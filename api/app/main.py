@@ -34,17 +34,18 @@ logger = logging.getLogger(__name__)
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    """Create tables on startup. Will be replaced by Alembic migrations."""
+    """Ensure database migrations, admin accounts, and startup hooks."""
     import os
     if not os.environ.get("PYTEST_CURRENT_TEST"):
         try:
-            Base.metadata.create_all(bind=engine)
-            logger.info("Database tables ensured")
+            from .db_migrate import run_database_migrations
+            active_version = run_database_migrations()
+            logger.info("Database schema and alembic_version verified at: %s", active_version)
             from .provision_admin import ensure_default_owner
             ensure_default_owner()
             logger.info("Default admin/owner accounts verified and provisioned")
         except Exception as exc:
-            logger.warning("Database connection or provisioning skipped on lifespan startup: %s", exc)
+            logger.warning("Database migration or provisioning skipped on lifespan startup: %s", exc)
     yield
 
 
@@ -67,29 +68,13 @@ def create_app() -> FastAPI:
         logger.warning("Rate limiting middleware not loaded (Redis may be unavailable)")
 
     # ── CORS (outermost middleware to wrap all responses) ───────────
-    origins = [o.strip() for o in settings.allowed_origins.split(",") if o.strip()]
-    for default_origin in [
-        "http://localhost:3000",
-        "http://127.0.0.1:3000",
-        "http://localhost:8000",
-        "https://attacksurface.online",
-        "https://www.attacksurface.online",
-    ]:
-        if default_origin not in origins:
-            origins.append(default_origin)
-
     application.add_middleware(
         CORSMiddleware,
-        allow_origins=origins,
+        allow_origins=settings.all_allowed_origins,
         allow_credentials=True,
         allow_methods=["*"],
         allow_headers=["*"],
     )
-
-    # ── Legacy health (kept for backward compatibility) ─────────────
-    @application.get("/health")
-    def health():
-        return {"status": "ok"}
 
     # ── Register API v1 routers ─────────────────────────────────────
     try:

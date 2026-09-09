@@ -1,6 +1,7 @@
 """Authentication router."""
 from __future__ import annotations
 
+from typing import Any
 import hashlib
 import logging
 import urllib.parse
@@ -44,16 +45,23 @@ SESSION_MAX_AGE_SECONDS = 7 * 24 * 3600  # 7 days
 
 
 def _set_session_cookie(response: Response, token: str) -> None:
-    is_https = settings.app_base_url.startswith("https://")
-    response.set_cookie(
-        key=SESSION_COOKIE_NAME,
-        value=token,
-        httponly=True,
-        secure=is_https,  # True in production on https://attacksurface.online
-        samesite="lax",
-        max_age=SESSION_MAX_AGE_SECONDS,
-        path="/",
+    is_https = (
+        settings.cookie_secure
+        if settings.cookie_secure is not None
+        else (settings.app_base_url.startswith("https://") or settings.app_env == "production")
     )
+    cookie_kwargs: dict[str, Any] = {
+        "key": SESSION_COOKIE_NAME,
+        "value": token,
+        "httponly": True,
+        "secure": is_https,
+        "samesite": "lax",
+        "max_age": SESSION_MAX_AGE_SECONDS,
+        "path": "/",
+    }
+    if settings.cookie_domain:
+        cookie_kwargs["domain"] = settings.cookie_domain
+    response.set_cookie(**cookie_kwargs)
 
 
 @router.post("/signup", response_model=UserOut, status_code=status.HTTP_201_CREATED)

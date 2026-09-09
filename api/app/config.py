@@ -19,11 +19,20 @@ class Settings(BaseSettings):
     secret_key: str = secrets.token_urlsafe(64)
 
     # ── API behavior ────────────────────────────────────────────────
+    app_env: str = "production"
     allowed_origins: str = "http://localhost:3000,http://localhost:8000,https://attacksurface.online,https://www.attacksurface.online"
-    collector_user_agent: str = "AttackSurfaceTimeline/0.1 (authorized research; desk@attacksurface.online)"
+    cors_origins: str | None = None
+    cookie_domain: str | None = None
+    cookie_secure: bool | None = None
+    collector_user_agent: str = "AttackSurfaceTimeline/0.2 (authorized research; desk@attacksurface.online)"
     request_delay_seconds: float = 1.0
     max_pages_per_snapshot: int = 8
     app_base_url: str = "https://attacksurface.online"
+
+    # ── Supabase Integration (Server-Side Only) ─────────────────────
+    supabase_url: str | None = None
+    supabase_anon_key: str | None = None
+    supabase_service_role_key: str | None = None
 
     # ── Rate limits ─────────────────────────────────────────────────
     rate_limit_enabled: bool = True
@@ -139,6 +148,22 @@ class Settings(BaseSettings):
     @property
     def google_oauth_configured(self) -> bool:
         return bool(self.google_client_id and self.google_client_secret)
+
+    @property
+    def all_allowed_origins(self) -> list[str]:
+        raw = f"{self.allowed_origins},{self.cors_origins or ''}"
+        origins = [o.strip() for o in raw.split(",") if o.strip()]
+        defaults = [
+            "https://attacksurface.online",
+            "https://www.attacksurface.online",
+            "http://localhost:3000",
+            "http://127.0.0.1:3000",
+            "http://localhost:8000",
+        ]
+        for d in defaults:
+            if d not in origins:
+                origins.append(d)
+        return origins
 
 
 settings = Settings()

@@ -60,7 +60,7 @@ export default function SettingsPage() {
         setSessions([
           {
             id: "current",
-            ip_address: "127.0.0.1",
+            ip_address: "Current Session",
             user_agent: typeof navigator !== "undefined" ? navigator.userAgent : "Browser Client",
             created_at: new Date().toISOString(),
             last_active: "Active now",
