@@ -1,0 +1,552 @@
+[
+  {
+    "authorized": true,
+    "company": "Google",
+    "primary_domain": "google.com",
+    "scope": [
+      "google.com",
+      "*.google.com"
+    ],
+    "authorization_source": "https://bughunters.google.com",
+    "source": "Google VRP"
+  },
+  {
+    "authorized": true,
+    "company": "Microsoft",
+    "primary_domain": "microsoft.com",
+    "scope": [
+      "microsoft.com",
+      "*.microsoft.com"
+    ],
+    "authorization_source": "https://www.microsoft.com/msrc/bounty",
+    "source": "Microsoft Bounty"
+  },
+  {
+    "authorized": true,
+    "company": "GitHub",
+    "primary_domain": "github.com",
+    "scope": [
+      "github.com",
+      "*.github.com"
+    ],
+    "authorization_source": "https://hackerone.com/github",
+    "source": "HackerOne"
+  },
+  {
+    "authorized": true,
+    "company": "Apple",
+    "primary_domain": "apple.com",
+    "scope": [
+      "apple.com",
+      "*.apple.com"
+    ],
+    "authorization_source": "https://security.apple.com/bounty",
+    "source": "Apple Security Bounty"
+  },
+  {
+    "authorized": true,
+    "company": "Amazon",
+    "primary_domain": "amazon.com",
+    "scope": [
+      "amazon.com",
+      "*.amazon.com"
+    ],
+    "authorization_source": "https://hackerone.com/amazonvrp",
+    "source": "HackerOne"
+  },
+  {
+    "authorized": true,
+    "company": "Meta",
+    "primary_domain": "meta.com",
+    "scope": [
+      "meta.com",
+      "*.meta.com"
+    ],
+    "authorization_source": "https://www.facebook.com/whitehat",
+    "source": "Official VDP"
+  },
+  {
+    "authorized": true,
+    "company": "Cloudflare",
+    "primary_domain": "cloudflare.com",
+    "scope": [
+      "cloudflare.com",
+      "*.cloudflare.com"
+    ],
+    "authorization_source": "https://hackerone.com/cloudflare",
+    "source": "HackerOne"
+  },
+  {
+    "authorized": true,
+    "company": "Stripe",
+    "primary_domain": "stripe.com",
+    "scope": [
+      "stripe.com",
+      "*.stripe.com"
+    ],
+    "authorization_source": "https://hackerone.com/stripe",
+    "source": "HackerOne"
+  },
+  {
+    "authorized": true,
+    "company": "OpenAI",
+    "primary_domain": "openai.com",
+    "scope": [
+      "openai.com",
+      "*.openai.com"
+    ],
+    "authorization_source": "https://bugcrowd.com/openai",
+    "source": "Bugcrowd"
+  },
+  {
+    "authorized": true,
+    "company": "Netflix",
+    "primary_domain": "netflix.com",
+    "scope": [
+      "netflix.com",
+      "*.netflix.com"
+    ],
+    "authorization_source": "https://bugcrowd.com/netflix",
+    "source": "Bugcrowd"
+  },
+  {
+    "authorized": true,
+    "company": "Shopify",
+    "primary_domain": "shopify.com",
+    "scope": [
+      "shopify.com",
+      "*.shopify.com"
+    ],
+    "authorization_source": "https://hackerone.com/shopify",
+    "source": "HackerOne"
+  },
+  {
+    "authorized": true,
+    "company": "Uber",
+    "primary_domain": "uber.com",
+    "scope": [
+      "uber.com",
+      "*.uber.com"
+    ],
+    "authorization_source": "https://hackerone.com/uber",
+    "source": "HackerOne"
+  },
+  {
+    "authorized": true,
+    "company": "Airbnb",
+    "primary_domain": "airbnb.com",
+    "scope": [
+      "airbnb.com",
+      "*.airbnb.com"
+    ],
+    "authorization_source": "https://hackerone.com/airbnb",
+    "source": "HackerOne"
+  },
+  {
+    "authorized": true,
+    "company": "Atlassian",
+    "primary_domain": "atlassian.com",
+    "scope": [
+      "atlassian.com",
+      "*.atlassian.com"
+    ],
+    "authorization_source": "https://bugcrowd.com/atlassian",
+    "source": "Bugcrowd"
+  },
+  {
+    "authorized": true,
+    "company": "GitLab",
+    "primary_domain": "gitlab.com",
+    "scope": [
+      "gitlab.com",
+      "*.gitlab.com"
+    ],
+    "authorization_source": "https://hackerone.com/gitlab",
+    "source": "HackerOne"
+  },
+  {
+    "authorized": true,
+    "company": "Slack",
+    "primary_domain": "slack.com",
+    "scope": [
+      "slack.com",
+      "*.slack.com"
+    ],
+    "authorization_source": "https://hackerone.com/slack",
+    "source": "HackerOne"
+  },
+  {
+    "authorized": true,
+    "company": "Zoom",
+    "primary_domain": "zoom.us",
+    "scope": [
+      "zoom.us",
+      "*.zoom.us"
+    ],
+    "authorization_source": "https://hackerone.com/zoom",
+    "source": "HackerOne"
+  },
+  {
+    "authorized": true,
+    "company": "X",
+    "primary_domain": "x.com",
+    "scope": [
+      "x.com",
+      "*.x.com"
+    ],
+    "authorization_source": "https://hackerone.com/twitter",
+    "source": "HackerOne"
+  },
+  {
+    "authorized": true,
+    "company": "Spotify",
+    "primary_domain": "spotify.com",
+    "scope": [
+      "spotify.com",
+      "*.spotify.com"
+    ],
+    "authorization_source": "https://hackerone.com/spotify",
+    "source": "HackerOne"
+  },
+  {
+    "authorized": true,
+    "company": "Dropbox",
+    "primary_domain": "dropbox.com",
+    "scope": [
+      "dropbox.com",
+      "*.dropbox.com"
+    ],
+    "authorization_source": "https://hackerone.com/dropbox",
+    "source": "HackerOne"
+  },
+  {
+    "authorized": true,
+    "company": "PayPal",
+    "primary_domain": "paypal.com",
+    "scope": [
+      "paypal.com",
+      "*.paypal.com"
+    ],
+    "authorization_source": "https://hackerone.com/paypal",
+    "source": "HackerOne"
+  },
+  {
+    "authorized": true,
+    "company": "Salesforce",
+    "primary_domain": "salesforce.com",
+    "scope": [
+      "salesforce.com",
+      "*.salesforce.com"
+    ],
+    "authorization_source": "https://hackerone.com/salesforce",
+    "source": "HackerOne"
+  },
+  {
+    "authorized": true,
+    "company": "Adobe",
+    "primary_domain": "adobe.com",
+    "scope": [
+      "adobe.com",
+      "*.adobe.com"
+    ],
+    "authorization_source": "https://hackerone.com/adobe",
+    "source": "HackerOne"
+  },
+  {
+    "authorized": true,
+    "company": "Coinbase",
+    "primary_domain": "coinbase.com",
+    "scope": [
+      "coinbase.com",
+      "*.coinbase.com"
+    ],
+    "authorization_source": "https://hackerone.com/coinbase",
+    "source": "HackerOne"
+  },
+  {
+    "authorized": true,
+    "company": "Docker",
+    "primary_domain": "docker.com",
+    "scope": [
+      "docker.com",
+      "*.docker.com"
+    ],
+    "authorization_source": "https://hackerone.com/docker",
+    "source": "HackerOne"
+  },
+  {
+    "authorized": true,
+    "company": "Okta",
+    "primary_domain": "okta.com",
+    "scope": [
+      "okta.com",
+      "*.okta.com"
+    ],
+    "authorization_source": "https://bugcrowd.com/okta",
+    "source": "Bugcrowd"
+  },
+  {
+    "authorized": true,
+    "company": "Reddit",
+    "primary_domain": "reddit.com",
+    "scope": [
+      "reddit.com",
+      "*.reddit.com"
+    ],
+    "authorization_source": "https://hackerone.com/reddit",
+    "source": "HackerOne"
+  },
+  {
+    "authorized": true,
+    "company": "LinkedIn",
+    "primary_domain": "linkedin.com",
+    "scope": [
+      "linkedin.com",
+      "*.linkedin.com"
+    ],
+    "authorization_source": "https://hackerone.com/linkedin",
+    "source": "HackerOne"
+  },
+  {
+    "authorized": true,
+    "company": "Pinterest",
+    "primary_domain": "pinterest.com",
+    "scope": [
+      "pinterest.com",
+      "*.pinterest.com"
+    ],
+    "authorization_source": "https://bugcrowd.com/pinterest",
+    "source": "Bugcrowd"
+  },
+  {
+    "authorized": true,
+    "company": "Twitch",
+    "primary_domain": "twitch.tv",
+    "scope": [
+      "twitch.tv",
+      "*.twitch.tv"
+    ],
+    "authorization_source": "https://hackerone.com/twitch",
+    "source": "HackerOne"
+  },
+  {
+    "authorized": true,
+    "company": "Snap",
+    "primary_domain": "snap.com",
+    "scope": [
+      "snap.com",
+      "*.snap.com"
+    ],
+    "authorization_source": "https://hackerone.com/snapchat",
+    "source": "HackerOne"
+  },
+  {
+    "authorized": true,
+    "company": "Yahoo",
+    "primary_domain": "yahoo.com",
+    "scope": [
+      "yahoo.com",
+      "*.yahoo.com"
+    ],
+    "authorization_source": "https://hackerone.com/yahoo",
+    "source": "HackerOne"
+  },
+  {
+    "authorized": true,
+    "company": "Oracle",
+    "primary_domain": "oracle.com",
+    "scope": [
+      "oracle.com",
+      "*.oracle.com"
+    ],
+    "authorization_source": "https://oracle.com/corporate/security-practices/assurance/vulnerability/",
+    "source": "Official VDP"
+  },
+  {
+    "authorized": true,
+    "company": "IBM",
+    "primary_domain": "ibm.com",
+    "scope": [
+      "ibm.com",
+      "*.ibm.com"
+    ],
+    "authorization_source": "https://hackerone.com/ibm",
+    "source": "HackerOne"
+  },
+  {
+    "authorized": true,
+    "company": "Cisco",
+    "primary_domain": "cisco.com",
+    "scope": [
+      "cisco.com",
+      "*.cisco.com"
+    ],
+    "authorization_source": "https://bugcrowd.com/cisco",
+    "source": "Bugcrowd"
+  },
+  {
+    "authorized": true,
+    "company": "Intel",
+    "primary_domain": "intel.com",
+    "scope": [
+      "intel.com",
+      "*.intel.com"
+    ],
+    "authorization_source": "https://intigriti.com/programs/intel",
+    "source": "Intigriti"
+  },
+  {
+    "authorized": true,
+    "company": "AMD",
+    "primary_domain": "amd.com",
+    "scope": [
+      "amd.com",
+      "*.amd.com"
+    ],
+    "authorization_source": "https://amd.com/en/resources/product-security.html",
+    "source": "Official VDP"
+  },
+  {
+    "authorized": true,
+    "company": "NVIDIA",
+    "primary_domain": "nvidia.com",
+    "scope": [
+      "nvidia.com",
+      "*.nvidia.com"
+    ],
+    "authorization_source": "https://hackerone.com/nvidia",
+    "source": "HackerOne"
+  },
+  {
+    "authorized": true,
+    "company": "Qualcomm",
+    "primary_domain": "qualcomm.com",
+    "scope": [
+      "qualcomm.com",
+      "*.qualcomm.com"
+    ],
+    "authorization_source": "https://hackerone.com/qualcomm",
+    "source": "HackerOne"
+  },
+  {
+    "authorized": true,
+    "company": "Tesla",
+    "primary_domain": "tesla.com",
+    "scope": [
+      "tesla.com",
+      "*.tesla.com"
+    ],
+    "authorization_source": "https://bugcrowd.com/tesla",
+    "source": "Bugcrowd"
+  },
+  {
+    "authorized": true,
+    "company": "SpaceX",
+    "primary_domain": "spacex.com",
+    "scope": [
+      "spacex.com",
+      "*.spacex.com"
+    ],
+    "authorization_source": "https://spacex.com/security",
+    "source": "Official VDP"
+  },
+  {
+    "authorized": true,
+    "company": "Block",
+    "primary_domain": "block.xyz",
+    "scope": [
+      "block.xyz",
+      "*.block.xyz"
+    ],
+    "authorization_source": "https://hackerone.com/square",
+    "source": "HackerOne"
+  },
+  {
+    "authorized": true,
+    "company": "Twilio",
+    "primary_domain": "twilio.com",
+    "scope": [
+      "twilio.com",
+      "*.twilio.com"
+    ],
+    "authorization_source": "https://bugcrowd.com/twilio",
+    "source": "Bugcrowd"
+  },
+  {
+    "authorized": true,
+    "company": "DigitalOcean",
+    "primary_domain": "digitalocean.com",
+    "scope": [
+      "digitalocean.com",
+      "*.digitalocean.com"
+    ],
+    "authorization_source": "https://hackerone.com/digitalocean",
+    "source": "HackerOne"
+  },
+  {
+    "authorized": true,
+    "company": "Vercel",
+    "primary_domain": "vercel.com",
+    "scope": [
+      "vercel.com",
+      "*.vercel.com"
+    ],
+    "authorization_source": "https://hackerone.com/vercel",
+    "source": "HackerOne"
+  },
+  {
+    "authorized": true,
+    "company": "Supabase",
+    "primary_domain": "supabase.com",
+    "scope": [
+      "supabase.com",
+      "*.supabase.com"
+    ],
+    "authorization_source": "https://supabase.com/security",
+    "source": "Official VDP"
+  },
+  {
+    "authorized": true,
+    "company": "Datadog",
+    "primary_domain": "datadoghq.com",
+    "scope": [
+      "datadoghq.com",
+      "*.datadoghq.com"
+    ],
+    "authorization_source": "https://hackerone.com/datadog",
+    "source": "HackerOne"
+  },
+  {
+    "authorized": true,
+    "company": "Splunk",
+    "primary_domain": "splunk.com",
+    "scope": [
+      "splunk.com",
+      "*.splunk.com"
+    ],
+    "authorization_source": "https://bugcrowd.com/splunk",
+    "source": "Bugcrowd"
+  },
+  {
+    "authorized": true,
+    "company": "Elastic",
+    "primary_domain": "elastic.co",
+    "scope": [
+      "elastic.co",
+      "*.elastic.co"
+    ],
+    "authorization_source": "https://hackerone.com/elastic",
+    "source": "HackerOne"
+  },
+  {
+    "authorized": true,
+    "company": "MongoDB",
+    "primary_domain": "mongodb.com",
+    "scope": [
+      "mongodb.com",
+      "*.mongodb.com"
+    ],
+    "authorization_source": "https://bugcrowd.com/mongodb",
+    "source": "Bugcrowd"
+  }
+]

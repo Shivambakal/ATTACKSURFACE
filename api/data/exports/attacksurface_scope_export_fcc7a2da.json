@@ -1,0 +1,3927 @@
+{
+  "export_type": "SCOPE_EXPORT",
+  "exported_at": "2026-09-06T09:43:56.138316+00:00",
+  "total_records": 402,
+  "records": [
+    {
+      "type": "TARGET",
+      "id": 2,
+      "domain": "microsoft.com",
+      "company_name": "Microsoft",
+      "monitoring_status": "active",
+      "authorization_confirmed": true
+    },
+    {
+      "type": "TARGET",
+      "id": 48,
+      "domain": "splunk.com",
+      "company_name": "Splunk",
+      "monitoring_status": "active",
+      "authorization_confirmed": true
+    },
+    {
+      "type": "TARGET",
+      "id": 18,
+      "domain": "x.com",
+      "company_name": "X",
+      "monitoring_status": "active",
+      "authorization_confirmed": true
+    },
+    {
+      "type": "TARGET",
+      "id": 11,
+      "domain": "shopify.com",
+      "company_name": "Shopify",
+      "monitoring_status": "active",
+      "authorization_confirmed": true
+    },
+    {
+      "type": "TARGET",
+      "id": 35,
+      "domain": "cisco.com",
+      "company_name": "Cisco",
+      "monitoring_status": "active",
+      "authorization_confirmed": true
+    },
+    {
+      "type": "TARGET",
+      "id": 21,
+      "domain": "paypal.com",
+      "company_name": "PayPal",
+      "monitoring_status": "active",
+      "authorization_confirmed": true
+    },
+    {
+      "type": "TARGET",
+      "id": 20,
+      "domain": "dropbox.com",
+      "company_name": "Dropbox",
+      "monitoring_status": "active",
+      "authorization_confirmed": true
+    },
+    {
+      "type": "TARGET",
+      "id": 29,
+      "domain": "pinterest.com",
+      "company_name": "Pinterest",
+      "monitoring_status": "active",
+      "authorization_confirmed": true
+    },
+    {
+      "type": "TARGET",
+      "id": 38,
+      "domain": "nvidia.com",
+      "company_name": "NVIDIA",
+      "monitoring_status": "active",
+      "authorization_confirmed": true
+    },
+    {
+      "type": "TARGET",
+      "id": 1,
+      "domain": "google.com",
+      "company_name": "Google",
+      "monitoring_status": "active",
+      "authorization_confirmed": true
+    },
+    {
+      "type": "TARGET",
+      "id": 3,
+      "domain": "github.com",
+      "company_name": "GitHub",
+      "monitoring_status": "active",
+      "authorization_confirmed": true
+    },
+    {
+      "type": "TARGET",
+      "id": 4,
+      "domain": "apple.com",
+      "company_name": "Apple",
+      "monitoring_status": "active",
+      "authorization_confirmed": true
+    },
+    {
+      "type": "TARGET",
+      "id": 10,
+      "domain": "netflix.com",
+      "company_name": "Netflix",
+      "monitoring_status": "active",
+      "authorization_confirmed": true
+    },
+    {
+      "type": "TARGET",
+      "id": 24,
+      "domain": "coinbase.com",
+      "company_name": "Coinbase",
+      "monitoring_status": "active",
+      "authorization_confirmed": true
+    },
+    {
+      "type": "TARGET",
+      "id": 25,
+      "domain": "docker.com",
+      "company_name": "Docker",
+      "monitoring_status": "active",
+      "authorization_confirmed": true
+    },
+    {
+      "type": "TARGET",
+      "id": 26,
+      "domain": "okta.com",
+      "company_name": "Okta",
+      "monitoring_status": "active",
+      "authorization_confirmed": true
+    },
+    {
+      "type": "TARGET",
+      "id": 15,
+      "domain": "gitlab.com",
+      "company_name": "GitLab",
+      "monitoring_status": "active",
+      "authorization_confirmed": true
+    },
+    {
+      "type": "TARGET",
+      "id": 16,
+      "domain": "slack.com",
+      "company_name": "Slack",
+      "monitoring_status": "active",
+      "authorization_confirmed": true
+    },
+    {
+      "type": "TARGET",
+      "id": 19,
+      "domain": "spotify.com",
+      "company_name": "Spotify",
+      "monitoring_status": "active",
+      "authorization_confirmed": true
+    },
+    {
+      "type": "TARGET",
+      "id": 22,
+      "domain": "salesforce.com",
+      "company_name": "Salesforce",
+      "monitoring_status": "active",
+      "authorization_confirmed": true
+    },
+    {
+      "type": "TARGET",
+      "id": 23,
+      "domain": "adobe.com",
+      "company_name": "Adobe",
+      "monitoring_status": "active",
+      "authorization_confirmed": true
+    },
+    {
+      "type": "TARGET",
+      "id": 17,
+      "domain": "zoom.us",
+      "company_name": "Zoom",
+      "monitoring_status": "active",
+      "authorization_confirmed": true
+    },
+    {
+      "type": "TARGET",
+      "id": 6,
+      "domain": "meta.com",
+      "company_name": "Meta",
+      "monitoring_status": "active",
+      "authorization_confirmed": true
+    },
+    {
+      "type": "TARGET",
+      "id": 7,
+      "domain": "cloudflare.com",
+      "company_name": "Cloudflare",
+      "monitoring_status": "active",
+      "authorization_confirmed": true
+    },
+    {
+      "type": "TARGET",
+      "id": 8,
+      "domain": "stripe.com",
+      "company_name": "Stripe",
+      "monitoring_status": "active",
+      "authorization_confirmed": true
+    },
+    {
+      "type": "TARGET",
+      "id": 5,
+      "domain": "amazon.com",
+      "company_name": "Amazon",
+      "monitoring_status": "active",
+      "authorization_confirmed": true
+    },
+    {
+      "type": "TARGET",
+      "id": 12,
+      "domain": "uber.com",
+      "company_name": "Uber",
+      "monitoring_status": "active",
+      "authorization_confirmed": true
+    },
+    {
+      "type": "TARGET",
+      "id": 13,
+      "domain": "airbnb.com",
+      "company_name": "Airbnb",
+      "monitoring_status": "active",
+      "authorization_confirmed": true
+    },
+    {
+      "type": "TARGET",
+      "id": 9,
+      "domain": "openai.com",
+      "company_name": "OpenAI",
+      "monitoring_status": "active",
+      "authorization_confirmed": true
+    },
+    {
+      "type": "TARGET",
+      "id": 14,
+      "domain": "atlassian.com",
+      "company_name": "Atlassian",
+      "monitoring_status": "active",
+      "authorization_confirmed": true
+    },
+    {
+      "type": "TARGET",
+      "id": 45,
+      "domain": "vercel.com",
+      "company_name": "Vercel",
+      "monitoring_status": "active",
+      "authorization_confirmed": true
+    },
+    {
+      "type": "TARGET",
+      "id": 46,
+      "domain": "supabase.com",
+      "company_name": "Supabase",
+      "monitoring_status": "active",
+      "authorization_confirmed": true
+    },
+    {
+      "type": "TARGET",
+      "id": 47,
+      "domain": "datadoghq.com",
+      "company_name": "Datadog",
+      "monitoring_status": "active",
+      "authorization_confirmed": true
+    },
+    {
+      "type": "TARGET",
+      "id": 34,
+      "domain": "ibm.com",
+      "company_name": "IBM",
+      "monitoring_status": "active",
+      "authorization_confirmed": true
+    },
+    {
+      "type": "TARGET",
+      "id": 30,
+      "domain": "twitch.tv",
+      "company_name": "Twitch",
+      "monitoring_status": "active",
+      "authorization_confirmed": true
+    },
+    {
+      "type": "TARGET",
+      "id": 31,
+      "domain": "snap.com",
+      "company_name": "Snap",
+      "monitoring_status": "active",
+      "authorization_confirmed": true
+    },
+    {
+      "type": "TARGET",
+      "id": 32,
+      "domain": "yahoo.com",
+      "company_name": "Yahoo",
+      "monitoring_status": "active",
+      "authorization_confirmed": true
+    },
+    {
+      "type": "TARGET",
+      "id": 36,
+      "domain": "intel.com",
+      "company_name": "Intel",
+      "monitoring_status": "active",
+      "authorization_confirmed": true
+    },
+    {
+      "type": "TARGET",
+      "id": 33,
+      "domain": "oracle.com",
+      "company_name": "Oracle",
+      "monitoring_status": "active",
+      "authorization_confirmed": true
+    },
+    {
+      "type": "TARGET",
+      "id": 27,
+      "domain": "reddit.com",
+      "company_name": "Reddit",
+      "monitoring_status": "active",
+      "authorization_confirmed": true
+    },
+    {
+      "type": "TARGET",
+      "id": 28,
+      "domain": "linkedin.com",
+      "company_name": "LinkedIn",
+      "monitoring_status": "active",
+      "authorization_confirmed": true
+    },
+    {
+      "type": "TARGET",
+      "id": 40,
+      "domain": "tesla.com",
+      "company_name": "Tesla",
+      "monitoring_status": "active",
+      "authorization_confirmed": true
+    },
+    {
+      "type": "TARGET",
+      "id": 41,
+      "domain": "spacex.com",
+      "company_name": "SpaceX",
+      "monitoring_status": "active",
+      "authorization_confirmed": true
+    },
+    {
+      "type": "TARGET",
+      "id": 37,
+      "domain": "amd.com",
+      "company_name": "AMD",
+      "monitoring_status": "active",
+      "authorization_confirmed": true
+    },
+    {
+      "type": "TARGET",
+      "id": 42,
+      "domain": "block.xyz",
+      "company_name": "Block",
+      "monitoring_status": "active",
+      "authorization_confirmed": true
+    },
+    {
+      "type": "TARGET",
+      "id": 43,
+      "domain": "twilio.com",
+      "company_name": "Twilio",
+      "monitoring_status": "active",
+      "authorization_confirmed": true
+    },
+    {
+      "type": "TARGET",
+      "id": 44,
+      "domain": "digitalocean.com",
+      "company_name": "DigitalOcean",
+      "monitoring_status": "active",
+      "authorization_confirmed": true
+    },
+    {
+      "type": "TARGET",
+      "id": 49,
+      "domain": "elastic.co",
+      "company_name": "Elastic",
+      "monitoring_status": "active",
+      "authorization_confirmed": true
+    },
+    {
+      "type": "TARGET",
+      "id": 39,
+      "domain": "qualcomm.com",
+      "company_name": "Qualcomm",
+      "monitoring_status": "active",
+      "authorization_confirmed": true
+    },
+    {
+      "type": "TARGET",
+      "id": 50,
+      "domain": "mongodb.com",
+      "company_name": "MongoDB",
+      "monitoring_status": "active",
+      "authorization_confirmed": true
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 1,
+      "pattern": "google.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 1.0,
+      "evidence": "Explicit verified bug-bounty registry entry",
+      "source_url": "https://bughunters.google.com"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 2,
+      "pattern": "*.google.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 1.0,
+      "evidence": "Explicit verified bug-bounty registry entry",
+      "source_url": "https://bughunters.google.com"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 3,
+      "pattern": "microsoft.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 1.0,
+      "evidence": "Explicit verified bug-bounty registry entry",
+      "source_url": "https://www.microsoft.com/msrc/bounty"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 4,
+      "pattern": "*.microsoft.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 1.0,
+      "evidence": "Explicit verified bug-bounty registry entry",
+      "source_url": "https://www.microsoft.com/msrc/bounty"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 5,
+      "pattern": "github.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 1.0,
+      "evidence": "Explicit verified bug-bounty registry entry",
+      "source_url": "https://hackerone.com/github"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 6,
+      "pattern": "*.github.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 1.0,
+      "evidence": "Explicit verified bug-bounty registry entry",
+      "source_url": "https://hackerone.com/github"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 7,
+      "pattern": "apple.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 1.0,
+      "evidence": "Explicit verified bug-bounty registry entry",
+      "source_url": "https://security.apple.com/bounty"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 8,
+      "pattern": "*.apple.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 1.0,
+      "evidence": "Explicit verified bug-bounty registry entry",
+      "source_url": "https://security.apple.com/bounty"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 9,
+      "pattern": "amazon.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 1.0,
+      "evidence": "Explicit verified bug-bounty registry entry",
+      "source_url": "https://hackerone.com/amazonvrp"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 10,
+      "pattern": "*.amazon.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 1.0,
+      "evidence": "Explicit verified bug-bounty registry entry",
+      "source_url": "https://hackerone.com/amazonvrp"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 11,
+      "pattern": "meta.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 1.0,
+      "evidence": "Explicit verified bug-bounty registry entry",
+      "source_url": "https://www.facebook.com/whitehat"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 12,
+      "pattern": "*.meta.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 1.0,
+      "evidence": "Explicit verified bug-bounty registry entry",
+      "source_url": "https://www.facebook.com/whitehat"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 13,
+      "pattern": "cloudflare.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 1.0,
+      "evidence": "Explicit verified bug-bounty registry entry",
+      "source_url": "https://hackerone.com/cloudflare"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 14,
+      "pattern": "*.cloudflare.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 1.0,
+      "evidence": "Explicit verified bug-bounty registry entry",
+      "source_url": "https://hackerone.com/cloudflare"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 15,
+      "pattern": "stripe.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 1.0,
+      "evidence": "Explicit verified bug-bounty registry entry",
+      "source_url": "https://hackerone.com/stripe"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 16,
+      "pattern": "*.stripe.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 1.0,
+      "evidence": "Explicit verified bug-bounty registry entry",
+      "source_url": "https://hackerone.com/stripe"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 17,
+      "pattern": "openai.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 1.0,
+      "evidence": "Explicit verified bug-bounty registry entry",
+      "source_url": "https://bugcrowd.com/openai"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 18,
+      "pattern": "*.openai.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 1.0,
+      "evidence": "Explicit verified bug-bounty registry entry",
+      "source_url": "https://bugcrowd.com/openai"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 19,
+      "pattern": "netflix.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 1.0,
+      "evidence": "Explicit verified bug-bounty registry entry",
+      "source_url": "https://bugcrowd.com/netflix"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 20,
+      "pattern": "*.netflix.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 1.0,
+      "evidence": "Explicit verified bug-bounty registry entry",
+      "source_url": "https://bugcrowd.com/netflix"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 21,
+      "pattern": "shopify.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 1.0,
+      "evidence": "Explicit verified bug-bounty registry entry",
+      "source_url": "https://hackerone.com/shopify"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 22,
+      "pattern": "*.shopify.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 1.0,
+      "evidence": "Explicit verified bug-bounty registry entry",
+      "source_url": "https://hackerone.com/shopify"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 23,
+      "pattern": "uber.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 1.0,
+      "evidence": "Explicit verified bug-bounty registry entry",
+      "source_url": "https://hackerone.com/uber"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 24,
+      "pattern": "*.uber.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 1.0,
+      "evidence": "Explicit verified bug-bounty registry entry",
+      "source_url": "https://hackerone.com/uber"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 25,
+      "pattern": "airbnb.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 1.0,
+      "evidence": "Explicit verified bug-bounty registry entry",
+      "source_url": "https://hackerone.com/airbnb"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 26,
+      "pattern": "*.airbnb.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 1.0,
+      "evidence": "Explicit verified bug-bounty registry entry",
+      "source_url": "https://hackerone.com/airbnb"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 27,
+      "pattern": "atlassian.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 1.0,
+      "evidence": "Explicit verified bug-bounty registry entry",
+      "source_url": "https://bugcrowd.com/atlassian"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 28,
+      "pattern": "*.atlassian.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 1.0,
+      "evidence": "Explicit verified bug-bounty registry entry",
+      "source_url": "https://bugcrowd.com/atlassian"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 29,
+      "pattern": "gitlab.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 1.0,
+      "evidence": "Explicit verified bug-bounty registry entry",
+      "source_url": "https://hackerone.com/gitlab"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 30,
+      "pattern": "*.gitlab.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 1.0,
+      "evidence": "Explicit verified bug-bounty registry entry",
+      "source_url": "https://hackerone.com/gitlab"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 31,
+      "pattern": "slack.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 1.0,
+      "evidence": "Explicit verified bug-bounty registry entry",
+      "source_url": "https://hackerone.com/slack"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 32,
+      "pattern": "*.slack.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 1.0,
+      "evidence": "Explicit verified bug-bounty registry entry",
+      "source_url": "https://hackerone.com/slack"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 33,
+      "pattern": "zoom.us",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 1.0,
+      "evidence": "Explicit verified bug-bounty registry entry",
+      "source_url": "https://hackerone.com/zoom"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 34,
+      "pattern": "*.zoom.us",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 1.0,
+      "evidence": "Explicit verified bug-bounty registry entry",
+      "source_url": "https://hackerone.com/zoom"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 35,
+      "pattern": "x.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 1.0,
+      "evidence": "Explicit verified bug-bounty registry entry",
+      "source_url": "https://hackerone.com/twitter"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 36,
+      "pattern": "*.x.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 1.0,
+      "evidence": "Explicit verified bug-bounty registry entry",
+      "source_url": "https://hackerone.com/twitter"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 37,
+      "pattern": "spotify.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 1.0,
+      "evidence": "Explicit verified bug-bounty registry entry",
+      "source_url": "https://hackerone.com/spotify"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 38,
+      "pattern": "*.spotify.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 1.0,
+      "evidence": "Explicit verified bug-bounty registry entry",
+      "source_url": "https://hackerone.com/spotify"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 39,
+      "pattern": "dropbox.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 1.0,
+      "evidence": "Explicit verified bug-bounty registry entry",
+      "source_url": "https://hackerone.com/dropbox"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 40,
+      "pattern": "*.dropbox.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 1.0,
+      "evidence": "Explicit verified bug-bounty registry entry",
+      "source_url": "https://hackerone.com/dropbox"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 41,
+      "pattern": "paypal.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 1.0,
+      "evidence": "Explicit verified bug-bounty registry entry",
+      "source_url": "https://hackerone.com/paypal"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 42,
+      "pattern": "*.paypal.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 1.0,
+      "evidence": "Explicit verified bug-bounty registry entry",
+      "source_url": "https://hackerone.com/paypal"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 43,
+      "pattern": "salesforce.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 1.0,
+      "evidence": "Explicit verified bug-bounty registry entry",
+      "source_url": "https://hackerone.com/salesforce"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 44,
+      "pattern": "*.salesforce.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 1.0,
+      "evidence": "Explicit verified bug-bounty registry entry",
+      "source_url": "https://hackerone.com/salesforce"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 45,
+      "pattern": "adobe.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 1.0,
+      "evidence": "Explicit verified bug-bounty registry entry",
+      "source_url": "https://hackerone.com/adobe"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 46,
+      "pattern": "*.adobe.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 1.0,
+      "evidence": "Explicit verified bug-bounty registry entry",
+      "source_url": "https://hackerone.com/adobe"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 47,
+      "pattern": "coinbase.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 1.0,
+      "evidence": "Explicit verified bug-bounty registry entry",
+      "source_url": "https://hackerone.com/coinbase"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 48,
+      "pattern": "*.coinbase.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 1.0,
+      "evidence": "Explicit verified bug-bounty registry entry",
+      "source_url": "https://hackerone.com/coinbase"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 49,
+      "pattern": "docker.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 1.0,
+      "evidence": "Explicit verified bug-bounty registry entry",
+      "source_url": "https://hackerone.com/docker"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 50,
+      "pattern": "*.docker.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 1.0,
+      "evidence": "Explicit verified bug-bounty registry entry",
+      "source_url": "https://hackerone.com/docker"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 51,
+      "pattern": "okta.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 1.0,
+      "evidence": "Explicit verified bug-bounty registry entry",
+      "source_url": "https://bugcrowd.com/okta"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 52,
+      "pattern": "*.okta.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 1.0,
+      "evidence": "Explicit verified bug-bounty registry entry",
+      "source_url": "https://bugcrowd.com/okta"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 53,
+      "pattern": "reddit.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 1.0,
+      "evidence": "Explicit verified bug-bounty registry entry",
+      "source_url": "https://hackerone.com/reddit"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 54,
+      "pattern": "*.reddit.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 1.0,
+      "evidence": "Explicit verified bug-bounty registry entry",
+      "source_url": "https://hackerone.com/reddit"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 55,
+      "pattern": "linkedin.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 1.0,
+      "evidence": "Explicit verified bug-bounty registry entry",
+      "source_url": "https://hackerone.com/linkedin"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 56,
+      "pattern": "*.linkedin.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 1.0,
+      "evidence": "Explicit verified bug-bounty registry entry",
+      "source_url": "https://hackerone.com/linkedin"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 57,
+      "pattern": "pinterest.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 1.0,
+      "evidence": "Explicit verified bug-bounty registry entry",
+      "source_url": "https://bugcrowd.com/pinterest"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 58,
+      "pattern": "*.pinterest.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 1.0,
+      "evidence": "Explicit verified bug-bounty registry entry",
+      "source_url": "https://bugcrowd.com/pinterest"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 59,
+      "pattern": "twitch.tv",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 1.0,
+      "evidence": "Explicit verified bug-bounty registry entry",
+      "source_url": "https://hackerone.com/twitch"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 60,
+      "pattern": "*.twitch.tv",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 1.0,
+      "evidence": "Explicit verified bug-bounty registry entry",
+      "source_url": "https://hackerone.com/twitch"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 61,
+      "pattern": "snap.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 1.0,
+      "evidence": "Explicit verified bug-bounty registry entry",
+      "source_url": "https://hackerone.com/snapchat"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 62,
+      "pattern": "*.snap.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 1.0,
+      "evidence": "Explicit verified bug-bounty registry entry",
+      "source_url": "https://hackerone.com/snapchat"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 63,
+      "pattern": "yahoo.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 1.0,
+      "evidence": "Explicit verified bug-bounty registry entry",
+      "source_url": "https://hackerone.com/yahoo"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 64,
+      "pattern": "*.yahoo.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 1.0,
+      "evidence": "Explicit verified bug-bounty registry entry",
+      "source_url": "https://hackerone.com/yahoo"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 65,
+      "pattern": "oracle.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 1.0,
+      "evidence": "Explicit verified bug-bounty registry entry",
+      "source_url": "https://oracle.com/corporate/security-practices/assurance/vulnerability/"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 66,
+      "pattern": "*.oracle.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 1.0,
+      "evidence": "Explicit verified bug-bounty registry entry",
+      "source_url": "https://oracle.com/corporate/security-practices/assurance/vulnerability/"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 67,
+      "pattern": "ibm.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 1.0,
+      "evidence": "Explicit verified bug-bounty registry entry",
+      "source_url": "https://hackerone.com/ibm"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 68,
+      "pattern": "*.ibm.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 1.0,
+      "evidence": "Explicit verified bug-bounty registry entry",
+      "source_url": "https://hackerone.com/ibm"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 69,
+      "pattern": "cisco.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 1.0,
+      "evidence": "Explicit verified bug-bounty registry entry",
+      "source_url": "https://bugcrowd.com/cisco"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 70,
+      "pattern": "*.cisco.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 1.0,
+      "evidence": "Explicit verified bug-bounty registry entry",
+      "source_url": "https://bugcrowd.com/cisco"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 71,
+      "pattern": "intel.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 1.0,
+      "evidence": "Explicit verified bug-bounty registry entry",
+      "source_url": "https://intigriti.com/programs/intel"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 72,
+      "pattern": "*.intel.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 1.0,
+      "evidence": "Explicit verified bug-bounty registry entry",
+      "source_url": "https://intigriti.com/programs/intel"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 73,
+      "pattern": "amd.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 1.0,
+      "evidence": "Explicit verified bug-bounty registry entry",
+      "source_url": "https://amd.com/en/resources/product-security.html"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 74,
+      "pattern": "*.amd.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 1.0,
+      "evidence": "Explicit verified bug-bounty registry entry",
+      "source_url": "https://amd.com/en/resources/product-security.html"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 75,
+      "pattern": "nvidia.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 1.0,
+      "evidence": "Explicit verified bug-bounty registry entry",
+      "source_url": "https://hackerone.com/nvidia"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 76,
+      "pattern": "*.nvidia.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 1.0,
+      "evidence": "Explicit verified bug-bounty registry entry",
+      "source_url": "https://hackerone.com/nvidia"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 77,
+      "pattern": "qualcomm.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 1.0,
+      "evidence": "Explicit verified bug-bounty registry entry",
+      "source_url": "https://hackerone.com/qualcomm"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 78,
+      "pattern": "*.qualcomm.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 1.0,
+      "evidence": "Explicit verified bug-bounty registry entry",
+      "source_url": "https://hackerone.com/qualcomm"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 79,
+      "pattern": "tesla.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 1.0,
+      "evidence": "Explicit verified bug-bounty registry entry",
+      "source_url": "https://bugcrowd.com/tesla"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 80,
+      "pattern": "*.tesla.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 1.0,
+      "evidence": "Explicit verified bug-bounty registry entry",
+      "source_url": "https://bugcrowd.com/tesla"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 81,
+      "pattern": "spacex.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 1.0,
+      "evidence": "Explicit verified bug-bounty registry entry",
+      "source_url": "https://spacex.com/security"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 82,
+      "pattern": "*.spacex.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 1.0,
+      "evidence": "Explicit verified bug-bounty registry entry",
+      "source_url": "https://spacex.com/security"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 83,
+      "pattern": "block.xyz",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 1.0,
+      "evidence": "Explicit verified bug-bounty registry entry",
+      "source_url": "https://hackerone.com/square"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 84,
+      "pattern": "*.block.xyz",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 1.0,
+      "evidence": "Explicit verified bug-bounty registry entry",
+      "source_url": "https://hackerone.com/square"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 85,
+      "pattern": "twilio.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 1.0,
+      "evidence": "Explicit verified bug-bounty registry entry",
+      "source_url": "https://bugcrowd.com/twilio"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 86,
+      "pattern": "*.twilio.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 1.0,
+      "evidence": "Explicit verified bug-bounty registry entry",
+      "source_url": "https://bugcrowd.com/twilio"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 87,
+      "pattern": "digitalocean.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 1.0,
+      "evidence": "Explicit verified bug-bounty registry entry",
+      "source_url": "https://hackerone.com/digitalocean"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 88,
+      "pattern": "*.digitalocean.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 1.0,
+      "evidence": "Explicit verified bug-bounty registry entry",
+      "source_url": "https://hackerone.com/digitalocean"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 89,
+      "pattern": "vercel.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 1.0,
+      "evidence": "Explicit verified bug-bounty registry entry",
+      "source_url": "https://hackerone.com/vercel"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 90,
+      "pattern": "*.vercel.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 1.0,
+      "evidence": "Explicit verified bug-bounty registry entry",
+      "source_url": "https://hackerone.com/vercel"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 91,
+      "pattern": "supabase.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 1.0,
+      "evidence": "Explicit verified bug-bounty registry entry",
+      "source_url": "https://supabase.com/security"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 92,
+      "pattern": "*.supabase.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 1.0,
+      "evidence": "Explicit verified bug-bounty registry entry",
+      "source_url": "https://supabase.com/security"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 93,
+      "pattern": "datadoghq.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 1.0,
+      "evidence": "Explicit verified bug-bounty registry entry",
+      "source_url": "https://hackerone.com/datadog"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 94,
+      "pattern": "*.datadoghq.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 1.0,
+      "evidence": "Explicit verified bug-bounty registry entry",
+      "source_url": "https://hackerone.com/datadog"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 95,
+      "pattern": "splunk.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 1.0,
+      "evidence": "Explicit verified bug-bounty registry entry",
+      "source_url": "https://bugcrowd.com/splunk"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 96,
+      "pattern": "*.splunk.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 1.0,
+      "evidence": "Explicit verified bug-bounty registry entry",
+      "source_url": "https://bugcrowd.com/splunk"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 97,
+      "pattern": "elastic.co",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 1.0,
+      "evidence": "Explicit verified bug-bounty registry entry",
+      "source_url": "https://hackerone.com/elastic"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 98,
+      "pattern": "*.elastic.co",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 1.0,
+      "evidence": "Explicit verified bug-bounty registry entry",
+      "source_url": "https://hackerone.com/elastic"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 99,
+      "pattern": "mongodb.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 1.0,
+      "evidence": "Explicit verified bug-bounty registry entry",
+      "source_url": "https://bugcrowd.com/mongodb"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 100,
+      "pattern": "*.mongodb.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 1.0,
+      "evidence": "Explicit verified bug-bounty registry entry",
+      "source_url": "https://bugcrowd.com/mongodb"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 101,
+      "pattern": "*.1password.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/1password"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 102,
+      "pattern": "*.abnormalsecurity.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/abnormalsecurity"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 103,
+      "pattern": "*.acronis.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/acronis"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 104,
+      "pattern": "*.adyen.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/adyen"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 105,
+      "pattern": "*.airbyte.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/airbyte"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 106,
+      "pattern": "*.airtable.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/airtable"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 107,
+      "pattern": "*.akamai.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/akamai"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 108,
+      "pattern": "*.akeyless.io",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/akeyless"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 109,
+      "pattern": "*.algolia.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/algolia"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 110,
+      "pattern": "*.alibaba.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/alibaba"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 111,
+      "pattern": "*.americanexpress.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/americanexpress"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 112,
+      "pattern": "*.amplitude.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/amplitude"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 113,
+      "pattern": "*.anchore.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/anchore"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 114,
+      "pattern": "*.anthropic.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/anthropic"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 115,
+      "pattern": "*.aquasec.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/aquasec"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 116,
+      "pattern": "*.arcticwolf.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/arcticwolf"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 117,
+      "pattern": "*.asana.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://bugcrowd.com/asana"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 118,
+      "pattern": "*.auth0.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://bugcrowd.com/auth0"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 119,
+      "pattern": "*.barracuda.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/barracuda"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 120,
+      "pattern": "*.bestbuy.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/bestbuy"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 121,
+      "pattern": "*.beyondtrust.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/beyondtrust"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 122,
+      "pattern": "*.binarly.io",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/binarly"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 123,
+      "pattern": "*.bitdefender.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/bitdefender"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 124,
+      "pattern": "*.bitfinex.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://bugcrowd.com/bitfinex"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 125,
+      "pattern": "*.bitsight.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/bitsight"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 126,
+      "pattern": "*.bmwgroup.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/bmwgroup"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 127,
+      "pattern": "*.booking.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/booking"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 128,
+      "pattern": "*.brave.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/brave"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 129,
+      "pattern": "*.brex.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/brex"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 130,
+      "pattern": "*.broadcom.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/broadcom"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 131,
+      "pattern": "*.browserstack.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/browserstack"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 132,
+      "pattern": "*.bugcrowd.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://bugcrowd.com/bugcrowd"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 133,
+      "pattern": "*.byd.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/byd"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 134,
+      "pattern": "*.bytedance.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/bytedance"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 135,
+      "pattern": "*.canonical.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://ubuntu.com/security/vulnerability-reporting"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 136,
+      "pattern": "*.canva.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://bugcrowd.com/canva"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 137,
+      "pattern": "*.cash.app",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/cash"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 138,
+      "pattern": "*.catonetworks.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/catonetworks"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 139,
+      "pattern": "*.censys.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/censys"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 140,
+      "pattern": "*.cerebras.ai",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/cerebras"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 141,
+      "pattern": "*.chainguard.dev",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/chainguard"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 142,
+      "pattern": "*.chargebee.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/chargebee"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 143,
+      "pattern": "*.checkpoint.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/checkpoint"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 144,
+      "pattern": "*.checkmarx.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/checkmarx"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 145,
+      "pattern": "*.chime.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/chime"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 146,
+      "pattern": "*.circle.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/circle"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 147,
+      "pattern": "*.circleci.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/circleci"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 148,
+      "pattern": "*.claroty.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/claroty"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 149,
+      "pattern": "*.clickhouse.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/clickhouse"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 150,
+      "pattern": "*.cloudbees.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/cloudbees"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 151,
+      "pattern": "*.cloudinary.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/cloudinary"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 152,
+      "pattern": "*.coalfire.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/coalfire"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 153,
+      "pattern": "*.cockroachlabs.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/cockroachlabs"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 154,
+      "pattern": "*.cohere.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/cohere"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 155,
+      "pattern": "*.cohesity.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/cohesity"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 156,
+      "pattern": "*.confluent.io",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/confluent"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 157,
+      "pattern": "*.contrastsecurity.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/contrastsecurity"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 158,
+      "pattern": "*.coreweave.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/coreweave"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 159,
+      "pattern": "*.costco.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/costco"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 160,
+      "pattern": "*.crowdstrike.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/crowdstrike"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 161,
+      "pattern": "*.cyberark.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/cyberark"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 162,
+      "pattern": "*.darktrace.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/darktrace"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 163,
+      "pattern": "*.databricks.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/databricks"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 164,
+      "pattern": "*.getdbt.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/getdbt"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 165,
+      "pattern": "*.deel.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/deel"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 166,
+      "pattern": "*.deepmind.google",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/deepmind"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 167,
+      "pattern": "*.dell.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/dell"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 168,
+      "pattern": "*.discord.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/discord"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 169,
+      "pattern": "*.doordash.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/doordash"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 170,
+      "pattern": "*.dragos.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/dragos"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 171,
+      "pattern": "*.drata.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/drata"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 172,
+      "pattern": "*.dream11.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/dream11"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 173,
+      "pattern": "*.druva.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/druva"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 174,
+      "pattern": "*.dynatrace.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/dynatrace"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 175,
+      "pattern": "*.ebay.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/ebay"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 176,
+      "pattern": "*.eclypsium.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/eclypsium"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 177,
+      "pattern": "*.ea.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/ea"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 178,
+      "pattern": "*.elevenlabs.io",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/elevenlabs"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 179,
+      "pattern": "*.epicgames.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/epicgames"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 180,
+      "pattern": "*.ericsson.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/ericsson"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 181,
+      "pattern": "*.etsy.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://bugcrowd.com/etsy"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 182,
+      "pattern": "*.expediagroup.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://bugcrowd.com/expedia"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 183,
+      "pattern": "*.expel.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/expel"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 184,
+      "pattern": "*.f5.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/f5"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 185,
+      "pattern": "*.fastly.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/fastly"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 186,
+      "pattern": "*.figma.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://bugcrowd.com/figma"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 187,
+      "pattern": "*.fivetran.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/fivetran"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 188,
+      "pattern": "*.flipkart.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/flipkart"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 189,
+      "pattern": "*.ford.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/ford"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 190,
+      "pattern": "*.fortinet.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/fortinet"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 191,
+      "pattern": "*.freshworks.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/freshworks"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 192,
+      "pattern": "*.gemini.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/gemini"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 193,
+      "pattern": "*.gm.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/gm"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 194,
+      "pattern": "*.gitguardian.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/gitguardian"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 195,
+      "pattern": "*.grafana.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/grafana"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 196,
+      "pattern": "*.groq.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/groq"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 197,
+      "pattern": "*.gusto.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/gusto"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 198,
+      "pattern": "*.hackerone.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/hackerone"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 199,
+      "pattern": "*.harness.io",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/harness"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 200,
+      "pattern": "*.hashicorp.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/hashicorp"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 201,
+      "pattern": "*.hasura.io",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/hasura"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 202,
+      "pattern": "*.hcltech.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/hcltech"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 203,
+      "pattern": "*.heroku.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/heroku"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 204,
+      "pattern": "*.hpe.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/hpe"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 205,
+      "pattern": "*.honeywell.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/honeywell"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 206,
+      "pattern": "*.hp.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/hp"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 207,
+      "pattern": "*.hubspot.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/hubspot"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 208,
+      "pattern": "*.huggingface.co",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/huggingface"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 209,
+      "pattern": "*.huntress.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/huntress"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 210,
+      "pattern": "*.hyundai.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/hyundai"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 211,
+      "pattern": "*.illumio.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/illumio"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 212,
+      "pattern": "*.imperva.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/imperva"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 213,
+      "pattern": "*.infosys.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/infosys"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 214,
+      "pattern": "*.instacart.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/instacart"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 215,
+      "pattern": "*.intercom.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/intercom"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 216,
+      "pattern": "*.intigriti.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://intigriti.com/programs/intigriti"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 217,
+      "pattern": "*.intuit.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/intuit"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 218,
+      "pattern": "*.ivanti.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/ivanti"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 219,
+      "pattern": "*.jetbrains.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/jetbrains"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 220,
+      "pattern": "*.jfrog.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/jfrog"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 221,
+      "pattern": "*.juniper.net",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/juniper"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 222,
+      "pattern": "*.keepersecurity.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/keepersecurity"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 223,
+      "pattern": "*.klarna.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/klarna"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 224,
+      "pattern": "*.kraken.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://bugcrowd.com/kraken"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 225,
+      "pattern": "*.launchdarkly.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/launchdarkly"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 226,
+      "pattern": "*.lenovo.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/lenovo"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 227,
+      "pattern": "*.lg.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/lg"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 228,
+      "pattern": "*.linear.app",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://linear.app/security"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 229,
+      "pattern": "*.ltimindtree.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/ltimindtree"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 230,
+      "pattern": "*.lyft.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/lyft"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 231,
+      "pattern": "*.makemytrip.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/makemytrip"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 232,
+      "pattern": "*.mandiant.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/mandiant"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 233,
+      "pattern": "*.marqeta.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/marqeta"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 234,
+      "pattern": "*.mastercard.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/mastercard"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 235,
+      "pattern": "*.medium.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/medium"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 236,
+      "pattern": "*.mercadolibre.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/mercadolibre"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 237,
+      "pattern": "*.mercedes-benz.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/mercedes-benz"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 238,
+      "pattern": "*.mercury.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/mercury"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 239,
+      "pattern": "*.midjourney.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/midjourney"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 240,
+      "pattern": "*.mistral.ai",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/mistral"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 241,
+      "pattern": "*.monday.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/monday"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 242,
+      "pattern": "*.monzo.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/monzo"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 243,
+      "pattern": "*.mozilla.org",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://bugcrowd.com/mozilla"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 244,
+      "pattern": "*.netapp.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/netapp"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 245,
+      "pattern": "*.netlify.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/netlify"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 246,
+      "pattern": "*.netskope.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/netskope"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 247,
+      "pattern": "*.newrelic.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/newrelic"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 248,
+      "pattern": "*.nokia.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/nokia"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 249,
+      "pattern": "*.notion.so",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/notion"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 250,
+      "pattern": "*.nozominetworks.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/nozominetworks"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 251,
+      "pattern": "*.nubank.com.br",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/nubank"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 252,
+      "pattern": "*.nutanix.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/nutanix"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 253,
+      "pattern": "*.olaelectric.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/olaelectric"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 254,
+      "pattern": "*.onetrust.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/onetrust"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 256,
+      "pattern": "*.ox.security",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/ox"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 257,
+      "pattern": "*.pagerduty.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/pagerduty"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 258,
+      "pattern": "*.palantir.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/palantir"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 259,
+      "pattern": "*.paloaltonetworks.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/paloaltonetworks"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 260,
+      "pattern": "*.patreon.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/patreon"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 261,
+      "pattern": "*.paytm.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/paytm"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 262,
+      "pattern": "*.perplexity.ai",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/perplexity"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 263,
+      "pattern": "*.phonepe.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/phonepe"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 264,
+      "pattern": "*.plaid.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/plaid"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 265,
+      "pattern": "*.planetscale.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/planetscale"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 266,
+      "pattern": "*.posthog.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/posthog"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 267,
+      "pattern": "*.postman.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/postman"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 268,
+      "pattern": "*.proofpoint.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/proofpoint"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 269,
+      "pattern": "*.qualys.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/qualys"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 270,
+      "pattern": "*.quora.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/quora"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 271,
+      "pattern": "*.rakuten.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/rakuten"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 272,
+      "pattern": "*.ramp.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/ramp"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 273,
+      "pattern": "*.rapid7.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/rapid7"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 274,
+      "pattern": "*.razorpay.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/razorpay"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 275,
+      "pattern": "*.recordedfuture.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/recordedfuture"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 276,
+      "pattern": "*.redhat.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://access.redhat.com/security/team/contact"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 277,
+      "pattern": "*.redis.io",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/redis"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 278,
+      "pattern": "*.replicate.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/replicate"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 279,
+      "pattern": "*.retool.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/retool"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 280,
+      "pattern": "*.revolut.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/revolut"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 281,
+      "pattern": "*.riotgames.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/riotgames"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 282,
+      "pattern": "*.rippling.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/rippling"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 283,
+      "pattern": "*.rivian.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/rivian"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 284,
+      "pattern": "*.robinhood.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/robinhood"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 285,
+      "pattern": "*.rubrik.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/rubrik"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 286,
+      "pattern": "*.runwayml.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/runwayml"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 287,
+      "pattern": "*.samsung.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/samsung"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 288,
+      "pattern": "*.sap.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/sap"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 289,
+      "pattern": "*.scale.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/scale"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 290,
+      "pattern": "*.se.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/se"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 291,
+      "pattern": "*.securecodewarrior.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/securecodewarrior"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 292,
+      "pattern": "*.securityscorecard.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/securityscorecard"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 293,
+      "pattern": "*.segment.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/segment"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 294,
+      "pattern": "*.semgrep.dev",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/semgrep"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 295,
+      "pattern": "*.sentinelone.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/sentinelone"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 296,
+      "pattern": "*.sentry.io",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/sentry"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 297,
+      "pattern": "*.servicenow.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/servicenow"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 298,
+      "pattern": "*.siemens.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/siemens"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 299,
+      "pattern": "*.signal.org",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://signal.org/security"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 300,
+      "pattern": "*.singlestore.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/singlestore"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 301,
+      "pattern": "*.snowflake.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/snowflake"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 302,
+      "pattern": "*.snyk.io",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/snyk"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 303,
+      "pattern": "*.socket.dev",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/socket"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 304,
+      "pattern": "*.sofi.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/sofi"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 305,
+      "pattern": "*.sonarsource.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/sonarsource"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 306,
+      "pattern": "*.sony.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/sony"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 307,
+      "pattern": "*.sophos.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/sophos"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 308,
+      "pattern": "*.stability.ai",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/stability"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 309,
+      "pattern": "*.substack.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/substack"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 310,
+      "pattern": "*.sumologic.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/sumologic"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 311,
+      "pattern": "*.suse.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://suse.com/security"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 312,
+      "pattern": "*.swiggy.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/swiggy"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 313,
+      "pattern": "*.synack.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/synack"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 314,
+      "pattern": "*.sysdig.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/sysdig"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 315,
+      "pattern": "*.tailscale.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/tailscale"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 316,
+      "pattern": "*.tanium.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/tanium"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 317,
+      "pattern": "*.target.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://bugcrowd.com/target"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 318,
+      "pattern": "*.tcs.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/tcs"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 319,
+      "pattern": "*.techmahindra.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/techmahindra"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 320,
+      "pattern": "*.telegram.org",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://telegram.org/security"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 321,
+      "pattern": "*.goteleport.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/goteleport"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 323,
+      "pattern": "*.tencent.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/tencent"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 324,
+      "pattern": "*.tiktok.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/tiktok"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 325,
+      "pattern": "*.together.ai",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/together"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 326,
+      "pattern": "*.toyota.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/toyota"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 327,
+      "pattern": "*.trendmicro.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/trendmicro"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 328,
+      "pattern": "*.tripadvisor.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://bugcrowd.com/tripadvisor"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 329,
+      "pattern": "*.twingate.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/twingate"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 330,
+      "pattern": "*.ubisoft.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://yeswehack.com/programs/ubisoft"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 331,
+      "pattern": "*.udaan.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/udaan"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 332,
+      "pattern": "*.valvesoftware.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/valve"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 333,
+      "pattern": "*.vanta.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/vanta"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 334,
+      "pattern": "*.veeam.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/veeam"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 335,
+      "pattern": "*.veracode.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/veracode"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 336,
+      "pattern": "*.vimeo.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/vimeo"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 337,
+      "pattern": "*.visa.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/visa"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 338,
+      "pattern": "*.vmware.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/vmware"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 339,
+      "pattern": "*.volkswagen-group.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/volkswagen-group"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 340,
+      "pattern": "*.walmart.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://bugcrowd.com/walmart"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 341,
+      "pattern": "*.wechat.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/wechat"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 342,
+      "pattern": "*.whatsapp.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://www.facebook.com/whitehat"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 343,
+      "pattern": "*.wipro.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/wipro"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 344,
+      "pattern": "*.wise.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://bugcrowd.com/transferwise"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 345,
+      "pattern": "*.wiz.io",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/wiz"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 346,
+      "pattern": "*.wordpress.org",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/automattic"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 347,
+      "pattern": "*.workday.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/workday"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 348,
+      "pattern": "*.x.ai",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/x"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 349,
+      "pattern": "*.yeswehack.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://yeswehack.com/programs/yeswehack-vdp"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 350,
+      "pattern": "*.zerodha.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/zerodha"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 351,
+      "pattern": "*.zerofox.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/zerofox"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 352,
+      "pattern": "*.zoho.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/zoho"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 353,
+      "pattern": "*.zomato.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/zomato"
+    },
+    {
+      "type": "SCOPE_RULE",
+      "id": 354,
+      "pattern": "*.zscaler.com",
+      "asset_type": null,
+      "inclusion_type": "INCLUDE",
+      "confidence": 0.95,
+      "evidence": "Baseline seed wildcard scope derived from public program listing",
+      "source_url": "https://hackerone.com/zscaler"
+    }
+  ]
+}

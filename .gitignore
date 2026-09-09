@@ -1,0 +1,44 @@
+# Environment & Secrets (NEVER COMMIT)
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.cert
+*.crt
+
+# Node & Build artifacts
+**/node_modules/
+**/.next/
+.pnpm-store/
+.npm-cache/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Python caches
+__pycache__/
+.pytest_cache/
+*.pyc
+*.pyo
+*.pyd
+.venv/
+venv/
+ENV/
+
+# Temporary screenshots & local dumps
+*.zip
+ast-*.png
+login-*.png
+final-*.png
+trial-*.png
+*.txt
+!requirements.txt
+!README.md
+
+# Tooling caches
+.playwright-cli/
+.kiro/
+.vscode/
+.idea/
+data/exports/

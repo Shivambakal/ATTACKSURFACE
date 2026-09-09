@@ -1,0 +1,144 @@
+"""Typed application configuration.
+
+All provider credentials are optional — the application starts and
+operates with deterministic-only features when credentials are absent.
+Secret values are NEVER exposed through API responses, logs, or tracebacks.
+"""
+from __future__ import annotations
+
+import secrets
+from pydantic_settings import BaseSettings, SettingsConfigDict
+
+
+class Settings(BaseSettings):
+    model_config = SettingsConfigDict(env_file=".env", extra="ignore")
+
+    # ── Infrastructure ──────────────────────────────────────────────
+    database_url: str = "postgresql+psycopg://attack:attack@localhost:5432/attacksurface"
+    redis_url: str = "redis://localhost:6379/0"
+    secret_key: str = secrets.token_urlsafe(64)
+
+    # ── API behavior ────────────────────────────────────────────────
+    allowed_origins: str = "http://localhost:3000,http://localhost:8000,https://attacksurface.online,https://www.attacksurface.online"
+    collector_user_agent: str = "AttackSurfaceTimeline/0.1 (authorized research; desk@attacksurface.online)"
+    request_delay_seconds: float = 1.0
+    max_pages_per_snapshot: int = 8
+    app_base_url: str = "https://attacksurface.online"
+
+    # ── Rate limits ─────────────────────────────────────────────────
+    rate_limit_enabled: bool = True
+    rate_limit_per_minute: int = 600
+    rate_limit_user_per_minute: int = 1200
+    rate_limit_collection_per_hour: int = 60
+
+    # ── Provider credentials (all optional) ─────────────────────────
+    github_token: str | None = None
+    gemini_api_key: str | None = None
+    nvidia_api_key: str | None = None
+    nvd_api_key: str | None = None
+    builtwith_api_key: str | None = None
+    censys_api_key: str | None = None
+    censys_organization_id: str | None = None
+    shodan_api_key: str | None = None
+    subdomains_finder_api_key: str | None = None
+    domainee_api_key: str | None = None
+    stackblitz_api_key: str | None = None
+
+    # ── Monetization & Payments (Razorpay) ───────────────────────────
+    razorpay_key_id: str | None = None
+    razorpay_key_secret: str | None = None
+    razorpay_webhook_secret: str | None = None
+
+    # ── CISA Feed & Export Engine ────────────────────────────────────
+    cisa_feed_url: str = "https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json"
+    export_storage_path: str = "data/exports"
+
+    # ── OAuth (Google OAuth 2.0) ────────────────────────────────────
+    google_client_id: str | None = None
+    google_client_secret: str | None = None
+    google_redirect_uri: str = "https://attacksurface.online/api/v1/auth/google/callback"
+
+    # ── Email Infrastructure (Resend) ───────────────────────────────
+    resend_api_key: str | None = None
+    resend_from_email: str = "AttackSurface <noreply@attacksurface.online>"
+    resend_reply_to: str = "attacksurface.alerts@gmail.com"
+
+    # ── Provider availability helpers ───────────────────────────────
+    @property
+    def resend_configured(self) -> bool:
+        return bool(self.resend_api_key)
+
+    @property
+    def google_oauth_configured(self) -> bool:
+        return bool(self.google_client_id and self.google_client_secret)
+
+    @property
+    def github_configured(self) -> bool:
+        return bool(self.github_token)
+
+    @property
+    def gemini_configured(self) -> bool:
+        return bool(self.gemini_api_key)
+
+    @property
+    def nvidia_configured(self) -> bool:
+        return bool(self.nvidia_api_key)
+
+    @property
+    def nvd_configured(self) -> bool:
+        return bool(self.nvd_api_key)
+
+    @property
+    def builtwith_configured(self) -> bool:
+        return bool(self.builtwith_api_key)
+
+    @property
+    def censys_configured(self) -> bool:
+        return bool(self.censys_api_key)
+
+    @property
+    def shodan_configured(self) -> bool:
+        return bool(self.shodan_api_key)
+
+    @property
+    def subdomains_finder_configured(self) -> bool:
+        return bool(self.subdomains_finder_api_key)
+
+    @property
+    def domainee_configured(self) -> bool:
+        return bool(self.domainee_api_key)
+
+    @property
+    def stackblitz_configured(self) -> bool:
+        return bool(self.stackblitz_api_key)
+
+    @property
+    def razorpay_configured(self) -> bool:
+        return bool(self.razorpay_key_id and self.razorpay_key_secret)
+
+    @property
+    def razorpay_environment(self) -> str:
+        if not self.razorpay_configured:
+            return "PAYMENTS NOT CONFIGURED"
+        if self.razorpay_key_id and self.razorpay_key_id.startswith("rzp_test_"):
+            return "TEST MODE"
+        if self.razorpay_key_id and self.razorpay_key_id.startswith("rzp_live_"):
+            return "LIVE MODE"
+        return "CONFIGURED"
+
+    @property
+    def razorpay_status_label(self) -> str:
+        if not self.razorpay_configured:
+            return "PAYMENTS NOT CONFIGURED"
+        if self.razorpay_key_id and self.razorpay_key_id.startswith("rzp_test_"):
+            return "RAZORPAY TEST MODE"
+        if self.razorpay_key_id and self.razorpay_key_id.startswith("rzp_live_"):
+            return "RAZORPAY LIVE MODE"
+        return "RAZORPAY CONFIGURED"
+
+    @property
+    def google_oauth_configured(self) -> bool:
+        return bool(self.google_client_id and self.google_client_secret)
+
+
+settings = Settings()

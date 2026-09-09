@@ -1,0 +1,629 @@
+# Official Corporate Source Registry Seed Definitions
+# Contains reference source packs for top enterprise organizations.
+# Each source specifies authority, collection method, polling policy, and scope.
+
+sources:
+  # =========================================================================
+  # GOOGLE (google.com)
+  # =========================================================================
+  - company_domain: "google.com"
+    name: "Google Cloud Release Notes"
+    source_url: "https://cloud.google.com/release-notes"
+    source_type: "OFFICIAL_PRODUCT_CHANGE"
+    authority_level: "OFFICIAL_PRODUCT_CHANGE"
+    product_scope: "Google Cloud"
+    platform_scope: "Cloud Infrastructure"
+    parser_strategy: "google_cloud_rss"
+    collection_method: "RSS"
+    feed_url: "https://cloud.google.com/feeds/gcp-release-notes.xml"
+    priority: "P0"
+    poll_interval_seconds: 600
+    notes: "Google Cloud service launches, feature updates, API additions, and deprecations."
+
+  - company_domain: "google.com"
+    name: "Google SecOps / Chronicle Release Notes"
+    source_url: "https://cloud.google.com/chronicle/docs/secops/release-notes"
+    source_type: "OFFICIAL_PRODUCT_CHANGE"
+    authority_level: "OFFICIAL_PRODUCT_CHANGE"
+    product_scope: "Google SecOps"
+    platform_scope: "Security Operations"
+    parser_strategy: "generic_feed"
+    collection_method: "HTML"
+    priority: "P1"
+    poll_interval_seconds: 600
+    notes: "Chronicle and Google Security Operations capability updates and rule changes."
+
+  - company_domain: "google.com"
+    name: "Google Workspace Updates"
+    source_url: "https://developers.google.com/workspace/release-notes"
+    source_type: "OFFICIAL_API_CHANGELOG"
+    authority_level: "OFFICIAL_DOCUMENTATION"
+    product_scope: "Google Workspace"
+    platform_scope: "Productivity APIs"
+    parser_strategy: "generic_feed"
+    collection_method: "RSS"
+    feed_url: "https://workspaceupdates.googleblog.com/feeds/posts/default"
+    priority: "P1"
+    poll_interval_seconds: 600
+    notes: "Workspace admin, API, OAuth scope, and enterprise collaboration changes."
+
+  - company_domain: "google.com"
+    name: "Chrome Releases Blog"
+    source_url: "https://chromereleases.googleblog.com/"
+    source_type: "OFFICIAL_RELEASE"
+    authority_level: "OFFICIAL_RELEASE"
+    product_scope: "Google Chrome"
+    platform_scope: "Browser"
+    parser_strategy: "chrome_releases_rss"
+    collection_method: "RSS"
+    feed_url: "https://chromereleases.googleblog.com/feeds/posts/default"
+    priority: "P0"
+    poll_interval_seconds: 600
+    notes: "Chrome Stable, Beta, Dev channel releases and browser security fixes."
+
+  - company_domain: "google.com"
+    name: "Android Platform What's New"
+    source_url: "https://source.android.com/docs/whatsnew"
+    source_type: "OFFICIAL_PRODUCT_CHANGE"
+    authority_level: "OFFICIAL_DOCUMENTATION"
+    product_scope: "Android"
+    platform_scope: "Mobile OS"
+    parser_strategy: "html_structured"
+    collection_method: "HTML"
+    priority: "P1"
+    poll_interval_seconds: 1800
+    notes: "AOSP and Android OS platform architecture changes."
+
+  - company_domain: "google.com"
+    name: "Android Security Bulletin"
+    source_url: "https://source.android.com/docs/security/bulletin"
+    source_type: "OFFICIAL_SECURITY_ADVISORY"
+    authority_level: "OFFICIAL_SECURITY_ADVISORY"
+    product_scope: "Android"
+    platform_scope: "Mobile Security"
+    parser_strategy: "html_structured"
+    collection_method: "HTML"
+    priority: "P0"
+    poll_interval_seconds: 1800
+    notes: "Monthly Android security patch levels, kernel advisories, and framework CVEs."
+
+  - company_domain: "google.com"
+    name: "Google APIs Explorer & Discovery"
+    source_url: "https://developers.google.com/apis-explorer"
+    source_type: "OFFICIAL_API_CHANGELOG"
+    authority_level: "OFFICIAL_DOCUMENTATION"
+    product_scope: "Google APIs"
+    platform_scope: "Developer Platform"
+    parser_strategy: "json_api"
+    collection_method: "JSON_API"
+    api_url: "https://discovery.googleapis.com/discovery/v1/apis"
+    priority: "P1"
+    poll_interval_seconds: 3600
+    notes: "Discovery service cataloging all publicly observable Google REST APIs."
+
+  - company_domain: "google.com"
+    name: "Google Developers Blog"
+    source_url: "https://developers.googleblog.com/"
+    source_type: "OFFICIAL_BLOG"
+    authority_level: "OFFICIAL_RELEASE"
+    product_scope: "Google Developer Tools"
+    platform_scope: "Developer Platform"
+    parser_strategy: "generic_feed"
+    collection_method: "RSS"
+    feed_url: "https://developers.googleblog.com/feeds/posts/default"
+    priority: "P2"
+    poll_interval_seconds: 1800
+    notes: "Developer product announcements, SDK releases, and developer previews."
+
+  - company_domain: "google.com"
+    name: "Google Cloud Community"
+    source_url: "https://www.googlecloudcommunity.com/"
+    source_type: "COMMUNITY"
+    authority_level: "COMMUNITY_REPORT"
+    product_scope: "Google Cloud"
+    platform_scope: "Community"
+    parser_strategy: "community_forum"
+    collection_method: "HTML"
+    priority: "P4"
+    poll_interval_seconds: 3600
+    notes: "Community discussion and corroboration only; never official evidence."
+
+  - company_domain: "google.com"
+    name: "Google Official GitHub Repositories"
+    source_url: "https://github.com/google"
+    source_type: "OFFICIAL_GITHUB"
+    authority_level: "OFFICIAL_GITHUB"
+    product_scope: "Open Source"
+    platform_scope: "Code"
+    parser_strategy: "github_events"
+    collection_method: "GITHUB_API"
+    api_url: "https://api.github.com/orgs/google/events"
+    repository_url: "https://github.com/google"
+    priority: "P1"
+    poll_interval_seconds: 600
+    notes: "Official public code activity, release tags, and advisory disclosures."
+
+  # =========================================================================
+  # AMAZON / AWS (amazon.com)
+  # =========================================================================
+  - company_domain: "amazon.com"
+    name: "AWS What's New"
+    source_url: "https://aws.amazon.com/new/"
+    source_type: "OFFICIAL_PRODUCT_CHANGE"
+    authority_level: "OFFICIAL_PRODUCT_CHANGE"
+    product_scope: "AWS"
+    platform_scope: "Cloud Platform"
+    parser_strategy: "aws_whats_new_rss"
+    collection_method: "RSS"
+    feed_url: "https://aws.amazon.com/about-aws/whats-new/recent/feed/"
+    priority: "P0"
+    poll_interval_seconds: 600
+    notes: "AWS service additions, launches, regions, feature updates, and IAM changes."
+
+  - company_domain: "amazon.com"
+    name: "AWS News Blog"
+    source_url: "https://aws.amazon.com/blogs/aws/"
+    source_type: "OFFICIAL_BLOG"
+    authority_level: "OFFICIAL_RELEASE"
+    product_scope: "AWS"
+    platform_scope: "Cloud Platform"
+    parser_strategy: "generic_feed"
+    collection_method: "RSS"
+    feed_url: "https://aws.amazon.com/blogs/aws/feed/"
+    priority: "P1"
+    poll_interval_seconds: 600
+    notes: "Detailed architecture announcements by AWS Chief Evangelists."
+
+  - company_domain: "amazon.com"
+    name: "AWS Security Bulletins"
+    source_url: "https://aws.amazon.com/security/security-bulletins/"
+    source_type: "OFFICIAL_SECURITY_ADVISORY"
+    authority_level: "OFFICIAL_SECURITY_ADVISORY"
+    product_scope: "AWS Security"
+    platform_scope: "Cloud Security"
+    parser_strategy: "generic_feed"
+    collection_method: "RSS"
+    feed_url: "https://aws.amazon.com/security/security-bulletins/feed/"
+    priority: "P0"
+    poll_interval_seconds: 600
+    notes: "Official AWS security bulletins and mitigation advisories."
+
+  - company_domain: "amazon.com"
+    name: "AWS Database Blog"
+    source_url: "https://aws.amazon.com/blogs/database/"
+    source_type: "OFFICIAL_BLOG"
+    authority_level: "OFFICIAL_RELEASE"
+    product_scope: "AWS Databases"
+    platform_scope: "Aurora / RDS / DynamoDB"
+    parser_strategy: "generic_feed"
+    collection_method: "RSS"
+    feed_url: "https://aws.amazon.com/blogs/database/feed/"
+    priority: "P2"
+    poll_interval_seconds: 1800
+    notes: "Aurora, RDS, and DynamoDB engine version upgrades and feature launches."
+
+  - company_domain: "amazon.com"
+    name: "AWS re:Post Community"
+    source_url: "https://repost.aws/"
+    source_type: "COMMUNITY"
+    authority_level: "COMMUNITY_REPORT"
+    product_scope: "AWS"
+    platform_scope: "Community"
+    parser_strategy: "community_forum"
+    collection_method: "HTML"
+    priority: "P4"
+    poll_interval_seconds: 3600
+    notes: "Community Q&A and user-reported quirks; strictly community authority."
+
+  - company_domain: "amazon.com"
+    name: "AWS Official GitHub"
+    source_url: "https://github.com/aws"
+    source_type: "OFFICIAL_GITHUB"
+    authority_level: "OFFICIAL_GITHUB"
+    product_scope: "AWS SDKs & Tools"
+    platform_scope: "Code"
+    parser_strategy: "github_events"
+    collection_method: "GITHUB_API"
+    api_url: "https://api.github.com/orgs/aws/events"
+    repository_url: "https://github.com/aws"
+    priority: "P1"
+    poll_interval_seconds: 600
+    notes: "Official AWS SDKs, CDK constructs, CLI releases, and security patches."
+
+  # =========================================================================
+  # MICROSOFT (microsoft.com)
+  # =========================================================================
+  - company_domain: "microsoft.com"
+    name: "Microsoft 365 Roadmap"
+    source_url: "https://www.microsoft.com/microsoft-365/roadmap"
+    source_type: "OFFICIAL_ROADMAP"
+    authority_level: "OFFICIAL_DOCUMENTATION"
+    product_scope: "Microsoft 365"
+    platform_scope: "Enterprise SaaS"
+    parser_strategy: "json_api"
+    collection_method: "JSON_API"
+    api_url: "https://roadmappublicapi.azurewebsites.net/api/v1/features"
+    priority: "P1"
+    poll_interval_seconds: 1800
+    notes: "Rolling M365 feature roadmap with planned, in-development, and launched capabilities."
+
+  - company_domain: "microsoft.com"
+    name: "Windows Release Health"
+    source_url: "https://learn.microsoft.com/windows/release-health/"
+    source_type: "OFFICIAL_RELEASE"
+    authority_level: "OFFICIAL_DOCUMENTATION"
+    product_scope: "Windows"
+    platform_scope: "OS"
+    parser_strategy: "html_structured"
+    collection_method: "HTML"
+    priority: "P1"
+    poll_interval_seconds: 1800
+    notes: "Windows 11 / 10 build releases, known issues, and lifecycle updates."
+
+  - company_domain: "microsoft.com"
+    name: "Microsoft Graph Changelog"
+    source_url: "https://developer.microsoft.com/graph/changelog/"
+    source_type: "OFFICIAL_API_CHANGELOG"
+    authority_level: "OFFICIAL_DOCUMENTATION"
+    product_scope: "Microsoft Graph"
+    platform_scope: "Developer API"
+    parser_strategy: "generic_feed"
+    collection_method: "RSS"
+    feed_url: "https://developer.microsoft.com/en-us/graph/changelog/rss"
+    priority: "P0"
+    poll_interval_seconds: 600
+    notes: "Graph API v1.0 and beta endpoint additions, permission changes, and deprecations."
+
+  - company_domain: "microsoft.com"
+    name: "MSRC Security Update Guide"
+    source_url: "https://msrc.microsoft.com/update-guide/"
+    source_type: "OFFICIAL_SECURITY_ADVISORY"
+    authority_level: "OFFICIAL_SECURITY_ADVISORY"
+    product_scope: "Microsoft Enterprise"
+    platform_scope: "Security Updates"
+    parser_strategy: "json_api"
+    collection_method: "REST"
+    api_url: "https://api.msrc.microsoft.com/cvrf/v2.0/updates"
+    priority: "P0"
+    poll_interval_seconds: 600
+    notes: "Patch Tuesday CVRF/CSAF machine-readable vulnerability advisories."
+
+  - company_domain: "microsoft.com"
+    name: "Azure Updates"
+    source_url: "https://azure.microsoft.com/updates/"
+    source_type: "OFFICIAL_PRODUCT_CHANGE"
+    authority_level: "OFFICIAL_PRODUCT_CHANGE"
+    product_scope: "Azure"
+    platform_scope: "Cloud Infrastructure"
+    parser_strategy: "generic_feed"
+    collection_method: "RSS"
+    feed_url: "https://azurecomcdn.azureedge.net/en-us/updates/feed/"
+    priority: "P0"
+    poll_interval_seconds: 600
+    notes: "Azure service launches, preview features, retirements, and regional rollouts."
+
+  - company_domain: "microsoft.com"
+    name: "Microsoft DevBlogs"
+    source_url: "https://devblogs.microsoft.com/"
+    source_type: "OFFICIAL_BLOG"
+    authority_level: "OFFICIAL_RELEASE"
+    product_scope: "Developer Tools"
+    platform_scope: "Developer Platform"
+    parser_strategy: "generic_feed"
+    collection_method: "RSS"
+    feed_url: "https://devblogs.microsoft.com/feed/"
+    priority: "P2"
+    poll_interval_seconds: 1800
+    notes: ".NET, TypeScript, PowerShell, and developer tooling announcements."
+
+  # =========================================================================
+  # CLOUDFLARE (cloudflare.com)
+  # =========================================================================
+  - company_domain: "cloudflare.com"
+    name: "Cloudflare Developer Changelog"
+    source_url: "https://developers.cloudflare.com/changelog/"
+    source_type: "OFFICIAL_PRODUCT_CHANGE"
+    authority_level: "OFFICIAL_PRODUCT_CHANGE"
+    product_scope: "Cloudflare Platform"
+    platform_scope: "Edge Network & Runtime"
+    parser_strategy: "generic_feed"
+    collection_method: "RSS"
+    feed_url: "https://developers.cloudflare.com/changelog/index.xml"
+    priority: "P0"
+    poll_interval_seconds: 600
+    notes: "Workers, Pages, D1, R2, Zero Trust, WAF, and developer platform changes."
+
+  - company_domain: "cloudflare.com"
+    name: "Cloudflare API Deprecations"
+    source_url: "https://developers.cloudflare.com/fundamentals/api/reference/deprecations/"
+    source_type: "OFFICIAL_API_CHANGELOG"
+    authority_level: "OFFICIAL_DOCUMENTATION"
+    product_scope: "Cloudflare API"
+    platform_scope: "API Management"
+    parser_strategy: "html_structured"
+    collection_method: "HTML"
+    priority: "P0"
+    poll_interval_seconds: 600
+    notes: "Official deprecation dates and replacement endpoints for Cloudflare v4 REST API."
+
+  - company_domain: "cloudflare.com"
+    name: "Cloudflare Security Blog"
+    source_url: "https://blog.cloudflare.com/tag/security/"
+    source_type: "OFFICIAL_BLOG"
+    authority_level: "OFFICIAL_SECURITY_ADVISORY"
+    product_scope: "Cloudflare Security"
+    platform_scope: "Security"
+    parser_strategy: "generic_feed"
+    collection_method: "RSS"
+    feed_url: "https://blog.cloudflare.com/tag/security/rss/"
+    priority: "P1"
+    poll_interval_seconds: 600
+    notes: "Incident reports, threat research, and security feature rollouts."
+
+  - company_domain: "cloudflare.com"
+    name: "Cloudflare Official GitHub"
+    source_url: "https://github.com/cloudflare"
+    source_type: "OFFICIAL_GITHUB"
+    authority_level: "OFFICIAL_GITHUB"
+    product_scope: "Wrangler & Open Source"
+    platform_scope: "Code"
+    parser_strategy: "github_events"
+    collection_method: "GITHUB_API"
+    api_url: "https://api.github.com/orgs/cloudflare/events"
+    repository_url: "https://github.com/cloudflare"
+    priority: "P1"
+    poll_interval_seconds: 600
+    notes: "Wrangler CLI, workerd runtime, and SDK code changes."
+
+  # =========================================================================
+  # APPLE (apple.com)
+  # =========================================================================
+  - company_domain: "apple.com"
+    name: "Apple Security Releases"
+    source_url: "https://support.apple.com/en-us/100100"
+    source_type: "OFFICIAL_SECURITY_ADVISORY"
+    authority_level: "OFFICIAL_SECURITY_ADVISORY"
+    product_scope: "Apple OS Ecosystem"
+    platform_scope: "iOS, iPadOS, macOS, watchOS, visionOS"
+    parser_strategy: "apple_security_html"
+    collection_method: "HTML"
+    priority: "P0"
+    poll_interval_seconds: 600
+    notes: "Canonical Apple security advisories cataloging patched CVEs per operating system."
+
+  - company_domain: "apple.com"
+    name: "Apple Developer News"
+    source_url: "https://developer.apple.com/news/"
+    source_type: "OFFICIAL_RELEASE"
+    authority_level: "OFFICIAL_DOCUMENTATION"
+    product_scope: "Apple Developer"
+    platform_scope: "SDKs & APIs"
+    parser_strategy: "generic_feed"
+    collection_method: "RSS"
+    feed_url: "https://developer.apple.com/news/rss/news.rss"
+    priority: "P1"
+    poll_interval_seconds: 600
+    notes: "Xcode, Swift, App Store guidelines, beta SDK announcements."
+
+  - company_domain: "apple.com"
+    name: "Apple Documentation Revision History"
+    source_url: "https://developer.apple.com/documentation/revision-history"
+    source_type: "OFFICIAL_DEVELOPER_DOCS"
+    authority_level: "OFFICIAL_DOCUMENTATION"
+    product_scope: "Frameworks"
+    platform_scope: "Developer Frameworks"
+    parser_strategy: "html_structured"
+    collection_method: "HTML"
+    priority: "P2"
+    poll_interval_seconds: 1800
+    notes: "Documentation updates for WebKit, CryptoKit, Network framework, and Security APIs."
+
+  # =========================================================================
+  # GITHUB (github.com)
+  # =========================================================================
+  - company_domain: "github.com"
+    name: "GitHub Changelog"
+    source_url: "https://github.blog/changelog/"
+    source_type: "OFFICIAL_PRODUCT_CHANGE"
+    authority_level: "OFFICIAL_PRODUCT_CHANGE"
+    product_scope: "GitHub Platform"
+    platform_scope: "Developer Platform"
+    parser_strategy: "generic_feed"
+    collection_method: "RSS"
+    feed_url: "https://github.blog/changelog/feed/"
+    priority: "P0"
+    poll_interval_seconds: 600
+    notes: "GitHub Actions, Codespaces, Advanced Security, and enterprise features."
+
+  - company_domain: "github.com"
+    name: "GitHub REST API Versions"
+    source_url: "https://docs.github.com/en/rest/overview/api-versions"
+    source_type: "OFFICIAL_API_CHANGELOG"
+    authority_level: "OFFICIAL_DOCUMENTATION"
+    product_scope: "GitHub REST API"
+    platform_scope: "API"
+    parser_strategy: "html_structured"
+    collection_method: "HTML"
+    priority: "P1"
+    poll_interval_seconds: 600
+    notes: "Date-based REST API versions, breaking changes, and header requirements."
+
+  - company_domain: "github.com"
+    name: "GitHub Security Advisories"
+    source_url: "https://github.com/advisories"
+    source_type: "OFFICIAL_SECURITY_ADVISORY"
+    authority_level: "OFFICIAL_SECURITY_ADVISORY"
+    product_scope: "Open Source Advisories"
+    platform_scope: "Global Vulnerability DB"
+    parser_strategy: "json_api"
+    collection_method: "REST"
+    api_url: "https://api.github.com/advisories"
+    priority: "P0"
+    poll_interval_seconds: 600
+    notes: "GHSA security advisories affecting software dependencies."
+
+  # =========================================================================
+  # META (meta.com)
+  # =========================================================================
+  - company_domain: "meta.com"
+    name: "Meta Graph API Changelog"
+    source_url: "https://developers.facebook.com/docs/graph-api/changelog/"
+    source_type: "OFFICIAL_API_CHANGELOG"
+    authority_level: "OFFICIAL_DOCUMENTATION"
+    product_scope: "Meta Graph API"
+    platform_scope: "API & Webhooks"
+    parser_strategy: "html_structured"
+    collection_method: "HTML"
+    priority: "P0"
+    poll_interval_seconds: 600
+    notes: "Versioned Graph API changes, permission requirements, and breaking removals."
+
+  - company_domain: "meta.com"
+    name: "Meta Engineering Blog"
+    source_url: "https://engineering.fb.com/"
+    source_type: "OFFICIAL_BLOG"
+    authority_level: "OFFICIAL_RELEASE"
+    product_scope: "Infrastructure"
+    platform_scope: "Architecture"
+    parser_strategy: "generic_feed"
+    collection_method: "RSS"
+    feed_url: "https://engineering.fb.com/feed/"
+    priority: "P2"
+    poll_interval_seconds: 1800
+    notes: "Infrastructure, backend systems, AI systems, and security engineering posts."
+
+  # =========================================================================
+  # ATLASSIAN (atlassian.com)
+  # =========================================================================
+  - company_domain: "atlassian.com"
+    name: "Atlassian Developer Changelog"
+    source_url: "https://developer.atlassian.com/changelog/"
+    source_type: "OFFICIAL_API_CHANGELOG"
+    authority_level: "OFFICIAL_DOCUMENTATION"
+    product_scope: "Jira / Confluence / Forge"
+    platform_scope: "Developer Platform"
+    parser_strategy: "generic_feed"
+    collection_method: "RSS"
+    feed_url: "https://developer.atlassian.com/changelog/feed.xml"
+    priority: "P0"
+    poll_interval_seconds: 600
+    notes: "Cloud REST APIs, Forge app runtime, and OAuth scope changes."
+
+  - company_domain: "atlassian.com"
+    name: "Jira Software Cloud Release Notes"
+    source_url: "https://confluence.atlassian.com/confcloud/confluence-release-notes-724764951.html"
+    source_type: "OFFICIAL_PRODUCT_CHANGE"
+    authority_level: "OFFICIAL_PRODUCT_CHANGE"
+    product_scope: "Jira Cloud"
+    platform_scope: "Enterprise SaaS"
+    parser_strategy: "html_structured"
+    collection_method: "HTML"
+    priority: "P1"
+    poll_interval_seconds: 1800
+    notes: "Weekly Jira and Confluence cloud feature releases and administrative updates."
+
+  # =========================================================================
+  # SALESFORCE (salesforce.com)
+  # =========================================================================
+  - company_domain: "salesforce.com"
+    name: "Salesforce Release Notes"
+    source_url: "https://help.salesforce.com/s/articleView?id=release-notes.salesforce_release_notes.htm"
+    source_type: "OFFICIAL_PRODUCT_CHANGE"
+    authority_level: "OFFICIAL_DOCUMENTATION"
+    product_scope: "Salesforce Core"
+    platform_scope: "Enterprise CRM"
+    parser_strategy: "html_structured"
+    collection_method: "HTML"
+    priority: "P1"
+    poll_interval_seconds: 1800
+    notes: "Seasonal major release notes (Spring, Summer, Winter), object, and permission updates."
+
+  - company_domain: "salesforce.com"
+    name: "Salesforce Security Advisories"
+    source_url: "https://security.salesforce.com/"
+    source_type: "OFFICIAL_SECURITY_ADVISORY"
+    authority_level: "OFFICIAL_SECURITY_ADVISORY"
+    product_scope: "Salesforce Platform"
+    platform_scope: "Trust & Security"
+    parser_strategy: "html_structured"
+    collection_method: "HTML"
+    priority: "P0"
+    poll_interval_seconds: 600
+    notes: "Security bulletins, TLS enforcement, and policy updates."
+
+  # =========================================================================
+  # ADOBE (adobe.com)
+  # =========================================================================
+  - company_domain: "adobe.com"
+    name: "Adobe Experience Cloud Release Notes"
+    source_url: "https://experienceleague.adobe.com/en/docs/release-notes/experience-cloud/current"
+    source_type: "OFFICIAL_PRODUCT_CHANGE"
+    authority_level: "OFFICIAL_DOCUMENTATION"
+    product_scope: "Experience Cloud"
+    platform_scope: "Marketing & Analytics"
+    parser_strategy: "html_structured"
+    collection_method: "HTML"
+    priority: "P1"
+    poll_interval_seconds: 1800
+    notes: "Adobe Experience Manager, Analytics, Commerce, and Target release updates."
+
+  - company_domain: "adobe.com"
+    name: "Adobe Security Bulletins"
+    source_url: "https://helpx.adobe.com/security.html"
+    source_type: "OFFICIAL_SECURITY_ADVISORY"
+    authority_level: "OFFICIAL_SECURITY_ADVISORY"
+    product_scope: "Adobe Products"
+    platform_scope: "Security"
+    parser_strategy: "html_structured"
+    collection_method: "HTML"
+    priority: "P0"
+    poll_interval_seconds: 600
+    notes: "Monthly security bulletins for Acrobat, ColdFusion, Commerce, and Creative Cloud."
+
+  # =========================================================================
+  # CISCO (cisco.com)
+  # =========================================================================
+  - company_domain: "cisco.com"
+    name: "Cisco Security Center Publications"
+    source_url: "https://sec.cloudapps.cisco.com/security/center/publicationListing.x"
+    source_type: "OFFICIAL_SECURITY_ADVISORY"
+    authority_level: "OFFICIAL_SECURITY_ADVISORY"
+    product_scope: "Cisco Network & Security"
+    platform_scope: "Networking"
+    parser_strategy: "generic_feed"
+    collection_method: "RSS"
+    feed_url: "https://tools.cisco.com/security/center/rss.x?i=44"
+    priority: "P0"
+    poll_interval_seconds: 600
+    notes: "IOS, IOS XE, ASA, Meraki, and appliance vulnerability advisories."
+
+  # =========================================================================
+  # OKTA (okta.com)
+  # =========================================================================
+  - company_domain: "okta.com"
+    name: "Okta Identity Engine Release Notes"
+    source_url: "https://help.okta.com/oie/en-us/content/topics/releasenotes/release_notes.htm"
+    source_type: "OFFICIAL_PRODUCT_CHANGE"
+    authority_level: "OFFICIAL_DOCUMENTATION"
+    product_scope: "Okta OIE"
+    platform_scope: "Identity & Access"
+    parser_strategy: "generic_feed"
+    collection_method: "RSS"
+    feed_url: "https://help.okta.com/oie/en-us/content/topics/releasenotes/release_notes.xml"
+    priority: "P0"
+    poll_interval_seconds: 600
+    notes: "SSO, MFA, OAuth, OIDC, SCIM, and administrative feature releases."
+
+  - company_domain: "okta.com"
+    name: "Okta Developer Release Notes"
+    source_url: "https://developer.okta.com/docs/release-notes/"
+    source_type: "OFFICIAL_API_CHANGELOG"
+    authority_level: "OFFICIAL_DOCUMENTATION"
+    product_scope: "Okta Auth API"
+    platform_scope: "Developer Identity"
+    parser_strategy: "generic_feed"
+    collection_method: "RSS"
+    feed_url: "https://developer.okta.com/feed.xml"
+    priority: "P0"
+    poll_interval_seconds: 600
+    notes: "Authentication API endpoints, SDK versions, and identity token changes."

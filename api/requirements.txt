@@ -1,0 +1,39 @@
+# Core framework
+fastapi==0.115.6
+uvicorn[standard]==0.34.0
+python-multipart==0.0.18
+
+# Database
+sqlalchemy==2.0.36
+psycopg[binary]==3.2.10
+alembic==1.14.1
+
+# Configuration
+pydantic-settings==2.7.0
+
+# HTTP client
+httpx==0.28.1
+
+# HTML parsing
+beautifulsoup4==4.12.3
+
+# Background jobs & caching
+redis==5.2.1
+rq==2.0.0
+
+# Auth
+bcrypt==4.2.1
+python-jose[cryptography]==3.3.0
+itsdangerous==2.2.0
+email-validator==2.2.0
+authlib==1.4.1
+
+# AI providers
+google-generativeai==0.8.4
+
+# Monetization & Payments
+razorpay==2.0.1
+
+# Testing
+pytest==8.3.4
+pytest-asyncio==0.24.0

@@ -1,0 +1,88 @@
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: attacksurface
+      POSTGRES_USER: attack
+      POSTGRES_PASSWORD: attack
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports: ["5432:5432"]
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U attack -d attacksurface"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  redis:
+    image: redis:7-alpine
+    volumes:
+      - redis_data:/data
+    ports: ["6379:6379"]
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  api:
+    build: ./api
+    volumes:
+      - ./api:/app
+    env_file:
+      - path: .env
+        required: false
+    environment:
+      DATABASE_URL: postgresql+psycopg://attack:attack@db:5432/attacksurface
+      REDIS_URL: redis://redis:6379/0
+    ports: ["8000:8000"]
+    depends_on:
+      db: { condition: service_healthy }
+      redis: { condition: service_healthy }
+
+  worker:
+    build: ./api
+    command: ["python", "-m", "app.worker"]
+    volumes:
+      - ./api:/app
+    env_file:
+      - path: .env
+        required: false
+    environment:
+      DATABASE_URL: postgresql+psycopg://attack:attack@db:5432/attacksurface
+      REDIS_URL: redis://redis:6379/0
+    depends_on:
+      db: { condition: service_healthy }
+      redis: { condition: service_healthy }
+
+  trial-scheduler:
+    build: ./api
+    command: ["python", "-m", "app.trial_scheduler"]
+    volumes:
+      - ./api:/app
+    env_file:
+      - path: .env
+        required: false
+    environment:
+      DATABASE_URL: postgresql+psycopg://attack:attack@db:5432/attacksurface
+      REDIS_URL: redis://redis:6379/0
+    depends_on:
+      db: { condition: service_healthy }
+      redis: { condition: service_healthy }
+
+  web:
+    build:
+      context: ./web
+      args:
+        NEXT_PUBLIC_API_URL: ""
+    environment:
+      NEXT_PUBLIC_API_URL: ""
+      API_INTERNAL_URL: http://api:8000
+    ports: ["3000:3000"]
+    depends_on:
+      - api
+
+volumes:
+  postgres_data:
+  redis_data:
+
