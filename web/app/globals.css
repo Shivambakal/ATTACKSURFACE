@@ -399,7 +399,7 @@
   background: var(--accent) !important;
   color: #020617 !important;
 }
-.hover\\:bg-cyan-400:hover {
+.hover\:bg-cyan-400:hover {
   background: var(--accent-strong) !important;
 }
 
