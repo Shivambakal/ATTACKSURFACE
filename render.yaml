@@ -1,0 +1,54 @@
+services:
+  - type: web
+    name: attacksurface-api
+    runtime: python
+    region: oregon
+    plan: free
+    rootDir: api
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /health
+    envVars:
+      - key: DATABASE_URL
+        sync: false   # Set manually in Render dashboard
+      - key: REDIS_URL
+        sync: false   # Set manually in Render dashboard (or leave empty - Redis is optional)
+      - key: SECRET_KEY
+        generateValue: true
+      - key: APP_ENV
+        value: production
+      - key: ALLOWED_ORIGINS
+        value: "https://attacksurface.online,https://www.attacksurface.online"
+      - key: COOKIE_DOMAIN
+        value: ".attacksurface.online"
+      - key: COOKIE_SECURE
+        value: "true"
+      - key: APP_BASE_URL
+        value: "https://attacksurface.online"
+      - key: GOOGLE_REDIRECT_URI
+        value: "https://attacksurface.online/api/v1/auth/google/callback"
+      - key: GOOGLE_CLIENT_ID
+        sync: false
+      - key: GOOGLE_CLIENT_SECRET
+        sync: false
+      - key: RESEND_API_KEY
+        sync: false
+      - key: GITHUB_TOKEN
+        sync: false
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: NVD_API_KEY
+        sync: false
+      - key: SHODAN_API_KEY
+        sync: false
+      - key: CENSYS_API_KEY
+        sync: false
+      - key: CENSYS_ORGANIZATION_ID
+        sync: false
+      - key: RAZORPAY_KEY_ID
+        sync: false
+      - key: RAZORPAY_KEY_SECRET
+        sync: false
+      - key: RAZORPAY_WEBHOOK_SECRET
+        sync: false
+    autoDeploy: true

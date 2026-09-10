@@ -2,12 +2,11 @@
 
 import React, { useState, Suspense } from "react";
 import Link from "next/link";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import { useAuth } from "@/lib/auth";
 import { apiFetch } from "@/lib/api";
 
 function LoginContent() {
-  const router = useRouter();
   const searchParams = useSearchParams();
   const oauthError = searchParams.get("error");
   const { login } = useAuth();

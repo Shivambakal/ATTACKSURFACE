@@ -167,3 +167,25 @@ class Settings(BaseSettings):
 
 
 settings = Settings()
+
+
+def _warn_if_misconfigured_database() -> None:
+    """Surface the most common production outage cause: DATABASE_URL still on localhost."""
+    url = (settings.database_url or "").lower()
+    looks_local = any(
+        host in url
+        for host in ("@localhost", "@127.0.0.1", "@0.0.0.0", "@db:", "@postgres:")
+    )
+    if settings.app_env.lower() in {"production", "prod", "staging"} and looks_local:
+        import logging
+
+        logging.getLogger(__name__).error(
+            "DATABASE_URL points at a local host (%s) while APP_ENV=%s. "
+            "Auth (login/signup) will fail until DATABASE_URL is set to your "
+            "managed Postgres (e.g. Supabase) connection string.",
+            settings.database_url.split("@")[-1] if "@" in settings.database_url else "(redacted)",
+            settings.app_env,
+        )
+
+
+_warn_if_misconfigured_database()

@@ -21,7 +21,7 @@ export default function SignupPage() {
   const [termsError, setTermsError] = useState<string | null>(null);
 
   // Selected subscription tier
-  const [selectedPlan, setSelectedPlan] = useState<"FREE" | "PRO" | "ENTERPRISE">("FREE");
+  const [selectedPlan, setSelectedPlan] = useState<"FREE" | "RESEARCHER" | "PRO" | "ADVANCED">("FREE");
 
   const [busy, setBusy] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
@@ -51,7 +51,7 @@ export default function SignupPage() {
   };
 
   // Complete registration with selected subscription
-  const handleCompleteRegistration = async (chosenTier: "FREE" | "PRO" | "ENTERPRISE") => {
+  const handleCompleteRegistration = async (chosenTier: "FREE" | "RESEARCHER" | "PRO" | "ADVANCED") => {
     setSelectedPlan(chosenTier);
     setBusy(true);
     setErrorMessage(null);
@@ -77,11 +77,14 @@ export default function SignupPage() {
         }
       }
 
-      router.push(chosenTier === "FREE" ? "/dashboard" : "/billing");
+      // A free account is active immediately. Paid plans go to the canonical
+      // billing screen, whose plan ids are shared with the server catalog.
+      router.replace(chosenTier === "FREE" ? "/dashboard" : `/billing/checkout?plan=${chosenTier.toLowerCase()}&interval=monthly`);
     } catch (err: unknown) {
       const msg = err instanceof Error ? err.message : "Account registration failed";
       setErrorMessage(msg);
-      setStep("credentials");
+      // Keep the plan selection visible so the user can retry without losing
+      // the credentials they just entered.
     } finally {
       setBusy(false);
     }
@@ -247,14 +250,14 @@ export default function SignupPage() {
             <div className="rounded-xl border border-slate-800 bg-slate-900/70 p-4 transition hover:border-slate-700">
               <div className="flex items-center justify-between">
                 <div>
-                  <h3 className="font-bold text-sm text-white">Community Hunter</h3>
-                  <div className="text-xs text-slate-400 mt-0.5">Basic intelligence &amp; discovery</div>
+                  <h3 className="font-bold text-sm text-white">Community Researcher</h3>
+                  <div className="text-xs text-slate-400 mt-0.5">Public intelligence &amp; discovery</div>
                 </div>
                 <div className="font-mono text-sm font-bold text-slate-200">$0 <span className="text-[10px] text-slate-400 font-normal">/mo</span></div>
               </div>
               <ul className="mt-3 space-y-1 text-xs text-slate-300 font-sans">
                 <li className="flex items-center gap-2 text-slate-300">
-                  <span className="text-emerald-400">✓</span> 5 Active Monitored Targets
+                  <span className="text-emerald-400">✓</span> 50 Authorized Targets
                 </li>
                 <li className="flex items-center gap-2 text-slate-300">
                   <span className="text-emerald-400">✓</span> Standard Program Catalog (H1/Bugcrowd)
@@ -281,15 +284,15 @@ export default function SignupPage() {
               <div className="flex items-center justify-between">
                 <div>
                   <h3 className="font-bold text-sm text-white flex items-center gap-1.5">
-                    <span>Professional Hunter</span>
+                    <span>Researcher</span>
                   </h3>
-                  <div className="text-xs text-slate-400 mt-0.5">Full continuous attack-surface telemetry</div>
+                  <div className="text-xs text-slate-400 mt-0.5">Continuous attack-surface telemetry</div>
                 </div>
-                <div className="font-mono text-sm font-bold text-cyan-400">₹3,999 <span className="text-[10px] text-slate-400 font-normal">($49/mo)</span></div>
+                <div className="font-mono text-sm font-bold text-cyan-400">₹400 <span className="text-[10px] text-slate-400 font-normal">/mo</span></div>
               </div>
               <ul className="mt-3 space-y-1 text-xs text-slate-200">
                 <li className="flex items-center gap-2">
-                  <span className="text-cyan-400 font-bold">✓</span> Unlimited Monitored Targets
+                  <span className="text-cyan-400 font-bold">✓</span> 500 Monitored Targets
                 </li>
                 <li className="flex items-center gap-2">
                   <span className="text-cyan-400 font-bold">✓</span> Real-Time CISA KEV Exploitation Alerts
@@ -304,40 +307,40 @@ export default function SignupPage() {
               <button
                 type="button"
                 disabled={busy}
-                onClick={() => handleCompleteRegistration("PRO")}
+                onClick={() => handleCompleteRegistration("RESEARCHER")}
                 className="mt-3 w-full rounded-lg bg-cyan-500 py-2 text-xs font-mono font-bold text-slate-950 hover:bg-cyan-400 transition shadow-md"
               >
-                {busy && selectedPlan === "PRO" ? "SETTING UP PRO TIER..." : "ACTIVATE PRO HUNTER →"}
+                {busy && selectedPlan === "RESEARCHER" ? "SETTING UP RESEARCHER..." : "CHOOSE RESEARCHER →"}
               </button>
             </div>
 
-            {/* Enterprise Tier */}
+            {/* Advanced Tier */}
             <div className="rounded-xl border border-slate-800 bg-slate-900/70 p-4 transition hover:border-slate-700">
               <div className="flex items-center justify-between">
                 <div>
-                  <h3 className="font-bold text-sm text-white">Enterprise Team</h3>
-                  <div className="text-xs text-slate-400 mt-0.5">Dedicated crawlers, APIs, and multi-seat</div>
+                  <h3 className="font-bold text-sm text-white">Advanced</h3>
+                  <div className="text-xs text-slate-400 mt-0.5">Highest-priority research workflows</div>
                 </div>
-                <div className="font-mono text-sm font-bold text-slate-200">₹15,999 <span className="text-[10px] text-slate-400 font-normal">($199/mo)</span></div>
+                <div className="font-mono text-sm font-bold text-slate-200">₹900 <span className="text-[10px] text-slate-400 font-normal">/mo</span></div>
               </div>
               <ul className="mt-3 space-y-1 text-xs text-slate-300">
                 <li className="flex items-center gap-2">
-                  <span className="text-emerald-400">✓</span> Dedicated Collector Infrastructure
+                  <span className="text-emerald-400">✓</span> All Pro Capabilities
                 </li>
                 <li className="flex items-center gap-2">
-                  <span className="text-emerald-400">✓</span> Direct REST API &amp; Webhook Access
+                  <span className="text-emerald-400">✓</span> Custom Intelligence Feeds
                 </li>
                 <li className="flex items-center gap-2">
-                  <span className="text-emerald-400">✓</span> Team Shared Findings &amp; Role Controls
+                  <span className="text-emerald-400">✓</span> Priority Verification Queue
                 </li>
               </ul>
               <button
                 type="button"
                 disabled={busy}
-                onClick={() => handleCompleteRegistration("ENTERPRISE")}
+                onClick={() => handleCompleteRegistration("ADVANCED")}
                 className="mt-3 w-full rounded-lg border border-slate-700 bg-slate-800 py-2 text-xs font-mono font-semibold text-slate-200 hover:bg-slate-700 transition"
               >
-                {busy && selectedPlan === "ENTERPRISE" ? "SETTING UP..." : "SELECT ENTERPRISE →"}
+                {busy && selectedPlan === "ADVANCED" ? "SETTING UP ADVANCED..." : "CHOOSE ADVANCED →"}
               </button>
             </div>
           </div>

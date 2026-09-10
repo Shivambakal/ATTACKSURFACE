@@ -26,26 +26,41 @@ export default function AuthLayout({
               alt="AttackSurface Logo"
               className="h-16 w-16 object-contain drop-shadow-[0_0_25px_rgba(0,240,255,0.45)] transition-transform duration-300 group-hover:scale-105 mb-3"
             />
-            <div className="inline-flex items-center gap-2 rounded-full border border-cyan-500/30 bg-cyan-950/40 px-3 py-1 text-xs font-mono tracking-wider text-cyan-400">
-              <span className="h-1.5 w-1.5 rounded-full bg-cyan-400 animate-pulse" />
+            <div className="inline-flex items-center gap-2 rounded-full border px-3 py-1 text-xs font-mono tracking-wider"
+              style={{
+                borderColor: "var(--line-strong)",
+                background: "var(--accent-wash)",
+                color: "var(--accent-strong)",
+              }}
+            >
+              <span className="h-1.5 w-1.5 rounded-full animate-pulse" style={{ background: "var(--accent)" }} />
               AUTHORIZED RESEARCH ONLY
             </div>
-            <h1 className="mt-3 text-2xl font-bold tracking-tight text-white transition-colors group-hover:text-cyan-400 font-display">
-              AttackSurface <span className="text-cyan-400">Timeline</span>
+            <h1
+              className="mt-3 text-2xl font-bold tracking-tight transition-colors font-display"
+              style={{ color: "var(--ink)" }}
+            >
+              AttackSurface <span style={{ color: "var(--accent)" }}>Timeline</span>
             </h1>
-            <p className="mt-1 text-xs font-mono text-slate-400 tracking-wide">
+            <p
+              className="mt-1 text-xs font-mono tracking-wide"
+              style={{ color: "var(--muted)" }}
+            >
               BUG BOUNTY RESEARCH INTELLIGENCE
             </p>
           </Link>
         </div>
 
-        {/* Content Card */}
-        <div className="rounded-[30px] border border-white/15 bg-slate-900/60 p-8 shadow-2xl backdrop-blur-2xl">
+        {/* Content Card — solid surface so background never bleeds through form text */}
+        <div className="auth-panel rounded-[30px] border border-white/15 p-8 shadow-2xl">
           {children}
         </div>
 
         {/* Footer legal disclaimer */}
-        <p className="mt-6 text-center text-xs text-slate-500 font-mono">
+        <p
+          className="mt-6 text-center text-xs font-mono"
+          style={{ color: "var(--muted)" }}
+        >
           Only authorized public data collection. Passive diffing &amp; audit logging active.
         </p>
       </div>

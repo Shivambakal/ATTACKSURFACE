@@ -8,6 +8,7 @@ import urllib.parse
 import httpx
 from fastapi import APIRouter, Depends, HTTPException, Request, Response, status
 from fastapi.responses import RedirectResponse
+from sqlalchemy.exc import OperationalError, SQLAlchemyError
 from sqlalchemy.orm import Session
 
 from app.config import settings
@@ -44,6 +45,18 @@ SESSION_COOKIE_NAME = "session_token"
 SESSION_MAX_AGE_SECONDS = 7 * 24 * 3600  # 7 days
 
 
+def _raise_auth_storage_unavailable(exc: Exception) -> None:
+    """Convert database outages into a clear client-facing 503 instead of a bare 500."""
+    logger.exception("Auth storage unavailable: %s", type(exc).__name__)
+    raise HTTPException(
+        status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
+        detail=(
+            "Authentication service is temporarily unavailable (database unreachable). "
+            "Please try again shortly."
+        ),
+    ) from exc
+
+
 def _set_session_cookie(response: Response, token: str) -> None:
     is_https = (
         settings.cookie_secure
@@ -72,41 +85,53 @@ def signup(
     db: Session = Depends(get_db),
 ) -> User:
     """Create a new user account, establish a session, and set session cookie."""
-    normalized_email = body.email.lower().strip()
-    existing = db.query(User).filter_by(email=normalized_email).first()
-    if existing:
-        raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST,
-            detail="Email already registered",
-        )
-
-    user = create_user(db, email=normalized_email, password=body.password)
-
-    # Dispatch welcome & verification emails via Resend
     try:
-        v_token = create_verification_token(db, user.id, hours=48)
-        email_service.send_welcome_email(
-            to=user.email,
-            display_name=user.email.split("@")[0],
-            user_id=user.id,
-            db=db,
-        )
-        email_service.send_email_verification_email(
-            to=user.email,
-            verification_token=v_token,
-            user_id=user.id,
-            db=db,
-        )
+        normalized_email = body.email.lower().strip()
+        existing = db.query(User).filter_by(email=normalized_email).first()
+        if existing:
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail="Email already registered",
+            )
+
+        user = create_user(db, email=normalized_email, password=body.password)
+
+        # Dispatch welcome & verification emails via Resend
+        try:
+            v_token = create_verification_token(db, user.id, hours=48)
+            email_service.send_welcome_email(
+                to=user.email,
+                display_name=user.email.split("@")[0],
+                user_id=user.id,
+                db=db,
+            )
+            email_service.send_email_verification_email(
+                to=user.email,
+                verification_token=v_token,
+                user_id=user.id,
+                db=db,
+            )
+        except Exception as exc:
+            logger.warning("Failed to dispatch signup emails: %s", exc)
+
+        client_ip = request.client.host if request.client else None
+        user_agent = request.headers.get("user-agent")
+        token = create_session(db, user, ip_address=client_ip, user_agent=user_agent)
+        _set_session_cookie(response, token)
+
+        response.headers["Cache-Control"] = "no-store, no-cache, must-revalidate"
+        return user
+    except HTTPException:
+        raise
+    except (OperationalError, SQLAlchemyError) as exc:
+        _raise_auth_storage_unavailable(exc)
     except Exception as exc:
-        logger.warning("Failed to dispatch signup emails: %s", exc)
-
-    client_ip = request.client.host if request.client else None
-    user_agent = request.headers.get("user-agent")
-    token = create_session(db, user, ip_address=client_ip, user_agent=user_agent)
-    _set_session_cookie(response, token)
-
-    response.headers["Cache-Control"] = "no-store, no-cache, must-revalidate"
-    return user
+        # Catch unexpected infra failures (e.g. bcrypt/runtime) so clients never see a blank 500.
+        logger.exception("Signup failed: %s", type(exc).__name__)
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail="Account registration failed. Please try again.",
+        ) from exc
 
 
 @router.post("/login", response_model=UserOut)
@@ -117,27 +142,38 @@ def login(
     db: Session = Depends(get_db),
 ) -> User:
     """Verify credentials, create session, and set session cookie."""
-    normalized_email = body.email.lower().strip()
-    user = db.query(User).filter_by(email=normalized_email).first()
+    try:
+        normalized_email = body.email.lower().strip()
+        user = db.query(User).filter_by(email=normalized_email).first()
 
-    if not user or not user.password_hash or not verify_password(body.password, user.password_hash):
+        if not user or not user.password_hash or not verify_password(body.password, user.password_hash):
+            raise HTTPException(
+                status_code=status.HTTP_401_UNAUTHORIZED,
+                detail="Invalid email or password",
+            )
+
+        if not user.is_active:
+            raise HTTPException(
+                status_code=status.HTTP_403_FORBIDDEN,
+                detail="Account is disabled",
+            )
+
+        client_ip = request.client.host if request.client else None
+        user_agent = request.headers.get("user-agent")
+        token = create_session(db, user, ip_address=client_ip, user_agent=user_agent)
+        _set_session_cookie(response, token)
+        response.headers["Cache-Control"] = "no-store, no-cache, must-revalidate"
+        return user
+    except HTTPException:
+        raise
+    except (OperationalError, SQLAlchemyError) as exc:
+        _raise_auth_storage_unavailable(exc)
+    except Exception as exc:
+        logger.exception("Login failed: %s", type(exc).__name__)
         raise HTTPException(
-            status_code=status.HTTP_401_UNAUTHORIZED,
-            detail="Invalid email or password",
-        )
-
-    if not user.is_active:
-        raise HTTPException(
-            status_code=status.HTTP_403_FORBIDDEN,
-            detail="Account is disabled",
-        )
-
-    client_ip = request.client.host if request.client else None
-    user_agent = request.headers.get("user-agent")
-    token = create_session(db, user, ip_address=client_ip, user_agent=user_agent)
-    _set_session_cookie(response, token)
-    response.headers["Cache-Control"] = "no-store, no-cache, must-revalidate"
-    return user
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail="Sign-in failed. Please try again.",
+        ) from exc
 
 
 @router.post("/logout")
