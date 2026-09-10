@@ -120,11 +120,9 @@ def answer_cyber_query(
         context_str = f"""
 VERIFIED ATTACK SURFACE INTELLIGENCE CONTEXT (GROUNDED TRUTH FROM DATABASE):
 - Target Organization: {cname} ({grounded_context.get('canonical_domain')})
-- Internal DB Security Events: {grounded_context.get('total_security_events_db')} records
-- Active CISA KEV Entries Monitored: {grounded_context.get('total_cisa_kev_items')} active exploited CVEs
 - Sample CISA CVEs: {', '.join(sample_cves)}
 
-HISTORIC LANDMARK ATTACKS & BREACHES (2004-2024+):
+HISTORIC LANDMARK ATTACKS & BREACHES:
 """
         for m in milestones:
             context_str += f"""
@@ -146,14 +144,15 @@ ATTACK TYPE / VULNERABILITY TAXONOMY DISTRIBUTION:
 """
     else:
         context_str = """
-GENERAL 20-YEAR CYBER THREAT & ATTACK SURFACE INTELLIGENCE:
-- 1,705+ Known Exploited Vulnerabilities (CISA KEV) indexed in production database.
-- 3,750+ verified security events across 1,432 global technology companies.
-- 20-year trends highlight a massive evolution from traditional client-side buffer overflows (2004-2014) to targeted supply-chain intrusions (SolarWinds, Log4j, XZ), browser/hypervisor zero-days exploited by commercial surveillance firms, and cloud identity/OAuth credential abuse (2015-2024+).
+GENERAL THREAT & ATTACK SURFACE INTELLIGENCE CONTEXT:
+- Authoritative CISA Known Exploited Vulnerabilities (KEV) and historical CVE telemetry.
+- Multi-decade attack trends highlighting evolution from traditional client-side memory corruption to targeted supply-chain intrusions (SolarWinds, Log4j, XZ), browser/hypervisor zero-days exploited by commercial surveillance actors, and cloud identity/OAuth credential abuse.
 """
 
-    system_prompt = f"""You are the AttackSurface Timeline Senior Cyber Threat Analyst & Intelligence Chatbot.
-Your goal is to answer queries with 99% technical precision, absolute historical accuracy, and zero speculation or fake hallucinations.
+    system_prompt = f"""You are the AttackSurface Senior Cyber Threat Analyst & Intelligence Assistant.
+Your goal is to answer queries with technical precision, absolute historical accuracy, and zero speculation or fake hallucinations.
+Maintain a strictly professional, authoritative security engineering tone at all times.
+IMPORTANT: Never recite or boast about internal database record counts, asset totals, or company counts. Present facts, technical attack vectors, threat actors, and remediation architecture directly.
 
 When answering questions about an organization's attacks, such as "biggest attack on Google in history and how many types of attacks in which years":
 1. Clearly identify the BIGGEST attack in history with full technical context:
