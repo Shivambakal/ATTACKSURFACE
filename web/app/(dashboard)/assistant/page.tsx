@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState } from "react";
-import CyberAssistantChat from "@/components/CyberAssistantChat";
 import { apiFetch } from "@/lib/api";
 
 export default function AssistantPage() {
@@ -33,13 +32,13 @@ export default function AssistantPage() {
       <div className="border-b border-slate-800 pb-6">
         <div className="flex items-center gap-2 font-mono text-xs text-cyan-400 uppercase tracking-widest mb-1">
           <span className="h-2 w-2 rounded-full bg-cyan-400 shadow-[0_0_8px_#22d3ee] animate-pulse" />
-          MILITARY-GRADE AI THREAT INTELLIGENCE
+          THREAT INTELLIGENCE WORKSPACE
         </div>
         <h1 className="text-2xl font-bold tracking-tight text-white">
-          AI Cyber Threat Analyst Workspace
+          AI Cyber Threat Analyst
         </h1>
         <p className="text-slate-400 text-sm mt-1 max-w-3xl">
-          Powered by Google Gemini 3.6 Flash grounded on 20 years of real exploit data, 1,705 CISA KEV entries, and 3,750+ historical security events.
+          Contextual threat analysis, historical exploit correlation, and enterprise vulnerability intelligence.
         </p>
       </div>
 
@@ -123,7 +122,7 @@ export default function AssistantPage() {
           <div className="flex items-center justify-between border-b border-slate-800 pb-3">
             <div className="flex items-center gap-2 text-xs font-mono text-cyan-400">
               <span className="h-2 w-2 rounded-full bg-cyan-400" />
-              INTELLIGENCE BRIEFING REPORT · GEMINI 3.6 FLASH
+              INTELLIGENCE BRIEFING REPORT
             </div>
             {grounded?.total_security_events && (
               <div className="flex gap-3 text-xs font-mono text-slate-400">
@@ -137,9 +136,6 @@ export default function AssistantPage() {
           </div>
         </div>
       )}
-
-      {/* Embedded Floating Assistant Drawer also available */}
-      <CyberAssistantChat />
     </div>
   );
 }

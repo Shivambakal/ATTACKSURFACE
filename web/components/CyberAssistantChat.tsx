@@ -38,7 +38,7 @@ export default function CyberAssistantChat() {
     {
       id: "welcome",
       sender: "assistant",
-      text: "### AttackSurface AI Threat Analyst (Gemini 3.6 Flash Grounded)\n\nI am your cybersecurity intelligence assistant, directly integrated with **1,705+ CISA KEV zero-days**, **3,750+ verified enterprise attack records**, and **20 years of threat telemetry**.\n\nAsk me anything — for example: *\"What was the biggest attack on Google in history and how many types of attacks were performed in which years?\"*",
+      text: "### Security Intelligence Analyst\n\nI am your cybersecurity threat analyst, directly integrated with authoritative exploit registries and enterprise threat telemetry.\n\nAsk me anything — for example: *\"What was the biggest attack on Google in history and how many types of attacks were performed in which years?\"*",
       timestamp: "Ready",
     },
   ]);
@@ -127,7 +127,7 @@ export default function CyberAssistantChat() {
               AI THREAT ANALYST
             </span>
             <span className="text-[9px] font-mono text-slate-400">
-              GEMINI 3.6 FLASH · GROUNDED
+              SECURITY INTELLIGENCE
             </span>
           </div>
           <svg className="w-4 h-4 text-cyan-400 group-hover:rotate-12 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -147,11 +147,11 @@ export default function CyberAssistantChat() {
                 <div className="flex items-center gap-2">
                   <h3 className="text-sm font-bold tracking-wide text-white">AI CYBER THREAT ANALYST</h3>
                   <span className="text-[9px] font-mono font-bold px-1.5 py-0.5 rounded bg-cyan-500/20 text-cyan-300 border border-cyan-500/40">
-                    GEMINI 3.6
+                    ANALYST
                   </span>
                 </div>
                 <p className="text-[10px] font-mono text-slate-400">
-                  20-Year Intelligence Grounding · 1,705 KEV · 3,750+ Breaches
+                  Authoritative Exploit &amp; Threat Telemetry Intelligence
                 </p>
               </div>
             </div>
@@ -237,7 +237,7 @@ export default function CyberAssistantChat() {
               <div className="flex flex-col items-start">
                 <div className="flex items-center gap-2 p-3 rounded-xl bg-slate-900/80 border border-slate-800 text-cyan-400 font-mono text-xs">
                   <span className="h-2 w-2 rounded-full bg-cyan-400 animate-ping" />
-                  <span>Synthesizing database records and querying Gemini 3.6 Flash...</span>
+                  <span>Synthesizing database records and analyzing threat telemetry...</span>
                 </div>
               </div>
             )}

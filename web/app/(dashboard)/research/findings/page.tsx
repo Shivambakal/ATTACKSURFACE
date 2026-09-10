@@ -104,7 +104,7 @@ export default function FindingsPage() {
             Vulnerability Findings
           </h2>
           <p className="text-xs text-slate-400">
-            Validated security exposures and reportable bug bounty submissions.
+            Documented security findings and scope validation reports.
           </p>
         </div>
 

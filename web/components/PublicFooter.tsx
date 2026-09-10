@@ -61,19 +61,19 @@ export default function PublicFooter() {
       ],
     },
     {
-      title: "Security & Legal",
+      title: "Intelligence & Scope",
       links: [
-        { label: "Security Architecture", href: "/security" },
-        { label: "Disclosure Policy", href: "/responsible-disclosure" },
-        { label: "Privacy Policy", href: "/privacy" },
-        { label: "Terms of Service", href: "/terms" },
-        { label: "Cookie Policy", href: "/cookies" },
+        { label: "CISA KEV Catalog", href: "/security-knowledge" },
+        { label: "Bug Bounty Directory", href: "/programs" },
+        { label: "Entity Watchlist", href: "/watchlist" },
+        { label: "Vulnerability Feed", href: "/security-intelligence" },
+        { label: "REST Documentation", href: "/docs" },
       ],
     },
   ];
 
   return (
-    <footer className="relative z-20 border-t border-white/[0.08] bg-[#030712] text-slate-400">
+    <footer className="relative z-20 border-t border-slate-800/90 bg-[#02040a] text-slate-400 shadow-[0_-20px_40px_rgba(0,0,0,0.7)]">
 
       {/* Main Multi-Column Content */}
       <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8 lg:py-16">

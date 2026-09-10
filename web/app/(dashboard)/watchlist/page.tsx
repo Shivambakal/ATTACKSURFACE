@@ -102,7 +102,7 @@ export default function WatchlistPage() {
             High-Priority Entity Watchlist
           </h2>
           <p className="text-xs text-slate-400">
-            Pinned surface changes, targets, and assets flagged for automated priority alerts.
+            Monitored targets and high-priority assets flagged for notifications.
           </p>
         </div>
 

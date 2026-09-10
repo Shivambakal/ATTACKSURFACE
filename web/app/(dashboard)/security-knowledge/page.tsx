@@ -294,19 +294,8 @@ export default function SecurityKnowledgePage() {
             Security Knowledge Base
           </h1>
           <p className="mt-1 text-sm text-slate-400">
-            Authoritative public vulnerability advisories, CISA KEV catalog records, CWE weakness taxonomies, and OWASP Top 10 mappings for contextual threat analysis.
+            Vulnerability advisories, weakness taxonomies, and exploit mappings.
           </p>
-        </div>
-
-        {/* Catalog Status Badge */}
-        <div className="flex items-center gap-3">
-          <div className="rounded-lg border border-slate-800 bg-slate-900/80 px-3 py-2 text-right">
-            <div className="font-mono text-[10px] text-slate-500 uppercase tracking-wider">Catalog Status</div>
-            <div className="font-mono text-xs font-bold text-emerald-400 flex items-center gap-1.5 justify-end">
-              <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
-              SYNCHRONIZED
-            </div>
-          </div>
         </div>
       </div>
 

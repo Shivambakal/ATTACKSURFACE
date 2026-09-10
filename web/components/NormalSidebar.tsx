@@ -259,43 +259,6 @@ export default function NormalSidebar({ collapsed, onToggleCollapse, onOpenComma
         />
       </div>
 
-      {/* Top Command Button (matching media_1788891721052.jpg) */}
-      <div className="px-3 pt-3 pb-1 shrink-0">
-        {!collapsed ? (
-          <button
-            onClick={() => {
-              if (onOpenCommand) {
-                onOpenCommand();
-              } else {
-                window.dispatchEvent(new KeyboardEvent("keydown", { key: "k", metaKey: true }));
-              }
-            }}
-            className="flex w-full items-center justify-between rounded-xl border border-slate-800 bg-slate-900/60 px-3 py-2 text-xs text-slate-300 transition-all hover:border-cyan-500/40 hover:bg-slate-900 hover:text-white"
-          >
-            <div className="flex items-center gap-2">
-              <span className="text-cyan-400 font-mono">⌘</span>
-              <span className="font-sans font-medium text-xs">Command</span>
-            </div>
-            <span className="rounded bg-slate-800/80 px-1.5 py-0.5 font-mono text-[10px] text-cyan-400 border border-slate-700/60">
-              ⌘K
-            </span>
-          </button>
-        ) : (
-          <button
-            onClick={() => {
-              if (onOpenCommand) {
-                onOpenCommand();
-              } else {
-                window.dispatchEvent(new KeyboardEvent("keydown", { key: "k", metaKey: true }));
-              }
-            }}
-            title="Command (⌘K)"
-            className="mx-auto flex h-9 w-9 items-center justify-center rounded-xl border border-slate-800 bg-slate-900/60 text-cyan-400 hover:border-cyan-500/50 hover:bg-slate-900 transition"
-          >
-            ⌘
-          </button>
-        )}
-      </div>
 
       {/* Main Categorized Navigation */}
       <nav className="flex-1 space-y-4 overflow-y-auto px-3 py-2 scrollbar-none">

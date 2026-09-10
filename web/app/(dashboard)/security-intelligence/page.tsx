@@ -103,7 +103,7 @@ export default function SecurityIntelligencePage() {
             <h1 className="text-2xl font-bold tracking-tight text-slate-100">Security News & Vulnerability Intelligence</h1>
           </div>
           <p className="text-sm text-slate-400 mt-1">
-            Continuous multi-source intelligence discovery, CISA KEV zero-day detection, vendor security advisories, and bug bounty disclosures.
+            Real-time vulnerability intelligence and authoritative security advisories.
           </p>
         </div>
 

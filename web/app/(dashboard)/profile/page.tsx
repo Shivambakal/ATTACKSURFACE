@@ -3,10 +3,10 @@
 import React, { useEffect, useState, useCallback } from "react";
 import { apiFetch } from "@/lib/api";
 import { Profile } from "@/lib/types";
-import { usePreferences, AtmosphereMode, VisualDensity, AnimationIntensity, ThreeDIntensity } from "@/lib/preferences";
+import { usePreferences } from "@/lib/preferences";
 
 export default function ProfilePage() {
-  const { preferences, updatePreferences, toggleSound } = usePreferences();
+  const { preferences } = usePreferences();
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [toast, setToast] = useState<string | null>(null);
@@ -229,141 +229,6 @@ export default function ProfilePage() {
         </div>
       )}
 
-      {/* ── SECTION 1: SPATIAL WORKSPACE PERSONALIZATION ───────── */}
-      <div className="rounded-3xl border border-cyan-500/30 bg-slate-950/80 p-6 sm:p-8 shadow-2xl backdrop-blur-xl space-y-6">
-        <div className="border-b border-slate-800 pb-3 flex items-center justify-between">
-          <div className="flex items-center gap-2.5">
-            <span className="h-2.5 w-2.5 rounded-full bg-cyan-400 shadow-[0_0_8px_#00f0ff]" />
-            <h2 className="text-base font-bold text-white font-display tracking-tight">
-              Spatial Atmosphere &amp; Motion Controls
-            </h2>
-          </div>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {/* Atmosphere Selection */}
-          <div className="space-y-2">
-            <label className="block text-xs font-mono uppercase text-slate-300 font-bold">
-              1. Ambient Atmosphere Mode
-            </label>
-            <p className="text-[11px] text-slate-500">
-              GPU-accelerated Canvas background reacting to pointer parallax.
-            </p>
-            <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 pt-1">
-              {(
-                [
-                  { id: "aurora", label: "Aurora", desc: "Volumetric waves" },
-                  { id: "data_field", label: "Data Field", desc: "Floating telemetry" },
-                  { id: "deep_space", label: "Deep Space", desc: "Micro stars" },
-                  { id: "grid", label: "Cyber Grid", desc: "Perspective grid" },
-                  { id: "particle_network", label: "Network", desc: "Connected nodes" },
-                  { id: "minimal", label: "Minimal", desc: "Vignette only" },
-                  { id: "off", label: "Off", desc: "Pure AMOLED" },
-                ] as const
-              ).map((mode) => (
-                <button
-                  key={mode.id}
-                  type="button"
-                  onClick={() => updatePreferences({ atmosphere: mode.id as AtmosphereMode })}
-                  className={`p-3 rounded-xl border text-left transition-all duration-200 ${
-                    preferences.atmosphere === mode.id
-                      ? "border-cyan-400 bg-cyan-950/60 shadow-[0_0_15px_rgba(0,240,255,0.15)] ring-1 ring-cyan-400"
-                      : "border-slate-800 bg-slate-900/60 hover:border-slate-700 text-slate-400"
-                  }`}
-                >
-                  <span className="block text-xs font-bold text-white font-display">
-                    {mode.label}
-                  </span>
-                  <span className="block text-[10px] text-slate-500 mt-0.5">
-                    {mode.desc}
-                  </span>
-                </button>
-              ))}
-            </div>
-          </div>
-
-          {/* Visual Density & Motion Intensity */}
-          <div className="space-y-6">
-            <div className="space-y-2">
-              <label className="block text-xs font-mono uppercase text-slate-300 font-bold">
-                2. Visual Information Density
-              </label>
-              <div className="grid grid-cols-3 gap-2">
-                {(
-                  [
-                    { id: "comfortable", label: "Comfortable" },
-                    { id: "compact", label: "Compact" },
-                    { id: "dense", label: "Ultra-Dense" },
-                  ] as const
-                ).map((d) => (
-                  <button
-                    key={d.id}
-                    type="button"
-                    onClick={() => updatePreferences({ visualDensity: d.id as VisualDensity })}
-                    className={`py-2 px-3 rounded-xl border text-xs font-mono font-bold text-center transition ${
-                      preferences.visualDensity === d.id
-                        ? "border-cyan-400 bg-cyan-950 text-cyan-300"
-                        : "border-slate-800 bg-slate-900 text-slate-400 hover:text-white"
-                    }`}
-                  >
-                    {d.label}
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            <div className="space-y-2">
-              <label className="block text-xs font-mono uppercase text-slate-300 font-bold">
-                3. Motion &amp; Animation Physics
-              </label>
-              <div className="grid grid-cols-3 gap-2">
-                {(
-                  [
-                    { id: "full", label: "Full Motion" },
-                    { id: "reduced", label: "Reduced" },
-                    { id: "minimal", label: "Minimal Cuts" },
-                  ] as const
-                ).map((m) => (
-                  <button
-                    key={m.id}
-                    type="button"
-                    onClick={() => updatePreferences({ animationIntensity: m.id as AnimationIntensity })}
-                    className={`py-2 px-3 rounded-xl border text-xs font-mono font-bold text-center transition ${
-                      preferences.animationIntensity === m.id
-                        ? "border-cyan-400 bg-cyan-950 text-cyan-300"
-                        : "border-slate-800 bg-slate-900 text-slate-400 hover:text-white"
-                    }`}
-                  >
-                    {m.label}
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            <div className="flex items-center justify-between p-3.5 rounded-xl border border-slate-800 bg-slate-900/60">
-              <div>
-                <span className="block text-xs font-bold text-white">
-                  Acoustic Telemetry Synthesizer
-                </span>
-                <span className="block text-[11px] text-slate-400">
-                  Web Audio API frequency chimes on critical CVE &amp; KEV alerts
-                </span>
-              </div>
-              <button
-                type="button"
-                onClick={toggleSound}
-                className={`px-3 py-1.5 rounded-lg font-mono text-xs font-bold transition ${
-                  preferences.soundEnabled
-                    ? "bg-cyan-500 text-slate-950"
-                    : "bg-slate-800 text-slate-400 hover:text-white"
-                }`}
-              >
-                {preferences.soundEnabled ? "ENABLED" : "MUTED"}
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
 
       {/* ── SECTION 2: RESEARCHER PROFILE & IDENTITY ─────────── */}
       <form onSubmit={handleSave} className="space-y-6">

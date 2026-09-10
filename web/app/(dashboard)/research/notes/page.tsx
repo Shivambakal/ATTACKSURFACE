@@ -111,7 +111,7 @@ export default function NotesPage() {
             Research Notes &amp; Observations
           </h2>
           <p className="text-xs text-slate-400">
-            Log technical hypotheses, attack vectors, and observation notes.
+            Technical hypotheses, attack vectors, and observation logs.
           </p>
         </div>
 

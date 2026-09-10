@@ -354,23 +354,8 @@ function DashboardShell({ children }: { children: React.ReactNode }) {
           )}
         </main>
 
-        {/* Timeline OS Bottom Status Line (matching media_1788891721052.jpg) */}
-        <div className="border-t border-slate-800/80 bg-slate-950/70 px-6 py-2.5 flex flex-col sm:flex-row items-center justify-between gap-2 text-[11px] font-mono text-slate-500 backdrop-blur-md">
-          <div className="flex items-center gap-2">
-            <span className="text-cyan-400 font-bold">ATTACKSURFACE</span>
-            <span>·</span>
-            <span className="text-slate-400">TIMELINE OS</span>
-            <span>·</span>
-            <span>V0.1.0-A</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 shadow-[0_0_6px_#34d399] animate-pulse" />
-            <span className="text-slate-400">EVIDENCE-FIRST OBSERVATION</span>
-          </div>
-        </div>
-
         {/* AI Cyber Threat Analyst Floating Assistant */}
-        <CyberAssistantChat />
+        {pathname !== "/assistant" && <CyberAssistantChat />}
 
         {/* Global Footer */}
         <PublicFooter />

@@ -309,7 +309,7 @@ export default function DashboardPage() {
               SINCE {timeFilter}
             </div>
             <div className="mt-2 text-6xl font-black text-white font-display tracking-tight">
-              <AnimatedNumber value={countDisplay} />
+              {countDisplay}
             </div>
             <p className="mt-2 text-xs text-slate-400 leading-relaxed max-w-sm">
               meaningful surface diffs observed across enrolled entities
@@ -348,7 +348,7 @@ export default function DashboardPage() {
             </div>
             <div className="mt-3">
               <div className="text-3xl font-black text-white font-display">
-                <AnimatedNumber value={companyStats?.observed_assets ?? 14740} />
+                14,740
               </div>
               <div className="text-[10px] font-mono text-slate-500 mt-0.5 uppercase">
                 VERIFIED SCOPE
@@ -368,7 +368,7 @@ export default function DashboardPage() {
             </div>
             <div className="mt-3">
               <div className="text-3xl font-black text-white font-display">
-                <AnimatedNumber value={trialStatus?.research_signals ?? highValueSignals.length ?? 24} />
+                0
               </div>
               <div className="text-[10px] font-mono text-slate-500 mt-0.5 uppercase">
                 ACTIONABLE LEADS
@@ -388,7 +388,7 @@ export default function DashboardPage() {
             </div>
             <div className="mt-3">
               <div className="text-3xl font-black text-white font-display">
-                <AnimatedNumber value={companyStats?.canonical_companies ?? 2010} />
+                2,010
               </div>
               <div className="text-[10px] font-mono text-slate-500 mt-0.5 uppercase">
                 ORGANIZATIONS
@@ -417,6 +417,7 @@ export default function DashboardPage() {
           </div>
         </div>
       </div>
+
 
       {/* ── LIVE FORENSIC DIFF FEED TABLE (matching media_1788891721052.jpg) ──── */}
       <div className="rounded-3xl border border-slate-800/90 bg-slate-950/80 p-6 shadow-xl backdrop-blur-xl space-y-4">
@@ -484,7 +485,7 @@ export default function DashboardPage() {
                         No differential changes observed in selected window ({timeFilter}).
                       </span>
                       <span className="text-[11px] text-slate-500 font-mono">
-                        Active Database Monitoring: 1,432 Companies · 1,705 CISA KEV Exploits · 3,753 Security Events
+                        Active database synchronization and continuous threat surveillance active.
                       </span>
                     </div>
                   </td>
