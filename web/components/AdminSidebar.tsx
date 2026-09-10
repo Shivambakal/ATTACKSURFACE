@@ -4,6 +4,7 @@ import React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useAuth } from "@/lib/auth";
+import AttackSurfaceLogo from "@/components/AttackSurfaceLogo";
 
 interface AdminSidebarProps {
   collapsed: boolean;
@@ -181,34 +182,12 @@ export default function AdminSidebar({ collapsed, onToggleCollapse }: AdminSideb
       }`}
     >
       {/* Brand Header */}
-      <div className="flex h-16 items-center justify-between border-b border-amber-500/20 px-4 bg-amber-500/[0.03]">
-        {!collapsed && (
-          <Link href="/admin" className="flex items-center gap-2.5 overflow-hidden group">
-            <img
-              src="/logo-icon-3d.png"
-              alt="AttackSurface Logo"
-              className="h-8 w-8 object-contain shrink-0 drop-shadow-[0_0_12px_rgba(245,158,11,0.4)] transition-transform duration-300 group-hover:scale-105"
-            />
-            <div className="leading-tight">
-              <span className="font-bold text-sm tracking-tight text-white flex items-center gap-1.5 font-display">
-                AttackSurface
-              </span>
-              <span className="block text-[9px] font-mono font-bold tracking-widest text-amber-400 uppercase">
-                ADMIN CONTROL CENTER
-              </span>
-            </div>
-          </Link>
-        )}
-
-        {collapsed && (
-          <Link href="/admin" className="mx-auto flex h-8 w-8 items-center justify-center">
-            <img
-              src="/logo-icon-3d.png"
-              alt="AttackSurface Logo"
-              className="h-7 w-7 object-contain drop-shadow-[0_0_10px_rgba(245,158,11,0.4)]"
-            />
-          </Link>
-        )}
+      <div className="flex h-16 items-center justify-between border-b border-amber-500/20 px-3.5 bg-amber-500/[0.03]">
+        <AttackSurfaceLogo
+          size={collapsed ? "sm" : "md"}
+          showText={!collapsed}
+          href="/admin"
+        />
 
         <button
           onClick={onToggleCollapse}

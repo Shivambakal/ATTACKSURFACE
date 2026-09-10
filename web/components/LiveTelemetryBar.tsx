@@ -46,9 +46,6 @@ export default function LiveTelemetryBar({ onNewEvent }: LiveTelemetryBarProps) 
           if (onNewEvent) {
             onNewEvent(newest);
           }
-        } else {
-          // Keep seconds relative
-          if (secondsAgo > 60) setSecondsAgo(22);
         }
       } catch {
         // Fallback
@@ -57,7 +54,7 @@ export default function LiveTelemetryBar({ onNewEvent }: LiveTelemetryBarProps) 
 
     const interval = setInterval(checkFeed, 25000);
     return () => clearInterval(interval);
-  }, [preferences.liveMode, onNewEvent, secondsAgo]);
+  }, [preferences.liveMode, onNewEvent]);
 
   return (
     <div className="relative inline-flex items-center gap-3 rounded-xl border border-cyan-500/30 bg-slate-950/80 px-3 py-1.5 shadow-[0_0_18px_rgba(0,240,255,0.06)] backdrop-blur-md font-mono text-xs">
@@ -102,7 +99,13 @@ export default function LiveTelemetryBar({ onNewEvent }: LiveTelemetryBarProps) 
       <div className="flex items-center gap-1.5 text-[11px] text-slate-400">
         <span>Last observation:</span>
         <strong className="text-cyan-300 font-semibold">
-          {secondsAgo < 5 ? "Just now" : `${secondsAgo}s ago`}
+          {secondsAgo < 5
+            ? "Just now"
+            : secondsAgo < 60
+            ? `${secondsAgo}s ago`
+            : secondsAgo < 3600
+            ? `${Math.floor(secondsAgo / 60)}m ago`
+            : `${Math.floor(secondsAgo / 3600)}h ago`}
         </strong>
       </div>
     </div>

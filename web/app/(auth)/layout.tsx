@@ -3,6 +3,8 @@ import Link from "next/link";
 import WhiteAesthetic3DBackground from "@/components/WhiteAesthetic3DBackground";
 import ThemeToggle from "@/components/ThemeToggle";
 
+import AttackSurfaceLogo from "@/components/AttackSurfaceLogo";
+
 export default function AuthLayout({
   children,
 }: {
@@ -21,32 +23,17 @@ export default function AuthLayout({
         {/* Branding header */}
         <div className="mb-6 text-center">
           <Link href="/" className="inline-flex flex-col items-center group">
-            <img
-              src="/logo-icon-3d.png"
-              alt="AttackSurface Logo"
-              className="h-16 w-16 object-contain drop-shadow-[0_0_25px_rgba(0,240,255,0.45)] transition-transform duration-300 group-hover:scale-105 mb-3"
-            />
-            <div className="inline-flex items-center gap-2 rounded-full border px-3 py-1 text-xs font-mono tracking-wider"
-              style={{
-                borderColor: "var(--line-strong)",
-                background: "var(--accent-wash)",
-                color: "var(--accent-strong)",
-              }}
-            >
-              <span className="h-1.5 w-1.5 rounded-full animate-pulse" style={{ background: "var(--accent)" }} />
-              AUTHORIZED RESEARCH ONLY
-            </div>
+            <AttackSurfaceLogo size="xl" showText={false} href="/" className="mb-3" />
             <h1
-              className="mt-3 text-2xl font-bold tracking-tight transition-colors font-display"
+              className="mt-2 text-2xl font-black tracking-tight transition-colors font-display"
               style={{ color: "var(--ink)" }}
             >
               AttackSurface <span style={{ color: "var(--accent)" }}>Timeline</span>
             </h1>
             <p
-              className="mt-1 text-xs font-mono tracking-wide"
-              style={{ color: "var(--muted)" }}
+              className="mt-1 text-xs font-mono tracking-wider uppercase text-cyan-400 font-semibold"
             >
-              BUG BOUNTY RESEARCH INTELLIGENCE
+              Continuous Intelligence Platform
             </p>
           </Link>
         </div>

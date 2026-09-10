@@ -15,6 +15,7 @@ import { apiFetch } from "@/lib/api";
 import PublicNav from "@/components/PublicNav";
 import PublicFooter from "@/components/PublicFooter";
 import ThemeToggle from "@/components/ThemeToggle";
+import CyberAssistantChat from "@/components/CyberAssistantChat";
 
 const PUBLIC_ACCESSIBLE_ROUTES = ["/programs", "/security-intelligence", "/pricing"];
 
@@ -365,10 +366,11 @@ function DashboardShell({ children }: { children: React.ReactNode }) {
           <div className="flex items-center gap-2">
             <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 shadow-[0_0_6px_#34d399] animate-pulse" />
             <span className="text-slate-400">EVIDENCE-FIRST OBSERVATION</span>
-            <span>·</span>
-            <span className="text-emerald-400 font-medium">ZERO-FABRICATION GUARANTEED</span>
           </div>
         </div>
+
+        {/* AI Cyber Threat Analyst Floating Assistant */}
+        <CyberAssistantChat />
 
         {/* Global Footer */}
         <PublicFooter />

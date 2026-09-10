@@ -4,6 +4,7 @@ import React, { useEffect, useState, useCallback, useMemo } from "react";
 import Link from "next/link";
 import { apiFetch } from "@/lib/api";
 import { Change } from "@/lib/types";
+import ModernFilterDropdown, { FilterOption } from "@/components/ModernFilterDropdown";
 
 interface ChangeStats {
   total: number;
@@ -476,78 +477,70 @@ export default function ChangesFeedPage() {
             )}
           </div>
 
-          <div className="flex items-center gap-2 w-full md:w-auto">
-            {/* Category Dropdown */}
-            <select
+          <div className="flex flex-wrap items-center gap-2.5 w-full md:w-auto">
+            <ModernFilterDropdown
+              label="Category"
               value={selectedCategory}
-              onChange={(e) => setSelectedCategory(e.target.value)}
-              className="rounded-lg border border-slate-800 bg-slate-950/80 px-3 py-2 text-xs font-mono text-slate-300 focus:border-cyan-500 focus:outline-none"
-            >
-              <option value="ALL">All Categories ({availableCategories.length})</option>
-              {availableCategories.map((cat) => (
-                <option key={cat} value={cat}>
-                  {cat.replace(/_/g, " ").toUpperCase()}{" "}
-                  {stats?.categories?.[cat] ? `(${stats.categories[cat]})` : ""}
-                </option>
-              ))}
-            </select>
+              onChange={setSelectedCategory}
+              align="right"
+              options={[
+                { value: "ALL", label: `All Categories (${availableCategories.length})` },
+                ...availableCategories.map((cat) => ({
+                  value: cat,
+                  label: cat.replace(/_/g, " ").toUpperCase(),
+                  badge: stats?.categories?.[cat] ? String(stats.categories[cat]) : undefined,
+                })),
+              ]}
+            />
 
-            {/* Sort Dropdown */}
-            <select
+            <ModernFilterDropdown
+              label="Sort"
               value={sortBy}
-              onChange={(e) => setSortBy(e.target.value as any)}
-              className="rounded-lg border border-slate-800 bg-slate-950/80 px-3 py-2 text-xs font-mono text-slate-300 focus:border-cyan-500 focus:outline-none"
-            >
-              <option value="newest">Newest First</option>
-              <option value="oldest">Oldest First</option>
-              <option value="priority">Highest Priority</option>
-              <option value="relevance">Highest Relevance</option>
-            </select>
+              onChange={(val) => setSortBy(val as any)}
+              align="right"
+              options={[
+                { value: "newest", label: "Newest First" },
+                { value: "oldest", label: "Oldest First" },
+                { value: "priority", label: "Highest Priority" },
+                { value: "relevance", label: "Highest Relevance" },
+              ]}
+            />
           </div>
         </div>
 
-        {/* Row 2: Priority Chips & Status Filter */}
-        <div className="flex flex-wrap items-center justify-between gap-3 pt-2 border-t border-slate-800/60 text-xs">
-          {/* Priority Chips */}
-          <div className="flex flex-wrap items-center gap-1.5">
-            <span className="text-[11px] font-mono text-slate-400 uppercase mr-1">Priority:</span>
-            {["ALL", "CRITICAL", "HIGH", "MEDIUM", "LOW", "INFO"].map((p) => {
-              const active = selectedPriority === p;
-              return (
-                <button
-                  key={p}
-                  onClick={() => setSelectedPriority(p)}
-                  className={`px-2.5 py-1 rounded-md font-mono text-[11px] font-semibold uppercase transition border ${
-                    active
-                      ? "bg-cyan-500 text-slate-950 border-cyan-400 shadow-sm"
-                      : "bg-slate-950/60 text-slate-400 border-slate-800 hover:border-slate-700 hover:text-slate-200"
-                  }`}
-                >
-                  {p}
-                </button>
-              );
-            })}
+        {/* Row 2: Modern Filter Dropdowns for Priority & Status */}
+        <div className="flex flex-wrap items-center justify-between gap-3 pt-3 border-t border-slate-800/60 text-xs">
+          <div className="flex flex-wrap items-center gap-2.5">
+            <ModernFilterDropdown
+              label="Priority"
+              value={selectedPriority}
+              onChange={setSelectedPriority}
+              options={[
+                { value: "ALL", label: "All Priorities" },
+                { value: "CRITICAL", label: "Critical Priority", color: "rose" },
+                { value: "HIGH", label: "High Priority", color: "amber" },
+                { value: "MEDIUM", label: "Medium Priority", color: "cyan" },
+                { value: "LOW", label: "Low Priority", color: "emerald" },
+                { value: "INFO", label: "Informational", color: "purple" },
+              ]}
+            />
+
+            <ModernFilterDropdown
+              label="Status"
+              value={selectedStatus}
+              onChange={setSelectedStatus}
+              options={[
+                { value: "ALL", label: "All Workflow States" },
+                { value: "interesting", label: "Interesting", color: "purple" },
+                { value: "investigating", label: "Under Investigation", color: "amber" },
+                { value: "resolved", label: "Resolved / Mitigated", color: "emerald" },
+                { value: "ignored", label: "Ignored / False Positive", color: "cyan" },
+              ]}
+            />
           </div>
 
-          {/* Status Chips */}
-          <div className="flex flex-wrap items-center gap-1.5">
-            <span className="text-[11px] font-mono text-slate-400 uppercase mr-1">Status:</span>
-            {["ALL", "interesting", "investigating", "resolved", "ignored"].map((s) => {
-              const active = selectedStatus === s;
-              return (
-                <button
-                  key={s}
-                  onClick={() => setSelectedStatus(s)}
-                  className={`px-2.5 py-1 rounded-md font-mono text-[11px] uppercase transition border ${
-                    active
-                      ? "bg-slate-200 text-slate-950 border-white font-semibold"
-                      : "bg-slate-950/60 text-slate-400 border-slate-800 hover:border-slate-700 hover:text-slate-200"
-                  }`}
-                >
-                  {s}
-                </button>
-              );
-            })}
+          <div className="text-[11px] font-mono text-slate-400">
+            <span>Showing <strong className="text-white">{filteredAndSortedChanges.length}</strong> changes</span>
           </div>
         </div>
       </div>

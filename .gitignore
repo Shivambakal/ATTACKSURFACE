@@ -42,3 +42,8 @@ trial-*.png
 .vscode/
 .idea/
 data/exports/
+.vercel
+.env*
+*.dump
+merge_*.py
+safe_merge_check.py

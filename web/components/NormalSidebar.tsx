@@ -3,6 +3,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import AttackSurfaceLogo from "@/components/AttackSurfaceLogo";
 import { apiFetch } from "@/lib/api";
 import { useAuth } from "@/lib/auth";
 import { Alert } from "@/lib/types";
@@ -77,6 +78,17 @@ export default function NormalSidebar({ collapsed, onToggleCollapse, onOpenComma
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
             </svg>
           ),
+        },
+        {
+          name: "AI Threat Analyst",
+          href: "/assistant",
+          icon: (
+            <svg className="w-4 h-4 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+            </svg>
+          ),
+          badge: "AI",
+          badgeTone: "cyan",
         },
         {
           name: "Alerts",
@@ -239,32 +251,12 @@ export default function NormalSidebar({ collapsed, onToggleCollapse, onOpenComma
       }`}
     >
       {/* Brand Header */}
-      <div className="flex h-16 items-center justify-between border-b border-slate-800/80 px-4 shrink-0">
-        {!collapsed ? (
-          <Link href="/dashboard" className="group flex items-center gap-2.5 overflow-hidden">
-            <img
-              src="/logo-icon-3d.png"
-              alt="AttackSurface Logo"
-              className="h-8 w-8 object-contain shrink-0 drop-shadow-[0_0_12px_rgba(0,240,255,0.4)] transition-transform duration-300 group-hover:scale-105"
-            />
-            <div className="leading-tight">
-              <span className="font-bold text-sm tracking-tight text-white group-hover:text-cyan-200 transition-colors font-display">
-                AttackSurface
-              </span>
-              <span className="block text-[9px] font-mono tracking-widest text-cyan-400 font-semibold">
-                TIMELINE OS
-              </span>
-            </div>
-          </Link>
-        ) : (
-          <Link href="/dashboard" className="mx-auto flex h-8 w-8 items-center justify-center">
-            <img
-              src="/logo-icon-3d.png"
-              alt="AttackSurface Logo"
-              className="h-7 w-7 object-contain drop-shadow-[0_0_10px_rgba(0,240,255,0.4)]"
-            />
-          </Link>
-        )}
+      <div className="flex h-16 items-center justify-between border-b border-slate-800/80 px-3.5 shrink-0">
+        <AttackSurfaceLogo
+          size={collapsed ? "sm" : "md"}
+          showText={!collapsed}
+          href="/dashboard"
+        />
       </div>
 
       {/* Top Command Button (matching media_1788891721052.jpg) */}
@@ -358,26 +350,24 @@ export default function NormalSidebar({ collapsed, onToggleCollapse, onOpenComma
         ))}
       </nav>
 
-      {/* Bottom Status & Collapse Bar (matching media_1788891721052.jpg) */}
-      <div className="border-t border-slate-800/80 px-3 py-2.5 bg-slate-950/60 shrink-0">
+      {/* Bottom Collapse Bar */}
+      <div className="border-t border-slate-800/80 px-3 py-2 bg-slate-950/40 shrink-0">
         <div className="flex items-center justify-between">
           {!collapsed ? (
-            <div className="flex items-center gap-2">
-              <span className="h-2 w-2 rounded-full bg-emerald-400 shadow-[0_0_8px_#34d399] animate-pulse" />
-              <span className="font-mono text-[10px] font-bold tracking-wider text-slate-300 uppercase">
-                LIVE · IDLE
-              </span>
-            </div>
+            <span className="font-mono text-[10px] text-slate-500 uppercase tracking-wider">
+              Navigation
+            </span>
           ) : (
-            <span className="mx-auto h-2 w-2 rounded-full bg-emerald-400 shadow-[0_0_8px_#34d399]" />
+            <span className="w-1" />
           )}
 
           <button
             onClick={onToggleCollapse}
             title={collapsed ? "Expand sidebar ( [ )" : "Collapse sidebar ( [ )"}
-            className="text-slate-400 hover:text-white p-1 rounded-lg hover:bg-white/[.06] transition font-mono text-xs"
+            className="text-slate-400 hover:text-white p-1.5 rounded-lg hover:bg-white/[.06] transition font-mono text-xs flex items-center gap-1 cursor-pointer"
           >
-            {collapsed ? "»" : "«"}
+            <span>{collapsed ? "»" : "«"}</span>
+            {!collapsed && <kbd className="text-[10px] text-slate-600 font-sans">[</kbd>}
           </button>
         </div>
       </div>

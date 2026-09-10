@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
+import AttackSurfaceLogo from "@/components/AttackSurfaceLogo";
 
 interface FooterLink {
   label: string;
@@ -78,37 +79,19 @@ export default function PublicFooter() {
       <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8 lg:py-16">
         <div className="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:gap-8">
           {/* Brand Column (Span 4) */}
-          <div className="space-y-5 lg:col-span-4">
-            <div className="flex items-center gap-3">
-              <img
-                src="/logo-icon-3d.png"
-                alt="AttackSurface Logo"
-                className="h-10 w-10 object-contain drop-shadow-[0_0_15px_rgba(0,240,255,0.4)]"
-              />
-              <div>
-                <span className="text-base font-bold tracking-tight text-white font-sans font-display">
-                  AttackSurface
-                </span>
-                <span className="block text-[10px] font-mono tracking-widest text-cyan-400 uppercase font-semibold">
-                  Timeline
-                </span>
-              </div>
-            </div>
-
-            <p className="text-xs leading-relaxed text-slate-300 max-w-sm">
-              Continuous security-change intelligence for researchers. We observe public internet surface deltas, verify cryptographic evidence trails, and deliver high-signal diffs without intrusive probing.
-            </p>
+          <div className="space-y-6 lg:col-span-4">
+            <AttackSurfaceLogo size="md" />
 
             {/* Official Contact & Socials */}
-            <div className="space-y-2.5 pt-2 border-t border-white/[0.06] max-w-sm">
-              <div className="text-[11px] font-mono uppercase tracking-wider text-slate-300">
-                Official Intelligence Channels
+            <div className="space-y-2.5 max-w-sm">
+              <div className="text-[11px] font-mono uppercase tracking-wider text-slate-400">
+                Official Channels
               </div>
               
               <div className="flex flex-col gap-2 text-xs">
                 <a
                   href="mailto:attacksurface.alerts@gmail.com"
-                  className="group flex items-center gap-2 text-slate-300 hover:text-cyan-400 transition-colors"
+                  className="group flex items-center gap-2.5 text-slate-300 hover:text-cyan-400 transition-colors"
                 >
                   <span className="flex h-6 w-6 items-center justify-center rounded-md bg-white/[0.04] border border-white/[0.08] text-slate-400 group-hover:text-cyan-400 group-hover:border-cyan-500/30">
                     ✉
@@ -120,7 +103,7 @@ export default function PublicFooter() {
                   href="https://instagram.com/attacksurface_official"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group flex items-center gap-2 text-slate-300 hover:text-cyan-400 transition-colors"
+                  className="group flex items-center gap-2.5 text-slate-300 hover:text-cyan-400 transition-colors"
                 >
                   <span className="flex h-6 w-6 items-center justify-center rounded-md bg-white/[0.04] border border-white/[0.08] text-slate-400 group-hover:text-cyan-400 group-hover:border-cyan-500/30">
                     ◈
@@ -128,12 +111,6 @@ export default function PublicFooter() {
                   <span className="font-mono text-[11px]">@attacksurface_official</span>
                 </a>
               </div>
-            </div>
-
-            {/* Security Guarantee Pill */}
-            <div className="inline-flex items-center gap-2 rounded-lg bg-emerald-500/10 border border-emerald-500/20 px-3 py-1.5 text-[11px] font-mono text-emerald-300">
-              <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
-              <span>Zero-Weaponization Standard Enforced</span>
             </div>
           </div>
 
@@ -186,11 +163,8 @@ export default function PublicFooter() {
         <div className="mt-12 border-t border-white/[0.08] pt-8 lg:mt-16">
           <div className="flex flex-col items-center justify-between gap-4 md:flex-row text-xs text-slate-300">
             <div className="flex flex-col gap-1 text-center md:text-left">
-              <p className="font-mono text-[11px] text-slate-300">
-                &copy; 2026 AttackSurface. All rights reserved.
-              </p>
-              <p className="text-[11px] text-slate-400">
-                Continuous security-change intelligence for authorized researchers. Non-intrusive public telemetry only.
+              <p className="font-mono text-[11px] text-slate-400">
+                &copy; 2026 AttackSurface Timeline. All rights reserved.
               </p>
             </div>
 

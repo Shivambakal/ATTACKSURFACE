@@ -4,6 +4,7 @@ import React, { useEffect, useState, useMemo } from "react";
 import Link from "next/link";
 import { apiFetch } from "@/lib/api";
 import { SecurityIntelligenceEvent, SecurityIntelligenceStats } from "@/lib/types";
+import ModernFilterDropdown from "@/components/ModernFilterDropdown";
 
 export default function SecurityIntelligencePage() {
   const [events, setEvents] = useState<SecurityIntelligenceEvent[]>([]);
@@ -209,41 +210,40 @@ export default function SecurityIntelligencePage() {
           </div>
         </div>
 
-        {/* Severity Tabs */}
-        <div className="flex flex-wrap gap-2 pt-2 border-t border-slate-800/60">
-          <span className="text-xs text-slate-400 flex items-center pr-2">Severity:</span>
-          {["ALL", "CRITICAL", "HIGH", "MEDIUM", "LOW"].map((sev) => (
-            <button
-              key={sev}
-              onClick={() => setSelectedSeverity(sev)}
-              className={`px-2.5 py-1 rounded text-xs font-medium transition-colors ${
-                selectedSeverity === sev
-                  ? sev === "CRITICAL"
-                    ? "bg-red-950 text-red-300 border border-red-700"
-                    : sev === "HIGH"
-                    ? "bg-orange-950 text-orange-300 border border-orange-700"
-                    : "bg-slate-800 text-cyan-300 border border-cyan-600/50"
-                  : "bg-slate-950 text-slate-400 border border-slate-800 hover:text-slate-200"
-              }`}
-            >
-              {sev}
-            </button>
-          ))}
+        {/* Modern Filter Dropdowns */}
+        <div className="flex flex-wrap items-center justify-between gap-3 pt-2.5 border-t border-slate-800/60 text-xs">
+          <div className="flex flex-wrap items-center gap-2.5">
+            <ModernFilterDropdown
+              label="Severity"
+              value={selectedSeverity}
+              onChange={setSelectedSeverity}
+              options={[
+                { value: "ALL", label: "All Severities" },
+                { value: "CRITICAL", label: "Critical Severity", color: "rose" },
+                { value: "HIGH", label: "High Severity", color: "amber" },
+                { value: "MEDIUM", label: "Medium Severity", color: "cyan" },
+                { value: "LOW", label: "Low Severity", color: "emerald" },
+              ]}
+            />
 
-          <span className="text-xs text-slate-400 flex items-center px-2">Type:</span>
-          {["ALL", "CVE", "SECURITY_ADVISORY", "EXPLOIT", "BUG_BOUNTY", "SECURITY_NEWS"].map((type) => (
-            <button
-              key={type}
-              onClick={() => setSelectedType(type)}
-              className={`px-2.5 py-1 rounded text-xs font-medium transition-colors ${
-                selectedType === type
-                  ? "bg-cyan-950 text-cyan-300 border border-cyan-700"
-                  : "bg-slate-950 text-slate-400 border border-slate-800 hover:text-slate-200"
-              }`}
-            >
-              {type.replace("_", " ")}
-            </button>
-          ))}
+            <ModernFilterDropdown
+              label="Intel Type"
+              value={selectedType}
+              onChange={setSelectedType}
+              options={[
+                { value: "ALL", label: "All Intelligence Types" },
+                { value: "CVE", label: "CVE Records", color: "rose" },
+                { value: "SECURITY_ADVISORY", label: "Security Advisories", color: "cyan" },
+                { value: "EXPLOIT", label: "Exploits & PoCs", color: "amber" },
+                { value: "BUG_BOUNTY", label: "Bug Bounty Scope", color: "emerald" },
+                { value: "SECURITY_NEWS", label: "Threat News", color: "purple" },
+              ]}
+            />
+          </div>
+
+          <div className="text-[11px] font-mono text-slate-400">
+            <span>Showing <strong className="text-white font-semibold">{filteredEvents.length}</strong> intelligence feeds</span>
+          </div>
         </div>
       </div>
 

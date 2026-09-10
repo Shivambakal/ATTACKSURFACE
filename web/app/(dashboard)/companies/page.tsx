@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { apiFetch } from "@/lib/api";
 import { Company } from "@/lib/types";
+import ModernFilterDropdown from "@/components/ModernFilterDropdown";
 
 interface CompanyStats {
   canonical_companies: number;
@@ -235,20 +236,17 @@ export default function CompaniesPage() {
           />
         </div>
 
-        <div className="flex items-center gap-2 overflow-x-auto pb-1 md:pb-0">
-          {industries.map((ind) => (
-            <button
-              key={ind}
-              onClick={() => setSelectedIndustry(ind)}
-              className={`rounded-xl px-3.5 py-2 font-display text-xs font-semibold whitespace-nowrap transition-all ${
-                selectedIndustry === ind
-                  ? "bg-cyan-500 text-slate-950 shadow-md shadow-cyan-500/20 font-bold"
-                  : "bg-slate-950 text-slate-400 border border-slate-800 hover:text-white hover:bg-slate-800/60"
-              }`}
-            >
-              {ind}
-            </button>
-          ))}
+        <div className="flex items-center gap-3 shrink-0">
+          <ModernFilterDropdown
+            label="Sector"
+            value={selectedIndustry}
+            onChange={(val) => setSelectedIndustry(val)}
+            align="right"
+            options={industries.map((ind) => ({
+              value: ind,
+              label: ind === "ALL" ? "All Sectors & Industries" : ind,
+            }))}
+          />
         </div>
       </div>
 

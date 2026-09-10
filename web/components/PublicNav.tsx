@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import ThemeToggle from "@/components/ThemeToggle";
+import AttackSurfaceLogo from "@/components/AttackSurfaceLogo";
 
 export default function PublicNav() {
   const pathname = usePathname();
@@ -18,47 +19,41 @@ export default function PublicNav() {
     { label: "Docs", href: "/docs" },
   ];
 
+  const isAuthPage =
+    pathname === "/login" ||
+    pathname === "/signup" ||
+    pathname === "/forgot-password" ||
+    pathname === "/reset-password";
+
   const isActive = (href: string) => pathname === href;
 
   return (
     <header className="sticky top-0 z-40 w-full border-b border-white/[0.08] bg-[#030712]/85 backdrop-blur-xl">
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
         {/* Brand */}
-        <Link href="/" className="flex items-center gap-3 group">
-          <img
-            src="/logo-icon-3d.png"
-            alt="AttackSurface Logo"
-            className="h-9 w-9 object-contain drop-shadow-[0_0_12px_rgba(0,240,255,0.4)] group-hover:scale-105 transition-transform"
-          />
-          <div>
-            <span className="text-sm font-bold tracking-tight text-white font-sans group-hover:text-cyan-300 transition-colors font-display">
-              AttackSurface
-            </span>
-            <span className="block text-[9px] font-mono tracking-widest text-cyan-400 uppercase font-semibold">
-              Timeline
-            </span>
-          </div>
-        </Link>
+        <AttackSurfaceLogo size="sm" href="/" />
 
         {/* Desktop Navigation */}
-        <nav className="hidden md:flex items-center gap-1">
-          {navLinks.map((link) => {
-            const active = isActive(link.href);
-            return (
-              <Link
-                key={link.href}
-                href={link.href}
-                className={`rounded-lg px-3 py-1.5 text-xs font-mono transition-all ${
-                  active
-                    ? "bg-cyan-500/15 text-cyan-300 border border-cyan-500/30"
-                    : "text-slate-300 hover:text-white hover:bg-white/[0.04]"
-                }`}
-              >
-                {link.label}
-              </Link>
-            );
-          })}
-        </nav>
+        {!isAuthPage && (
+          <nav className="hidden md:flex items-center gap-1">
+            {navLinks.map((link) => {
+              const active = isActive(link.href);
+              return (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className={`rounded-lg px-3 py-1.5 text-xs font-mono transition-all ${
+                    active
+                      ? "bg-cyan-500/15 text-cyan-300 border border-cyan-500/30"
+                      : "text-slate-300 hover:text-white hover:bg-white/[0.04]"
+                  }`}
+                >
+                  {link.label}
+                </Link>
+              );
+            })}
+          </nav>
+        )}
 
         {/* Right Actions */}
         <div className="hidden sm:flex items-center gap-3">
@@ -97,7 +92,7 @@ export default function PublicNav() {
       </div>
 
       {/* Mobile Drawer */}
-      {mobileMenuOpen && (
+      {mobileMenuOpen && !isAuthPage && (
         <div className="border-b border-white/[0.08] bg-[#030712] px-4 py-4 md:hidden">
           <div className="flex flex-col gap-2">
             {navLinks.map((link) => (
