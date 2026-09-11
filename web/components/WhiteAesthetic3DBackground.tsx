@@ -11,9 +11,6 @@ function readIsWhiteTheme(): boolean {
 }
 
 export default function WhiteAesthetic3DBackground() {
-  const [mouseOffset, setMouseOffset] = useState({ x: 0, y: 0 });
-  // Default dark until ThemeToggle applies a saved preference — avoids a flash of
-  // light canvas behind white/cyan auth titles that would make them unreadable.
   const [isWhiteAesthetic, setIsWhiteAesthetic] = useState(false);
   const containerRef = useRef<HTMLDivElement | null>(null);
 
@@ -28,36 +25,52 @@ export default function WhiteAesthetic3DBackground() {
     return () => observer.disconnect();
   }, []);
 
+  // High-performance GPU-only mouse parallax without React re-renders
   useEffect(() => {
-    let animFrame: number;
-    let lastPaint = 0;
+    let animFrame: number | null = null;
     let targetX = 0;
     let targetY = 0;
     let currentX = 0;
     let currentY = 0;
+    let isRunning = false;
+
+    const applyPhysics = () => {
+      currentX += (targetX - currentX) * 0.06;
+      currentY += (targetY - currentY) * 0.06;
+
+      if (containerRef.current) {
+        containerRef.current.style.setProperty("--mx", `${currentX.toFixed(2)}px`);
+        containerRef.current.style.setProperty("--my", `${currentY.toFixed(2)}px`);
+      }
+
+      // If close to target, stop loop to save 100% CPU/battery
+      if (Math.abs(targetX - currentX) < 0.02 && Math.abs(targetY - currentY) < 0.02) {
+        isRunning = false;
+        animFrame = null;
+        return;
+      }
+
+      animFrame = requestAnimationFrame(applyPhysics);
+    };
 
     const handlePointerMove = (e: MouseEvent) => {
       const { innerWidth, innerHeight } = window;
       targetX = (e.clientX / innerWidth - 0.5) * 35;
       targetY = (e.clientY / innerHeight - 0.5) * 25;
-    };
 
-    const updatePhysics = (timestamp: number) => {
-      currentX += (targetX - currentX) * 0.05;
-      currentY += (targetY - currentY) * 0.05;
-      if (timestamp - lastPaint >= 33) {
-        lastPaint = timestamp;
-        setMouseOffset({ x: currentX, y: currentY });
+      if (!isRunning) {
+        isRunning = true;
+        animFrame = requestAnimationFrame(applyPhysics);
       }
-      animFrame = requestAnimationFrame(updatePhysics);
     };
 
     window.addEventListener("mousemove", handlePointerMove, { passive: true });
-    animFrame = requestAnimationFrame(updatePhysics);
 
     return () => {
       window.removeEventListener("mousemove", handlePointerMove);
-      cancelAnimationFrame(animFrame);
+      if (animFrame !== null) {
+        cancelAnimationFrame(animFrame);
+      }
     };
   }, []);
 
@@ -67,7 +80,12 @@ export default function WhiteAesthetic3DBackground() {
       className={`fixed inset-0 pointer-events-none z-0 overflow-hidden transition-colors duration-700 ${
         isWhiteAesthetic ? "bg-[#f8fafc]" : "bg-[#000000]"
       }`}
-      style={{ perspective: "1200px" }}
+      style={{
+        perspective: "1200px",
+        // Default CSS variable fallbacks
+        ["--mx" as any]: "0px",
+        ["--my" as any]: "0px",
+      }}
       aria-hidden="true"
     >
       <div
@@ -76,25 +94,25 @@ export default function WhiteAesthetic3DBackground() {
         }`}
       >
         <div
-          className="absolute -top-32 -left-32 w-[600px] h-[600px] rounded-full blur-[140px] pointer-events-none"
+          className="absolute -top-32 -left-32 w-[600px] h-[600px] rounded-full blur-[120px] pointer-events-none will-change-transform"
           style={{
             background: isWhiteAesthetic
               ? "radial-gradient(circle, rgba(6, 182, 212, 0.12) 0%, transparent 70%)"
               : "radial-gradient(circle, rgba(6, 182, 212, 0.18) 0%, transparent 70%)",
-            transform: `translate3d(${mouseOffset.x * 1.2}px, ${mouseOffset.y * 1.2}px, 0)`,
+            transform: "translate3d(calc(var(--mx) * 1.2), calc(var(--my) * 1.2), 0)",
           }}
         />
         <div
-          className="absolute top-1/3 -right-32 w-[700px] h-[700px] rounded-full blur-[150px] pointer-events-none"
+          className="absolute top-1/3 -right-32 w-[700px] h-[700px] rounded-full blur-[130px] pointer-events-none will-change-transform"
           style={{
             background: isWhiteAesthetic
               ? "radial-gradient(circle, rgba(59, 130, 246, 0.10) 0%, transparent 70%)"
               : "radial-gradient(circle, rgba(139, 92, 246, 0.16) 0%, transparent 70%)",
-            transform: `translate3d(${-mouseOffset.x * 0.8}px, ${-mouseOffset.y * 0.8}px, 0)`,
+            transform: "translate3d(calc(var(--mx) * -0.8), calc(var(--my) * -0.8), 0)",
           }}
         />
         <div
-          className="absolute -bottom-40 left-1/3 w-[800px] h-[600px] rounded-full blur-[160px] pointer-events-none"
+          className="absolute -bottom-40 left-1/3 w-[800px] h-[600px] rounded-full blur-[140px] pointer-events-none will-change-transform"
           style={{
             background: isWhiteAesthetic
               ? "radial-gradient(circle, rgba(99, 102, 241, 0.06) 0%, transparent 70%)"
@@ -104,11 +122,11 @@ export default function WhiteAesthetic3DBackground() {
       </div>
 
       <div
-        className={`absolute inset-0 pointer-events-none transition-opacity duration-500 ${
+        className={`absolute inset-0 pointer-events-none transition-opacity duration-500 will-change-transform ${
           isWhiteAesthetic ? "opacity-20" : "opacity-55"
         }`}
         style={{
-          transform: `rotateX(55deg) translate3d(${mouseOffset.x * 0.4}px, ${mouseOffset.y * 0.4 + 100}px, -100px)`,
+          transform: "rotateX(55deg) translate3d(calc(var(--mx) * 0.4), calc(var(--my) * 0.4 + 100px), -100px)",
           transformOrigin: "bottom center",
           backgroundImage: isWhiteAesthetic
             ? `linear-gradient(to right, rgba(148, 163, 184, 0.10) 1px, transparent 1px),

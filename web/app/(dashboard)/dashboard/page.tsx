@@ -194,7 +194,11 @@ export default function DashboardPage() {
 
   useEffect(() => {
     fetchDashboardData(true);
-    const timer = setInterval(() => fetchDashboardData(false), 30000);
+    const timer = setInterval(() => {
+      if (typeof document !== "undefined" && document.visibilityState === "visible") {
+        fetchDashboardData(false);
+      }
+    }, 30000);
     return () => clearInterval(timer);
   }, [fetchDashboardData]);
 
