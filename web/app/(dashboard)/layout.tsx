@@ -247,6 +247,9 @@ function DashboardShell({ children }: { children: React.ReactNode }) {
               )}
             </button>
 
+            {/* Theme Toggle (Light / Dark) */}
+            <ThemeToggle />
+
             {/* User Avatar Circle */}
             <div className="relative">
               <button
