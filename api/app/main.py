@@ -106,6 +106,7 @@ def create_app() -> FastAPI:
         from .routers.billing import router as billing_router
         from .routers.programs import router as programs_router
         from .routers.assistant import router as assistant_router
+        from .routers.scheduler_router import router as scheduler_router
 
         application.include_router(auth_router)
         application.include_router(admin_router)
@@ -113,6 +114,7 @@ def create_app() -> FastAPI:
         application.include_router(billing_router)
         application.include_router(trial_router)
         application.include_router(live_intelligence_router)
+        application.include_router(scheduler_router)
         application.include_router(sources_router)
         application.include_router(corporate_intelligence_router)
         application.include_router(security_intelligence_router)

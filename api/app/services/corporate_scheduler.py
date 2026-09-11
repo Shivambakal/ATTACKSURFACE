@@ -11,6 +11,7 @@ from __future__ import annotations
 
 import asyncio
 import logging
+import time
 from datetime import datetime, timedelta, timezone
 from typing import Any
 from redis import Redis
@@ -25,38 +26,74 @@ logger = logging.getLogger(__name__)
 
 LOCK_PREFIX = "source_lock:"
 DEFAULT_LOCK_TTL = 300  # 5 minutes bounded lock
+_in_memory_locks: dict[int, float] = {}
 
 
 class CorporateScheduler:
     """Orchestrates continuous 10-minute polling cycles across corporate sources."""
 
     def __init__(self, redis_client: Redis | None = None):
-        self.redis = redis_client or Redis.from_url(settings.redis_url)
+        self._redis_client = redis_client
         self.engine = ConnectorEngine()
 
+    @property
+    def redis(self) -> Redis | None:
+        """Lazily initialize Redis client with exception isolation."""
+        if self._redis_client is not None:
+            return self._redis_client
+        try:
+            if settings.redis_url and settings.redis_url.startswith(("redis://", "rediss://", "unix://")):
+                self._redis_client = Redis.from_url(settings.redis_url)
+                return self._redis_client
+        except Exception as exc:
+            logger.warning("Redis initialization failed; falling back to in-memory locking: %s", exc)
+        return None
+
     def acquire_source_lock(self, source_id: int, ttl: int = DEFAULT_LOCK_TTL) -> bool:
-        """Acquires a Redis distributed lock for an individual source."""
-        key = f"{LOCK_PREFIX}{source_id}"
-        # Set if not exists with expiration
-        acquired = self.redis.set(key, "locked", nx=True, ex=ttl)
-        return bool(acquired)
+        """Acquires a distributed or in-memory lock for an individual source."""
+        now = time.monotonic()
+        r = self.redis
+        if r is not None:
+            try:
+                key = f"{LOCK_PREFIX}{source_id}"
+                acquired = r.set(key, "locked", nx=True, ex=ttl)
+                return bool(acquired)
+            except Exception as exc:
+                logger.debug("Redis lock error for source %s: %s; falling back to memory", source_id, exc)
+
+        # In-memory lock fallback with expiration
+        exp = _in_memory_locks.get(source_id)
+        if exp and exp > now:
+            return False
+        _in_memory_locks[source_id] = now + ttl
+        return True
 
     def release_source_lock(self, source_id: int) -> None:
-        """Releases the Redis distributed lock."""
-        key = f"{LOCK_PREFIX}{source_id}"
-        self.redis.delete(key)
+        """Releases the distributed or in-memory lock."""
+        _in_memory_locks.pop(source_id, None)
+        r = self.redis
+        if r is not None:
+            try:
+                key = f"{LOCK_PREFIX}{source_id}"
+                r.delete(key)
+            except Exception as exc:
+                logger.debug("Redis release lock error for source %s: %s", source_id, exc)
 
-    def get_due_sources(self, db: Session, limit: int = 100) -> list[CompanySource]:
+    def get_due_sources(self, db: Session, limit: int = 100, force: bool = False) -> list[CompanySource]:
         """Returns enabled sources ready for collection."""
+        from sqlalchemy import or_
         now = datetime.now(timezone.utc)
+        conditions = [
+            CompanySource.enabled.is_(True),
+            CompanySource.status != SourceStatus.DISABLED.value,
+        ]
+        if not force:
+            conditions.append(or_(CompanySource.next_check_at.is_(None), CompanySource.next_check_at <= now))
+
         query = (
             select(CompanySource)
-            .where(
-                CompanySource.enabled.is_(True),
-                CompanySource.next_check_at <= now,
-                CompanySource.status != SourceStatus.DISABLED.value,
-            )
-            .order_by(CompanySource.priority.asc(), CompanySource.next_check_at.asc())
+            .where(*conditions)
+            .order_by(CompanySource.priority.asc(), CompanySource.next_check_at.asc().nullsfirst())
             .limit(limit)
         )
         return list(db.scalars(query).all())
@@ -84,10 +121,18 @@ class CorporateScheduler:
                 buckets["p2_standard"].append(s)
         return buckets
 
-    async def run_due_sources(self, db: Session, max_sources: int = 50) -> dict[str, int]:
+    async def run_due_sources(self, db: Session, max_sources: int = 50, force: bool = False) -> dict[str, Any]:
         """Runs an execution cycle for all due sources, respecting locks and intervals."""
-        due = self.get_due_sources(db, limit=max_sources)
-        stats = {"dispatched": 0, "locked_skipped": 0, "errors": 0}
+        due = self.get_due_sources(db, limit=max_sources, force=force)
+        stats: dict[str, Any] = {
+            "due_count": len(due),
+            "dispatched": 0,
+            "locked_skipped": 0,
+            "errors": 0,
+            "items_found": 0,
+            "items_changed": 0,
+            "runs": [],
+        }
 
         now = datetime.now(timezone.utc)
 
@@ -98,16 +143,32 @@ class CorporateScheduler:
 
             try:
                 # Update next_check_at ahead of time to prevent immediate re-selection
-                interval = max(source.poll_interval_seconds, 60)
+                interval = max(source.poll_interval_seconds or 600, 60)
                 source.next_check_at = now + timedelta(seconds=interval)
                 db.commit()
 
                 # Execute collection
-                await self.engine.execute_source(source.id, db)
+                result = await self.engine.execute_source(source.id, db)
                 stats["dispatched"] += 1
+                stats["items_found"] += len(result.items)
+                stats["items_changed"] += len(result.items) if result.status == "SUCCESS_CHANGED" else 0
+                stats["runs"].append({
+                    "source_id": source.id,
+                    "source_name": source.name,
+                    "status": result.status,
+                    "http_status": result.http_status,
+                    "items_found": len(result.items),
+                    "duration_ms": result.duration_ms,
+                })
             except Exception as exc:
                 logger.error("Error executing source %s: %s", source.id, exc)
                 stats["errors"] += 1
+                stats["runs"].append({
+                    "source_id": source.id,
+                    "source_name": source.name,
+                    "status": "FAILED",
+                    "error": str(exc),
+                })
             finally:
                 self.release_source_lock(source.id)
 

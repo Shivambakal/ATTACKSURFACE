@@ -690,27 +690,41 @@ SCHEMA:
                         )
                         db.add(timeline_event)
 
-                    # Create ResearchSignal
+                    # Create ResearchSignal matching canonical SQLAlchemy schema
                     signal = ResearchSignal(
                         company_id=company.id,
                         target_id=target_id,
-                        signal_type=SignalType.HIGH_RISK_SURFACE if event.actively_exploited else SignalType.EXPOSURE_RISK,
                         title=f"External Intel: {event.title[:255]}",
-                        description=(
-                            f"{event.summary}\n\n"
-                            f"Source: {event.source_name} ({event.source_url})\n"
+                        signal_type=SignalType.SECURITY_CHANGE.value,
+                        summary=event.summary[:1000],
+                        why_it_matters=(
+                            f"Public intelligence alert from {event.source_name} ({event.source_url}). "
                             f"Severity: {event.severity} | Priority: {event.priority} | "
-                            f"Actively Exploited: {event.actively_exploited}"
+                            f"Actively Exploited: {event.actively_exploited}."
                         ),
-                        confidence=event.confidence,
-                        severity=event.severity if event.severity in ("CRITICAL", "HIGH", "MEDIUM", "LOW") else "MEDIUM",
-                        status=SignalStatus.ACTIVE,
-                        evidence_sources=[event.source_url] + (event.additional_sources or []),
-                        dedup_hash=f"intel_{event.fingerprint}_{company.id}",
+                        relevance_score=int(event.priority_score or 50),
+                        confidence_score=int((event.confidence or 0.8) * 100),
+                        security_context_score=int(event.severity_score or 50),
+                        priority=event.priority or "MEDIUM",
+                        status=SignalStatus.NEW.value,
+                        source_count=1,
+                        security_context={
+                            "source_name": event.source_name,
+                            "source_url": event.source_url,
+                            "cve_ids": event.cve_ids or [],
+                            "actively_exploited": event.actively_exploited,
+                            "fingerprint": event.fingerprint,
+                        },
+                        score_factors={
+                            "severity_score": event.severity_score,
+                            "freshness_score": event.freshness_score,
+                            "exploitation_score": event.exploitation_score,
+                            "relevance_score": event.relevance_score,
+                        },
                     )
                     db.add(signal)
 
             db.commit()
         except Exception as exc:
             db.rollback()
-            logger.debug("Failed to emit signals for correlated intelligence: %s", exc)
+            logger.warning("Failed to emit signals for correlated intelligence: %s", exc)

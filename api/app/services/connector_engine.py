@@ -20,6 +20,7 @@ from dataclasses import dataclass, field
 from datetime import datetime, timezone
 from email.utils import parsedate_to_datetime
 from typing import Any
+import urllib.parse
 import httpx
 from sqlalchemy import select
 from sqlalchemy.orm import Session
@@ -207,6 +208,23 @@ class GenericFeedConnector(BaseConnector):
             # Parse XML/RSS/Atom items
             items = self._parse_feed_items(body_text, source)
 
+            # Resilient fallback: If XML feed parsing yields 0 items and response is HTML,
+            # discover linked RSS/Atom feeds or parse structured HTML advisories/bulletins.
+            if not items and ("<html" in body_text.lower() or "<!doctype" in body_text.lower()):
+                discovered_feed = self._discover_feed_url(body_text, target_url)
+                if discovered_feed and discovered_feed != target_url:
+                    try:
+                        feed_resp = await client.get(discovered_feed, headers=headers, timeout=15.0, follow_redirects=True)
+                        if feed_resp.status_code == 200:
+                            items = self._parse_feed_items(feed_resp.text, source)
+                            if items:
+                                source.feed_url = discovered_feed
+                    except Exception as feed_err:
+                        logger.debug("Discovered feed fetch failed for %s: %s", discovered_feed, feed_err)
+
+                if not items:
+                    items = self._parse_html_advisories(body_text, source, target_url)
+
             return FetchResult(
                 status="SUCCESS_CHANGED",
                 http_status=resp.status_code,
@@ -305,6 +323,77 @@ class GenericFeedConnector(BaseConnector):
                     api_endpoint=None,
                 )
             )
+        return items
+
+    def _discover_feed_url(self, html_text: str, base_url: str) -> str | None:
+        """Autodiscover RSS/Atom feed URL from HTML <link> or <a> tags."""
+        try:
+            from bs4 import BeautifulSoup
+            soup = BeautifulSoup(html_text, "html.parser")
+            # 1. Check standard <link rel="alternate" type="...">
+            for link in soup.find_all("link", rel=lambda r: r and "alternate" in r):
+                t = (link.get("type") or "").lower()
+                if "rss" in t or "atom" in t or "xml" in t:
+                    href = link.get("href")
+                    if href:
+                        return urllib.parse.urljoin(base_url, href)
+
+            # 2. Check <a> links with /feed or /rss in href
+            for a in soup.find_all("a", href=True):
+                href = a["href"].strip().lower()
+                text = a.get_text(strip=True).lower()
+                if any(x in href or x in text for x in ["rss/feed", "/feed/", "feed.xml", "rss.xml", "atom.xml"]):
+                    return urllib.parse.urljoin(base_url, a["href"])
+        except Exception as exc:
+            logger.debug("Error autodiscovering feed URL: %s", exc)
+        return None
+
+    def _parse_html_advisories(self, html_text: str, source: CompanySource, base_url: str) -> list[ParsedItem]:
+        """Extracts structured advisory and release bulletin items directly from HTML."""
+        from bs4 import BeautifulSoup
+        items: list[ParsedItem] = []
+        try:
+            soup = BeautifulSoup(html_text, "html.parser")
+            seen_urls: set[str] = set()
+            now = datetime.now(timezone.utc)
+
+            # Search prominent links and cards
+            for a in soup.find_all("a", href=True):
+                text = clean_text_content(a.get_text(strip=True))
+                href = a["href"].strip()
+                if not text or len(text) < 12 or len(text) > 250:
+                    continue
+                lower = f"{text} {href}".lower()
+                is_bulletin = any(k in lower for k in [
+                    "cve-", "advisory", "security update", "bulletin", "vulnerability",
+                    "security alert", "patch", "zero-day", "security release", "security notice",
+                    "release notes", "changelog"
+                ])
+                if is_bulletin:
+                    full_url = urllib.parse.urljoin(base_url, href)
+                    canon_url = canonicalize_url(full_url)
+                    if canon_url in seen_urls:
+                        continue
+                    seen_urls.add(canon_url)
+
+                    change_type = "SECURITY_UPDATE" if any(k in lower for k in ["cve-", "security", "vulnerability", "advisory", "patch"]) else "PRODUCT_UPDATE"
+                    item_id = hashlib.sha256(f"{source.id}:{canon_url}:{text}".encode()).hexdigest()[:32]
+                    items.append(
+                        ParsedItem(
+                            item_id=item_id,
+                            title=text,
+                            summary=f"Security advisory / bulletin notice: {text}",
+                            change_type=change_type,
+                            published_at=now,
+                            url=canon_url,
+                            product=source.product_scope,
+                            platform=source.platform_scope,
+                        )
+                    )
+                    if len(items) >= 30:
+                        break
+        except Exception as exc:
+            logger.debug("HTML advisory extraction error: %s", exc)
         return items
 
 
