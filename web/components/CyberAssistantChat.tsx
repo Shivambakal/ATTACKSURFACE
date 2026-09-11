@@ -30,10 +30,71 @@ const QUICK_PROMPTS = [
   "Explain how modern supply chain attacks work (Log4j, libwebp)",
 ];
 
+/**
+ * Animated Cyber Threat Agent Avatar with pulsing visor, radar scan, and high-tech aesthetics.
+ */
+export function CyberAgentAvatar({ className = "w-7 h-7" }: { className?: string }) {
+  return (
+    <div className={`relative flex items-center justify-center shrink-0 ${className}`}>
+      {/* Subtle pulsing background glow */}
+      <div className="absolute inset-0 rounded-full bg-cyan-500/25 blur-sm animate-pulse" />
+
+      {/* Cyber Agent Avatar SVG */}
+      <svg
+        viewBox="0 0 36 36"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        className="relative w-full h-full text-cyan-400 drop-shadow-[0_0_8px_rgba(6,182,212,0.8)]"
+      >
+        {/* Head / Helmet outline */}
+        <path
+          d="M18 4C10.82 4 5 9.82 5 17C5 21.41 7.2 25.3 10.58 27.63L10 32L14.71 30.12C15.77 30.43 16.87 30.6 18 30.6C25.18 30.6 31 24.78 31 17.6C31 10.42 25.18 4 18 4Z"
+          fill="url(#agent-gradient)"
+          stroke="#06b6d4"
+          strokeWidth="1.5"
+          strokeLinejoin="round"
+        />
+        {/* Visor shield */}
+        <path
+          d="M10 15C10 13.5 12 12.5 18 12.5C24 12.5 26 13.5 26 15C26 17.5 23.5 18.5 18 18.5C12.5 18.5 10 17.5 10 15Z"
+          fill="#0e7490"
+          stroke="#22d3ee"
+          strokeWidth="1.2"
+        />
+        {/* Visor glowing scanline */}
+        <line
+          x1="12"
+          y1="15.5"
+          x2="24"
+          y2="15.5"
+          stroke="#67e8f9"
+          strokeWidth="1.5"
+          strokeLinecap="round"
+          className="animate-pulse"
+        />
+        {/* Agent Chin sensors */}
+        <circle cx="15" cy="24" r="1" fill="#38bdf8" />
+        <circle cx="18" cy="24" r="1" fill="#38bdf8" />
+        <circle cx="21" cy="24" r="1" fill="#38bdf8" />
+        {/* Side communication nodes */}
+        <line x1="5" y1="17" x2="3" y2="17" stroke="#06b6d4" strokeWidth="1.5" strokeLinecap="round" />
+        <line x1="31" y1="17" x2="33" y2="17" stroke="#06b6d4" strokeWidth="1.5" strokeLinecap="round" />
+        <defs>
+          <linearGradient id="agent-gradient" x1="18" y1="4" x2="18" y2="32" gradientUnits="userSpaceOnUse">
+            <stop stopColor="#083344" />
+            <stop offset="1" stopColor="#020617" />
+          </linearGradient>
+        </defs>
+      </svg>
+    </div>
+  );
+}
+
 export default function CyberAssistantChat() {
   const [isOpen, setIsOpen] = useState(false);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
+  const [showFindingsPopup, setShowFindingsPopup] = useState(false);
   const [messages, setMessages] = useState<ChatMessage[]>([
     {
       id: "welcome",
@@ -45,6 +106,28 @@ export default function CyberAssistantChat() {
 
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
+  // Proactively check for login welcome or unacknowledged findings popup safely
+  useEffect(() => {
+    try {
+      if (typeof window !== "undefined") {
+        const justLoggedIn = sessionStorage.getItem("just_logged_in") === "true";
+        const alreadyWelcomed = sessionStorage.getItem("attacksurface_welcomed_findings") === "true";
+
+        if (justLoggedIn || !alreadyWelcomed) {
+          const timer = setTimeout(() => {
+            setShowFindingsPopup(true);
+            if (justLoggedIn) {
+              sessionStorage.removeItem("just_logged_in");
+            }
+          }, 1000);
+          return () => clearTimeout(timer);
+        }
+      }
+    } catch {
+      // Safe fallback - avoid any runtime interference
+    }
+  }, []);
+
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   };
@@ -54,6 +137,23 @@ export default function CyberAssistantChat() {
       scrollToBottom();
     }
   }, [messages, isOpen]);
+
+  const handleDismissPopup = () => {
+    try {
+      setShowFindingsPopup(false);
+      if (typeof window !== "undefined") {
+        sessionStorage.setItem("attacksurface_welcomed_findings", "true");
+      }
+    } catch {
+      // Safe fallback
+    }
+  };
+
+  const handleOpenLatestFindings = () => {
+    handleDismissPopup();
+    setIsOpen(true);
+    handleSend("What are the latest verified bug findings, active zero-days in CISA KEV, and top attack vectors?");
+  };
 
   const handleSend = async (textToSend?: string) => {
     const query = (textToSend || input).trim();
@@ -90,7 +190,7 @@ export default function CyberAssistantChat() {
       const assistantMsg: ChatMessage = {
         id: `ai-${Date.now()}`,
         sender: "assistant",
-        text: res.response || "No intelligence report returned.",
+        text: res.response || "Threat telemetry analysis returned no matching records.",
         timestamp: new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }),
         company: res.company,
         grounded_data: res.grounded_data,
@@ -98,13 +198,23 @@ export default function CyberAssistantChat() {
 
       setMessages((prev) => [...prev, assistantMsg]);
     } catch (err: any) {
+      // Clean, privacy-secured error display with zero provider details
+      const fallbackMsg =
+        "The Threat Intelligence Engine is currently processing a high volume of telemetry feeds. Our automated threat database remains active. Please retry your inquiry in a moment.";
+      const rawMsg = err?.message || "";
+      const isVendorLeaked =
+        rawMsg.toLowerCase().includes("gemini") ||
+        rawMsg.includes("503") ||
+        rawMsg.toLowerCase().includes("generativelanguage");
+      const safeMsg = !isVendorLeaked && rawMsg ? rawMsg : fallbackMsg;
+
       setMessages((prev) => [
         ...prev,
         {
           id: `err-${Date.now()}`,
           sender: "assistant",
-          text: `**Intelligence Connection Error:** ${err.message || "Failed to reach AI Threat Analyst engine."}`,
-          timestamp: "Error",
+          text: `**Intelligence Connection Status:** ${safeMsg}`,
+          timestamp: "Notice",
         },
       ]);
     } finally {
@@ -114,25 +224,91 @@ export default function CyberAssistantChat() {
 
   return (
     <>
-      {/* ── Floating Launcher Trigger Button ── */}
-      <div className="fixed bottom-12 right-6 z-40">
-        <button
-          onClick={() => setIsOpen((prev) => !prev)}
-          className="group relative flex items-center gap-3 px-4 py-2.5 rounded-full bg-slate-900/90 hover:bg-slate-800 border border-cyan-500/40 hover:border-cyan-400 text-white shadow-[0_0_20px_rgba(6,182,212,0.25)] hover:shadow-[0_0_25px_rgba(6,182,212,0.45)] backdrop-blur-md transition-all duration-200 cursor-pointer"
-          title="Open AI Threat Analyst"
-        >
-          <AttackSurfaceLogo size="sm" showText={false} />
-          <div className="flex flex-col text-left">
-            <span className="text-[11px] font-mono font-bold tracking-wider text-cyan-300 uppercase">
-              AI THREAT ANALYST
-            </span>
-            <span className="text-[9px] font-mono text-slate-400">
-              SECURITY INTELLIGENCE
-            </span>
+      {/* ── Interactive Login / Welcome Popup: Latest Bug Findings ── */}
+      {showFindingsPopup && !isOpen && (
+        <div className="fixed bottom-22 right-6 z-40 w-80 max-w-[calc(100vw-2rem)] animate-in fade-in slide-in-from-bottom-5 duration-300 font-sans">
+          <div className="relative rounded-2xl border border-cyan-500/40 bg-[#030712]/95 p-4 shadow-[0_15px_40px_rgba(0,0,0,0.7),0_0_20px_rgba(6,182,212,0.2)] backdrop-blur-2xl text-slate-200">
+            {/* Pointer arrow down toward circular agent button */}
+            <div className="absolute -bottom-2 right-6 h-4 w-4 rotate-45 border-b border-r border-cyan-500/40 bg-[#030712]" />
+
+            {/* Header */}
+            <div className="flex items-center justify-between pb-2.5 border-b border-white/[0.08]">
+              <div className="flex items-center gap-2">
+                <CyberAgentAvatar className="w-5 h-5" />
+                <span className="font-mono text-[10px] font-bold uppercase tracking-wider text-cyan-300">
+                  THREAT INTEL RADAR
+                </span>
+              </div>
+              <button
+                onClick={handleDismissPopup}
+                className="text-slate-400 hover:text-white p-1 transition-colors text-xs rounded hover:bg-white/[0.06]"
+                title="Dismiss"
+                aria-label="Dismiss notification"
+              >
+                ✕
+              </button>
+            </div>
+
+            {/* Body */}
+            <div className="mt-3 space-y-1">
+              <h4 className="text-xs font-bold text-white tracking-tight">
+                Want latest bug findings?
+              </h4>
+              <p className="text-[11px] leading-relaxed text-slate-300">
+                Inspect newly detected CISA KEV zero-days, high-severity CVE advisories, and monitored perimeter signals.
+              </p>
+            </div>
+
+            {/* Actions */}
+            <div className="mt-4 flex items-center justify-between gap-2 pt-2.5 border-t border-white/[0.06]">
+              <button
+                onClick={handleDismissPopup}
+                className="text-[11px] font-mono text-slate-400 hover:text-slate-200 px-2 py-1 rounded transition hover:bg-white/[0.04]"
+              >
+                Later
+              </button>
+              <button
+                onClick={handleOpenLatestFindings}
+                className="flex items-center gap-1.5 rounded-lg bg-gradient-to-r from-cyan-500 to-blue-600 px-3 py-1.5 font-mono text-[11px] font-bold text-white shadow-[0_0_15px_rgba(6,182,212,0.35)] hover:brightness-110 active:scale-95 transition"
+              >
+                <span>Show Findings</span>
+                <span>&rarr;</span>
+              </button>
+            </div>
           </div>
-          <svg className="w-4 h-4 text-cyan-400 group-hover:rotate-12 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
-          </svg>
+        </div>
+      )}
+
+      {/* ── Floating Small Circular Launcher Trigger Button ── */}
+      <div className="fixed bottom-6 right-6 z-40 flex items-center group">
+        {/* Subtle Tooltip on Hover */}
+        <div className="pointer-events-none mr-3 hidden sm:flex items-center gap-1.5 rounded-full bg-slate-950/95 border border-cyan-500/40 px-3 py-1 shadow-xl backdrop-blur-md opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+          <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse" />
+          <span className="font-mono text-[10px] font-bold text-cyan-300 uppercase tracking-wider">
+            AI Cyber Analyst
+          </span>
+        </div>
+
+        <button
+          onClick={() => {
+            setIsOpen((prev) => !prev);
+            if (showFindingsPopup) handleDismissPopup();
+          }}
+          className="relative flex h-14 w-14 items-center justify-center rounded-full bg-slate-950/95 border border-cyan-500/50 hover:border-cyan-300 text-white shadow-[0_0_20px_rgba(6,182,212,0.35)] hover:shadow-[0_0_30px_rgba(6,182,212,0.6)] backdrop-blur-xl transition-all duration-300 hover:scale-105 active:scale-95 cursor-pointer"
+          title="Open AI Threat Analyst"
+          aria-label="Toggle AI Cyber Threat Analyst"
+        >
+          {/* Animated radar ripple effect around circle */}
+          <span className="absolute inset-0 rounded-full border border-cyan-400/40 animate-ping opacity-60 pointer-events-none" />
+
+          {/* Active status indicator dot */}
+          <span className="absolute top-0.5 right-0.5 flex h-3.5 w-3.5">
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+            <span className="relative inline-flex rounded-full h-3.5 w-3.5 bg-emerald-500 border-2 border-slate-950 shadow-[0_0_8px_#10b981]" />
+          </span>
+
+          {/* Animated Cyber Agent Avatar */}
+          <CyberAgentAvatar className="w-8 h-8 group-hover:scale-110 transition-transform" />
         </button>
       </div>
 
@@ -142,7 +318,7 @@ export default function CyberAssistantChat() {
           {/* Header */}
           <div className="px-5 py-4 border-b border-slate-800 flex items-center justify-between bg-slate-900/60">
             <div className="flex items-center gap-3">
-              <AttackSurfaceLogo size="sm" showText={false} />
+              <CyberAgentAvatar className="w-8 h-8" />
               <div>
                 <div className="flex items-center gap-2">
                   <h3 className="text-sm font-bold tracking-wide text-white">AI CYBER THREAT ANALYST</h3>

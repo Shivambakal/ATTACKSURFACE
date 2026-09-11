@@ -20,7 +20,13 @@ export default function AssistantPage() {
       setResponse(data.response);
       setGrounded(data.grounded_data);
     } catch (err: any) {
-      setResponse(`Error: ${err.message}`);
+      const raw = err?.message || "";
+      const isVendorLeaked =
+        raw.toLowerCase().includes("gemini") ||
+        raw.includes("503") ||
+        raw.toLowerCase().includes("generativelanguage");
+      const safeMsg = !isVendorLeaked && raw ? raw : "The Threat Intelligence Engine is currently processing high query volume. Please retry in a moment.";
+      setResponse(`Threat Intelligence Status: ${safeMsg}`);
     } finally {
       setLoading(false);
     }

@@ -21,7 +21,7 @@ class ChatQueryResponse(BaseModel):
     response: str
     company: dict[str, Any] | None = None
     grounded_data: dict[str, Any] | None = None
-    model: str = "gemini-3.6-flash"
+    model: str = "AttackSurface-CyberAnalyst-v2"
 
 
 @router.post("/chat", response_model=ChatQueryResponse)
@@ -39,5 +39,5 @@ def handle_assistant_chat(
         response=result.get("response", ""),
         company=result.get("company"),
         grounded_data=result.get("grounded_data"),
-        model=result.get("model", "gemini-3.6-flash"),
+        model=result.get("model", "AttackSurface-CyberAnalyst-v2"),
     )

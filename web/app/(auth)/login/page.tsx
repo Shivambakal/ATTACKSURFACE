@@ -29,6 +29,9 @@ function LoginContent() {
 
     try {
       const loggedIn = await login(email, password);
+      try {
+        sessionStorage.setItem("just_logged_in", "true");
+      } catch {}
       if (loggedIn.role === "OWNER" || loggedIn.role === "ADMIN" || loggedIn.is_admin) {
         window.location.href = "/admin";
       } else {
