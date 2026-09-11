@@ -356,70 +356,82 @@
   }
 }
 
-/* ── FROSTED GLASS TRANSLUCENT CONTAINERS (DARK MODE) ────────── */
+/* ── FROSTED GLASS TRANSLUCENT CONTAINERS (DARK MODE ONLY) ────────── */
 /* Makes cards slightly transparent to merge elegantly with 3D background */
-.glass-surface,
-.bg-slate-900,
-.bg-slate-900\/40,
-.bg-slate-900\/50,
-.bg-slate-900\/60,
-.bg-slate-900\/70,
-.bg-slate-900\/80,
-.bg-slate-900\/90,
-.bg-slate-950\/60,
-.bg-slate-950\/70,
-.bg-slate-950\/75,
-.bg-slate-950\/80,
-.bg-slate-950\/90 {
+.dark .glass-surface,
+.dark .bg-slate-900,
+.dark .bg-slate-900\/40,
+.dark .bg-slate-900\/50,
+.dark .bg-slate-900\/60,
+.dark .bg-slate-900\/70,
+.dark .bg-slate-900\/80,
+.dark .bg-slate-900\/90,
+.dark .bg-slate-950\/60,
+.dark .bg-slate-950\/70,
+.dark .bg-slate-950\/75,
+.dark .bg-slate-950\/80,
+.dark .bg-slate-950\/90 {
   background: rgba(8, 14, 24, 0.65) !important;
   border-color: rgba(148, 163, 184, 0.16) !important;
   box-shadow: 0 16px 40px -10px rgba(0, 0, 0, 0.65), inset 0 1px 0 rgba(255, 255, 255, 0.08) !important;
   backdrop-filter: blur(20px) saturate(140%) !important;
   -webkit-backdrop-filter: blur(20px) saturate(140%) !important;
 }
-.bg-slate-950 {
+.dark .bg-slate-950 {
   background: rgba(4, 9, 15, 0.72) !important;
   backdrop-filter: blur(24px) saturate(140%) !important;
   -webkit-backdrop-filter: blur(24px) saturate(140%) !important;
 }
 
-.border-slate-800, .border-slate-800\/80, .border-slate-800\/60, .border-slate-700 {
+.dark .border-slate-800,
+.dark .border-slate-800\/80,
+.dark .border-slate-800\/60,
+.dark .border-slate-700 {
   border-color: var(--line) !important;
 }
-.bg-slate-800, .bg-slate-800\/80, .bg-slate-800\/70 {
+.dark .bg-slate-800,
+.dark .bg-slate-800\/80,
+.dark .bg-slate-800\/70 {
   background: var(--glass-soft) !important;
 }
-.text-slate-400, .text-slate-500 {
+.dark .text-slate-400,
+.dark .text-slate-500 {
   color: var(--muted) !important;
 }
-.text-cyan-400, .text-cyan-300 {
+.dark .text-cyan-400,
+.dark .text-cyan-300 {
   color: var(--accent) !important;
 }
-.bg-cyan-500 {
+.dark .bg-cyan-500 {
   background: var(--accent) !important;
   color: #020617 !important;
 }
-.hover\:bg-cyan-400:hover {
+.dark .hover\:bg-cyan-400:hover {
   background: var(--accent-strong) !important;
 }
 
-input, select, textarea {
+.dark input,
+.dark select,
+.dark textarea {
   background: rgba(4, 9, 14, 0.65) !important;
   border-color: var(--line) !important;
   color: #f8fafc !important;
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
 }
-input:focus, select:focus, textarea:focus {
+.dark input:focus,
+.dark select:focus,
+.dark textarea:focus {
   border-color: var(--accent) !important;
   box-shadow: 0 0 0 2px var(--accent-wash), inset 0 1px 0 rgba(255, 255, 255, 0.06) !important;
 }
-input::placeholder, textarea::placeholder {
+.dark input::placeholder,
+.dark textarea::placeholder {
   color: #94a3b8 !important;
   opacity: 1;
 }
 
-/* White mode MUST come after shared glass/input rules so !important wins
-   and forms stay dark-on-white instead of dark-on-dark (invisible text). */
+/* ── WHITE AESTHETIC MASTER OVERRIDES (HIGHEST SPECIFICITY) ────────── */
+/* Ensures 100% text visibility, crisp contrast, and neutral clean containers */
 [data-theme="white-aesthetic"] .glass-surface,
 .theme-white-aesthetic .glass-surface,
 [data-theme="white-aesthetic"] .bg-slate-900,
@@ -447,15 +459,78 @@ input::placeholder, textarea::placeholder {
 [data-theme="white-aesthetic"] .bg-slate-950\/80,
 .theme-white-aesthetic .bg-slate-950\/80,
 [data-theme="white-aesthetic"] .bg-slate-950\/90,
-.theme-white-aesthetic .bg-slate-950\/90 {
+.theme-white-aesthetic .bg-slate-950\/90,
+[data-theme="white-aesthetic"] .bg-\[\#07090e\],
+.theme-white-aesthetic .bg-\[\#07090e\],
+[data-theme="white-aesthetic"] .bg-\[\#07090e\]\/95,
+.theme-white-aesthetic .bg-\[\#07090e\]\/95,
+[data-theme="white-aesthetic"] .bg-\[\#0d101a\],
+.theme-white-aesthetic .bg-\[\#0d101a\],
+[data-theme="white-aesthetic"] .bg-\[\#0d101a\]\/95,
+.theme-white-aesthetic .bg-\[\#0d101a\]\/95,
+[data-theme="white-aesthetic"] .bg-\[\#0c0d14\],
+.theme-white-aesthetic .bg-\[\#0c0d14\],
+[data-theme="white-aesthetic"] .bg-\[\#0c0d14\]\/85,
+.theme-white-aesthetic .bg-\[\#0c0d14\]\/85,
+[data-theme="white-aesthetic"] .bg-\[\#0c0d14\]\/95,
+.theme-white-aesthetic .bg-\[\#0c0d14\]\/95,
+[data-theme="white-aesthetic"] .bg-\[\#0c101c\],
+.theme-white-aesthetic .bg-\[\#0c101c\],
+[data-theme="white-aesthetic"] .bg-\[\#05070d\],
+.theme-white-aesthetic .bg-\[\#05070d\],
+[data-theme="white-aesthetic"] .bg-\[\#020307\],
+.theme-white-aesthetic .bg-\[\#020307\],
+[data-theme="white-aesthetic"] .bg-\[\#030408\],
+.theme-white-aesthetic .bg-\[\#030408\],
+[data-theme="white-aesthetic"] .bg-\[\#02040a\],
+.theme-white-aesthetic .bg-\[\#02040a\],
+[data-theme="white-aesthetic"] .bg-\[\#0c0e18\],
+.theme-white-aesthetic .bg-\[\#0c0e18\],
+[data-theme="white-aesthetic"] .bg-\[\#0c0e18\]\/85,
+.theme-white-aesthetic .bg-\[\#0c0e18\]\/85,
+[data-theme="white-aesthetic"] .bg-\[\#0c0e18\]\/90,
+.theme-white-aesthetic .bg-\[\#0c0e18\]\/90,
+[data-theme="white-aesthetic"] .bg-\[\#12141c\],
+.theme-white-aesthetic .bg-\[\#12141c\],
+[data-theme="white-aesthetic"] .bg-\[\#181a24\],
+.theme-white-aesthetic .bg-\[\#181a24\],
+[data-theme="white-aesthetic"] .bg-\[\#090d16\],
+.theme-white-aesthetic .bg-\[\#090d16\],
+[data-theme="white-aesthetic"] .bg-\[\#04090e\],
+.theme-white-aesthetic .bg-\[\#04090e\],
+[data-theme="white-aesthetic"] .bg-\[\#070d14\],
+.theme-white-aesthetic .bg-\[\#070d14\],
+[data-theme="white-aesthetic"] .bg-\[\#080e18\],
+.theme-white-aesthetic .bg-\[\#080e18\],
+[data-theme="white-aesthetic"] .bg-black,
+.theme-white-aesthetic .bg-black,
+[data-theme="white-aesthetic"] .bg-black\/20,
+.theme-white-aesthetic .bg-black\/20,
+[data-theme="white-aesthetic"] .bg-black\/40,
+.theme-white-aesthetic .bg-black\/40,
+[data-theme="white-aesthetic"] .bg-black\/60,
+.theme-white-aesthetic .bg-black\/60,
+[data-theme="white-aesthetic"] .bg-black\/80,
+.theme-white-aesthetic .bg-black\/80,
+[data-theme="white-aesthetic"] .bg-black\/90,
+.theme-white-aesthetic .bg-black\/90 {
   background: #ffffff !important;
+  background-image: none !important;
   border-color: #cbd5e1 !important;
-  box-shadow: 0 12px 32px -18px rgba(15, 23, 42, 0.28), 0 0 0 1px rgba(203, 213, 225, 0.7) !important;
-  backdrop-filter: none !important;
-  -webkit-backdrop-filter: none !important;
+  box-shadow: 0 4px 18px -4px rgba(15, 23, 42, 0.08), 0 0 0 1px rgba(203, 213, 225, 0.8) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  color: #0f172a !important;
 }
+
 [data-theme="white-aesthetic"] .bg-slate-800,
 .theme-white-aesthetic .bg-slate-800,
+[data-theme="white-aesthetic"] .bg-slate-800\/40,
+.theme-white-aesthetic .bg-slate-800\/40,
+[data-theme="white-aesthetic"] .bg-slate-800\/50,
+.theme-white-aesthetic .bg-slate-800\/50,
+[data-theme="white-aesthetic"] .bg-slate-800\/60,
+.theme-white-aesthetic .bg-slate-800\/60,
 [data-theme="white-aesthetic"] .bg-slate-800\/70,
 .theme-white-aesthetic .bg-slate-800\/70,
 [data-theme="white-aesthetic"] .bg-slate-800\/80,
@@ -464,7 +539,10 @@ input::placeholder, textarea::placeholder {
 .theme-white-aesthetic .bg-slate-800\/90 {
   background: #f1f5f9 !important;
   border-color: #cbd5e1 !important;
+  color: #0f172a !important;
 }
+
+/* Form inputs in White Aesthetic */
 [data-theme="white-aesthetic"] input,
 .theme-white-aesthetic input,
 [data-theme="white-aesthetic"] select,
@@ -492,8 +570,168 @@ input::placeholder, textarea::placeholder {
   color: #64748b !important;
 }
 
-/* Auth / signup panels stay fully opaque so form text never mixes with the
-   ambient background (glass rules above intentionally make other cards soft). */
+/* 100% Visible Crisp High-Contrast Typography */
+[data-theme="white-aesthetic"] .text-white,
+.theme-white-aesthetic .text-white {
+  color: #090d16 !important;
+  font-weight: 600 !important;
+}
+
+[data-theme="white-aesthetic"] .text-slate-100,
+.theme-white-aesthetic .text-slate-100,
+[data-theme="white-aesthetic"] .text-slate-200,
+.theme-white-aesthetic .text-slate-200,
+[data-theme="white-aesthetic"] .text-neutral-100,
+.theme-white-aesthetic .text-neutral-100,
+[data-theme="white-aesthetic"] .text-neutral-200,
+.theme-white-aesthetic .text-neutral-200,
+[data-theme="white-aesthetic"] .text-zinc-100,
+.theme-white-aesthetic .text-zinc-100,
+[data-theme="white-aesthetic"] .text-zinc-200,
+.theme-white-aesthetic .text-zinc-200,
+[data-theme="white-aesthetic"] .text-gray-100,
+.theme-white-aesthetic .text-gray-100,
+[data-theme="white-aesthetic"] .text-gray-200,
+.theme-white-aesthetic .text-gray-200 {
+  color: #0f172a !important;
+}
+
+[data-theme="white-aesthetic"] .text-slate-300,
+.theme-white-aesthetic .text-slate-300,
+[data-theme="white-aesthetic"] .text-slate-400,
+.theme-white-aesthetic .text-slate-400,
+[data-theme="white-aesthetic"] .text-neutral-300,
+.theme-white-aesthetic .text-neutral-300,
+[data-theme="white-aesthetic"] .text-neutral-400,
+.theme-white-aesthetic .text-neutral-400,
+[data-theme="white-aesthetic"] .text-zinc-300,
+.theme-white-aesthetic .text-zinc-300,
+[data-theme="white-aesthetic"] .text-zinc-400,
+.theme-white-aesthetic .text-zinc-400,
+[data-theme="white-aesthetic"] .text-gray-300,
+.theme-white-aesthetic .text-gray-300,
+[data-theme="white-aesthetic"] .text-gray-400,
+.theme-white-aesthetic .text-gray-400 {
+  color: #334155 !important;
+}
+
+[data-theme="white-aesthetic"] .text-slate-500,
+.theme-white-aesthetic .text-slate-500,
+[data-theme="white-aesthetic"] .text-neutral-500,
+.theme-white-aesthetic .text-neutral-500,
+[data-theme="white-aesthetic"] .text-zinc-500,
+.theme-white-aesthetic .text-zinc-500,
+[data-theme="white-aesthetic"] .text-gray-500,
+.theme-white-aesthetic .text-gray-500 {
+  color: #475569 !important;
+}
+
+/* Vibrant Readable Colors in White Aesthetic */
+[data-theme="white-aesthetic"] .text-cyan-200,
+.theme-white-aesthetic .text-cyan-200,
+[data-theme="white-aesthetic"] .text-cyan-300,
+.theme-white-aesthetic .text-cyan-300,
+[data-theme="white-aesthetic"] .text-cyan-400,
+.theme-white-aesthetic .text-cyan-400 {
+  color: #0284c7 !important;
+}
+
+[data-theme="white-aesthetic"] .text-emerald-200,
+.theme-white-aesthetic .text-emerald-200,
+[data-theme="white-aesthetic"] .text-emerald-300,
+.theme-white-aesthetic .text-emerald-300,
+[data-theme="white-aesthetic"] .text-emerald-400,
+.theme-white-aesthetic .text-emerald-400 {
+  color: #047857 !important;
+}
+
+[data-theme="white-aesthetic"] .text-amber-200,
+.theme-white-aesthetic .text-amber-200,
+[data-theme="white-aesthetic"] .text-amber-300,
+.theme-white-aesthetic .text-amber-300,
+[data-theme="white-aesthetic"] .text-amber-400,
+.theme-white-aesthetic .text-amber-400 {
+  color: #b45309 !important;
+}
+
+[data-theme="white-aesthetic"] .text-purple-200,
+.theme-white-aesthetic .text-purple-200,
+[data-theme="white-aesthetic"] .text-purple-300,
+.theme-white-aesthetic .text-purple-300,
+[data-theme="white-aesthetic"] .text-purple-400,
+.theme-white-aesthetic .text-purple-400 {
+  color: #6d28d9 !important;
+}
+
+[data-theme="white-aesthetic"] .text-rose-200,
+.theme-white-aesthetic .text-rose-200,
+[data-theme="white-aesthetic"] .text-rose-300,
+.theme-white-aesthetic .text-rose-300,
+[data-theme="white-aesthetic"] .text-rose-400,
+.theme-white-aesthetic .text-rose-400,
+[data-theme="white-aesthetic"] .text-red-300,
+.theme-white-aesthetic .text-red-300,
+[data-theme="white-aesthetic"] .text-red-400,
+.theme-white-aesthetic .text-red-400 {
+  color: #be123c !important;
+}
+
+/* Light Theme Badge Wells & Accents */
+[data-theme="white-aesthetic"] .bg-cyan-950,
+.theme-white-aesthetic .bg-cyan-950,
+[data-theme="white-aesthetic"] .bg-cyan-950\/40,
+.theme-white-aesthetic .bg-cyan-950\/40,
+[data-theme="white-aesthetic"] .bg-cyan-950\/80,
+.theme-white-aesthetic .bg-cyan-950\/80,
+[data-theme="white-aesthetic"] .bg-cyan-500\/15,
+.theme-white-aesthetic .bg-cyan-500\/15 {
+  background-color: #e0f2fe !important;
+  border-color: #7dd3fc !important;
+  color: #0284c7 !important;
+}
+
+[data-theme="white-aesthetic"] .bg-emerald-950,
+.theme-white-aesthetic .bg-emerald-950,
+[data-theme="white-aesthetic"] .bg-emerald-950\/40,
+.theme-white-aesthetic .bg-emerald-950\/40,
+[data-theme="white-aesthetic"] .bg-emerald-950\/50,
+.theme-white-aesthetic .bg-emerald-950\/50,
+[data-theme="white-aesthetic"] .bg-emerald-500\/15,
+.theme-white-aesthetic .bg-emerald-500\/15 {
+  background-color: #dcfce7 !important;
+  border-color: #86efac !important;
+  color: #047857 !important;
+}
+
+[data-theme="white-aesthetic"] .bg-amber-950,
+.theme-white-aesthetic .bg-amber-950,
+[data-theme="white-aesthetic"] .bg-amber-950\/40,
+.theme-white-aesthetic .bg-amber-950\/40,
+[data-theme="white-aesthetic"] .bg-amber-950\/50,
+.theme-white-aesthetic .bg-amber-950\/50,
+[data-theme="white-aesthetic"] .bg-amber-500\/15,
+.theme-white-aesthetic .bg-amber-500\/15 {
+  background-color: #fef3c7 !important;
+  border-color: #fde68a !important;
+  color: #b45309 !important;
+}
+
+[data-theme="white-aesthetic"] .bg-rose-950,
+.theme-white-aesthetic .bg-rose-950,
+[data-theme="white-aesthetic"] .bg-rose-950\/40,
+.theme-white-aesthetic .bg-rose-950\/40,
+[data-theme="white-aesthetic"] .bg-rose-500\/15,
+.theme-white-aesthetic .bg-rose-500\/15,
+[data-theme="white-aesthetic"] .bg-red-950,
+.theme-white-aesthetic .bg-red-950,
+[data-theme="white-aesthetic"] .bg-red-950\/50,
+.theme-white-aesthetic .bg-red-950\/50 {
+  background-color: #ffe4e6 !important;
+  border-color: #fecdd3 !important;
+  color: #be123c !important;
+}
+
+/* Auth / signup panels stay fully opaque */
 .auth-panel {
   background: rgba(8, 14, 24, 0.96) !important;
   border-color: rgba(148, 163, 184, 0.22) !important;

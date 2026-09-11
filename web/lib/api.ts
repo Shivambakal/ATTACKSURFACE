@@ -35,7 +35,7 @@ export async function apiFetch<T>(path: string, options?: ApiFetchOptions): Prom
   const method = (options?.method || "GET").toUpperCase();
   const isGet = method === "GET";
   const skipCache = options?.skipCache ?? false;
-  const timeoutMs = options?.timeoutMs ?? 12_000;
+  const timeoutMs = options?.timeoutMs ?? 45_000;
 
   // On non-GET mutations (POST/PUT/DELETE/PATCH), invalidate cache so fresh data loads
   if (!isGet) {
@@ -50,6 +50,31 @@ export async function apiFetch<T>(path: string, options?: ApiFetchOptions): Prom
       return cached.data as T;
     }
   }
+
+  // Helper for localStorage cached fallback
+  const getPersistedCache = (): T | null => {
+    if (typeof window === "undefined") return null;
+    try {
+      const raw = window.localStorage.getItem(`ast_cache:${path}`);
+      if (!raw) return null;
+      const parsed = JSON.parse(raw);
+      return parsed.data as T;
+    } catch {
+      return null;
+    }
+  };
+
+  const setPersistedCache = (data: any) => {
+    if (typeof window === "undefined") return;
+    try {
+      window.localStorage.setItem(
+        `ast_cache:${path}`,
+        JSON.stringify({ data, ts: Date.now() })
+      );
+    } catch {
+      // Ignore quota errors
+    }
+  };
 
   // In-flight deduplication: if the exact same request is already executing, reuse its promise
   if (isGet && inFlightRequests.has(cacheKey)) {
@@ -73,6 +98,20 @@ export async function apiFetch<T>(path: string, options?: ApiFetchOptions): Prom
         },
       });
     } catch (err: any) {
+      // If request timed out or network failed, check if we have cached or persisted data
+      if (isGet) {
+        const memoryFallback = apiCache.get(cacheKey)?.data as T | undefined;
+        if (memoryFallback) {
+          console.warn(`[API] Returning stale memory cache for ${path} due to connection delay.`);
+          return memoryFallback;
+        }
+        const persistedFallback = getPersistedCache();
+        if (persistedFallback) {
+          console.warn(`[API] Returning persisted cache for ${path} due to server cold start.`);
+          return persistedFallback;
+        }
+      }
+
       if (err?.name === "AbortError") {
         throw new Error("Request timed out. The server is taking too long to respond.");
       }
@@ -82,6 +121,14 @@ export async function apiFetch<T>(path: string, options?: ApiFetchOptions): Prom
     }
 
     if (!res.ok) {
+      // On 500+ or 503, if we have persisted cached data, gracefully return it
+      if (isGet && res.status >= 500) {
+        const persisted = getPersistedCache();
+        if (persisted) {
+          return persisted;
+        }
+      }
+
       const rawText = await res.text().catch(() => "");
       let error: { detail?: unknown } = {};
       if (rawText) {
@@ -143,6 +190,7 @@ export async function apiFetch<T>(path: string, options?: ApiFetchOptions): Prom
         data: parsed,
         timestamp: Date.now(),
       });
+      setPersistedCache(parsed);
     }
 
     return parsed;

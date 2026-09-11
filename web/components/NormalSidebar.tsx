@@ -239,6 +239,25 @@ export default function NormalSidebar({ collapsed, onToggleCollapse, onOpenComma
     },
   ];
 
+  const [isHovered, setIsHovered] = useState<boolean>(false);
+  const hoverTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+  const handleMouseEnter = () => {
+    if (hoverTimeoutRef.current) {
+      clearTimeout(hoverTimeoutRef.current);
+      hoverTimeoutRef.current = null;
+    }
+    setIsHovered(true);
+  };
+
+  const handleMouseLeave = () => {
+    hoverTimeoutRef.current = setTimeout(() => {
+      setIsHovered(false);
+    }, 160);
+  };
+
+  const isExpanded = !collapsed || isHovered;
+
   const isActive = (href: string) => {
     if (href === "/dashboard") return pathname === "/dashboard";
     return pathname.startsWith(href);
@@ -246,26 +265,44 @@ export default function NormalSidebar({ collapsed, onToggleCollapse, onOpenComma
 
   return (
     <aside
-      className={`fixed top-0 bottom-0 left-0 z-40 flex flex-col border-r border-slate-800/80 bg-slate-950/80 backdrop-blur-2xl transition-all duration-300 ease-[cubic-bezier(0.2,0.9,0.3,1)] ${
-        collapsed ? "w-16" : "w-60"
-      }`}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+      className={`fixed top-0 bottom-0 left-0 z-40 flex flex-col rounded-r-3xl overflow-hidden border-r transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+        isExpanded ? "w-64 shadow-[14px_0_45px_rgba(0,0,0,0.5)]" : "w-16 shadow-[6px_0_20px_rgba(0,0,0,0.3)]"
+      } backdrop-blur-2xl bg-[#0c0e18]/85 border-white/10 dark:bg-[#0c0e18]/85 dark:border-white/10 [data-theme=white-aesthetic]:bg-white/90 [data-theme=white-aesthetic]:border-slate-200/90 [data-theme=white-aesthetic]:shadow-[10px_0_35px_rgba(15,23,42,0.06)]`}
     >
       {/* Brand Header */}
-      <div className="flex h-16 items-center justify-between border-b border-slate-800/80 px-3.5 shrink-0">
+      <div className="flex h-16 items-center justify-between border-b border-white/[0.08] dark:border-white/[0.08] [data-theme=white-aesthetic]:border-slate-200/80 px-3.5 shrink-0">
         <AttackSurfaceLogo
-          size={collapsed ? "sm" : "md"}
-          showText={!collapsed}
+          size={isExpanded ? "md" : "sm"}
+          showText={isExpanded}
           href="/dashboard"
         />
+        {isExpanded && (
+          <button
+            onClick={onToggleCollapse}
+            title={collapsed ? "Pin sidebar open ( [ )" : "Unpin / Auto-hover mode ( [ )"}
+            className="text-slate-400 hover:text-white dark:hover:text-white [data-theme=white-aesthetic]:hover:text-slate-900 p-1.5 rounded-lg hover:bg-white/[.06] [data-theme=white-aesthetic]:hover:bg-slate-100 transition cursor-pointer"
+          >
+            <svg
+              className={`w-3.5 h-3.5 transition-transform ${collapsed ? "rotate-180 text-slate-500" : "rotate-0 text-cyan-400"}`}
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth={2}
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
+            </svg>
+          </button>
+        )}
       </div>
-
 
       {/* Main Categorized Navigation */}
       <nav className="flex-1 space-y-4 overflow-y-auto px-3 py-2 scrollbar-none">
         {navSections.map((section) => (
           <div key={section.title} className="space-y-1">
-            {!collapsed && (
-              <div className="px-2 pb-1 text-[10px] font-mono font-semibold tracking-wider text-slate-500 uppercase">
+            {isExpanded && (
+              <div className="px-2 pb-1 text-[10px] font-mono font-semibold tracking-wider text-slate-500 [data-theme=white-aesthetic]:text-slate-600 uppercase transition-opacity duration-200">
                 {section.title}
               </div>
             )}
@@ -276,30 +313,30 @@ export default function NormalSidebar({ collapsed, onToggleCollapse, onOpenComma
                   <Link
                     key={item.name}
                     href={item.href}
-                    title={collapsed ? item.name : undefined}
-                    className={`group relative flex items-center gap-3 rounded-xl px-2.5 py-1.5 text-xs font-medium transition-all duration-150 ${
+                    title={!isExpanded ? item.name : undefined}
+                    className={`group relative flex items-center gap-3 rounded-xl px-2.5 py-2 text-xs font-medium transition-all duration-150 ${
                       active
-                        ? "bg-cyan-950/40 text-cyan-300 border border-cyan-500/30 shadow-[0_0_15px_rgba(0,240,255,0.06)]"
-                        : "text-slate-400 hover:bg-white/[.04] hover:text-slate-100"
+                        ? "bg-cyan-950/50 text-cyan-300 border border-cyan-500/30 shadow-[0_0_15px_rgba(0,240,255,0.08)] [data-theme=white-aesthetic]:bg-sky-50 [data-theme=white-aesthetic]:text-sky-800 [data-theme=white-aesthetic]:border-sky-300"
+                        : "text-slate-400 hover:bg-white/[.05] hover:text-slate-100 [data-theme=white-aesthetic]:text-slate-600 [data-theme=white-aesthetic]:hover:bg-slate-100/90 [data-theme=white-aesthetic]:hover:text-slate-900"
                     }`}
                   >
                     {active && (
-                      <span className="absolute left-0 top-1.5 bottom-1.5 w-1 rounded-r-full bg-cyan-400 shadow-[0_0_8px_#00f0ff]" />
+                      <span className="absolute left-0 top-1.5 bottom-1.5 w-1 rounded-r-full bg-cyan-400 shadow-[0_0_8px_#00f0ff] [data-theme=white-aesthetic]:bg-sky-600" />
                     )}
-                    <span className={`shrink-0 transition-colors ${active ? "text-cyan-400" : "text-slate-400 group-hover:text-slate-200"}`}>
+                    <span className={`shrink-0 transition-colors ${active ? "text-cyan-400 [data-theme=white-aesthetic]:text-sky-600" : "text-slate-400 group-hover:text-slate-200 [data-theme=white-aesthetic]:text-slate-500 [data-theme=white-aesthetic]:group-hover:text-slate-900"}`}>
                       {item.icon}
                     </span>
-                    {!collapsed && (
+                    {isExpanded && (
                       <span className="truncate font-sans tracking-tight">
                         {item.name}
                       </span>
                     )}
-                    {!collapsed && Boolean(item.badge) && (
+                    {isExpanded && Boolean(item.badge) && (
                       <span
                         className={`ml-auto rounded px-1.5 py-0.2 text-[9px] font-mono font-bold border ${
                           item.badgeTone === "rose"
-                            ? "bg-rose-500/15 text-rose-300 border-rose-500/30"
-                            : "bg-cyan-500/15 text-cyan-300 border-cyan-500/30"
+                            ? "bg-rose-500/15 text-rose-300 border-rose-500/30 [data-theme=white-aesthetic]:bg-rose-50 [data-theme=white-aesthetic]:text-rose-700 [data-theme=white-aesthetic]:border-rose-200"
+                            : "bg-cyan-500/15 text-cyan-300 border-cyan-500/30 [data-theme=white-aesthetic]:bg-sky-50 [data-theme=white-aesthetic]:text-sky-700 [data-theme=white-aesthetic]:border-sky-200"
                         }`}
                       >
                         {item.badge}
@@ -314,11 +351,11 @@ export default function NormalSidebar({ collapsed, onToggleCollapse, onOpenComma
       </nav>
 
       {/* Bottom Collapse Bar */}
-      <div className="border-t border-slate-800/80 px-3 py-2 bg-slate-950/40 shrink-0">
+      <div className="border-t border-white/[0.08] [data-theme=white-aesthetic]:border-slate-200/80 px-3 py-2 bg-black/20 [data-theme=white-aesthetic]:bg-slate-50/50 shrink-0">
         <div className="flex items-center justify-between">
-          {!collapsed ? (
-            <span className="font-mono text-[10px] text-slate-500 uppercase tracking-wider">
-              Navigation
+          {isExpanded ? (
+            <span className="font-mono text-[10px] text-slate-500 [data-theme=white-aesthetic]:text-slate-600 uppercase tracking-wider">
+              {collapsed ? "Auto-Hover Mode" : "Pinned"}
             </span>
           ) : (
             <span className="w-1" />
@@ -326,11 +363,11 @@ export default function NormalSidebar({ collapsed, onToggleCollapse, onOpenComma
 
           <button
             onClick={onToggleCollapse}
-            title={collapsed ? "Expand sidebar ( [ )" : "Collapse sidebar ( [ )"}
-            className="text-slate-400 hover:text-white p-1.5 rounded-lg hover:bg-white/[.06] transition font-mono text-xs flex items-center gap-1 cursor-pointer"
+            title={collapsed ? "Pin sidebar open ( [ )" : "Collapse to hover mode ( [ )"}
+            className="text-slate-400 hover:text-white [data-theme=white-aesthetic]:text-slate-600 [data-theme=white-aesthetic]:hover:text-slate-900 p-1.5 rounded-lg hover:bg-white/[.06] [data-theme=white-aesthetic]:hover:bg-slate-200 transition font-mono text-xs flex items-center gap-1 cursor-pointer"
           >
             <span>{collapsed ? "»" : "«"}</span>
-            {!collapsed && <kbd className="text-[10px] text-slate-600 font-sans">[</kbd>}
+            {isExpanded && <kbd className="text-[10px] text-slate-600 [data-theme=white-aesthetic]:text-slate-500 font-sans">[</kbd>}
           </button>
         </div>
       </div>

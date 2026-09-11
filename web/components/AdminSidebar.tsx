@@ -170,6 +170,25 @@ export default function AdminSidebar({ collapsed, onToggleCollapse }: AdminSideb
     },
   ];
 
+  const [isHovered, setIsHovered] = React.useState<boolean>(false);
+  const hoverTimeoutRef = React.useRef<NodeJS.Timeout | null>(null);
+
+  const handleMouseEnter = () => {
+    if (hoverTimeoutRef.current) {
+      clearTimeout(hoverTimeoutRef.current);
+      hoverTimeoutRef.current = null;
+    }
+    setIsHovered(true);
+  };
+
+  const handleMouseLeave = () => {
+    hoverTimeoutRef.current = setTimeout(() => {
+      setIsHovered(false);
+    }, 160);
+  };
+
+  const isExpanded = !collapsed || isHovered;
+
   const isActive = (href: string) => {
     if (href === "/admin") return pathname === "/admin";
     return pathname.startsWith(href);
@@ -177,42 +196,44 @@ export default function AdminSidebar({ collapsed, onToggleCollapse }: AdminSideb
 
   return (
     <aside
-      className={`fixed top-0 bottom-0 left-0 z-40 flex flex-col border-r border-amber-500/25 bg-slate-950/80 backdrop-blur-2xl transition-all duration-300 ${
-        collapsed ? "w-16" : "w-64"
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+      className={`fixed top-0 bottom-0 left-0 z-40 flex flex-col rounded-r-3xl overflow-hidden border-r border-amber-500/25 backdrop-blur-2xl bg-[#0c0e18]/85 [data-theme=white-aesthetic]:bg-white/90 [data-theme=white-aesthetic]:border-amber-400/40 shadow-[14px_0_45px_rgba(0,0,0,0.4)] transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+        isExpanded ? "w-64" : "w-16"
       }`}
     >
       {/* Brand Header */}
       <div className="flex h-16 items-center justify-between border-b border-amber-500/20 px-3.5 bg-amber-500/[0.03]">
         <AttackSurfaceLogo
-          size={collapsed ? "sm" : "md"}
-          showText={!collapsed}
+          size={isExpanded ? "md" : "sm"}
+          showText={isExpanded}
           href="/admin"
         />
 
-        <button
-          onClick={onToggleCollapse}
-          title={collapsed ? "Expand sidebar" : "Collapse sidebar"}
-          className={`text-slate-400 hover:text-white p-1 rounded hover:bg-slate-800/80 transition-colors ${
-            collapsed ? "mx-auto mt-1" : ""
-          }`}
-        >
-          <svg
-            className="w-4 h-4 transition-transform duration-200"
-            style={{ transform: collapsed ? "rotate(180deg)" : "rotate(0deg)" }}
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
+        {isExpanded && (
+          <button
+            onClick={onToggleCollapse}
+            title={collapsed ? "Pin sidebar open" : "Collapse to hover mode"}
+            className="text-slate-400 hover:text-white p-1 rounded hover:bg-slate-800/80 transition-colors cursor-pointer"
           >
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 19l-7-7 7-7m8 14l-7-7 7-7" />
-          </svg>
-        </button>
+            <svg
+              className="w-4 h-4 transition-transform duration-200"
+              style={{ transform: collapsed ? "rotate(180deg)" : "rotate(0deg)" }}
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 19l-7-7 7-7m8 14l-7-7 7-7" />
+            </svg>
+          </button>
+        )}
       </div>
 
       {/* Main Navigation */}
-      <nav className="flex-1 space-y-3 overflow-y-auto px-2 py-3">
+      <nav className="flex-1 space-y-3 overflow-y-auto px-2 py-3 scrollbar-none">
         {/* Mode Switcher */}
         <div className="mb-2 px-1">
-          {!collapsed ? (
+          {isExpanded ? (
             <div className="grid grid-cols-2 gap-1 p-1 bg-slate-900/90 rounded-xl border border-amber-500/25">
               <div className="py-1 px-2 rounded-lg text-[10px] font-mono font-bold bg-amber-500/20 text-amber-300 border border-amber-500/40 text-center">
                 ⚡ ADMIN
