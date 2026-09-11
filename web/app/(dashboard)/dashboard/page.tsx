@@ -21,6 +21,7 @@ import {
 import CompanyPriorityBoard from "@/components/CompanyPriorityBoard";
 import LiveTelemetryBar from "@/components/LiveTelemetryBar";
 import ModernFilterDropdown, { FilterOption } from "@/components/ModernFilterDropdown";
+import TrackedAssetsOrbitalHub from "@/components/TrackedAssetsOrbitalHub";
 
 interface TrendingAdvisory {
   id: number;
@@ -334,87 +335,19 @@ export default function DashboardPage() {
           </div>
         </div>
 
-        {/* Right 2x2 Metric Cards */}
-        <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-4">
-          {/* Card 1: Tracked Assets */}
-          <div className="rounded-3xl border border-slate-800/90 bg-slate-950/80 p-5 flex flex-col justify-between shadow-lg backdrop-blur-xl">
-            <div className="flex items-center justify-between">
-              <span className="text-[10px] font-mono font-semibold uppercase tracking-wider text-slate-500">
-                TRACKED ASSETS
-              </span>
-              <span className="text-[10px] font-mono text-emerald-400 font-bold bg-emerald-500/10 px-1.5 py-0.5 rounded border border-emerald-500/20">
-                +12%
-              </span>
-            </div>
-            <div className="mt-3">
-              <div className="text-3xl font-black text-white font-display">
-                14,740
-              </div>
-              <div className="text-[10px] font-mono text-slate-500 mt-0.5 uppercase">
-                VERIFIED SCOPE
-              </div>
-            </div>
-          </div>
-
-          {/* Card 2: Active Signals */}
-          <div className="rounded-3xl border border-slate-800/90 bg-slate-950/80 p-5 flex flex-col justify-between shadow-lg backdrop-blur-xl">
-            <div className="flex items-center justify-between">
-              <span className="text-[10px] font-mono font-semibold uppercase tracking-wider text-slate-500">
-                ACTIVE SIGNALS
-              </span>
-              <span className="text-[10px] font-mono text-amber-400 font-bold bg-amber-500/10 px-1.5 py-0.5 rounded border border-amber-500/20">
-                LIVE
-              </span>
-            </div>
-            <div className="mt-3">
-              <div className="text-3xl font-black text-white font-display">
-                0
-              </div>
-              <div className="text-[10px] font-mono text-slate-500 mt-0.5 uppercase">
-                ACTIONABLE LEADS
-              </div>
-            </div>
-          </div>
-
-          {/* Card 3: Companies Watched */}
-          <div className="rounded-3xl border border-slate-800/90 bg-slate-950/80 p-5 flex flex-col justify-between shadow-lg backdrop-blur-xl">
-            <div className="flex items-center justify-between">
-              <span className="text-[10px] font-mono font-semibold uppercase tracking-wider text-slate-500">
-                COMPANIES WATCHED
-              </span>
-              <span className="text-[10px] font-mono text-cyan-400 font-bold bg-cyan-500/10 px-1.5 py-0.5 rounded border border-cyan-500/20">
-                CANONICAL
-              </span>
-            </div>
-            <div className="mt-3">
-              <div className="text-3xl font-black text-white font-display">
-                2,010
-              </div>
-              <div className="text-[10px] font-mono text-slate-500 mt-0.5 uppercase">
-                ORGANIZATIONS
-              </div>
-            </div>
-          </div>
-
-          {/* Card 4: Avg Confidence */}
-          <div className="rounded-3xl border border-slate-800/90 bg-slate-950/80 p-5 flex flex-col justify-between shadow-lg backdrop-blur-xl">
-            <div className="flex items-center justify-between">
-              <span className="text-[10px] font-mono font-semibold uppercase tracking-wider text-slate-500">
-                AVG CONFIDENCE
-              </span>
-              <span className="text-[10px] font-mono text-purple-400 font-bold bg-purple-500/10 px-1.5 py-0.5 rounded border border-purple-500/20">
-                CONSENSUS
-              </span>
-            </div>
-            <div className="mt-3">
-              <div className="text-3xl font-black text-white font-display">
-                94.2%
-              </div>
-              <div className="text-[10px] font-mono text-slate-500 mt-0.5 uppercase">
-                ZERO-FABRICATION
-              </div>
-            </div>
-          </div>
+        {/* Right Orbital Telemetry Hub (matching media_1789123121664.png) */}
+        <div className="lg:col-span-7 flex">
+          <TrackedAssetsOrbitalHub
+            trackedAssets={14740}
+            verifiedScope="VERIFIED SCOPE"
+            activeSignals={highValueSignals.length}
+            actionableLeads="ACTIONABLE LEADS"
+            companiesWatched={companies.length || 2010}
+            canonicalOrgs="CANONICAL ORGANIZATIONS"
+            avgConfidence="99.4%"
+            consensusStatus="CONSENSUS"
+            className="w-full"
+          />
         </div>
       </div>
 

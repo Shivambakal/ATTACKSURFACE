@@ -7,6 +7,7 @@ import { useAuth } from "@/lib/auth";
 import PublicNav from "@/components/PublicNav";
 import PublicFooter from "@/components/PublicFooter";
 import WhiteAesthetic3DBackground from "@/components/WhiteAesthetic3DBackground";
+import TrackedAssetsOrbitalHub from "@/components/TrackedAssetsOrbitalHub";
 
 export default function LandingPage() {
   const router = useRouter();
@@ -58,17 +59,21 @@ export default function LandingPage() {
             Operator Sign In
           </Link>
         </div>
-
-        {/* Feature Grid */}
         </div>
-        <div className="relative hidden min-h-[390px] overflow-hidden rounded-[32px] border border-white/10 bg-white/[.025] lg:block">
-          <div className="network-halo" />
-          <div className="network-orbit orbit-one" />
-          <div className="network-orbit orbit-two" />
-          <div className="absolute left-[16%] top-[28%] rounded-full border border-cyan-200/40 bg-slate-950/70 px-3 py-2 font-mono text-[10px] uppercase text-cyan-200 shadow-[0_0_25px_var(--accent-wash)]">old surface</div>
-          <div className="absolute right-[13%] top-[20%] rounded-full border border-cyan-200/40 bg-slate-950/70 px-3 py-2 font-mono text-[10px] uppercase text-cyan-200 shadow-[0_0_25px_var(--accent-wash)]">new endpoint</div>
-          <div className="absolute bottom-[22%] left-[38%] rounded-full border border-cyan-200/40 bg-cyan-500/15 px-3 py-2 font-mono text-[10px] uppercase text-cyan-100 shadow-[0_0_25px_var(--accent-wash)]">research signal</div>
-          <div className="absolute inset-x-8 bottom-6 flex justify-between border-t border-white/10 pt-3 font-mono text-[9px] uppercase tracking-widest text-slate-500"><span>discover</span><span>correlate</span><span>understand</span></div>
+
+        {/* Orbital Telemetry Hub Hero (matching media_1789123121664.png) */}
+        <div className="relative hidden w-full lg:block">
+          <TrackedAssetsOrbitalHub
+            trackedAssets={14740}
+            verifiedScope="VERIFIED SCOPE"
+            activeSignals={0}
+            actionableLeads="ACTIONABLE LEADS"
+            companiesWatched={2010}
+            canonicalOrgs="CANONICAL ORGANIZATIONS"
+            avgConfidence="99.4%"
+            consensusStatus="CONSENSUS"
+            className="w-full"
+          />
         </div>
         </div>
 
