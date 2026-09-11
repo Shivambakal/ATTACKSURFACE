@@ -1,0 +1,330 @@
+/* ── STAGGERED MENU (REACT BITS) ──────────────────────────────────
+   Apple-like Frosted Glass with High Opacity & Crisp Contrast
+   Fully adapted for both Dark Canvas and White Aesthetic themes
+─────────────────────────────────────────────────────────────────── */
+
+:root {
+  --sm-accent: #00f0ff;
+  --sm-bg: rgba(10, 16, 28, 0.95);
+  --sm-border: rgba(148, 163, 184, 0.16);
+  --sm-text: #ffffff;
+  --sm-text-muted: #94a3b8;
+  --sm-hover-bg: rgba(255, 255, 255, 0.06);
+  --sm-shadow: 0 30px 70px -15px rgba(0, 0, 0, 0.85);
+  --sm-prelayer-1: rgba(6, 182, 212, 0.35);
+  --sm-prelayer-2: rgba(15, 23, 42, 0.9);
+}
+
+[data-theme="white-aesthetic"],
+.theme-white-aesthetic {
+  --sm-accent: #0284c7;
+  --sm-bg: rgba(255, 255, 255, 0.96);
+  --sm-border: rgba(203, 213, 225, 0.7);
+  --sm-text: #0f172a;
+  --sm-text-muted: #64748b;
+  --sm-hover-bg: rgba(15, 23, 42, 0.05);
+  --sm-shadow: 0 30px 70px -15px rgba(15, 23, 42, 0.18);
+  --sm-prelayer-1: rgba(2, 132, 199, 0.25);
+  --sm-prelayer-2: rgba(241, 245, 249, 0.95);
+}
+
+.staggered-menu-wrapper {
+  position: relative;
+  width: 100%;
+  pointer-events: none;
+  z-index: 100;
+}
+
+.staggered-menu-wrapper.fixed-wrapper {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 999;
+}
+
+.staggered-menu-wrapper[data-open="true"] {
+  pointer-events: auto;
+}
+
+/* ── FOCUSED BACKDROP OVERLAY ───────────────────────────────────── */
+.sm-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 85;
+}
+
+.staggered-menu-wrapper[data-open="true"] .sm-backdrop {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* ── PRE-LAYERS (STAGGERED CURTAIN SLIDES) ─────────────────────── */
+.sm-prelayers {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 90;
+}
+
+.sm-prelayer {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: min(420px, 90vw);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow: 0 0 50px rgba(0, 0, 0, 0.3);
+}
+
+.staggered-menu-wrapper[data-position="left"] .sm-prelayer {
+  left: 0;
+  border-right: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.staggered-menu-wrapper[data-position="right"] .sm-prelayer {
+  right: 0;
+  border-left: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* ── HEADER & TOGGLE BUTTON ────────────────────────────────────── */
+.staggered-menu-header {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  pointer-events: auto;
+  z-index: 110;
+}
+
+.sm-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.sm-logo-img {
+  height: 28px;
+  width: auto;
+  object-fit: contain;
+}
+
+/* Apple-style pill button */
+.sm-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.625rem;
+  padding: 0.5rem 1rem;
+  border-radius: 9999px;
+  border: 1px solid var(--sm-border);
+  background: var(--sm-bg);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  color: var(--sm-text);
+  font-family: var(--font-display, inherit);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  cursor: pointer;
+  box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.25);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.15s ease;
+  user-select: none;
+}
+
+.sm-toggle:hover {
+  border-color: var(--sm-accent);
+  box-shadow: 0 0 20px rgba(6, 182, 212, 0.25);
+  transform: translateY(-1px);
+}
+
+.sm-toggle:active {
+  transform: translateY(0);
+}
+
+.sm-toggle-textWrap {
+  display: inline-block;
+  height: 1.125rem;
+  overflow: hidden;
+  line-height: 1.125rem;
+}
+
+.sm-toggle-textInner {
+  display: flex;
+  flex-direction: column;
+}
+
+.sm-toggle-line {
+  display: block;
+  height: 1.125rem;
+  line-height: 1.125rem;
+}
+
+/* Animated Cross / Plus Icon */
+.sm-icon {
+  position: relative;
+  width: 14px;
+  height: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sm-icon-line {
+  position: absolute;
+  width: 14px;
+  height: 2px;
+  background-color: currentColor;
+  border-radius: 2px;
+}
+
+.sm-icon-line-v {
+  transform: rotate(90deg);
+}
+
+/* ── STAGGERED DRAWER PANEL (APPLE FROSTED GLASS) ─────────────── */
+.staggered-menu-panel {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  width: min(420px, 90vw);
+  background: var(--sm-bg);
+  backdrop-filter: blur(32px) saturate(190%) contrast(105%);
+  -webkit-backdrop-filter: blur(32px) saturate(190%) contrast(105%);
+  box-shadow: var(--sm-shadow);
+  pointer-events: auto;
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.staggered-menu-wrapper[data-position="left"] .staggered-menu-panel {
+  left: 0;
+  border-right: 1px solid var(--sm-border);
+}
+
+.staggered-menu-wrapper[data-position="right"] .staggered-menu-panel {
+  right: 0;
+  border-left: 1px solid var(--sm-border);
+}
+
+.sm-panel-inner {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  padding: 5.5rem 2rem 2.5rem 2rem;
+  overflow-y: auto;
+  scrollbar-width: none;
+}
+
+.sm-panel-inner::-webkit-scrollbar {
+  display: none;
+}
+
+/* ── NAVIGATION LIST ITEMS ─────────────────────────────────────── */
+.sm-panel-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.sm-panel-itemWrap {
+  overflow: hidden;
+  position: relative;
+}
+
+.sm-panel-item {
+  position: relative;
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+  padding: 0.5rem 0.75rem;
+  border-radius: 12px;
+  text-decoration: none;
+  color: var(--sm-text);
+  transition: background-color 0.2s ease, transform 0.2s ease, color 0.2s ease;
+}
+
+.sm-panel-item:hover {
+  background-color: var(--sm-hover-bg);
+  color: var(--sm-accent);
+  transform: translateX(4px);
+}
+
+/* Numbering (01, 02, 03...) */
+.sm-panel-list[data-numbering] .sm-panel-item::before {
+  content: attr(data-index);
+  font-family: var(--font-mono, monospace);
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--sm-accent);
+  opacity: var(--sm-num-opacity, 1);
+  min-width: 1.5rem;
+  transition: opacity 0.2s ease;
+}
+
+.sm-panel-itemLabel {
+  display: inline-block;
+  font-family: var(--font-display, inherit);
+  font-size: 1.25rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.25;
+  transform-origin: left bottom;
+}
+
+/* ── FOOTER / SOCIALS SECTION ─────────────────────────────────── */
+.sm-socials {
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--sm-border);
+}
+
+.sm-socials-title {
+  font-family: var(--font-mono, monospace);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--sm-text-muted);
+  margin-bottom: 0.75rem;
+}
+
+.sm-socials-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.875rem 1.25rem;
+}
+
+.sm-socials-item {
+  margin: 0;
+}
+
+.sm-socials-link {
+  font-family: var(--font-sans, inherit);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--sm-text-muted);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.sm-socials-link:hover {
+  color: var(--sm-accent);
+}

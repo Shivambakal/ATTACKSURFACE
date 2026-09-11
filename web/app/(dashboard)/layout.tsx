@@ -16,6 +16,7 @@ import PublicNav from "@/components/PublicNav";
 import PublicFooter from "@/components/PublicFooter";
 import ThemeToggle from "@/components/ThemeToggle";
 import CyberAssistantChat from "@/components/CyberAssistantChat";
+import StaggeredMenu, { StaggeredMenuItem } from "@/components/StaggeredMenu";
 
 const PUBLIC_ACCESSIBLE_ROUTES = ["/programs", "/security-intelligence", "/pricing"];
 
@@ -152,6 +153,27 @@ function DashboardShell({ children }: { children: React.ReactNode }) {
     router.push("/login");
   };
 
+  const staggeredNavItems: StaggeredMenuItem[] = [
+    { label: "Dashboard Hub", ariaLabel: "Dashboard Hub", link: "/dashboard" },
+    { label: "Company Intelligence", ariaLabel: "Company Intelligence", link: "/companies" },
+    { label: "Attack Surface Targets", ariaLabel: "Attack Surface Targets", link: "/targets" },
+    { label: "Public Programs", ariaLabel: "Public Security Programs", link: "/programs", badge: "2,010" },
+    { label: "Surface Diff Forensic", ariaLabel: "Surface Diff Forensic", link: "/changes" },
+    { label: "AI Threat Analyst", ariaLabel: "AI Threat Analyst", link: "/assistant", badge: "AI" },
+    { label: "Research Workspace", ariaLabel: "Research Workspace", link: "/research" },
+    { label: "Security Alerts", ariaLabel: "Security Alerts", link: "/alerts", badge: unreadAlertsCount > 0 ? `${unreadAlertsCount} New` : undefined },
+    { label: "Security Knowledge", ariaLabel: "Security Knowledge", link: "/security-knowledge" },
+    ...(isAdmin ? [{ label: "Admin Control Plane", ariaLabel: "Admin Control Plane", link: "/admin", badge: "Admin" }] : []),
+    { label: "Platform Settings", ariaLabel: "Platform Settings", link: "/settings" },
+  ];
+
+  const staggeredSocialItems = [
+    { label: "Security API Docs", link: "/docs" },
+    { label: "Global Search", link: "/search" },
+    { label: "Entity Watchlist", link: "/watchlist" },
+    { label: "System Health", link: "/status" },
+  ];
+
   return (
     <div className="dashboard-ambient relative min-h-screen overflow-hidden text-slate-100 selection:bg-cyan-500 selection:text-slate-950 font-sans">
       {/* ── PERSISTENT GLOBAL SPATIAL BACKGROUND ────────────────── */}
@@ -195,15 +217,22 @@ function DashboardShell({ children }: { children: React.ReactNode }) {
       >
         {/* Top Header Bar (Timeline OS HUD) */}
         <header
-          className={`sticky top-0 z-30 flex h-16 items-center justify-between border-b px-6 backdrop-blur-xl transition-colors ${
+          className={`sticky top-0 z-30 flex h-16 items-center justify-between border-b px-4 sm:px-6 backdrop-blur-xl transition-colors ${
             showAdminSidebar
               ? "border-amber-500/20 bg-slate-950/75"
               : "border-slate-800/80 bg-slate-950/80"
           }`}
         >
-          {/* Left: Current Page Title */}
-          <div className="flex items-center gap-2">
-            <span className="text-sm font-semibold tracking-tight text-slate-200">
+          {/* Left: StaggeredMenu Animated Sidebar Drawer + Page Title */}
+          <div className="flex items-center gap-3">
+            <StaggeredMenu
+              position="left"
+              items={staggeredNavItems}
+              socialItems={staggeredSocialItems}
+              isFixed={true}
+              accentColor="#00f0ff"
+            />
+            <span className="hidden lg:inline text-sm font-semibold tracking-tight text-slate-200 font-display">
               {getPageTitle()}
             </span>
           </div>
