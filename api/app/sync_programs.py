@@ -20,10 +20,14 @@ logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(na
 logger = logging.getLogger("sync_programs")
 
 
-def run_sync(batch_size: int = 50) -> dict:
+def run_sync(batch_size: int = 50, db: Session | None = None, limit: int | None = None) -> dict:
     """Executes the public program sync pipeline."""
     start_time = time.time()
-    db = SessionLocal()
+    close_db = False
+    if db is None:
+        db = SessionLocal()
+        close_db = True
+
     try:
         initial_companies = db.query(Company).count()
         initial_programs = db.query(SecurityProgram).count()
@@ -35,6 +39,8 @@ def run_sync(batch_size: int = 50) -> dict:
         )
 
         all_programs = fetch_all_public_programs()
+        if limit:
+            all_programs = all_programs[:limit]
         logger.info("Fetched %d raw program records from all public ecosystems.", len(all_programs))
 
         resolver = ProgramEntityResolutionService(db)
@@ -94,7 +100,8 @@ def run_sync(batch_size: int = 50) -> dict:
         logger.info("Sync finished successfully in %.2fs. Summary: %s", duration, summary)
         return summary
     finally:
-        db.close()
+        if close_db:
+            db.close()
 
 
 if __name__ == "__main__":

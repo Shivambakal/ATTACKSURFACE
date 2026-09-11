@@ -331,6 +331,25 @@ class ProgramEntityResolutionService:
             plat = (prog.platform or "").strip().lower()
             self.programs_by_key[(prog.company_id, plat, handle)] = prog
 
+        # Pre-load latest snapshot for each program to avoid per-program queries
+        self.latest_snapshots: dict[int, ProgramSnapshot] = {}
+        from sqlalchemy import func
+        subq = (
+            self.db.query(
+                ProgramSnapshot.security_program_id,
+                func.max(ProgramSnapshot.id).label("max_id"),
+            )
+            .group_by(ProgramSnapshot.security_program_id)
+            .subquery()
+        )
+        latest_snaps = (
+            self.db.query(ProgramSnapshot)
+            .join(subq, ProgramSnapshot.id == subq.c.max_id)
+            .all()
+        )
+        for snap in latest_snaps:
+            self.latest_snapshots[snap.security_program_id] = snap
+
     def resolve_candidate_company(
         self,
         program_data: dict[str, Any],
@@ -464,7 +483,6 @@ class ProgramEntityResolutionService:
                 last_verified_at=utcnow(),
             )
             self.db.add(security_program)
-            self.db.flush()
             self.programs_by_key[prog_key] = security_program
             program_created = True
         else:
@@ -482,20 +500,14 @@ class ProgramEntityResolutionService:
         # Scope Rules & Snapshot Diffing
         current_hash = compute_scope_hash(in_scope + out_of_scope)
 
-        # Check existing latest snapshot
-        latest_snapshot = (
-            self.db.query(ProgramSnapshot)
-            .filter(ProgramSnapshot.security_program_id == security_program.id)
-            .order_by(ProgramSnapshot.created_at.desc())
-            .first()
-        )
+        # Check existing latest snapshot from in-memory cache
+        latest_snapshot = self.latest_snapshots.get(security_program.id) if security_program.id else None
 
         has_scope_changed = False
         if not latest_snapshot or latest_snapshot.snapshot_hash != current_hash:
             has_scope_changed = True
             # Create new snapshot
             new_snapshot = ProgramSnapshot(
-                security_program_id=security_program.id,
                 snapshot_hash=current_hash,
                 scope_count=total_scope_count,
                 scope_summary=scope_summary,
@@ -507,10 +519,12 @@ class ProgramEntityResolutionService:
                 },
                 raw_payload_reference={"total_targets": total_scope_count},
             )
-            self.db.add(new_snapshot)
+            security_program.snapshots.append(new_snapshot)
+            if security_program.id:
+                self.latest_snapshots[security_program.id] = new_snapshot
 
             # Record ProgramChangeEvent if there was a previous snapshot
-            if latest_snapshot:
+            if latest_snapshot and security_program.id:
                 change_type = "PROGRAM_SCOPE_CHANGED"
                 summary = f"Program scope updated for {prog_name} ({platform}): {total_scope_count} items."
                 if total_scope_count > latest_snapshot.scope_count:
@@ -521,7 +535,6 @@ class ProgramEntityResolutionService:
                     summary = f"Scope reduced for {prog_name} ({platform}): -{latest_snapshot.scope_count - total_scope_count} targets."
 
                 change_event = ProgramChangeEvent(
-                    security_program_id=security_program.id,
                     company_id=matched_company.id,
                     change_type=change_type,
                     summary=summary,
@@ -531,7 +544,7 @@ class ProgramEntityResolutionService:
                     },
                     confidence=1.0,
                 )
-                self.db.add(change_event)
+                security_program.change_events.append(change_event)
 
                 # Generate TimelineEvent for public intelligence timeline
                 timeline_evt = TimelineEvent(
@@ -551,10 +564,10 @@ class ProgramEntityResolutionService:
 
         # Ingest Scope Rules if changed or first time
         if has_scope_changed and in_scope:
-            # Delete existing rules for this program to ensure clean sync
-            self.db.query(ProgramScopeRule).filter(
-                ProgramScopeRule.security_program_id == security_program.id
-            ).delete()
+            if not program_created and security_program.id:
+                self.db.query(ProgramScopeRule).filter(
+                    ProgramScopeRule.security_program_id == security_program.id
+                ).delete(synchronize_session=False)
 
             # Insert top 50 in-scope rules per program to keep DB balanced
             for item in in_scope[:50]:
@@ -563,7 +576,6 @@ class ProgramEntityResolutionService:
                     continue
                 asset_type = item.get("type") or item.get("asset_type") or "URL"
                 rule = ProgramScopeRule(
-                    security_program_id=security_program.id,
                     pattern=pat[:255],
                     asset_type=asset_type[:64],
                     inclusion_type=InclusionType.INCLUDE.value,
@@ -571,6 +583,6 @@ class ProgramEntityResolutionService:
                     confidence=0.95,
                     last_verified_at=utcnow(),
                 )
-                self.db.add(rule)
+                security_program.rules.append(rule)
 
         return security_program, company_created, program_created

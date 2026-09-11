@@ -55,8 +55,14 @@ def _save_to_cache(source_name: str, data: Any):
         logger.warning("Failed to write cache for %s: %s", source_name, e)
 
 
-def fetch_raw_dataset(source_name: str, timeout: float = 25.0) -> list | dict:
-    """Fetches raw JSON dataset from the remote source or falls back to local cache."""
+def fetch_raw_dataset(source_name: str, timeout: float = 4.0, force_refresh: bool = False) -> list | dict:
+    """Fetches raw JSON dataset from cache if available, or falls back to remote download."""
+    if not force_refresh:
+        cached = _load_from_cache(source_name)
+        if cached is not None:
+            logger.info("Using cached dataset for %s", source_name)
+            return cached
+
     url = DATASET_URLS.get(source_name)
     if not url:
         raise ValueError(f"Unknown dataset source: {source_name}")

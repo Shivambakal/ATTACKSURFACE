@@ -272,137 +272,137 @@
       "in_scope": [
         {
           "type": "ios",
-          "target": "https://apps.apple.com/au/app/afterpay-shop-now-pay-later/id1230286588",
-          "uri": "https://apps.apple.com/au/app/afterpay-shop-now-pay-later/id1230286588",
-          "name": "Afterpay iOS App",
+          "target": "\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588",
+          "uri": null,
+          "name": "\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588",
           "ipAddress": null
         },
         {
           "type": "android",
-          "target": "https://play.google.com/store/apps/details?id=com.afterpaymobile.us&hl=en_US&gl=US",
-          "uri": "https://play.google.com/store/apps/details?id=com.afterpaymobile.us&hl=en_US&gl=US",
-          "name": "Afterpay Android App",
+          "target": "\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588",
+          "uri": null,
+          "name": "\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588",
           "ipAddress": null
         },
         {
           "type": "website",
-          "target": "https://portal.afterpay.com",
-          "uri": "https://portal.afterpay.com",
-          "name": "portal.afterpay.com",
+          "target": "\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588",
+          "uri": null,
+          "name": "\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588",
           "ipAddress": null
         },
         {
           "type": "website",
-          "target": "https://afterpay.com",
-          "uri": "https://afterpay.com",
-          "name": "*.afterpay.com",
+          "target": "\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588",
+          "uri": null,
+          "name": "\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588",
           "ipAddress": null
         },
         {
           "type": "api",
-          "target": "https://mobileapi.afterpay.com",
-          "uri": "https://mobileapi.afterpay.com",
-          "name": "mobileapi.afterpay.com",
+          "target": "\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588",
+          "uri": null,
+          "name": "\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588",
           "ipAddress": null
         },
         {
           "type": "api",
-          "target": "https://portalapi.us.afterpay.com",
-          "uri": "https://portalapi.us.afterpay.com",
-          "name": "portalapi.*.afterpay.com",
+          "target": "\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588",
+          "uri": null,
+          "name": "\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588",
           "ipAddress": null
         },
         {
           "type": "website",
-          "target": "https://developers.afterpay.com",
-          "uri": "https://developers.afterpay.com",
-          "name": "developers.afterpay.com",
+          "target": "\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588",
+          "uri": null,
+          "name": "\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588",
           "ipAddress": null
         },
         {
           "type": "ios",
-          "target": "https://apps.apple.com/gb/app/clearpay-buy-now-pay-later/id1474022186",
-          "uri": "https://apps.apple.com/gb/app/clearpay-buy-now-pay-later/id1474022186",
-          "name": "Clearpay iOS App",
+          "target": "\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588",
+          "uri": null,
+          "name": "\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588",
           "ipAddress": null
         },
         {
           "type": "android",
-          "target": "https://play.google.com/store/apps/details?id=com.afterpaymobile.uk",
-          "uri": "https://play.google.com/store/apps/details?id=com.afterpaymobile.uk",
-          "name": "Clearpay Android App",
+          "target": "\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588",
+          "uri": null,
+          "name": "\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588",
           "ipAddress": null
         },
         {
           "type": "website",
-          "target": "https://clearpay.co.uk",
-          "uri": "https://clearpay.co.uk",
-          "name": "clearpay.co.uk",
+          "target": "\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588",
+          "uri": null,
+          "name": "\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588",
           "ipAddress": null
         },
         {
           "type": "website",
-          "target": "https://clearpay.com",
-          "uri": "https://clearpay.com",
-          "name": "clearpay.com",
+          "target": "\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588",
+          "uri": null,
+          "name": "\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588",
           "ipAddress": null
         },
         {
           "type": "website",
-          "target": "https://portal.clearpay.com",
-          "uri": "https://portal.clearpay.com",
-          "name": "portal.clearpay.com",
+          "target": "\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588",
+          "uri": null,
+          "name": "\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588",
           "ipAddress": null
         },
         {
           "type": "website",
-          "target": "https://portal.clearpay.co.uk",
-          "uri": "https://portal.clearpay.co.uk",
-          "name": "portal.clearpay.co.uk",
+          "target": "\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588",
+          "uri": null,
+          "name": "\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588",
           "ipAddress": null
         },
         {
           "type": "api",
-          "target": "https://mobileapi.clearpay.com",
-          "uri": "https://mobileapi.clearpay.com",
-          "name": "mobileapi.clearpay.com",
+          "target": "\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588",
+          "uri": null,
+          "name": "\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588",
           "ipAddress": null
         },
         {
           "type": "api",
-          "target": "https://portalapi.eu.clearpay.co.uk",
-          "uri": "https://portalapi.eu.clearpay.co.uk",
-          "name": "portalapi.eu.clearpay.co.uk",
+          "target": "\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588",
+          "uri": null,
+          "name": "\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588",
           "ipAddress": null
         },
         {
           "type": "api",
-          "target": "https://api.clearpay.com",
-          "uri": "https://api.clearpay.com",
-          "name": "api.clearpay.com",
+          "target": "\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588",
+          "uri": null,
+          "name": "\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588",
           "ipAddress": null
         }
       ],
       "out_of_scope": [
         {
           "type": "website",
-          "target": "https://afterpaytechblog.com",
-          "uri": "https://afterpaytechblog.com",
-          "name": "afterpaytechblog.com",
+          "target": "\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588",
+          "uri": null,
+          "name": "\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588",
           "ipAddress": null
         },
         {
           "type": "website",
-          "target": "https://genderfree.afterpay.com",
-          "uri": "https://genderfree.afterpay.com",
-          "name": "genderfree.afterpay.com",
+          "target": "\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588",
+          "uri": null,
+          "name": "\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588",
           "ipAddress": null
         },
         {
           "type": "website",
-          "target": "https://www.moneybyafterpay.com/",
-          "uri": "https://www.moneybyafterpay.com/",
-          "name": "moneybyafterpay.com",
+          "target": "\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588",
+          "uri": null,
+          "name": "\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588",
           "ipAddress": null
         }
       ]
@@ -4487,6 +4487,13 @@
           "uri": "https://play.google.com/store/apps/details?id=com.bitso.alpha",
           "name": "Mobile App Bitso Alpha Android",
           "ipAddress": ""
+        },
+        {
+          "type": "website",
+          "target": "https://onchain.cc/",
+          "uri": "https://onchain.cc/",
+          "name": "onchain.cc",
+          "ipAddress": null
         }
       ],
       "out_of_scope": [
@@ -5598,6 +5605,33 @@
     }
   },
   {
+    "name": "Cappsule Sarl - Marketplace Bug Bounty Program",
+    "url": "https://bugcrowd.com/engagements/cappsule-sarl",
+    "allows_disclosure": false,
+    "managed_by_bugcrowd": true,
+    "safe_harbor": "full",
+    "max_payout": 1500,
+    "targets": {
+      "in_scope": [
+        {
+          "type": "website",
+          "target": "https://marketplace.atlassian.com/apps/1216988/timesheet-tracking-for-jira?hosting=cloud&tab=overview",
+          "uri": "https://marketplace.atlassian.com/apps/1216988/timesheet-tracking-for-jira?hosting=cloud&tab=overview",
+          "name": "https://marketplace.atlassian.com/apps/1216988/timesheet-tracking-for-jira?hosting=cloud&tab=overview",
+          "ipAddress": ""
+        },
+        {
+          "type": "website",
+          "target": "https://marketplace.atlassian.com/apps/1235502/chart-factory-for-jira?hosting=cloud&tab=overview",
+          "uri": "https://marketplace.atlassian.com/apps/1235502/chart-factory-for-jira?hosting=cloud&tab=overview",
+          "name": "https://marketplace.atlassian.com/apps/1235502/chart-factory-for-jira?hosting=cloud&tab=overview",
+          "ipAddress": ""
+        }
+      ],
+      "out_of_scope": []
+    }
+  },
+  {
     "name": "Majid Al Futtaim Retail",
     "url": "https://bugcrowd.com/engagements/carrefour",
     "allows_disclosure": true,
@@ -5657,30 +5691,99 @@
       "in_scope": [
         {
           "type": "ios",
-          "target": "https://itunes.apple.com/us/app/cash-app/id711923939?mt=8",
-          "uri": "https://itunes.apple.com/us/app/cash-app/id711923939?mt=8",
-          "name": "Cash App Mobile Application for iOS",
+          "target": "\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588",
+          "uri": null,
+          "name": "\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588",
           "ipAddress": null
         },
         {
           "type": "android",
-          "target": "https://play.google.com/store/apps/details?id=com.squareup.cash",
-          "uri": "https://play.google.com/store/apps/details?id=com.squareup.cash",
-          "name": "Cash App Mobile Application for Android",
+          "target": "\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588",
+          "uri": null,
+          "name": "\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588",
           "ipAddress": null
         },
         {
           "type": "website",
-          "target": "https://cash.app",
-          "uri": "https://cash.app",
-          "name": "*.cash.app",
+          "target": "\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588",
+          "uri": null,
+          "name": "\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588",
           "ipAddress": null
         },
         {
           "type": "website",
-          "target": "*.cashstaging.app",
-          "uri": "",
-          "name": "*.cashstaging.app",
+          "target": "\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588",
+          "uri": null,
+          "name": "\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588",
+          "ipAddress": null
+        }
+      ],
+      "out_of_scope": []
+    }
+  },
+  {
+    "name": "Catapult Labs Bug Bounty",
+    "url": "https://bugcrowd.com/engagements/catapultlabs",
+    "allows_disclosure": false,
+    "managed_by_bugcrowd": true,
+    "safe_harbor": "full",
+    "max_payout": 1500,
+    "targets": {
+      "in_scope": [
+        {
+          "type": "website",
+          "target": "https://marketplace.atlassian.com/apps/1215875/scrum-poker-estimates-for-confluence?hosting=cloud&tab=overview",
+          "uri": "https://marketplace.atlassian.com/apps/1215875/scrum-poker-estimates-for-confluence?hosting=cloud&tab=overview",
+          "name": "Scrum Poker Estimates for Confluence - Cloud - https://marketplace.atlassian.com/apps/1215875/scrum-poker-estimates-for-confluence?hosting=cloud&tab=overview",
+          "ipAddress": null
+        },
+        {
+          "type": "website",
+          "target": "https://marketplace.atlassian.com/apps/1218960/scrum-poker-estimates-for-jira?hosting=cloud&tab=overview",
+          "uri": "https://marketplace.atlassian.com/apps/1218960/scrum-poker-estimates-for-jira?hosting=cloud&tab=overview",
+          "name": "Scrum Poker Estimates for Jira - Cloud -  https://marketplace.atlassian.com/apps/1218960/scrum-poker-estimates-for-jira?hosting=cloud&tab=overview",
+          "ipAddress": null
+        },
+        {
+          "type": "website",
+          "target": "https://marketplace.atlassian.com/apps/1218860/agile-retrospectives-for-jira?hosting=cloud&tab=overview",
+          "uri": "https://marketplace.atlassian.com/apps/1218860/agile-retrospectives-for-jira?hosting=cloud&tab=overview",
+          "name": "Agile Retrospectives for Jira - Cloud https://marketplace.atlassian.com/apps/1218860/agile-retrospectives-for-jira?hosting=cloud&tab=overview",
+          "ipAddress": null
+        },
+        {
+          "type": "website",
+          "target": "https://marketplace.atlassian.com/apps/1218860/agile-retrospectives-for-jira?hosting=datacenter&tab=overview",
+          "uri": "https://marketplace.atlassian.com/apps/1218860/agile-retrospectives-for-jira?hosting=datacenter&tab=overview",
+          "name": "Agile Retrospectives for Jira - DC-  https://marketplace.atlassian.com/apps/1218860/agile-retrospectives-for-jira?hosting=datacenter&tab=overview",
+          "ipAddress": null
+        },
+        {
+          "type": "website",
+          "target": "https://marketplace.atlassian.com/apps/1216054/agile-retrospectives-for-confluence?tab=overview&hosting=cloud",
+          "uri": "https://marketplace.atlassian.com/apps/1216054/agile-retrospectives-for-confluence?tab=overview&hosting=cloud",
+          "name": "Agile Retrospectives for Confluence - Cloud - https://marketplace.atlassian.com/apps/1216054/agile-retrospectives-for-confluence?tab=overview&hosting=cloud",
+          "ipAddress": null
+        },
+        {
+          "type": "website",
+          "target": "https://marketplace.atlassian.com/apps/1216054/agile-retrospectives-for-confluence?hosting=datacenter&tab=overview",
+          "uri": "https://marketplace.atlassian.com/apps/1216054/agile-retrospectives-for-confluence?hosting=datacenter&tab=overview",
+          "name": "Agile Retrospectives for Confluence - DC -  https://marketplace.atlassian.com/apps/1216054/agile-retrospectives-for-confluence?hosting=datacenter&tab=overview",
+          "ipAddress": null
+        },
+        {
+          "type": "website",
+          "target": "https://marketplace.atlassian.com/apps/1217825/standbot-slack-stand-up-bot-for-jira?tab=overview&hosting=cloud",
+          "uri": "https://marketplace.atlassian.com/apps/1217825/standbot-slack-stand-up-bot-for-jira?tab=overview&hosting=cloud",
+          "name": "StandBot - Slack stand-up bot for Jira - Cloud - https://marketplace.atlassian.com/apps/1217825/standbot-slack-stand-up-bot-for-jira?tab=overview&hosting=cloud",
+          "ipAddress": null
+        },
+        {
+          "type": "website",
+          "target": "https://marketplace.atlassian.com/apps/1227873/teampulse-health-checks-for-jira?tab=overview&hosting=cloud",
+          "uri": "https://marketplace.atlassian.com/apps/1227873/teampulse-health-checks-for-jira?tab=overview&hosting=cloud",
+          "name": "TeamPulse - Health checks for Jira - Cloud - https://marketplace.atlassian.com/apps/1227873/teampulse-health-checks-for-jira?tab=overview&hosting=cloud",
           "ipAddress": null
         }
       ],
@@ -5718,53 +5821,53 @@
       "in_scope": [
         {
           "type": "website",
-          "target": "https://www.cfr.org/",
-          "uri": "https://www.cfr.org/",
-          "name": "https://www.cfr.org/",
+          "target": "\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588",
+          "uri": null,
+          "name": "\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588",
           "ipAddress": null
         },
         {
           "type": "website",
-          "target": "https://thinkglobalhealth.org",
-          "uri": "https://thinkglobalhealth.org",
-          "name": "https://thinkglobalhealth.org",
+          "target": "\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588",
+          "uri": null,
+          "name": "\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588",
           "ipAddress": null
         },
         {
           "type": "website",
-          "target": "https://education.cfr.org/",
-          "uri": "https://education.cfr.org/",
-          "name": "https://education.cfr.org/",
+          "target": "\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588",
+          "uri": null,
+          "name": "\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588",
           "ipAddress": ""
         }
       ],
       "out_of_scope": [
         {
           "type": "website",
-          "target": "https://subs.foreignaffairs.com",
+          "target": "\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588",
           "uri": null,
-          "name": "https://subs.foreignaffairs.com",
+          "name": "\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588",
           "ipAddress": null
         },
         {
           "type": "website",
-          "target": "https://subscribe.foreignaffairs.com ",
-          "uri": "",
-          "name": "https://subscribe.foreignaffairs.com ",
+          "target": "\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588",
+          "uri": null,
+          "name": "\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588",
           "ipAddress": null
         },
         {
           "type": "website",
-          "target": "https://world101.cfr.org/",
-          "uri": "https://world101.cfr.org/",
-          "name": "https://world101.cfr.org/",
+          "target": "\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588",
+          "uri": null,
+          "name": "\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588",
           "ipAddress": null
         },
         {
           "type": "website",
-          "target": "https://modeldiplomacy.cfr.org",
-          "uri": "https://modeldiplomacy.cfr.org",
-          "name": "https://modeldiplomacy.cfr.org",
+          "target": "\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588",
+          "uri": null,
+          "name": "\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588",
           "ipAddress": null
         }
       ]
@@ -6715,6 +6818,26 @@
     }
   },
   {
+    "name": "codecentric AG - Marketplace Bug Bounty Program",
+    "url": "https://bugcrowd.com/engagements/codecentric",
+    "allows_disclosure": false,
+    "managed_by_bugcrowd": true,
+    "safe_harbor": "full",
+    "max_payout": 1500,
+    "targets": {
+      "in_scope": [
+        {
+          "type": "website",
+          "target": "https://marketplace.atlassian.com/apps/1227136/issue-picker-for-jira?hosting=cloud&tab=overview",
+          "uri": "https://marketplace.atlassian.com/apps/1227136/issue-picker-for-jira?hosting=cloud&tab=overview",
+          "name": "Issue Picker for Jira - https://marketplace.atlassian.com/apps/1227136/issue-picker-for-jira?hosting=cloud&tab=overview",
+          "ipAddress": ""
+        }
+      ],
+      "out_of_scope": []
+    }
+  },
+  {
     "name": "codeclou GmbH",
     "url": "https://bugcrowd.com/engagements/codeclou",
     "allows_disclosure": false,
@@ -6729,6 +6852,13 @@
           "uri": "https://marketplace.atlassian.com/apps/1212096/customfield-editor-for-jira?hosting=cloud&tab=overview",
           "name": "https://marketplace.atlassian.com/apps/1212096/customfield-editor-for-jira?hosting=cloud&tab=overview",
           "ipAddress": ""
+        },
+        {
+          "type": "api",
+          "target": "https://marketplace.atlassian.com/apps/1212096/customfield-editor-for-jira?hosting=datacenter&tab=overview",
+          "uri": "https://marketplace.atlassian.com/apps/1212096/customfield-editor-for-jira?hosting=datacenter&tab=overview",
+          "name": "https://marketplace.atlassian.com/apps/1212096/customfield-editor-for-jira?hosting=datacenter&tab=overview",
+          "ipAddress": null
         },
         {
           "type": "website",
@@ -6750,6 +6880,13 @@
           "uri": "https://marketplace.atlassian.com/apps/1211159/advanced-codeblocks-for-confluence?hosting=cloud",
           "name": "https://marketplace.atlassian.com/apps/1211159/advanced-codeblocks-for-confluence?hosting=cloud",
           "ipAddress": ""
+        },
+        {
+          "type": "website",
+          "target": "https://marketplace.atlassian.com/apps/1212096/customfield-editor-for-jira?hosting=datacenter&tab=overview",
+          "uri": "https://marketplace.atlassian.com/apps/1212096/customfield-editor-for-jira?hosting=datacenter&tab=overview",
+          "name": "https://marketplace.atlassian.com/apps/1212096/customfield-editor-for-jira?hosting=server&tab=overview",
+          "ipAddress": null
         }
       ],
       "out_of_scope": []
@@ -7438,6 +7575,54 @@
     }
   },
   {
+    "name": "Creativas",
+    "url": "https://bugcrowd.com/engagements/creativas",
+    "allows_disclosure": false,
+    "managed_by_bugcrowd": true,
+    "safe_harbor": "full",
+    "max_payout": 1500,
+    "targets": {
+      "in_scope": [
+        {
+          "type": "website",
+          "target": "https://marketplace.atlassian.com/apps/1219677/smart-terms-for-confluence-glossary?hosting=cloud&tab=overview",
+          "uri": "https://marketplace.atlassian.com/apps/1219677/smart-terms-for-confluence-glossary?hosting=cloud&tab=overview",
+          "name": "Smart Terms for Confluence - Glossary - Cloud - https://marketplace.atlassian.com/apps/1219677/smart-terms-for-confluence-glossary?hosting=cloud&tab=overview",
+          "ipAddress": null
+        },
+        {
+          "type": "website",
+          "target": "https://marketplace.atlassian.com/apps/1216979/smart-courses-for-confluence-lms?hosting=cloud&tab=overview",
+          "uri": "https://marketplace.atlassian.com/apps/1216979/smart-courses-for-confluence-lms?hosting=cloud&tab=overview",
+          "name": "Smart Courses for Confluence - LMS - Cloud - https://marketplace.atlassian.com/apps/1216979/smart-courses-for-confluence-lms?hosting=cloud&tab=overview",
+          "ipAddress": null
+        },
+        {
+          "type": "website",
+          "target": "https://marketplace.atlassian.com/apps/1225000/smart-images-for-confluence?hosting=cloud&tab=overview",
+          "uri": "https://marketplace.atlassian.com/apps/1225000/smart-images-for-confluence?hosting=cloud&tab=overview",
+          "name": "Smart Images for Confluence- Cloud - https://marketplace.atlassian.com/apps/1225000/smart-images-for-confluence?hosting=cloud&tab=overview",
+          "ipAddress": null
+        },
+        {
+          "type": "website",
+          "target": "https://marketplace.atlassian.com/apps/1218080/smart-tables-for-confluence?hosting=cloud&tab=overview",
+          "uri": "https://marketplace.atlassian.com/apps/1218080/smart-tables-for-confluence?hosting=cloud&tab=overview",
+          "name": "Smart Tables for Confluence - Cloud - https://marketplace.atlassian.com/apps/1218080/smart-tables-for-confluence?hosting=cloud&tab=overview",
+          "ipAddress": ""
+        },
+        {
+          "type": "website",
+          "target": "https://marketplace.atlassian.com/apps/1234678/smart-terms-for-jira-glossary?hosting=cloud&tab=overview",
+          "uri": "https://marketplace.atlassian.com/apps/1234678/smart-terms-for-jira-glossary?hosting=cloud&tab=overview",
+          "name": "https://marketplace.atlassian.com/apps/1234678/smart-terms-for-jira-glossary?hosting=cloud&tab=overview",
+          "ipAddress": ""
+        }
+      ],
+      "out_of_scope": []
+    }
+  },
+  {
     "name": "Dell Technologies Application Bug Bounty",
     "url": "https://bugcrowd.com/engagements/dell-com",
     "allows_disclosure": true,
@@ -7897,6 +8082,40 @@
           "target": "https://marketplace.atlassian.com/apps/856555290/salesforge-crm-leads-deals-customers-management-for-jira?hosting=cloud&tab=overview",
           "uri": "https://marketplace.atlassian.com/apps/856555290/salesforge-crm-leads-deals-customers-management-for-jira?hosting=cloud&tab=overview",
           "name": "https://marketplace.atlassian.com/apps/856555290/salesforge-crm-leads-deals-customers-management-for-jira?hosting=cloud&tab=overview",
+          "ipAddress": ""
+        }
+      ],
+      "out_of_scope": []
+    }
+  },
+  {
+    "name": "Digital Rose's Marketplace Bug Bounty",
+    "url": "https://bugcrowd.com/engagements/digitalrose",
+    "allows_disclosure": false,
+    "managed_by_bugcrowd": true,
+    "safe_harbor": "full",
+    "max_payout": 1500,
+    "targets": {
+      "in_scope": [
+        {
+          "type": "website",
+          "target": "https://marketplace.atlassian.com/apps/1221581/esign-electronic-signatures-for-jira?hosting=cloud&tab=overview",
+          "uri": "https://marketplace.atlassian.com/apps/1221581/esign-electronic-signatures-for-jira?hosting=cloud&tab=overview",
+          "name": "https://marketplace.atlassian.com/apps/1221581/esign-electronic-signatures-for-jira?hosting=cloud&tab=overview",
+          "ipAddress": null
+        },
+        {
+          "type": "website",
+          "target": "https://marketplace.atlassian.com/apps/1224071/esign-electronic-signatures-for-confluence?hosting=cloud&tab=overview",
+          "uri": "https://marketplace.atlassian.com/apps/1224071/esign-electronic-signatures-for-confluence?hosting=cloud&tab=overview",
+          "name": "https://marketplace.atlassian.com/apps/1224071/esign-electronic-signatures-for-confluence?hosting=cloud&tab=overview",
+          "ipAddress": null
+        },
+        {
+          "type": "website",
+          "target": "https://marketplace.atlassian.com/apps/1228868/esign-document-management?hosting=cloud&tab=overview",
+          "uri": "https://marketplace.atlassian.com/apps/1228868/esign-document-management?hosting=cloud&tab=overview",
+          "name": "https://marketplace.atlassian.com/apps/1228868/esign-document-management?hosting=cloud&tab=overview",
           "ipAddress": ""
         }
       ],
@@ -12103,18 +12322,18 @@
       "in_scope": [
         {
           "type": "website",
-          "target": "https://kw-bugcrowd-pub.bounty.kiteworks.dev/",
-          "uri": "https://kw-bugcrowd-pub.bounty.kiteworks.dev/",
-          "name": "https://kw-bugcrowd-pub.bounty.kiteworks.dev/",
+          "target": "\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588",
+          "uri": null,
+          "name": "\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588",
           "ipAddress": null
         }
       ],
       "out_of_scope": [
         {
           "type": "website",
-          "target": "https://bugcrowd-pub.bounty.kiteworks.dev",
-          "uri": "https://bugcrowd-pub.bounty.kiteworks.dev",
-          "name": "https://bugcrowd-pub.bounty.kiteworks.dev",
+          "target": "\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588",
+          "uri": null,
+          "name": "\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588",
           "ipAddress": ""
         }
       ]
@@ -13930,7 +14149,7 @@
           "type": "website",
           "target": "https://marketplace.atlassian.com/apps/1230303/project-templates-for-jira?hosting=cloud&tab=overview",
           "uri": "https://marketplace.atlassian.com/apps/1230303/project-templates-for-jira?hosting=cloud&tab=overview",
-          "name": "Project Templates & Issue Templates for Jira | https://marketplace.atlassian.com/apps/1230303/project-templates-for-jira?hosting=cloud&tab=overview",
+          "name": "Space Templates & Content Templates for Jira | https://marketplace.atlassian.com/apps/1230303/project-templates-for-jira?hosting=cloud&tab=overview",
           "ipAddress": null
         },
         {
@@ -22390,6 +22609,55 @@
     }
   },
   {
+    "name": "Railsware",
+    "url": "https://bugcrowd.com/engagements/railsware",
+    "allows_disclosure": false,
+    "managed_by_bugcrowd": true,
+    "safe_harbor": "full",
+    "max_payout": 1500,
+    "targets": {
+      "in_scope": [
+        {
+          "type": "website",
+          "target": "https://marketplace.atlassian.com/apps/1216451/smart-checklist-for-jira-enterprise?hosting=cloud",
+          "uri": "https://marketplace.atlassian.com/apps/1216451/smart-checklist-for-jira-enterprise?hosting=cloud",
+          "name": "Smart Checklist for Jira. Enterprise -  https://marketplace.atlassian.com/apps/1216451/smart-checklist-for-jira-enterprise?hosting=cloud",
+          "ipAddress": null
+        },
+        {
+          "type": "website",
+          "target": "https://marketplace.atlassian.com/apps/1215277/smart-checklist-for-jira-free?hosting=cloud&tab=overview",
+          "uri": "https://marketplace.atlassian.com/apps/1215277/smart-checklist-for-jira-free?hosting=cloud&tab=overview",
+          "name": "Smart Checklist for Jira Free - https://marketplace.atlassian.com/apps/1215277/smart-checklist-for-jira-free?hosting=cloud&tab=overview",
+          "ipAddress": null
+        },
+        {
+          "type": "website",
+          "target": "https://marketplace.atlassian.com/apps/1231143/smart-templates-issue-templates-for-jira?hosting=cloud&tab",
+          "uri": "https://marketplace.atlassian.com/apps/1231143/smart-templates-issue-templates-for-jira?hosting=cloud&tab",
+          "name": "Smart Templates: Issue Templates for Jira - https://marketplace.atlassian.com/apps/1231143/smart-templates-issue-templates-for-jira?hosting=cloud&tab",
+          "ipAddress": ""
+        },
+        {
+          "type": "website",
+          "target": "https://marketplace.atlassian.com/apps/1233681/smart-ai-release-notes-for-jira?tab=overview&hosting=cloud",
+          "uri": "https://marketplace.atlassian.com/apps/1233681/smart-ai-release-notes-for-jira?tab=overview&hosting=cloud",
+          "name": "https://marketplace.atlassian.com/apps/1233681/smart-ai-release-notes-for-jira?tab=overview&hosting=cloud",
+          "ipAddress": ""
+        }
+      ],
+      "out_of_scope": [
+        {
+          "type": "website",
+          "target": "https://jirachecklist.com/",
+          "uri": "https://jirachecklist.com/",
+          "name": "https://jirachecklist.com/",
+          "ipAddress": null
+        }
+      ]
+    }
+  },
+  {
     "name": "Raley Apps",
     "url": "https://bugcrowd.com/engagements/raleyapps",
     "allows_disclosure": false,
@@ -24950,6 +25218,40 @@
     }
   },
   {
+    "name": "Savignano Software Solutions Marketplace Bug Bounty Program",
+    "url": "https://bugcrowd.com/engagements/savignano",
+    "allows_disclosure": false,
+    "managed_by_bugcrowd": true,
+    "safe_harbor": "full",
+    "max_payout": 1500,
+    "targets": {
+      "in_scope": [
+        {
+          "type": "website",
+          "target": "https://marketplace.atlassian.com/apps/1218251/s-notify-email-encryption-for-jira?hosting=datacenter",
+          "uri": "https://marketplace.atlassian.com/apps/1218251/s-notify-email-encryption-for-jira?hosting=datacenter",
+          "name": "https://marketplace.atlassian.com/apps/1218251/s-notify-email-encryption-for-jira?hosting=datacenter",
+          "ipAddress": ""
+        },
+        {
+          "type": "website",
+          "target": "https://marketplace.atlassian.com/apps/1218509/s-notify-email-encryption-for-confluence?hosting=datacenter",
+          "uri": "https://marketplace.atlassian.com/apps/1218509/s-notify-email-encryption-for-confluence?hosting=datacenter",
+          "name": "https://marketplace.atlassian.com/apps/1218509/s-notify-email-encryption-for-confluence?hosting=datacenter",
+          "ipAddress": ""
+        },
+        {
+          "type": "website",
+          "target": "https://marketplace.atlassian.com/apps/1226720/s-notify-email-encryption-for-bitbucket?hosting=datacenter",
+          "uri": "https://marketplace.atlassian.com/apps/1226720/s-notify-email-encryption-for-bitbucket?hosting=datacenter",
+          "name": "https://marketplace.atlassian.com/apps/1226720/s-notify-email-encryption-for-bitbucket?hosting=datacenter",
+          "ipAddress": ""
+        }
+      ],
+      "out_of_scope": []
+    }
+  },
+  {
     "name": "SecureFlag Marketplace Bug Bounty",
     "url": "https://bugcrowd.com/engagements/secureflag-mbb-market",
     "allows_disclosure": false,
@@ -26525,123 +26827,123 @@
       "in_scope": [
         {
           "type": "website",
-          "target": "https://squareup.com/",
-          "uri": "https://squareup.com/",
-          "name": "*.square.com",
+          "target": "\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588",
+          "uri": null,
+          "name": "\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588",
           "ipAddress": null
         },
         {
           "type": "website",
-          "target": "https://squareup.com/",
-          "uri": "https://squareup.com/",
-          "name": "*.squareup.com",
+          "target": "\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588",
+          "uri": null,
+          "name": "\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588",
           "ipAddress": null
         },
         {
           "type": "website",
-          "target": "https://square.online",
-          "uri": "https://square.online",
-          "name": "square.online",
+          "target": "\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588",
+          "uri": null,
+          "name": "\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588",
           "ipAddress": ""
         },
         {
           "type": "android",
-          "target": "https://play.google.com/store/apps/details?id=com.squareup&hl=en_US&gl=US",
-          "uri": "https://play.google.com/store/apps/details?id=com.squareup&hl=en_US&gl=US",
-          "name": "Square Point of Sale Mobile Application for Android",
+          "target": "\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588",
+          "uri": null,
+          "name": "\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588",
           "ipAddress": null
         },
         {
           "type": "ios",
-          "target": "https://apps.apple.com/us/app/square-point-of-sale-pos/id335393788",
-          "uri": "https://apps.apple.com/us/app/square-point-of-sale-pos/id335393788",
-          "name": "Square Point of Sale Mobile Application for iOS",
+          "target": "\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588",
+          "uri": null,
+          "name": "\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588",
           "ipAddress": null
         },
         {
           "type": "hardware",
-          "target": "Square Register",
-          "uri": "",
-          "name": "Square Register",
+          "target": "\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588",
+          "uri": null,
+          "name": "\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588",
           "ipAddress": ""
         },
         {
           "type": "hardware",
-          "target": "Square Terminal",
-          "uri": "",
-          "name": "Square Terminal",
+          "target": "\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588",
+          "uri": null,
+          "name": "\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588",
           "ipAddress": ""
         },
         {
           "type": "website",
-          "target": "https://www.weebly.com/",
-          "uri": "https://www.weebly.com/",
-          "name": "weebly.com",
+          "target": "\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588",
+          "uri": null,
+          "name": "\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588",
           "ipAddress": null
         }
       ],
       "out_of_scope": [
         {
           "type": "website",
-          "target": "https://afterpay.com",
-          "uri": "https://afterpay.com",
-          "name": "*.afterpay.com",
+          "target": "\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588",
+          "uri": null,
+          "name": "\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588",
           "ipAddress": null
         },
         {
           "type": "website",
-          "target": "https://cash.me",
-          "uri": "https://cash.me",
-          "name": "*.cash.me",
+          "target": "\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588",
+          "uri": null,
+          "name": "\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588",
           "ipAddress": null
         },
         {
           "type": "website",
-          "target": "https://designers.weebly.com/",
-          "uri": "https://designers.weebly.com/",
-          "name": "designers.weebly.com",
+          "target": "\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588",
+          "uri": null,
+          "name": "\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588",
           "ipAddress": ""
         },
         {
           "type": "website",
-          "target": "https://tidal.com/",
-          "uri": "https://tidal.com/",
-          "name": "*.tidal.com",
+          "target": "\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588",
+          "uri": null,
+          "name": "\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588",
           "ipAddress": null
         },
         {
           "type": "other",
-          "target": "https://app.squareupstaging.com/v1/ask-ai/copilot/spotlight/query",
-          "uri": "https://app.squareupstaging.com/v1/ask-ai/copilot/spotlight/query",
-          "name": "app.squareupstaging.com/v1/ask-ai/copilot/spotlight/query",
+          "target": "\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588",
+          "uri": null,
+          "name": "\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588",
           "ipAddress": ""
         },
         {
           "type": "other",
-          "target": "http://community.squareup.com",
-          "uri": "http://community.squareup.com",
-          "name": " community.squareup.com",
+          "target": "\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588",
+          "uri": null,
+          "name": "\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588",
           "ipAddress": ""
         },
         {
           "type": "android",
-          "target": "https://play.google.com/store/apps/details?id=com.squareup.cash",
-          "uri": "https://play.google.com/store/apps/details?id=com.squareup.cash",
-          "name": "Cash App Mobile Application for Android",
+          "target": "\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588",
+          "uri": null,
+          "name": "\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588",
           "ipAddress": null
         },
         {
           "type": "ios",
-          "target": "https://itunes.apple.com/us/app/cash-app/id711923939?mt=8",
-          "uri": "https://itunes.apple.com/us/app/cash-app/id711923939?mt=8",
-          "name": "Cash App Mobile Application for iOS",
+          "target": "\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588",
+          "uri": null,
+          "name": "\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588",
           "ipAddress": null
         },
         {
           "type": "website",
-          "target": "Any vulnerabilities found in Third-party software",
+          "target": "\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588",
           "uri": null,
-          "name": "Any vulnerabilities found in Third-party software",
+          "name": "\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588",
           "ipAddress": null
         }
       ]
@@ -28467,88 +28769,88 @@
       "in_scope": [
         {
           "type": "website",
-          "target": "https://tidal.com/",
-          "uri": "https://tidal.com/",
-          "name": "*.tidal.com",
+          "target": "\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588",
+          "uri": null,
+          "name": "\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588",
           "ipAddress": null
         },
         {
           "type": "website",
-          "target": "*.wimpmusic.com",
-          "uri": "",
-          "name": "*.wimpmusic.com",
+          "target": "\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588",
+          "uri": null,
+          "name": "\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588",
           "ipAddress": null
         },
         {
           "type": "website",
-          "target": "*.tidalhifi.com",
-          "uri": "",
-          "name": "*.tidalhifi.com",
+          "target": "\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588",
+          "uri": null,
+          "name": "\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588",
           "ipAddress": null
         },
         {
           "type": "api",
-          "target": "api.tidal.com",
-          "uri": "",
-          "name": "api.tidal.com",
+          "target": "\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588",
+          "uri": null,
+          "name": "\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588",
           "ipAddress": null
         },
         {
           "type": "website",
-          "target": "*tidalhi.fi",
-          "uri": "",
-          "name": "*tidalhi.fi",
+          "target": "\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588",
+          "uri": null,
+          "name": "\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588",
           "ipAddress": null
         },
         {
           "type": "website",
-          "target": "*.tdl.sh",
-          "uri": "",
-          "name": "*.tdl.sh",
+          "target": "\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588",
+          "uri": null,
+          "name": "\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588",
           "ipAddress": null
         },
         {
           "type": "ios",
-          "target": "Tidal Client for iOS",
-          "uri": "",
-          "name": "Tidal Client for iOS",
+          "target": "\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588",
+          "uri": null,
+          "name": "\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588",
           "ipAddress": null
         },
         {
           "type": "android",
-          "target": "Tidal Client for Android",
-          "uri": "",
-          "name": "Tidal Client for Android",
+          "target": "\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588",
+          "uri": null,
+          "name": "\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588",
           "ipAddress": null
         },
         {
           "type": "other",
-          "target": "https://offer.tidal.com/download",
-          "uri": "https://offer.tidal.com/download",
-          "name": "Tidal Desktop Client",
+          "target": "\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588",
+          "uri": null,
+          "name": "\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588",
           "ipAddress": null
         },
         {
           "type": "other",
-          "target": "Tidal Official Clients (e.g. Sonos integration, Tesla integration, etc.)",
-          "uri": "",
-          "name": "Tidal Official Clients (e.g. Sonos integration, Tesla integration, etc.)",
+          "target": "\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588",
+          "uri": null,
+          "name": "\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588",
           "ipAddress": null
         }
       ],
       "out_of_scope": [
         {
           "type": "other",
-          "target": "https://developer.tidal.com",
-          "uri": "https://developer.tidal.com",
-          "name": "developer.tidal.com",
+          "target": "\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588",
+          "uri": null,
+          "name": "\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588",
           "ipAddress": ""
         },
         {
           "type": "other",
-          "target": "https://embed.tidal.com",
-          "uri": "https://embed.tidal.com",
-          "name": "embed.tidal.com",
+          "target": "\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588",
+          "uri": null,
+          "name": "\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588",
           "ipAddress": ""
         }
       ]
@@ -30513,6 +30815,75 @@
     }
   },
   {
+    "name": "Vectors Bug Bounty ",
+    "url": "https://bugcrowd.com/engagements/vectors-marketplace",
+    "allows_disclosure": false,
+    "managed_by_bugcrowd": true,
+    "safe_harbor": "full",
+    "max_payout": 1500,
+    "targets": {
+      "in_scope": [
+        {
+          "type": "website",
+          "target": "https://marketplace.atlassian.com/apps/1212124/spectrum-formatting-macros?hosting=cloud",
+          "uri": "https://marketplace.atlassian.com/apps/1212124/spectrum-formatting-macros?hosting=cloud",
+          "name": "https://marketplace.atlassian.com/apps/1212124/spectrum-formatting-macros?hosting=cloud",
+          "ipAddress": null
+        },
+        {
+          "type": "website",
+          "target": "https://marketplace.atlassian.com/apps/1211894/ideation?hosting=cloud&tab=overview",
+          "uri": "https://marketplace.atlassian.com/apps/1211894/ideation?hosting=cloud&tab=overview",
+          "name": "https://marketplace.atlassian.com/apps/1211894/ideation?hosting=cloud&tab=overview",
+          "ipAddress": null
+        },
+        {
+          "type": "website",
+          "target": "https://marketplace.atlassian.com/apps/1211855/faq-for-confluence?hosting=cloud&tab=overview",
+          "uri": "https://marketplace.atlassian.com/apps/1211855/faq-for-confluence?hosting=cloud&tab=overview",
+          "name": "https://marketplace.atlassian.com/apps/1211855/faq-for-confluence?hosting=cloud&tab=overview",
+          "ipAddress": ""
+        },
+        {
+          "type": "website",
+          "target": "https://marketplace.atlassian.com/apps/1212012/discussion-for-confluence?hosting=cloud&tab=overview",
+          "uri": "https://marketplace.atlassian.com/apps/1212012/discussion-for-confluence?hosting=cloud&tab=overview",
+          "name": "https://marketplace.atlassian.com/apps/1212012/discussion-for-confluence?hosting=cloud&tab=overview",
+          "ipAddress": ""
+        },
+        {
+          "type": "website",
+          "target": "https://marketplace.atlassian.com/apps/1217652/content-status-for-confluence?hosting=cloud&tab=overview",
+          "uri": "https://marketplace.atlassian.com/apps/1217652/content-status-for-confluence?hosting=cloud&tab=overview",
+          "name": "https://marketplace.atlassian.com/apps/1217652/content-status-for-confluence?hosting=cloud&tab=overview",
+          "ipAddress": ""
+        },
+        {
+          "type": "website",
+          "target": "https://marketplace.atlassian.com/apps/1235238/morph-ai-powered-content-formatting-for-confluence?tab=overview&hosting=cloud",
+          "uri": "https://marketplace.atlassian.com/apps/1235238/morph-ai-powered-content-formatting-for-confluence?tab=overview&hosting=cloud",
+          "name": "https://marketplace.atlassian.com/apps/1235238/morph-ai-powered-content-formatting-for-confluence?tab=overview&hosting=cloud",
+          "ipAddress": ""
+        },
+        {
+          "type": "website",
+          "target": "https://marketplace.atlassian.com/apps/1211800/glossary?hosting=cloud",
+          "uri": "https://marketplace.atlassian.com/apps/1211800/glossary?hosting=cloud",
+          "name": "https://marketplace.atlassian.com/apps/1211800/glossary?hosting=cloud",
+          "ipAddress": null
+        },
+        {
+          "type": "website",
+          "target": "https://marketplace.atlassian.com/apps/1235579/comment-toolkit-for-jira?hosting=cloud&tab=overview",
+          "uri": "https://marketplace.atlassian.com/apps/1235579/comment-toolkit-for-jira?hosting=cloud&tab=overview",
+          "name": "https://marketplace.atlassian.com/apps/1235579/comment-toolkit-for-jira?hosting=cloud&tab=overview",
+          "ipAddress": ""
+        }
+      ],
+      "out_of_scope": []
+    }
+  },
+  {
     "name": "Verisign Bug Bounty",
     "url": "https://bugcrowd.com/engagements/verisign",
     "allows_disclosure": true,
@@ -31015,7 +31386,7 @@
     }
   },
   {
-    "name": "weweave UG Marketplace Bug Bounty",
+    "name": "weweave GmbH Marketplace Bug Bounty",
     "url": "https://bugcrowd.com/engagements/we-weave",
     "allows_disclosure": false,
     "managed_by_bugcrowd": true,
@@ -31206,6 +31577,13 @@
       "in_scope": [
         {
           "type": "website",
+          "target": "https://app.web.com",
+          "uri": "https://app.web.com",
+          "name": "app.web.com",
+          "ipAddress": ""
+        },
+        {
+          "type": "website",
           "target": "https://www.networksolutions.com",
           "uri": "https://www.networksolutions.com",
           "name": "www.networksolutions.com",
@@ -31267,13 +31645,6 @@
           "target": "https://*.hostgator.com",
           "uri": "https://*.hostgator.com",
           "name": "*.hostgator.com",
-          "ipAddress": ""
-        },
-        {
-          "type": "website",
-          "target": "https://app.web.com",
-          "uri": "https://app.web.com",
-          "name": "app.web.com",
           "ipAddress": ""
         }
       ]

@@ -1248,6 +1248,36 @@
     }
   },
   {
+    "id": "baca9d50-2fd8-427f-bd56-e67f7f058573",
+    "name": "BMC",
+    "company_handle": "randstad",
+    "handle": "bmc",
+    "url": "https://www.intigriti.com/programs/randstad/bmc/detail",
+    "status": "open",
+    "confidentiality_level": "public",
+    "tacRequired": false,
+    "twoFactorRequired": false,
+    "min_bounty": {
+      "value": 0,
+      "currency": "EUR"
+    },
+    "max_bounty": {
+      "value": 0,
+      "currency": "EUR"
+    },
+    "targets": {
+      "in_scope": [
+        {
+          "type": "wildcard",
+          "endpoint": "*.bmc.nl",
+          "description": null,
+          "impact": "Tier 2"
+        }
+      ],
+      "out_of_scope": []
+    }
+  },
+  {
     "id": "61e0e37c-19cc-4abe-af51-108a78bee995",
     "name": "BMW Group",
     "company_handle": "bmw",
@@ -3105,6 +3135,199 @@
         }
       ],
       "out_of_scope": []
+    }
+  },
+  {
+    "id": "bd22f48d-633e-4b26-bf71-e4778d41b247",
+    "name": "DataCamp",
+    "company_handle": "datacamp",
+    "handle": "datacamp",
+    "url": "https://www.intigriti.com/programs/datacamp/datacamp/detail",
+    "status": "open",
+    "confidentiality_level": "public",
+    "tacRequired": false,
+    "twoFactorRequired": false,
+    "min_bounty": {
+      "value": 25,
+      "currency": "EUR"
+    },
+    "max_bounty": {
+      "value": 1500,
+      "currency": "EUR"
+    },
+    "targets": {
+      "in_scope": [
+        {
+          "type": "url",
+          "endpoint": "profiles-api.datacamp.com",
+          "description": null,
+          "impact": "Tier 2"
+        },
+        {
+          "type": "url",
+          "endpoint": "app.datacamp.com/certification",
+          "description": null,
+          "impact": "Tier 2"
+        },
+        {
+          "type": "url",
+          "endpoint": "app.datacamp.com/groups",
+          "description": null,
+          "impact": "Tier 2"
+        },
+        {
+          "type": "url",
+          "endpoint": "app.datacamp.com/learn",
+          "description": null,
+          "impact": "Tier 2"
+        },
+        {
+          "type": "url",
+          "endpoint": "assessment-api.datacamp.com",
+          "description": null,
+          "impact": "Tier 2"
+        },
+        {
+          "type": "url",
+          "endpoint": "assessment-v2.datacamp.com ",
+          "description": null,
+          "impact": "Tier 2"
+        },
+        {
+          "type": "url",
+          "endpoint": "assessment.datacamp.com",
+          "description": null,
+          "impact": "Tier 2"
+        },
+        {
+          "type": "url",
+          "endpoint": "campus.datacamp.com",
+          "description": null,
+          "impact": "Tier 2"
+        },
+        {
+          "type": "android",
+          "endpoint": "com.datacamp",
+          "description": null,
+          "impact": "Tier 2"
+        },
+        {
+          "type": "ios",
+          "endpoint": "https://apps.apple.com/au/app/datacamp-learn-data-science/id1263413087",
+          "description": null,
+          "impact": "Tier 2"
+        },
+        {
+          "type": "url",
+          "endpoint": "practice.datacamp.com",
+          "description": null,
+          "impact": "Tier 2"
+        },
+        {
+          "type": "url",
+          "endpoint": "projects.datacamp.com",
+          "description": null,
+          "impact": "Tier 2"
+        },
+        {
+          "type": "url",
+          "endpoint": "www.datacamp.com",
+          "description": null,
+          "impact": "Tier 2"
+        },
+        {
+          "type": "url",
+          "endpoint": "www.datacamp.com/datalab",
+          "description": null,
+          "impact": "Tier 2"
+        },
+        {
+          "type": "wildcard",
+          "endpoint": "*.datacamp.com",
+          "description": null,
+          "impact": "Tier 3"
+        }
+      ],
+      "out_of_scope": [
+        {
+          "type": "wildcard",
+          "endpoint": "*.it.datacamp.com",
+          "description": null,
+          "impact": "Out of scope"
+        },
+        {
+          "type": "url",
+          "endpoint": "app.datacamp.com/recruit",
+          "description": null,
+          "impact": "Out of scope"
+        },
+        {
+          "type": "url",
+          "endpoint": "ast-viewer.datacamp.com",
+          "description": null,
+          "impact": "Out of scope"
+        },
+        {
+          "type": "url",
+          "endpoint": "confluence.datacamp.com",
+          "description": null,
+          "impact": "Out of scope"
+        },
+        {
+          "type": "url",
+          "endpoint": "dccertified.datacamp.com",
+          "description": null,
+          "impact": "Out of scope"
+        },
+        {
+          "type": "url",
+          "endpoint": "intranet.datacamp.com",
+          "description": null,
+          "impact": "Out of scope"
+        },
+        {
+          "type": "url",
+          "endpoint": "jira.datacamp.com",
+          "description": null,
+          "impact": "Out of scope"
+        },
+        {
+          "type": "url",
+          "endpoint": "links.datacamp.com",
+          "description": null,
+          "impact": "Out of scope"
+        },
+        {
+          "type": "url",
+          "endpoint": "rdocumentation.datacamp.com",
+          "description": null,
+          "impact": "Out of scope"
+        },
+        {
+          "type": "url",
+          "endpoint": "signature.datacamp.com",
+          "description": null,
+          "impact": "Out of scope"
+        },
+        {
+          "type": "url",
+          "endpoint": "status.datacamp.com",
+          "description": null,
+          "impact": "Out of scope"
+        },
+        {
+          "type": "url",
+          "endpoint": "support.datacamp.com",
+          "description": null,
+          "impact": "Out of scope"
+        },
+        {
+          "type": "url",
+          "endpoint": "talent-jobs-api.datacamp.com",
+          "description": null,
+          "impact": "Out of scope"
+        }
+      ]
     }
   },
   {
@@ -10528,7 +10751,7 @@
         },
         {
           "type": "wildcard",
-          "endpoint": "*.gantnercloud.com",
+          "endpoint": "*.gantner.cloud",
           "description": null,
           "impact": "Tier 2"
         },
@@ -11517,6 +11740,60 @@
           "endpoint": "*.tekioncloud.com",
           "description": null,
           "impact": "No Bounty"
+        }
+      ],
+      "out_of_scope": []
+    }
+  },
+  {
+    "id": "82be1e9b-f9ab-45e7-82fd-9ba65be37645",
+    "name": "Tempo-Team ",
+    "company_handle": "randstad",
+    "handle": "tempo-team",
+    "url": "https://www.intigriti.com/programs/randstad/tempo-team/detail",
+    "status": "open",
+    "confidentiality_level": "public",
+    "tacRequired": false,
+    "twoFactorRequired": false,
+    "min_bounty": {
+      "value": 0,
+      "currency": "EUR"
+    },
+    "max_bounty": {
+      "value": 0,
+      "currency": "EUR"
+    },
+    "targets": {
+      "in_scope": [
+        {
+          "type": "wildcard",
+          "endpoint": "*.tempo-team.*",
+          "description": null,
+          "impact": "Tier 2"
+        },
+        {
+          "type": "url",
+          "endpoint": "Any related Tempo-Team domain",
+          "description": null,
+          "impact": "Tier 2"
+        },
+        {
+          "type": "url",
+          "endpoint": "www.tempo-team.be",
+          "description": "\ud83c\uddf3\ud83c\uddf1\ud83c\uddeb\ud83c\uddf7",
+          "impact": "Tier 2"
+        },
+        {
+          "type": "url",
+          "endpoint": "www.tempo-team.com",
+          "description": "\ud83c\udde9\ud83c\uddea",
+          "impact": "Tier 2"
+        },
+        {
+          "type": "url",
+          "endpoint": "www.tempo-team.nl",
+          "description": "\ud83c\uddf3\ud83c\uddf1",
+          "impact": "Tier 2"
         }
       ],
       "out_of_scope": []
@@ -13205,78 +13482,6 @@
     }
   },
   {
-    "id": "c5a9bbd6-2139-4ec9-bdcc-8e2a5082fd7e",
-    "name": "Venly",
-    "company_handle": "arkane",
-    "handle": "arkanenetwork",
-    "url": "https://www.intigriti.com/programs/arkane/arkanenetwork/detail",
-    "status": "open",
-    "confidentiality_level": "public",
-    "tacRequired": false,
-    "twoFactorRequired": false,
-    "min_bounty": {
-      "value": 50,
-      "currency": "EUR"
-    },
-    "max_bounty": {
-      "value": 5000,
-      "currency": "EUR"
-    },
-    "targets": {
-      "in_scope": [
-        {
-          "type": "url",
-          "endpoint": "api-wallet.venly.io",
-          "description": null,
-          "impact": "Tier 2"
-        },
-        {
-          "type": "url",
-          "endpoint": "api.arkane.network",
-          "description": null,
-          "impact": "Tier 2"
-        },
-        {
-          "type": "url",
-          "endpoint": "connect.arkane.network ",
-          "description": null,
-          "impact": "Tier 2"
-        },
-        {
-          "type": "url",
-          "endpoint": "connect.venly.io",
-          "description": null,
-          "impact": "Tier 2"
-        },
-        {
-          "type": "url",
-          "endpoint": "login.arkane.network",
-          "description": null,
-          "impact": "Tier 2"
-        },
-        {
-          "type": "url",
-          "endpoint": "login.venly.io",
-          "description": null,
-          "impact": "Tier 2"
-        },
-        {
-          "type": "url",
-          "endpoint": "wallet.venly.io",
-          "description": null,
-          "impact": "Tier 2"
-        },
-        {
-          "type": "url",
-          "endpoint": "api-wallet-sandbox.venly.io",
-          "description": null,
-          "impact": "Tier 3"
-        }
-      ],
-      "out_of_scope": []
-    }
-  },
-  {
     "id": "3e51fb18-7082-4ce5-85d0-2bd889b5ed4e",
     "name": "Visma Responsible Disclosure",
     "company_handle": "visma",
@@ -14352,6 +14557,12 @@
           "impact": null
         },
         {
+          "type": "url",
+          "endpoint": "id-watsonsbesti.com",
+          "description": "This is an AI Chatbot linked to the Watsons Indonesia e-commerce website www.watsons.co.id.",
+          "impact": null
+        },
+        {
           "type": "wildcard",
           "endpoint": "*.watsons.co.id",
           "description": "This asset contains all other applications on this wildcard not explicitly mentioned elsewhere in the scope",
@@ -14764,6 +14975,36 @@
           "endpoint": "Any Wartsila related domain ",
           "description": "Please verify ownership or legitimate association via WHOIS, reverse DNS, delegated DNS, or other reliable means to ensure the asset is intended for W\u00e4rtsil\u00e4 use and that W\u00e4rtsil\u00e4 is the appropriate recipient of the disclosure.",
           "impact": "No Bounty"
+        }
+      ],
+      "out_of_scope": []
+    }
+  },
+  {
+    "id": "bbc2d49d-6b11-40af-9746-aefa64756928",
+    "name": "Yacht",
+    "company_handle": "randstad",
+    "handle": "yacht",
+    "url": "https://www.intigriti.com/programs/randstad/yacht/detail",
+    "status": "open",
+    "confidentiality_level": "public",
+    "tacRequired": false,
+    "twoFactorRequired": false,
+    "min_bounty": {
+      "value": 0,
+      "currency": "EUR"
+    },
+    "max_bounty": {
+      "value": 0,
+      "currency": "EUR"
+    },
+    "targets": {
+      "in_scope": [
+        {
+          "type": "wildcard",
+          "endpoint": "*.yacht.nl",
+          "description": null,
+          "impact": "Tier 2"
         }
       ],
       "out_of_scope": []

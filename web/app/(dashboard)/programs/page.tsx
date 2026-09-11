@@ -29,10 +29,25 @@ export default function ProgramsPage() {
   const [viewMode, setViewMode] = useState<"stream" | "grid">("stream");
   const pageSize = 30;
 
-  // Selected Program Modal/Drawer for inspecting scope rules
   const [selectedProgram, setSelectedProgram] = useState<SecurityProgram | null>(null);
   const [programDetailLoading, setProgramDetailLoading] = useState(false);
   const [programDetailData, setProgramDetailData] = useState<any | null>(null);
+  const [syncing, setSyncing] = useState(false);
+
+  const handleSync = async () => {
+    setSyncing(true);
+    try {
+      await apiFetch("/api/v1/programs/sync", { method: "POST" });
+      setTimeout(async () => {
+        await fetchStats();
+        await fetchPrograms();
+        setSyncing(false);
+      }, 3000);
+    } catch (err) {
+      console.error("Failed to sync programs:", err);
+      setSyncing(false);
+    }
+  };
 
   const fetchStats = async () => {
     try {
@@ -124,6 +139,26 @@ export default function ProgramsPage() {
         </div>
 
         <div className="flex items-center gap-3 flex-shrink-0">
+          <button
+            onClick={handleSync}
+            disabled={syncing}
+            className="flex items-center gap-2 rounded-xl border border-emerald-800/60 bg-emerald-950/40 px-3.5 py-2.5 text-xs font-bold text-emerald-400 hover:bg-emerald-900/50 hover:border-emerald-700 transition-colors font-display disabled:opacity-50"
+          >
+            <svg
+              className={`h-3.5 w-3.5 ${syncing ? "animate-spin" : ""}`}
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
+              />
+            </svg>
+            {syncing ? "SYNCING REGISTRY..." : "SYNC REGISTRY"}
+          </button>
           <Link
             href="/companies"
             className="flex items-center gap-2 rounded-xl border border-slate-800 bg-slate-900 px-3.5 py-2.5 text-xs font-bold text-slate-300 hover:bg-slate-800 transition-colors font-display"
