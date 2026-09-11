@@ -38,9 +38,9 @@ export default function ContactPage() {
       <div className="mt-14 grid grid-cols-1 gap-10 lg:grid-cols-12">
         {/* Contact Info & Official Channels (Span 5) */}
         <div className="lg:col-span-5 space-y-6">
-          <div className="rounded-3xl border border-white/[0.08] bg-slate-950/80 p-6 backdrop-blur-xl shadow-2xl space-y-5">
+          <div className="rounded-3xl border border-white/[0.08] bg-neutral-950/80 p-6 backdrop-blur-xl shadow-2xl space-y-5">
             <h2 className="text-lg font-bold text-white">Direct Intelligence Channels</h2>
-            <p className="text-xs text-slate-300">
+            <p className="text-xs text-neutral-400">
               For fastest response, reach us directly via our verified official channels:
             </p>
 
@@ -80,7 +80,7 @@ export default function ContactPage() {
         </div>
 
         {/* Interactive Contact Form (Span 7) */}
-        <div className="lg:col-span-7 rounded-3xl border border-white/[0.08] bg-slate-950/80 p-6 sm:p-8 backdrop-blur-xl shadow-2xl">
+        <div className="lg:col-span-7 rounded-3xl border border-white/[0.08] bg-neutral-950/80 p-6 sm:p-8 backdrop-blur-xl shadow-2xl">
           {submitted ? (
             <div className="py-12 text-center space-y-4">
               <div className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xl font-bold">

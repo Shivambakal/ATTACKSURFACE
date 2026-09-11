@@ -65,7 +65,7 @@ export default function WhiteAesthetic3DBackground() {
     <div
       ref={containerRef}
       className={`fixed inset-0 pointer-events-none z-0 overflow-hidden transition-colors duration-700 ${
-        isWhiteAesthetic ? "bg-[#f8fafc]" : "bg-[#02050b]"
+        isWhiteAesthetic ? "bg-[#f8fafc]" : "bg-[#000000]"
       }`}
       style={{ perspective: "1200px" }}
       aria-hidden="true"
