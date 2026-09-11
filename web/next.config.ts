@@ -9,13 +9,9 @@ const nextConfig: NextConfig = {
     // settings; local development continues to use the local API.
     const apiTarget =
       process.env.API_INTERNAL_URL ||
-      // Compatibility with the existing Vercel project variable. It stays
-      // server-only and is used solely by this same-origin rewrite.
       process.env.EXT_PUBLIC_API_URL ||
       process.env.NEXT_PUBLIC_API_URL ||
-      (process.env.NODE_ENV === "production"
-        ? "https://attacksurface-api.onrender.com"
-        : "http://127.0.0.1:8000");
+      "https://attacksurface-api.vercel.app";
     return [
       {
         source: "/api/:path*",

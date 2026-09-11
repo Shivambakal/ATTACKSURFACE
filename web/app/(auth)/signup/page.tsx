@@ -33,7 +33,7 @@ const DEFAULT_POPULAR_COMPANIES: CanonicalCompanyOption[] = [
 
 export default function SignupPage() {
   const router = useRouter();
-  const { signup } = useAuth();
+  const { signup, login } = useAuth();
 
   // Stepper state (1: Credentials, 2: Companies, 3: Payment)
   const [currentStep, setCurrentStep] = useState(1);
@@ -161,8 +161,17 @@ export default function SignupPage() {
     setGeneralError(null);
 
     try {
-      // 1. Sign up user
-      await signup(email, password);
+      // 1. Sign up user (or login seamlessly if already registered)
+      try {
+        await signup(email, password);
+      } catch (signupErr: any) {
+        const msg = String(signupErr?.message || "").toLowerCase();
+        if (msg.includes("already registered") || msg.includes("already exists")) {
+          await login(email, password);
+        } else {
+          throw signupErr;
+        }
+      }
 
       // 2. Persist profile info & pinned companies to preferences
       try {
