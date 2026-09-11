@@ -19,7 +19,7 @@ export default function AuthLayout({
         <ThemeToggle />
       </div>
 
-      <div className="relative z-10 w-full max-w-md animate-surface-in">
+      <div className="relative z-10 w-full max-w-2xl animate-surface-in transition-all duration-300">
         {/* Branding header */}
         <div className="mb-6 text-center">
           <Link href="/" className="inline-flex flex-col items-center group">
