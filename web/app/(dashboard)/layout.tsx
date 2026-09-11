@@ -8,7 +8,6 @@ import { PreferencesProvider, usePreferences } from "@/lib/preferences";
 import AdminSidebar from "@/components/AdminSidebar";
 import NormalSidebar from "@/components/NormalSidebar";
 import GlobalSpatialBackground from "@/components/GlobalSpatialBackground";
-import DigitalClock from "@/components/DigitalClock";
 import CommandPalette from "@/components/CommandPalette";
 import NotificationCenter from "@/components/NotificationCenter";
 import { apiFetch } from "@/lib/api";
@@ -252,13 +251,8 @@ function DashboardShell({ children }: { children: React.ReactNode }) {
             </kbd>
           </button>
 
-          {/* Right: UTC Digital Clock, Bell, Theme Toggle, User Avatar */}
+          {/* Right: Bell, Theme Toggle, User Avatar */}
           <div className="flex items-center gap-2.5">
-
-            {/* Live Digital Clock */}
-            <div className="hidden xl:block">
-              <DigitalClock />
-            </div>
 
             {/* Notification Dispatch Bell */}
             <button
