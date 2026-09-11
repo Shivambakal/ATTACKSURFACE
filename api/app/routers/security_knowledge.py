@@ -13,7 +13,7 @@ from typing import Any, Optional
 
 from fastapi import APIRouter, Depends, HTTPException, Query
 from sqlalchemy import func, or_
-from sqlalchemy.orm import Session
+from sqlalchemy.orm import Session, selectinload
 
 from app.db import get_db
 from app.models import (
@@ -371,8 +371,12 @@ def get_trending_advisories(
     """Returns top trending vulnerabilities ranked by recency, exploitation, and ransomware indicators."""
     advisories = (
         db.query(SecurityAdvisory)
+        .options(
+            selectinload(SecurityAdvisory.cwes),
+            selectinload(SecurityAdvisory.owasp_categories),
+        )
         .order_by(SecurityAdvisory.date_added.desc().nullslast())
-        .limit(limit * 2)
+        .limit(limit)
         .all()
     )
     results = []
