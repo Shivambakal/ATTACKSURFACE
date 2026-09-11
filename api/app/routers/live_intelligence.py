@@ -24,6 +24,7 @@ from app.db import get_db
 from app.models import (
     Asset,
     Change,
+    ChangeCluster,
     ChangeEvidence,
     Company,
     ResearchSignal,
