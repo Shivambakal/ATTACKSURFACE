@@ -1,0 +1,16 @@
+name: 10-Minute Live Intelligence Pipeline Runner
+
+on:
+  schedule:
+    - cron: '*/10 * * * *'
+  workflow_dispatch:
+
+jobs:
+  run-pipeline:
+    name: Execute Intelligence Collection Cycle
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger Live Pipeline Cycle
+        run: |
+          echo "Triggering live intelligence pipeline cycle..."
+          curl -s -f -m 50 -X POST "https://attacksurface-api.vercel.app/api/v1/scheduler/run?limit=15&force=false&run_ai=true" || true
