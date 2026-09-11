@@ -2,15 +2,19 @@
 
 import React, { useEffect, useState, useCallback } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { apiFetch } from "@/lib/api";
 import { Target } from "@/lib/types";
+import AnimatedList from "@/components/AnimatedList";
 
 export default function TargetsPage() {
+  const router = useRouter();
   const [targets, setTargets] = useState<Target[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [searchTerm, setSearchTerm] = useState("");
   const [statusFilter, setStatusFilter] = useState("ALL");
+  const [viewMode, setViewMode] = useState<"stream" | "table">("stream");
 
   // Add Target modal state
   const [showModal, setShowModal] = useState(false);
@@ -208,38 +212,163 @@ export default function TargetsPage() {
           )}
         </div>
 
-        <div className="flex items-center gap-2">
-          <span className="font-mono text-[11px] text-slate-400">STATUS:</span>
-          {["ALL", "ACTIVE", "PAUSED"].map((status) => (
+        <div className="flex items-center gap-3">
+          {/* View Mode Switcher */}
+          <div className="flex items-center gap-1 rounded-xl border border-slate-800 bg-slate-950 p-1">
             <button
-              key={status}
-              onClick={() => setStatusFilter(status)}
-              className={`rounded px-2.5 py-1 font-mono text-[10px] font-semibold transition ${
-                statusFilter === status
-                  ? "bg-cyan-500 text-slate-950"
-                  : "bg-slate-800 text-slate-400 hover:text-slate-200"
+              type="button"
+              onClick={() => setViewMode("stream")}
+              className={`flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-semibold transition ${
+                viewMode === "stream"
+                  ? "bg-cyan-500 text-slate-950 font-bold shadow-sm"
+                  : "text-slate-400 hover:text-white"
               }`}
+              title="Animated Stream List"
             >
-              {status}
+              <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+              </svg>
+              Stream List
             </button>
-          ))}
+            <button
+              type="button"
+              onClick={() => setViewMode("table")}
+              className={`flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-semibold transition ${
+                viewMode === "table"
+                  ? "bg-cyan-500 text-slate-950 font-bold shadow-sm"
+                  : "text-slate-400 hover:text-white"
+              }`}
+              title="Table View"
+            >
+              <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 10h18M3 14h18m-9-4v8m-7 0h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
+              </svg>
+              Table
+            </button>
+          </div>
+
+          <div className="flex items-center gap-2">
+            <span className="font-mono text-[11px] text-slate-400">STATUS:</span>
+            {["ALL", "ACTIVE", "PAUSED"].map((status) => (
+              <button
+                key={status}
+                onClick={() => setStatusFilter(status)}
+                className={`rounded px-2.5 py-1 font-mono text-[10px] font-semibold transition ${
+                  statusFilter === status
+                    ? "bg-cyan-500 text-slate-950"
+                    : "bg-slate-800 text-slate-400 hover:text-slate-200"
+                }`}
+              >
+                {status}
+              </button>
+            ))}
+          </div>
         </div>
       </div>
 
-      {/* Target Table */}
-      <div className="overflow-hidden rounded-xl border border-slate-800 bg-slate-900/40 shadow">
-        {loading ? (
-          <div className="py-16 text-center font-mono text-xs text-slate-400">
-            RETRIEVING TARGET REGISTRY...
+      {/* Target Registry View */}
+      {loading ? (
+        <div className="py-16 text-center font-mono text-xs text-slate-400 rounded-xl border border-slate-800 bg-slate-900/40">
+          <div className="inline-block h-6 w-6 animate-spin rounded-full border-2 border-cyan-500 border-t-transparent mb-2" />
+          <div>RETRIEVING TARGET REGISTRY...</div>
+        </div>
+      ) : filteredTargets.length === 0 ? (
+        <div className="py-16 text-center rounded-xl border border-slate-800 bg-slate-900/40">
+          <p className="text-sm text-slate-400">No targets found matching criteria.</p>
+          <p className="mt-1 text-xs text-slate-500">
+            {searchTerm ? "Try adjusting your search filter." : "Click Add Target to register your first domain."}
+          </p>
+        </div>
+      ) : viewMode === "stream" ? (
+        <div className="rounded-2xl border border-slate-800/80 bg-slate-900/30 p-2 sm:p-3 backdrop-blur-md">
+          <div className="flex items-center justify-between px-3 py-2 text-xs font-mono text-slate-400 border-b border-slate-800/60 mb-2">
+            <div className="flex items-center gap-2">
+              <span className="h-2 w-2 rounded-full bg-cyan-400 animate-pulse" />
+              <span className="font-bold text-slate-200">INTERACTIVE TARGET STREAM</span>
+              <span>&bull; {filteredTargets.length} Monitored Assets</span>
+            </div>
+            <div className="hidden sm:flex items-center gap-2 text-[11px] text-slate-400">
+              <span>Use <kbd className="px-1.5 py-0.5 rounded bg-slate-800 border border-slate-700 text-slate-200 font-bold">↑</kbd> <kbd className="px-1.5 py-0.5 rounded bg-slate-800 border border-slate-700 text-slate-200 font-bold">↓</kbd> or <kbd className="px-1.5 py-0.5 rounded bg-slate-800 border border-slate-700 text-slate-200 font-bold">Enter</kbd> to open</span>
+            </div>
           </div>
-        ) : filteredTargets.length === 0 ? (
-          <div className="py-16 text-center">
-            <p className="text-sm text-slate-400">No targets found matching criteria.</p>
-            <p className="mt-1 text-xs text-slate-500">
-              {searchTerm ? "Try adjusting your search filter." : "Click Add Target to register your first domain."}
-            </p>
-          </div>
-        ) : (
+
+          <AnimatedList
+            items={filteredTargets}
+            maxHeight="650px"
+            onItemSelect={(t) => router.push(`/targets/${t.id}`)}
+            renderItem={(target, index, isSelected) => (
+              <div
+                className={`p-4 sm:p-5 rounded-2xl border transition-all duration-200 backdrop-blur-md flex flex-col md:flex-row md:items-center md:justify-between gap-4 ${
+                  isSelected
+                    ? "bg-cyan-950/40 border-cyan-500/70 shadow-lg shadow-cyan-500/15 ring-1 ring-cyan-500/50"
+                    : "bg-slate-900/80 border-slate-800/80 hover:border-cyan-500/40 hover:bg-slate-900"
+                }`}
+              >
+                {/* Domain Info */}
+                <div className="flex items-start sm:items-center gap-3.5 min-w-0">
+                  <div className="h-10 w-10 sm:h-12 sm:w-12 rounded-xl bg-gradient-to-br from-cyan-950 to-slate-900 border border-cyan-800/50 flex items-center justify-center font-mono font-extrabold text-cyan-300 text-xs sm:text-sm flex-shrink-0 shadow-inner">
+                    {target.scope_type === "WILDCARD" ? "*." : target.domain.slice(0, 2).toUpperCase()}
+                  </div>
+                  <div className="min-w-0">
+                    <div className="flex items-center gap-2 flex-wrap">
+                      <span className="text-base font-bold text-white group-hover:text-cyan-400 transition font-mono truncate">
+                        {target.domain}
+                      </span>
+                      {target.scope_type && (
+                        <span className="rounded bg-slate-800/90 px-2 py-0.5 font-mono text-[10px] text-cyan-400 border border-slate-700">
+                          {target.scope_type}
+                        </span>
+                      )}
+                      <span className="rounded bg-emerald-950/80 border border-emerald-800/60 px-2 py-0.5 font-mono text-[10px] font-semibold text-emerald-400">
+                        {target.monitoring_status || "ACTIVE"}
+                      </span>
+                    </div>
+                    <div className="mt-1 flex items-center gap-2.5 text-xs text-slate-400 font-sans">
+                      <span className="text-slate-200 font-medium">{target.company_name || "Independent"}</span>
+                      <span>&bull; {target.program_source || "Public Scope"}</span>
+                      <span className="hidden sm:inline font-mono text-slate-500">&bull; Enrolled {new Date(target.created_at).toLocaleDateString()}</span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Authorization & Actions */}
+                <div className="flex items-center justify-between md:justify-end gap-3 sm:gap-4 pt-2 md:pt-0 border-t md:border-t-0 border-slate-800/60">
+                  <div className="hidden lg:block text-right font-mono text-xs">
+                    <div className="max-w-[200px] truncate text-slate-300" title={target.authorization_source || undefined}>
+                      {target.authorization_source || "Bug Bounty Policy"}
+                    </div>
+                    <span className="inline-flex items-center gap-1 text-[10px] text-emerald-400">
+                      <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
+                      RECORD PROVEN
+                    </span>
+                  </div>
+
+                  <div className="flex items-center gap-2 flex-shrink-0">
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleTakeSnapshot(target.id, target.domain);
+                      }}
+                      disabled={snapshotLoadingId === target.id}
+                      className="rounded-xl border border-slate-700 bg-slate-800 px-3 py-2 font-mono text-xs text-slate-200 hover:border-cyan-500 hover:text-cyan-300 disabled:opacity-40 transition"
+                    >
+                      {snapshotLoadingId === target.id ? "COLLECTING..." : "SNAPSHOT"}
+                    </button>
+                    <Link
+                      href={`/targets/${target.id}`}
+                      onClick={(e) => e.stopPropagation()}
+                      className="rounded-xl bg-cyan-500/10 border border-cyan-500/30 px-3.5 py-2 font-mono text-xs font-semibold text-cyan-300 hover:bg-cyan-500 hover:text-slate-950 transition"
+                    >
+                      OVERVIEW →
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            )}
+          />
+        </div>
+      ) : (
+        <div className="overflow-hidden rounded-xl border border-slate-800 bg-slate-900/40 shadow">
           <div className="overflow-x-auto">
             <table className="w-full text-left font-sans">
               <thead className="border-b border-slate-800 bg-slate-950/60 font-mono text-[11px] text-slate-400">
@@ -328,8 +457,8 @@ export default function TargetsPage() {
               </tbody>
             </table>
           </div>
-        )}
-      </div>
+        </div>
+      )}
 
       {/* Add Target Modal Dialog */}
       {showModal && (

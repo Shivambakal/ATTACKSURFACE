@@ -2,9 +2,11 @@
 
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { apiFetch } from "@/lib/api";
 import { Company } from "@/lib/types";
 import ModernFilterDropdown from "@/components/ModernFilterDropdown";
+import AnimatedList, { AnimatedItem } from "@/components/AnimatedList";
 
 interface CompanyStats {
   canonical_companies: number;
@@ -15,6 +17,7 @@ interface CompanyStats {
 }
 
 export default function CompaniesPage() {
+  const router = useRouter();
   const [companies, setCompanies] = useState<Company[]>([]);
   const [stats, setStats] = useState<CompanyStats | null>(null);
   const [loading, setLoading] = useState(true);
@@ -22,6 +25,7 @@ export default function CompaniesPage() {
   const [selectedIndustry, setSelectedIndustry] = useState<string>("ALL");
   const [totalCount, setTotalCount] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
+  const [viewMode, setViewMode] = useState<"stream" | "grid">("stream");
   const pageSize = 24;
 
   // Add Company Modal State
@@ -237,6 +241,40 @@ export default function CompaniesPage() {
         </div>
 
         <div className="flex items-center gap-3 shrink-0">
+          {/* View Mode Switcher */}
+          <div className="flex items-center gap-1 rounded-xl border border-slate-800 bg-slate-950 p-1">
+            <button
+              type="button"
+              onClick={() => setViewMode("stream")}
+              className={`flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-semibold transition ${
+                viewMode === "stream"
+                  ? "bg-cyan-500 text-slate-950 font-bold shadow-sm"
+                  : "text-slate-400 hover:text-white"
+              }`}
+              title="Animated Stream List with Top/Bottom Gradients & Keyboard Navigation"
+            >
+              <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+              </svg>
+              Stream List
+            </button>
+            <button
+              type="button"
+              onClick={() => setViewMode("grid")}
+              className={`flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-semibold transition ${
+                viewMode === "grid"
+                  ? "bg-cyan-500 text-slate-950 font-bold shadow-sm"
+                  : "text-slate-400 hover:text-white"
+              }`}
+              title="Animated Card Grid"
+            >
+              <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
+              </svg>
+              Grid
+            </button>
+          </div>
+
           <ModernFilterDropdown
             label="Sector"
             value={selectedIndustry}
@@ -250,7 +288,7 @@ export default function CompaniesPage() {
         </div>
       </div>
 
-      {/* Company Grid */}
+      {/* Company List / Grid */}
       {loading ? (
         <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
           {[1, 2, 3, 4, 5, 6].map((i) => (
@@ -269,91 +307,193 @@ export default function CompaniesPage() {
         </div>
       ) : (
         <div className="space-y-6">
-          <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
-            {paginatedCompanies.map((c) => (
-              <div
-                key={c.id}
-                className="flex flex-col justify-between rounded-2xl border border-slate-800/90 bg-slate-900/60 p-5 hover:border-cyan-500/50 transition-all shadow-md group card-3d-interactive"
-              >
-                <div>
-                  <div className="flex items-start justify-between gap-3">
-                    <div>
-                      <Link
-                        href={`/companies/${c.id}`}
-                        className="text-base font-bold text-white group-hover:text-cyan-400 transition-colors font-display"
-                      >
-                        {c.name}
-                      </Link>
-                      <div className="mt-0.5 flex items-center gap-2">
-                        <span className="font-mono text-xs text-cyan-300">{c.canonical_domain}</span>
-                        {c.country && (
-                          <span className="text-[10px] text-slate-500 font-mono">({c.country})</span>
-                        )}
+          {viewMode === "stream" ? (
+            <div className="rounded-2xl border border-slate-800/80 bg-slate-900/30 p-2 sm:p-3 backdrop-blur-md">
+              <div className="flex items-center justify-between px-3 py-2 text-xs font-mono text-slate-400 border-b border-slate-800/60 mb-2">
+                <div className="flex items-center gap-2">
+                  <span className="h-2 w-2 rounded-full bg-cyan-400 animate-pulse" />
+                  <span className="font-bold text-slate-200">INTERACTIVE STREAM</span>
+                  <span>&bull; {paginatedCompanies.length} Organizations</span>
+                </div>
+                <div className="hidden sm:flex items-center gap-2 text-[11px] text-slate-400">
+                  <span>Use <kbd className="px-1.5 py-0.5 rounded bg-slate-800 border border-slate-700 text-slate-200 font-bold">↑</kbd> <kbd className="px-1.5 py-0.5 rounded bg-slate-800 border border-slate-700 text-slate-200 font-bold">↓</kbd> or <kbd className="px-1.5 py-0.5 rounded bg-slate-800 border border-slate-700 text-slate-200 font-bold">Enter</kbd> to open</span>
+                </div>
+              </div>
+
+              <AnimatedList
+                items={paginatedCompanies}
+                maxHeight="680px"
+                onItemSelect={(comp) => router.push(`/companies/${comp.id}`)}
+                renderItem={(c, index, isSelected) => (
+                  <div
+                    className={`p-4 sm:p-5 rounded-2xl border transition-all duration-200 backdrop-blur-md flex flex-col md:flex-row md:items-center md:justify-between gap-4 ${
+                      isSelected
+                        ? "bg-cyan-950/40 border-cyan-500/70 shadow-lg shadow-cyan-500/15 ring-1 ring-cyan-500/50"
+                        : "bg-slate-900/80 border-slate-800/80 hover:border-cyan-500/40 hover:bg-slate-900"
+                    }`}
+                  >
+                    {/* Organization Details */}
+                    <div className="flex items-start sm:items-center gap-3.5 min-w-0">
+                      <div className="h-10 w-10 sm:h-12 sm:w-12 rounded-xl bg-gradient-to-br from-cyan-950 to-slate-900 border border-cyan-800/50 flex items-center justify-center font-display font-extrabold text-cyan-300 text-sm sm:text-base flex-shrink-0 shadow-inner">
+                        {c.name.slice(0, 2).toUpperCase()}
+                      </div>
+                      <div className="min-w-0">
+                        <div className="flex items-center gap-2 flex-wrap">
+                          <span className="text-base font-bold text-white group-hover:text-cyan-400 transition font-display truncate">
+                            {c.name}
+                          </span>
+                          {c.bug_bounty_url ? (
+                            <span className="rounded bg-emerald-950/80 border border-emerald-800/60 px-2 py-0.5 font-mono text-[10px] font-bold text-emerald-400">
+                              BOUNTY
+                            </span>
+                          ) : (
+                            <span className="rounded bg-slate-800/80 px-2 py-0.5 font-mono text-[10px] text-slate-400">
+                              DISCLOSURE
+                            </span>
+                          )}
+                          {c.industry && (
+                            <span className="rounded-md bg-slate-800/60 px-2 py-0.5 text-[11px] font-mono text-slate-300">
+                              {c.industry}
+                            </span>
+                          )}
+                        </div>
+                        <div className="mt-1 flex items-center gap-2.5 text-xs text-slate-400 font-mono">
+                          <span className="text-cyan-300 font-medium">{c.canonical_domain}</span>
+                          {c.country && <span>&bull; {c.country}</span>}
+                          <span className="hidden sm:inline text-slate-500">&bull; ID #{c.id}</span>
+                        </div>
                       </div>
                     </div>
 
-                    {c.bug_bounty_url ? (
-                      <span className="rounded bg-emerald-950/80 border border-emerald-800/60 px-2.5 py-0.5 font-mono text-[10px] font-semibold text-emerald-400">
-                        BOUNTY
-                      </span>
-                    ) : (
-                      <span className="rounded bg-slate-800/80 px-2 py-0.5 font-mono text-[10px] text-slate-400">
-                        DISCLOSURE
-                      </span>
-                    )}
+                    {/* Quick Metrics & Actions */}
+                    <div className="flex items-center justify-between md:justify-end gap-3 sm:gap-6 pt-2 md:pt-0 border-t md:border-t-0 border-slate-800/60">
+                      <div className="flex items-center gap-2 sm:gap-3 text-center">
+                        <div className="px-2.5 py-1 rounded-lg bg-slate-950/80 border border-slate-800/60">
+                          <div className="font-mono text-xs font-bold text-white">{c.assets_count ?? 0}</div>
+                          <div className="text-[9px] uppercase tracking-wider text-slate-500 font-mono">Assets</div>
+                        </div>
+                        <div className="px-2.5 py-1 rounded-lg bg-slate-950/80 border border-slate-800/60">
+                          <div className="font-mono text-xs font-bold text-emerald-400">{c.in_scope_assets_count ?? 0}</div>
+                          <div className="text-[9px] uppercase tracking-wider text-slate-500 font-mono">Scope</div>
+                        </div>
+                        <div className="px-2.5 py-1 rounded-lg bg-slate-950/80 border border-slate-800/60">
+                          <div className="font-mono text-xs font-bold text-cyan-400">{c.programs_count ?? (c.bug_bounty_url ? 1 : 0)}</div>
+                          <div className="text-[9px] uppercase tracking-wider text-slate-500 font-mono">Progs</div>
+                        </div>
+                        <div className="px-2.5 py-1 rounded-lg bg-slate-950/80 border border-slate-800/60">
+                          <div className="font-mono text-xs font-bold text-amber-400">{c.signals_count ?? 0}</div>
+                          <div className="text-[9px] uppercase tracking-wider text-slate-500 font-mono">Signals</div>
+                        </div>
+                      </div>
+
+                      <div className="flex items-center gap-2 flex-shrink-0">
+                        <Link
+                          href={`/companies/${c.id}/attack-surface`}
+                          onClick={(e) => e.stopPropagation()}
+                          className="rounded-xl border border-cyan-800/60 bg-cyan-950/40 px-3 py-2 text-xs font-mono font-medium text-cyan-300 hover:bg-cyan-900/60 transition"
+                          title="View Attack Surface Graph"
+                        >
+                          GRAPH
+                        </Link>
+                        <Link
+                          href={`/companies/${c.id}`}
+                          onClick={(e) => e.stopPropagation()}
+                          className="rounded-xl bg-slate-800 hover:bg-cyan-600 hover:text-slate-950 px-3.5 py-2 text-xs font-display font-bold text-slate-200 transition shadow-sm"
+                        >
+                          COMMAND &rarr;
+                        </Link>
+                      </div>
+                    </div>
                   </div>
+                )}
+              />
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+              {paginatedCompanies.map((c, idx) => (
+                <AnimatedItem key={c.id} index={idx} delay={(idx % 6) * 0.04} style={{ marginBottom: 0 }}>
+                  <div className="h-full flex flex-col justify-between rounded-2xl border border-slate-800/90 bg-slate-900/60 p-5 hover:border-cyan-500/50 transition-all shadow-md group card-3d-interactive">
+                    <div>
+                      <div className="flex items-start justify-between gap-3">
+                        <div>
+                          <Link
+                            href={`/companies/${c.id}`}
+                            className="text-base font-bold text-white group-hover:text-cyan-400 transition-colors font-display"
+                          >
+                            {c.name}
+                          </Link>
+                          <div className="mt-0.5 flex items-center gap-2">
+                            <span className="font-mono text-xs text-cyan-300">{c.canonical_domain}</span>
+                            {c.country && (
+                              <span className="text-[10px] text-slate-500 font-mono">({c.country})</span>
+                            )}
+                          </div>
+                        </div>
 
-                  {c.industry && (
-                    <div className="mt-2.5">
-                      <span className="inline-block rounded-md bg-slate-800/60 px-2 py-0.5 text-[11px] font-mono text-slate-300">
-                        {c.industry}
-                      </span>
-                    </div>
-                  )}
+                        {c.bug_bounty_url ? (
+                          <span className="rounded bg-emerald-950/80 border border-emerald-800/60 px-2.5 py-0.5 font-mono text-[10px] font-semibold text-emerald-400">
+                            BOUNTY
+                          </span>
+                        ) : (
+                          <span className="rounded bg-slate-800/80 px-2 py-0.5 font-mono text-[10px] text-slate-400">
+                            DISCLOSURE
+                          </span>
+                        )}
+                      </div>
 
-                  {/* Graph Metrics */}
-                  <div className="mt-4 grid grid-cols-4 gap-1.5 border-t border-slate-800/80 pt-3 text-center">
-                    <div className="rounded-xl bg-slate-950/60 p-2">
-                      <span className="block font-mono text-xs font-bold text-white">{c.assets_count ?? 0}</span>
-                      <span className="block text-[9px] uppercase tracking-wider text-slate-500 font-mono">Assets</span>
+                      {c.industry && (
+                        <div className="mt-2.5">
+                          <span className="inline-block rounded-md bg-slate-800/60 px-2 py-0.5 text-[11px] font-mono text-slate-300">
+                            {c.industry}
+                          </span>
+                        </div>
+                      )}
+
+                      {/* Graph Metrics */}
+                      <div className="mt-4 grid grid-cols-4 gap-1.5 border-t border-slate-800/80 pt-3 text-center">
+                        <div className="rounded-xl bg-slate-950/60 p-2">
+                          <span className="block font-mono text-xs font-bold text-white">{c.assets_count ?? 0}</span>
+                          <span className="block text-[9px] uppercase tracking-wider text-slate-500 font-mono">Assets</span>
+                        </div>
+                        <div className="rounded-xl bg-slate-950/60 p-2">
+                          <span className="block font-mono text-xs font-bold text-emerald-400">{c.in_scope_assets_count ?? 0}</span>
+                          <span className="block text-[9px] uppercase tracking-wider text-slate-500 font-mono">Scope</span>
+                        </div>
+                        <div className="rounded-xl bg-slate-950/60 p-2">
+                          <span className="block font-mono text-xs font-bold text-cyan-400">{c.programs_count ?? (c.bug_bounty_url ? 1 : 0)}</span>
+                          <span className="block text-[9px] uppercase tracking-wider text-slate-500 font-mono">Progs</span>
+                        </div>
+                        <div className="rounded-xl bg-slate-950/60 p-2">
+                          <span className="block font-mono text-xs font-bold text-amber-400">{c.signals_count ?? 0}</span>
+                          <span className="block text-[9px] uppercase tracking-wider text-slate-500 font-mono">Signals</span>
+                        </div>
+                      </div>
                     </div>
-                    <div className="rounded-xl bg-slate-950/60 p-2">
-                      <span className="block font-mono text-xs font-bold text-emerald-400">{c.in_scope_assets_count ?? 0}</span>
-                      <span className="block text-[9px] uppercase tracking-wider text-slate-500 font-mono">Scope</span>
-                    </div>
-                    <div className="rounded-xl bg-slate-950/60 p-2">
-                      <span className="block font-mono text-xs font-bold text-cyan-400">{c.programs_count ?? (c.bug_bounty_url ? 1 : 0)}</span>
-                      <span className="block text-[9px] uppercase tracking-wider text-slate-500 font-mono">Progs</span>
-                    </div>
-                    <div className="rounded-xl bg-slate-950/60 p-2">
-                      <span className="block font-mono text-xs font-bold text-amber-400">{c.signals_count ?? 0}</span>
-                      <span className="block text-[9px] uppercase tracking-wider text-slate-500 font-mono">Signals</span>
+
+                    {/* Action Buttons */}
+                    <div className="mt-4 flex items-center justify-between gap-2 border-t border-slate-800/80 pt-3">
+                      <Link
+                        href={`/companies/${c.id}`}
+                        className="flex-1 rounded-xl bg-slate-800/80 py-2 text-center text-xs font-display font-bold text-slate-200 hover:bg-slate-700 transition-colors"
+                      >
+                        COMMAND CENTER
+                      </Link>
+                      <Link
+                        href={`/companies/${c.id}/attack-surface`}
+                        className="flex items-center justify-center gap-1.5 rounded-xl border border-cyan-800/60 bg-cyan-950/40 px-3.5 py-2 text-xs font-mono font-medium text-cyan-300 hover:bg-cyan-900/60 transition-colors"
+                        title="View Attack Surface Graph"
+                      >
+                        <svg className="h-3.5 w-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                        </svg>
+                        GRAPH
+                      </Link>
                     </div>
                   </div>
-                </div>
-
-                {/* Action Buttons */}
-                <div className="mt-4 flex items-center justify-between gap-2 border-t border-slate-800/80 pt-3">
-                  <Link
-                    href={`/companies/${c.id}`}
-                    className="flex-1 rounded-xl bg-slate-800/80 py-2 text-center text-xs font-display font-bold text-slate-200 hover:bg-slate-700 transition-colors"
-                  >
-                    COMMAND CENTER
-                  </Link>
-                  <Link
-                    href={`/companies/${c.id}/attack-surface`}
-                    className="flex items-center justify-center gap-1.5 rounded-xl border border-cyan-800/60 bg-cyan-950/40 px-3.5 py-2 text-xs font-mono font-medium text-cyan-300 hover:bg-cyan-900/60 transition-colors"
-                    title="View Attack Surface Graph"
-                  >
-                    <svg className="h-3.5 w-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-                    </svg>
-                    GRAPH
-                  </Link>
-                </div>
-              </div>
-            ))}
-          </div>
+                </AnimatedItem>
+              ))}
+            </div>
+          )}
 
           {/* Pagination Controls */}
           {totalPages > 1 && (

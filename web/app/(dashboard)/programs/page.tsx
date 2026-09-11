@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { apiFetch } from "@/lib/api";
 import { SecurityProgram } from "@/lib/types";
+import AnimatedList, { AnimatedItem } from "@/components/AnimatedList";
 
 interface ProgramStats {
   total_programs: number;
@@ -25,6 +26,7 @@ export default function ProgramsPage() {
   const [bountyFilter, setBountyFilter] = useState<"ALL" | "BOUNTY" | "VDP">("ALL");
   const [totalCount, setTotalCount] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
+  const [viewMode, setViewMode] = useState<"stream" | "grid">("stream");
   const pageSize = 30;
 
   // Selected Program Modal/Drawer for inspecting scope rules
@@ -218,181 +220,315 @@ export default function ProgramsPage() {
             />
           </div>
 
-          {/* Bounty Filter Toggle */}
-          <div className="flex items-center gap-1 rounded-xl border border-slate-800 bg-slate-950 p-1 flex-shrink-0">
-            <button
-              onClick={() => { setBountyFilter("ALL"); setCurrentPage(1); }}
-              className={`rounded-lg px-3 py-1.5 text-xs font-bold transition ${
-                bountyFilter === "ALL" ? "bg-cyan-600 text-white" : "text-slate-400 hover:text-white"
-              }`}
-            >
-              All Types
-            </button>
-            <button
-              onClick={() => { setBountyFilter("BOUNTY"); setCurrentPage(1); }}
-              className={`rounded-lg px-3 py-1.5 text-xs font-bold transition ${
-                bountyFilter === "BOUNTY" ? "bg-emerald-600 text-white" : "text-slate-400 hover:text-white"
-              }`}
-            >
-              Bounties Only
-            </button>
-            <button
-              onClick={() => { setBountyFilter("VDP"); setCurrentPage(1); }}
-              className={`rounded-lg px-3 py-1.5 text-xs font-bold transition ${
-                bountyFilter === "VDP" ? "bg-slate-700 text-white" : "text-slate-400 hover:text-white"
-              }`}
-            >
-              VDP Only
-            </button>
+            {/* Bounty Filter Toggle */}
+            <div className="flex items-center gap-1 rounded-xl border border-slate-800 bg-slate-950 p-1 flex-shrink-0">
+              <button
+                onClick={() => { setBountyFilter("ALL"); setCurrentPage(1); }}
+                className={`rounded-lg px-3 py-1.5 text-xs font-bold transition ${
+                  bountyFilter === "ALL" ? "bg-cyan-600 text-white" : "text-slate-400 hover:text-white"
+                }`}
+              >
+                All Types
+              </button>
+              <button
+                onClick={() => { setBountyFilter("BOUNTY"); setCurrentPage(1); }}
+                className={`rounded-lg px-3 py-1.5 text-xs font-bold transition ${
+                  bountyFilter === "BOUNTY" ? "bg-emerald-600 text-white" : "text-slate-400 hover:text-white"
+                }`}
+              >
+                Bounties Only
+              </button>
+              <button
+                onClick={() => { setBountyFilter("VDP"); setCurrentPage(1); }}
+                className={`rounded-lg px-3 py-1.5 text-xs font-bold transition ${
+                  bountyFilter === "VDP" ? "bg-slate-700 text-white" : "text-slate-400 hover:text-white"
+                }`}
+              >
+                VDP Only
+              </button>
+            </div>
+
+            {/* View Mode Toggle */}
+            <div className="flex items-center gap-1 rounded-xl border border-slate-800 bg-slate-950 p-1 flex-shrink-0">
+              <button
+                type="button"
+                onClick={() => setViewMode("stream")}
+                className={`flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-semibold transition ${
+                  viewMode === "stream"
+                    ? "bg-cyan-500 text-slate-950 font-bold shadow-sm"
+                    : "text-slate-400 hover:text-white"
+                }`}
+                title="Animated Stream List with Gradients & Keyboard Navigation"
+              >
+                <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+                Stream List
+              </button>
+              <button
+                type="button"
+                onClick={() => setViewMode("grid")}
+                className={`flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-semibold transition ${
+                  viewMode === "grid"
+                    ? "bg-cyan-500 text-slate-950 font-bold shadow-sm"
+                    : "text-slate-400 hover:text-white"
+                }`}
+                title="Animated Grid"
+              >
+                <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
+                </svg>
+                Grid
+              </button>
+            </div>
+          </div>
+
+          {/* Platform Chips */}
+          <div className="flex items-center gap-2 overflow-x-auto pb-1 border-t border-slate-800/80 pt-3">
+            <span className="text-[11px] font-mono uppercase tracking-wider text-slate-500 mr-1 flex-shrink-0">Platform:</span>
+            {platforms.map((plat) => {
+              const count = stats?.platform_breakdown?.[plat];
+              return (
+                <button
+                  key={plat}
+                  onClick={() => {
+                    setSelectedPlatform(plat);
+                    setCurrentPage(1);
+                  }}
+                  className={`rounded-xl px-3 py-1.5 font-display text-xs font-semibold whitespace-nowrap transition-all ${
+                    selectedPlatform === plat
+                      ? "bg-cyan-500 text-slate-950 shadow-md shadow-cyan-500/20 font-bold"
+                      : "bg-slate-950 text-slate-400 border border-slate-800 hover:text-white hover:bg-slate-800/60"
+                  }`}
+                >
+                  {plat} {count !== undefined && <span className="opacity-70 font-mono">({count.toLocaleString()})</span>}
+                </button>
+              );
+            })}
           </div>
         </div>
 
-        {/* Platform Chips */}
-        <div className="flex items-center gap-2 overflow-x-auto pb-1 border-t border-slate-800/80 pt-3">
-          <span className="text-[11px] font-mono uppercase tracking-wider text-slate-500 mr-1 flex-shrink-0">Platform:</span>
-          {platforms.map((plat) => {
-            const count = stats?.platform_breakdown?.[plat];
-            return (
-              <button
-                key={plat}
-                onClick={() => {
-                  setSelectedPlatform(plat);
-                  setCurrentPage(1);
-                }}
-                className={`rounded-xl px-3 py-1.5 font-display text-xs font-semibold whitespace-nowrap transition-all ${
-                  selectedPlatform === plat
-                    ? "bg-cyan-500 text-slate-950 shadow-md shadow-cyan-500/20 font-bold"
-                    : "bg-slate-950 text-slate-400 border border-slate-800 hover:text-white hover:bg-slate-800/60"
-                }`}
-              >
-                {plat} {count !== undefined && <span className="opacity-70 font-mono">({count.toLocaleString()})</span>}
-              </button>
-            );
-          })}
-        </div>
-      </div>
-
-      {/* Programs List */}
-      {loading ? (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {[1, 2, 3, 4, 5, 6].map((i) => (
-            <div key={i} className="h-44 rounded-2xl border border-slate-800/80 bg-slate-900/40 animate-pulse" />
-          ))}
-        </div>
-      ) : programs.length === 0 ? (
-        <div className="rounded-2xl border border-dashed border-slate-800 p-12 text-center font-sans">
-          <p className="text-slate-400 font-mono text-sm">NO PUBLIC PROGRAMS MATCH YOUR QUERY</p>
-          <p className="mt-1 text-xs text-slate-500">Try adjusting your search query or platform filters.</p>
-        </div>
-      ) : (
-        <div className="space-y-6">
+        {/* Programs List */}
+        {loading ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {programs.map((prog) => (
-              <div
-                key={prog.id}
-                className="flex flex-col justify-between rounded-2xl border border-slate-800/90 bg-slate-900/60 p-5 hover:border-cyan-500/50 transition-all shadow-md group card-3d-interactive"
-              >
-                <div>
-                  <div className="flex items-start justify-between gap-2">
-                    <div className="min-w-0 flex-1">
-                      <div className="text-base font-bold text-white group-hover:text-cyan-400 transition-colors font-display truncate">
-                        {prog.program_name || prog.company_name}
+            {[1, 2, 3, 4, 5, 6].map((i) => (
+              <div key={i} className="h-44 rounded-2xl border border-slate-800/80 bg-slate-900/40 animate-pulse" />
+            ))}
+          </div>
+        ) : programs.length === 0 ? (
+          <div className="rounded-2xl border border-dashed border-slate-800 p-12 text-center font-sans">
+            <p className="text-slate-400 font-mono text-sm">NO PUBLIC PROGRAMS MATCH YOUR QUERY</p>
+            <p className="mt-1 text-xs text-slate-500">Try adjusting your search query or platform filters.</p>
+          </div>
+        ) : (
+          <div className="space-y-6">
+            {viewMode === "stream" ? (
+              <div className="rounded-2xl border border-slate-800/80 bg-slate-900/30 p-2 sm:p-3 backdrop-blur-md">
+                <div className="flex items-center justify-between px-3 py-2 text-xs font-mono text-slate-400 border-b border-slate-800/60 mb-2">
+                  <div className="flex items-center gap-2">
+                    <span className="h-2 w-2 rounded-full bg-emerald-400 animate-pulse" />
+                    <span className="font-bold text-slate-200">INTERACTIVE STREAM</span>
+                    <span>&bull; {programs.length} Programs</span>
+                  </div>
+                  <div className="hidden sm:flex items-center gap-2 text-[11px] text-slate-400">
+                    <span>Use <kbd className="px-1.5 py-0.5 rounded bg-slate-800 border border-slate-700 text-slate-200 font-bold">↑</kbd> <kbd className="px-1.5 py-0.5 rounded bg-slate-800 border border-slate-700 text-slate-200 font-bold">↓</kbd> or <kbd className="px-1.5 py-0.5 rounded bg-slate-800 border border-slate-700 text-slate-200 font-bold">Enter</kbd> to inspect</span>
+                  </div>
+                </div>
+
+                <AnimatedList
+                  items={programs}
+                  maxHeight="700px"
+                  onItemSelect={(prog) => loadProgramDetail(prog)}
+                  renderItem={(prog, index, isSelected) => (
+                    <div
+                      className={`p-4 sm:p-5 rounded-2xl border transition-all duration-200 backdrop-blur-md flex flex-col md:flex-row md:items-center md:justify-between gap-4 ${
+                        isSelected
+                          ? "bg-cyan-950/40 border-cyan-500/70 shadow-lg shadow-cyan-500/15 ring-1 ring-cyan-500/50"
+                          : "bg-slate-900/80 border-slate-800/80 hover:border-cyan-500/40 hover:bg-slate-900"
+                      }`}
+                    >
+                      {/* Program Info */}
+                      <div className="flex items-start sm:items-center gap-3.5 min-w-0">
+                        <div className="h-10 w-10 sm:h-12 sm:w-12 rounded-xl bg-gradient-to-br from-emerald-950/60 to-slate-900 border border-emerald-800/40 flex items-center justify-center font-display font-extrabold text-emerald-300 text-xs sm:text-sm flex-shrink-0 shadow-inner">
+                          {prog.platform.slice(0, 3).toUpperCase()}
+                        </div>
+                        <div className="min-w-0">
+                          <div className="flex items-center gap-2 flex-wrap">
+                            <span className="text-base font-bold text-white group-hover:text-cyan-400 transition font-display truncate">
+                              {prog.program_name || prog.company_name}
+                            </span>
+                            <span className="rounded-md bg-slate-800/80 border border-slate-700/60 px-2 py-0.5 font-mono text-[10px] font-bold text-slate-200">
+                              {prog.platform}
+                            </span>
+                            {prog.offers_bounties ? (
+                              <span className="rounded bg-emerald-950/80 border border-emerald-800/60 px-2 py-0.5 font-mono text-[10px] font-semibold text-emerald-400">
+                                BOUNTY
+                              </span>
+                            ) : (
+                              <span className="rounded bg-slate-800/80 px-2 py-0.5 font-mono text-[10px] text-slate-400">
+                                VDP
+                              </span>
+                            )}
+                          </div>
+                          <div className="mt-1 flex items-center gap-2.5 text-xs text-slate-400 font-mono">
+                            {prog.company_domain && <span className="text-cyan-300">{prog.company_domain}</span>}
+                            <span>&bull; Scope: {prog.scope_rules_count ? `${prog.scope_rules_count} rules` : prog.scope_summary || "Public Targets"}</span>
+                          </div>
+                        </div>
                       </div>
-                      <div className="mt-0.5 flex items-center gap-2 flex-wrap">
+
+                      {/* Reward & Actions */}
+                      <div className="flex items-center justify-between md:justify-end gap-3 sm:gap-5 pt-2 md:pt-0 border-t md:border-t-0 border-slate-800/60">
+                        {prog.max_bounty ? (
+                          <div className="px-3 py-1.5 rounded-xl bg-emerald-950/30 border border-emerald-800/40 text-right">
+                            <div className="text-[9px] uppercase tracking-wider text-emerald-400/80 font-mono font-bold">Max Reward</div>
+                            <div className="font-mono text-xs sm:text-sm font-black text-emerald-300">
+                              {prog.currency} {prog.max_bounty.toLocaleString()}
+                            </div>
+                          </div>
+                        ) : (
+                          <div className="px-3 py-1.5 rounded-xl bg-slate-950 border border-slate-800/60 text-right">
+                            <div className="text-[9px] uppercase tracking-wider text-slate-500 font-mono">Reward</div>
+                            <div className="font-mono text-xs text-slate-400">Safe Harbor</div>
+                          </div>
+                        )}
+
+                        <div className="flex items-center gap-2 flex-shrink-0">
+                          {prog.program_url && (
+                            <a
+                              href={prog.program_url}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              onClick={(e) => e.stopPropagation()}
+                              className="rounded-xl border border-cyan-800/60 bg-cyan-950/40 px-3 py-2 text-xs font-mono font-medium text-cyan-300 hover:bg-cyan-900/60 transition flex items-center gap-1"
+                              title="Open Policy"
+                            >
+                              <span>POLICY</span>
+                              <svg className="h-3 w-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                              </svg>
+                            </a>
+                          )}
+                          <button
+                            onClick={() => loadProgramDetail(prog)}
+                            className="rounded-xl bg-slate-800 hover:bg-cyan-600 hover:text-slate-950 px-3.5 py-2 text-xs font-display font-bold text-slate-200 transition shadow-sm"
+                          >
+                            INSPECT SCOPE &rarr;
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                />
+              </div>
+            ) : (
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                {programs.map((prog, idx) => (
+                  <AnimatedItem key={prog.id} index={idx} delay={(idx % 6) * 0.04} style={{ marginBottom: 0 }}>
+                    <div className="h-full flex flex-col justify-between rounded-2xl border border-slate-800/90 bg-slate-900/60 p-5 hover:border-cyan-500/50 transition-all shadow-md group card-3d-interactive">
+                      <div>
+                        <div className="flex items-start justify-between gap-2">
+                          <div className="min-w-0 flex-1">
+                            <div className="text-base font-bold text-white group-hover:text-cyan-400 transition-colors font-display truncate">
+                              {prog.program_name || prog.company_name}
+                            </div>
+                            <div className="mt-0.5 flex items-center gap-2 flex-wrap">
+                              {prog.company_id && (
+                                <Link
+                                  href={`/companies/${prog.company_id}`}
+                                  className="font-mono text-xs text-cyan-300 hover:underline truncate"
+                                >
+                                  {prog.company_name || prog.company_domain}
+                                </Link>
+                              )}
+                              {prog.company_domain && (
+                                <span className="font-mono text-[10px] text-slate-500 truncate">
+                                  ({prog.company_domain})
+                                </span>
+                              )}
+                            </div>
+                          </div>
+
+                          <div className="flex flex-col items-end gap-1 flex-shrink-0">
+                            <span className="rounded-md bg-slate-800/80 border border-slate-700/60 px-2 py-0.5 font-mono text-[10px] font-bold text-slate-200">
+                              {prog.platform}
+                            </span>
+                            {prog.offers_bounties ? (
+                              <span className="rounded bg-emerald-950/80 border border-emerald-800/60 px-2 py-0.5 font-mono text-[10px] font-semibold text-emerald-400">
+                                BOUNTY
+                              </span>
+                            ) : (
+                              <span className="rounded bg-slate-800/80 px-2 py-0.5 font-mono text-[10px] text-slate-400">
+                                VDP
+                              </span>
+                            )}
+                          </div>
+                        </div>
+
+                        {/* Bounty / Scope Summary */}
+                        <div className="mt-3.5 space-y-1.5 text-xs font-mono text-slate-300">
+                          <div className="flex items-center justify-between text-[11px] text-slate-400">
+                            <span>Scope:</span>
+                            <span className="text-slate-200 font-bold">
+                              {prog.scope_rules_count ? `${prog.scope_rules_count} items` : prog.scope_summary || "Public Targets"}
+                            </span>
+                          </div>
+
+                          {prog.max_bounty ? (
+                            <div className="flex items-center justify-between text-[11px]">
+                              <span className="text-slate-400">Max Reward:</span>
+                              <span className="text-emerald-400 font-bold">
+                                {prog.currency} {prog.max_bounty.toLocaleString()}
+                              </span>
+                            </div>
+                          ) : null}
+
+                          <div className="flex items-center justify-between text-[11px] text-slate-400">
+                            <span>Status:</span>
+                            <span className="text-cyan-400 uppercase">{prog.submission_state || "OPEN"}</span>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Card Actions */}
+                      <div className="mt-4 flex items-center justify-between gap-2 border-t border-slate-800/80 pt-3">
+                        <button
+                          onClick={() => loadProgramDetail(prog)}
+                          className="flex-1 rounded-xl bg-slate-800/80 py-2 text-center text-xs font-display font-bold text-slate-200 hover:bg-slate-700 transition-colors"
+                        >
+                          INSPECT SCOPE
+                        </button>
+
+                        {prog.program_url && (
+                          <a
+                            href={prog.program_url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex items-center justify-center gap-1 rounded-xl border border-cyan-800/60 bg-cyan-950/40 px-3 py-2 text-xs font-mono font-medium text-cyan-300 hover:bg-cyan-900/60 transition-colors"
+                            title="Open Official Policy"
+                          >
+                            <span>POLICY</span>
+                            <svg className="h-3 w-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                            </svg>
+                          </a>
+                        )}
+
                         {prog.company_id && (
                           <Link
                             href={`/companies/${prog.company_id}`}
-                            className="font-mono text-xs text-cyan-300 hover:underline truncate"
+                            className="flex items-center justify-center rounded-xl border border-slate-800 bg-slate-900 px-3 py-2 text-xs font-mono text-slate-400 hover:text-white hover:bg-slate-800 transition-colors"
+                            title="Company Command Center"
                           >
-                            {prog.company_name || prog.company_domain}
+                            ORG &rarr;
                           </Link>
                         )}
-                        {prog.company_domain && (
-                          <span className="font-mono text-[10px] text-slate-500 truncate">
-                            ({prog.company_domain})
-                          </span>
-                        )}
                       </div>
                     </div>
-
-                    <div className="flex flex-col items-end gap-1 flex-shrink-0">
-                      <span className="rounded-md bg-slate-800/80 border border-slate-700/60 px-2 py-0.5 font-mono text-[10px] font-bold text-slate-200">
-                        {prog.platform}
-                      </span>
-                      {prog.offers_bounties ? (
-                        <span className="rounded bg-emerald-950/80 border border-emerald-800/60 px-2 py-0.5 font-mono text-[10px] font-semibold text-emerald-400">
-                          BOUNTY
-                        </span>
-                      ) : (
-                        <span className="rounded bg-slate-800/80 px-2 py-0.5 font-mono text-[10px] text-slate-400">
-                          VDP
-                        </span>
-                      )}
-                    </div>
-                  </div>
-
-                  {/* Bounty / Scope Summary */}
-                  <div className="mt-3.5 space-y-1.5 text-xs font-mono text-slate-300">
-                    <div className="flex items-center justify-between text-[11px] text-slate-400">
-                      <span>Scope:</span>
-                      <span className="text-slate-200 font-bold">
-                        {prog.scope_rules_count ? `${prog.scope_rules_count} items` : prog.scope_summary || "Public Targets"}
-                      </span>
-                    </div>
-
-                    {prog.max_bounty ? (
-                      <div className="flex items-center justify-between text-[11px]">
-                        <span className="text-slate-400">Max Reward:</span>
-                        <span className="text-emerald-400 font-bold">
-                          {prog.currency} {prog.max_bounty.toLocaleString()}
-                        </span>
-                      </div>
-                    ) : null}
-
-                    <div className="flex items-center justify-between text-[11px] text-slate-400">
-                      <span>Status:</span>
-                      <span className="text-cyan-400 uppercase">{prog.submission_state || "OPEN"}</span>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Card Actions */}
-                <div className="mt-4 flex items-center justify-between gap-2 border-t border-slate-800/80 pt-3">
-                  <button
-                    onClick={() => loadProgramDetail(prog)}
-                    className="flex-1 rounded-xl bg-slate-800/80 py-2 text-center text-xs font-display font-bold text-slate-200 hover:bg-slate-700 transition-colors"
-                  >
-                    INSPECT SCOPE
-                  </button>
-
-                  {prog.program_url && (
-                    <a
-                      href={prog.program_url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center justify-center gap-1 rounded-xl border border-cyan-800/60 bg-cyan-950/40 px-3 py-2 text-xs font-mono font-medium text-cyan-300 hover:bg-cyan-900/60 transition-colors"
-                      title="Open Official Policy"
-                    >
-                      <span>POLICY</span>
-                      <svg className="h-3 w-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                      </svg>
-                    </a>
-                  )}
-
-                  {prog.company_id && (
-                    <Link
-                      href={`/companies/${prog.company_id}`}
-                      className="flex items-center justify-center rounded-xl border border-slate-800 bg-slate-900 px-3 py-2 text-xs font-mono text-slate-400 hover:text-white hover:bg-slate-800 transition-colors"
-                      title="Company Command Center"
-                    >
-                      ORG &rarr;
-                    </Link>
-                  )}
-                </div>
+                  </AnimatedItem>
+                ))}
               </div>
-            ))}
-          </div>
+            )}
 
           {/* Pagination Controls */}
           {totalPages > 1 && (
