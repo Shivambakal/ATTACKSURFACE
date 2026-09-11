@@ -39,7 +39,10 @@ class SignalStatusUpdate(BaseModel):
 
 class ResearchSignalOut(BaseModel):
     id: int
-    target_id: int
+    company_id: int | None = None
+    target_id: int | None = None
+    product_id: int | None = None
+    asset_id: int | None = None
     change_id: int | None = None
     cluster_id: int | None = None
     title: str
@@ -47,17 +50,18 @@ class ResearchSignalOut(BaseModel):
     summary: str
     why_it_matters: str
     recommended_research_area: str | None = None
-    relevance_score: int
-    confidence_score: int
-    security_context_score: int
-    priority: str
-    status: str
+    relevance_score: int = 50
+    confidence_score: int = 70
+    security_context_score: int = 50
+    priority: str = "MEDIUM"
+    status: str = "new"
+    security_context: dict[str, Any] | None = None
     historical_context: dict[str, Any] | None = None
     affected_assets: list[str] | None = None
     evidence_ids: list[str] | None = None
-    source_count: int
+    source_count: int = 1
     created_at: datetime
-    updated_at: datetime
+    updated_at: datetime | None = None
 
     class Config:
         from_attributes = True
@@ -65,15 +69,16 @@ class ResearchSignalOut(BaseModel):
 
 class ChangeClusterOut(BaseModel):
     id: int
-    target_id: int
+    company_id: int | None = None
+    target_id: int | None = None
     title: str
     summary: str
     primary_category: str
-    affected_urls: list[str]
-    source_count: int
-    confidence: float
-    relevance_score: int
-    priority: str
+    affected_urls: list[str] | None = None
+    source_count: int = 1
+    confidence: float = 0.8
+    relevance_score: int = 50
+    priority: str = "MEDIUM"
     created_at: datetime
 
     class Config:

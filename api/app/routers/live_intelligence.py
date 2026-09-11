@@ -101,18 +101,18 @@ def get_live_feed(
             pass
     for sig in signals_q.limit(limit).all():
         tgt = target_map.get(sig.target_id)
-        comp_name = tgt.company_name if tgt else "Authorized Org"
+        comp_name = tgt.company_name if tgt else (company_map.get(sig.company_id, "Authorized Org") if sig.company_id else "Authorized Org")
         events.append({
             "id": f"sig-{sig.id}",
             "raw_id": sig.id,
             "kind": "SIGNAL",
             "event_type": "RESEARCH SIGNAL",
-            "target": tgt.domain if tgt else "Target Surface",
+            "target": tgt.domain if tgt else comp_name,
             "target_id": sig.target_id,
             "company": comp_name,
-            "company_id": tgt.company_id if tgt else None,
+            "company_id": sig.company_id or (tgt.company_id if tgt else None),
             "what_changed": sig.title,
-            "why_it_matters": sig.why_it_matters or sig.description,
+            "why_it_matters": getattr(sig, "why_it_matters", "") or getattr(sig, "summary", ""),
             "timestamp": sig.created_at.isoformat() if sig.created_at else None,
             "security_relevance": sig.relevance_score,
             "confidence": sig.confidence_score,
@@ -122,7 +122,39 @@ def get_live_feed(
             "source": f"Research Pipeline ({sig.signal_type})",
         })
 
-    # 2. Real Attack-Surface Changes
+    # 2. Real Change Clusters
+    clusters_q = db.query(ChangeCluster).order_by(desc(ChangeCluster.created_at))
+    if since:
+        try:
+            since_dt = datetime.fromisoformat(since.replace("Z", "+00:00"))
+            clusters_q = clusters_q.filter(ChangeCluster.created_at > since_dt)
+        except Exception:
+            pass
+    for c in clusters_q.limit(limit).all():
+        tgt = target_map.get(c.target_id) if c.target_id else None
+        comp_name = company_map.get(c.company_id) or (tgt.company_name if tgt else "Tracked Organization")
+        meta = c.meta or {}
+        events.append({
+            "id": f"cluster-{c.id}",
+            "raw_id": c.id,
+            "kind": "CHANGE",
+            "event_type": _classify_change_event_type(c.primary_category, c.title),
+            "target": tgt.domain if tgt else (c.affected_urls[0] if c.affected_urls else comp_name),
+            "target_id": c.target_id,
+            "company": comp_name,
+            "company_id": c.company_id,
+            "what_changed": c.title,
+            "why_it_matters": c.summary or f"Multi-source converged change cluster ({c.source_count} sources)",
+            "timestamp": c.created_at.isoformat() if c.created_at else None,
+            "security_relevance": meta.get("relevance_score", 65),
+            "confidence": int(meta.get("confidence", 0.85) * 100) if isinstance(meta.get("confidence"), float) else 85,
+            "priority": meta.get("priority", "MEDIUM"),
+            "status": "active",
+            "source": meta.get("authority_level", "Official Advisory"),
+            "evidence": c.affected_urls or [],
+        })
+
+    # 3. Real Attack-Surface Changes
     changes_q = db.query(Change).order_by(desc(Change.detected_at))
     if since:
         try:

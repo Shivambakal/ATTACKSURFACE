@@ -76,6 +76,16 @@ def create_app() -> FastAPI:
         allow_headers=["*"],
     )
 
+    @application.get("/")
+    def root_status():
+        return {
+            "service": "AttackSurface Intelligence API",
+            "status": "online",
+            "version": "0.2.0",
+            "docs": "/docs",
+            "ready": "/api/v1/ready",
+        }
+
     # ── Register API v1 routers ─────────────────────────────────────
     try:
         from .routers.auth import router as auth_router
