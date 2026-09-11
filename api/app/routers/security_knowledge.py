@@ -394,7 +394,7 @@ def get_trending_advisories(
             score += 5
 
         score = min(99, max(50, score))
-        d = _advisory_to_dict(a, db)
+        d = _advisory_to_dict(a, None)
         d["trend_score"] = score
         d["exploitation_status"] = "ACTIVELY EXPLOITED" if a.provider == "CISA_KEV" else "MONITORED"
         results.append(d)

@@ -236,6 +236,27 @@ async def trigger_collection_now(
     }
 
 
+@router.get("/feed")
+def get_security_intelligence_feed(
+    limit: int = Query(50, ge=1, le=100),
+    db: Session = Depends(get_db),
+) -> dict[str, Any]:
+    """Retrieve security intelligence feed items."""
+    query = (
+        select(SecurityIntelligenceEvent)
+        .order_by(
+            SecurityIntelligenceEvent.priority_score.desc(),
+            SecurityIntelligenceEvent.published_at.desc(),
+        )
+        .limit(limit)
+    )
+    events = db.execute(query).scalars().all()
+    return {
+        "total": len(events),
+        "items": [_event_to_dict(e) for e in events],
+    }
+
+
 @router.get("/{event_id}")
 def get_single_event(
     event_id: int,

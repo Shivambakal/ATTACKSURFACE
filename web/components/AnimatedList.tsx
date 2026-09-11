@@ -9,7 +9,7 @@ import React, {
   type MouseEventHandler,
   type UIEvent,
 } from "react";
-import { motion, useInView } from "motion/react";
+import { motion } from "motion/react";
 import "./AnimatedList.css";
 
 interface AnimatedItemProps {
@@ -31,17 +31,14 @@ export const AnimatedItem: React.FC<AnimatedItemProps> = ({
   className = "",
   style,
 }) => {
-  const ref = useRef<HTMLDivElement>(null);
-  const inView = useInView(ref, { amount: 0.35, once: false });
   return (
     <motion.div
-      ref={ref}
       data-index={index}
       onMouseEnter={onMouseEnter}
       onClick={onClick}
-      initial={{ scale: 0.75, opacity: 0 }}
-      animate={inView ? { scale: 1, opacity: 1 } : { scale: 0.75, opacity: 0 }}
-      transition={{ duration: 0.25, delay, ease: [0.25, 0.1, 0.25, 1] }}
+      initial={{ opacity: 0, y: 6 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.2, delay: Math.min(delay, 0.15), ease: "easeOut" }}
       style={{ marginBottom: "1rem", cursor: "pointer", ...style }}
       className={className}
     >

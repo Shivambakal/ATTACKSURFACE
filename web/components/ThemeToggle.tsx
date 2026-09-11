@@ -3,13 +3,13 @@
 import React, { useEffect, useState } from "react";
 
 export default function ThemeToggle({ className = "" }: { className?: string }) {
-  const [theme, setTheme] = useState<"white-aesthetic" | "cyber-dark">("white-aesthetic");
+  const [theme, setTheme] = useState<"white-aesthetic" | "cyber-dark">("cyber-dark");
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
     setMounted(true);
     const saved = window.localStorage.getItem("ast_theme_preference");
-    const active = saved === "cyber-dark" ? "cyber-dark" : "white-aesthetic";
+    const active = saved === "white-aesthetic" ? "white-aesthetic" : "cyber-dark";
     setTheme(active);
     applyTheme(active);
   }, []);
