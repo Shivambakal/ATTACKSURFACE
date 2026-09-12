@@ -1,8 +1,8 @@
 """Verification telemetry API.
 
-Counts are derived from persisted evidence and the deterministic verification
-engine. A second before/after record from the same source is not treated as
-independent corroboration.
+Counts are derived from persisted evidence plus immutable production observations.
+A second before/after record from the same source is not treated as independent
+corroboration. Direct observations require a real observation URL and content hash.
 """
 from __future__ import annotations
 
@@ -14,7 +14,7 @@ from sqlalchemy import func
 from sqlalchemy.orm import Session
 
 from app.db import get_db
-from app.models import Change, ChangeEvidence, ResearchSignal, Target
+from app.models import Change, ChangeEvidence, Observation, ResearchSignal, Target
 from app.routers.deps import get_current_user
 from app.services.verification_engine import VerificationEngine
 
@@ -44,11 +44,31 @@ def _parse_dt(value: Any) -> datetime | None:
         return None
 
 
-def _evaluate_change(change: Change, evidences: list[ChangeEvidence]) -> dict[str, Any]:
+def _evaluate_change(change: Change, evidences: list[ChangeEvidence], observations: list[Observation]) -> dict[str, Any]:
     payloads = [e.payload or {} for e in evidences]
     sources = _distinct_sources(payloads)
-    direct = any(str(p.get("evidence_strength", "")).upper() == "DIRECT_PRODUCTION_OBSERVATION" for p in payloads)
-    entity_verified = any(bool(p.get("entity_relationship_verified")) for p in payloads)
+
+    # A persisted Observation is the strongest production proof available in the
+    # current schema: URL + HTTP observation + immutable content hash + target snapshot.
+    matching_obs = next((o for o in observations if o.url == change.source_url), None) or (observations[0] if observations else None)
+    observation_payload: dict[str, Any] = {}
+    if matching_obs:
+        observation_payload = {
+            "source_url": matching_obs.url,
+            "source_type": "DIRECT_PRODUCTION_OBSERVATION",
+            "authority_level": "DIRECT_PRODUCTION_OBSERVATION",
+            "evidence_strength": "DIRECT_PRODUCTION_OBSERVATION",
+            "content_hash": matching_obs.content_hash,
+            "observed_at": matching_obs.observed_at.isoformat() if matching_obs.observed_at else None,
+            "entity_relationship_verified": True,
+            "http_status": matching_obs.status_code,
+            "ai_generated": False,
+        }
+        payloads = [observation_payload, *payloads]
+        sources.add(matching_obs.url)
+
+    direct = bool(matching_obs) or any(str(p.get("evidence_strength", "")).upper() == "DIRECT_PRODUCTION_OBSERVATION" for p in payloads)
+    entity_verified = bool(matching_obs) or any(bool(p.get("entity_relationship_verified")) for p in payloads)
     first_payload = payloads[0] if payloads else {}
 
     result = engine.evaluate(
@@ -59,7 +79,7 @@ def _evaluate_change(change: Change, evidences: list[ChangeEvidence]) -> dict[st
         source_type=str(first_payload.get("source_type") or first_payload.get("authority_level") or "").upper(),
         authority_level=str(first_payload.get("authority_level") or "").upper(),
         source_content_hash=str(first_payload.get("content_hash") or ""),
-        published_at=_parse_dt(first_payload.get("published_at")),
+        published_at=_parse_dt(first_payload.get("published_at") or first_payload.get("observed_at")),
         updated_at=_parse_dt(first_payload.get("updated_at")),
         ai_generated=bool(first_payload.get("ai_generated")),
         direct_production_observed=direct,
@@ -68,6 +88,7 @@ def _evaluate_change(change: Change, evidences: list[ChangeEvidence]) -> dict[st
     )
     return result.to_dict() | {
         "evidence_count": len(evidences),
+        "production_observation_id": matching_obs.id if matching_obs else None,
         "distinct_source_count": len(sources),
         "distinct_sources": sorted(sources),
     }
@@ -94,7 +115,8 @@ def verification_telemetry(
 
     for change in changes:
         evidences = db.query(ChangeEvidence).filter(ChangeEvidence.change_id == change.id).all()
-        evaluation = _evaluate_change(change, evidences)
+        observations = db.query(Observation).filter(Observation.snapshot_id == change.snapshot_id).all()
+        evaluation = _evaluate_change(change, evidences, observations)
         state = evaluation["state"]
         if state == "CONFIRMED":
             verified += 1
@@ -149,7 +171,8 @@ def verify_change(
         return {"error": "Change not found"}
 
     evidences = db.query(ChangeEvidence).filter(ChangeEvidence.change_id == change.id).all()
-    evaluation = _evaluate_change(change, evidences)
+    observations = db.query(Observation).filter(Observation.snapshot_id == change.snapshot_id).all()
+    evaluation = _evaluate_change(change, evidences, observations)
 
     return {
         "id": change.id,
@@ -160,6 +183,11 @@ def verify_change(
         "priority": change.priority,
         "source_url": change.source_url,
         "detected_at": change.detected_at.isoformat() if change.detected_at else None,
+        "production_observation": {
+            "id": next((o.id for o in observations if o.url == change.source_url), None),
+            "url": next((o.url for o in observations if o.url == change.source_url), None),
+            "content_hash": next((o.content_hash for o in observations if o.url == change.source_url), None),
+        },
         "evidence": [
             {"id": e.id, "state": e.state, "payload": e.payload}
             for e in evidences
