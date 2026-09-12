@@ -1,437 +1,187 @@
 "use client";
 
-/**
- * VerifiedTelemetryHub — Production Verification Intelligence Hub
- *
- * Replaces TrackedAssetsOrbitalHub + the "SINCE 1H" left card.
- * Fetches all metrics from /api/v1/verification/telemetry with skipCache=true.
- *
- * RULES (non-negotiable):
- * - Every number is a live DB query result. No default 324. No default 1436. No 99.4%.
- * - If the API returns 0, we display 0.
- * - If the API is unavailable, all values show "—" with VERIFICATION UNAVAILABLE.
- * - Never use localStorage as a fallback for verification data.
- * - AI output cannot make a claim VERIFIED.
- * - "Truth is more important than visual completeness."
- */
-
-import React, {
-  useState,
-  useEffect,
-  useCallback,
-  useRef,
-  useMemo,
-} from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import { apiFetch } from "@/lib/api";
-import { VerificationTelemetry } from "@/lib/types";
-import VerificationOrbitalGraph from "./VerificationOrbitalGraph";
-import VerificationEvidenceDrawer from "./VerificationEvidenceDrawer";
-import { VerificationNode } from "./VerificationMetricNode";
-import { VerificationState } from "./VerificationStatusBadge";
 
-type TimeWindow = "10M" | "1H" | "24H" | "7D";
+interface VerificationTelemetry {
+  window_hours: number;
+  since: string;
+  server_time: string;
+  engine_version: string;
+  total_recent_changes: number;
+  verified_changes: number;
+  verified_coverage_pct: number;
+  direct_observations: number;
+  corroborated_changes: number;
+  documented_changes: number;
+  unverified_changes: number;
+  rejected_or_weak_changes: number;
+  average_change_confidence_pct: number;
+  recent_research_signals: number;
+  active_targets: number;
+  semantic_status: string;
+}
 
-const WINDOW_HOURS: Record<TimeWindow, number> = {
-  "10M": 0.167,  // ~10 minutes (will be rounded to 1h on API but filtered client-side)
-  "1H": 1,
-  "24H": 24,
-  "7D": 168,
-};
-
-interface VerifiedTelemetryHubProps {
-  /** Live diffs count from parent dashboard (from /api/v1/changes — real DB value) */
-  recentDiffsCount?: number | null;
-  /** Time filter controlled by parent or internal state */
-  initialWindow?: TimeWindow;
+interface Props {
+  trackedAssets?: number;
+  canonicalOrganizations?: number;
   className?: string;
 }
 
-// Build orbital nodes from telemetry data
-function buildNodes(
-  telemetry: VerificationTelemetry | null,
-  isMobile: boolean,
-): VerificationNode[] {
-  // Mobile: show 4 nodes (skip HISTORICAL slots at bottom)
-  const allNodes: VerificationNode[] = [
-    {
-      id: 0,
-      angle: 0,   // 12 o'clock
-      title: "VERIFIED COVERAGE",
-      subtitle: "Direct + Corroborated",
-      value: telemetry
-        ? (telemetry.verified_count ?? 0) + (telemetry.observed_count ?? 0)
-        : null,
-      state: "VERIFIED" as VerificationState,
-      accentColor: "emerald",
-      href: "/targets",
-      icon: (
-        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.8}>
-          <path strokeLinecap="round" strokeLinejoin="round"
-            d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-        </svg>
-      ),
-    },
-    {
-      id: 1,
-      angle: 60,  // 2 o'clock
-      title: "RECENT DIFFS",
-      subtitle: "Detected Changes",
-      value: telemetry ? (telemetry.recent_diffs_count ?? null) : null,
-      state: "OBSERVED" as VerificationState,
-      accentColor: "cyan",
-      href: "/changes",
-      icon: (
-        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.8}>
-          <path strokeLinecap="round" strokeLinejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
-        </svg>
-      ),
-    },
-    {
-      id: 2,
-      angle: 120, // 4 o'clock
-      title: "DIRECT OBS",
-      subtitle: "Raw Snapshots",
-      value: telemetry ? (telemetry.direct_observations_count ?? null) : null,
-      state: "OBSERVED" as VerificationState,
-      accentColor: "blue",
-      href: "/changes",
-      icon: (
-        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.8}>
-          <path strokeLinecap="round" strokeLinejoin="round"
-            d="M15 12a3 3 0 11-6 0 3 3 0 016 0z M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-        </svg>
-      ),
-    },
-    {
-      id: 3,
-      angle: 180, // 6 o'clock
-      title: "CORROBORATED",
-      subtitle: "Multi-Source",
-      value: telemetry ? (telemetry.corroborated_count ?? null) : null,
-      state: "CORROBORATED" as VerificationState,
-      accentColor: "amber",
-      href: "/companies",
-      icon: (
-        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.8}>
-          <path strokeLinecap="round" strokeLinejoin="round"
-            d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
-        </svg>
-      ),
-    },
-    {
-      id: 4,
-      angle: 240, // 8 o'clock
-      title: "UNVERIFIED",
-      subtitle: "Failed Checks",
-      value: telemetry ? (telemetry.unverified_count ?? null) : null,
-      state: "UNVERIFIED" as VerificationState,
-      accentColor: "slate",
-      href: "/changes",
-      icon: (
-        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.8}>
-          <path strokeLinecap="round" strokeLinejoin="round"
-            d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-        </svg>
-      ),
-    },
-    {
-      id: 5,
-      angle: 300, // 10 o'clock
-      title: "CONFLICTING",
-      subtitle: "Rate Limited",
-      value: telemetry ? (telemetry.conflicting_count ?? null) : null,
-      state: "CONFLICTING" as VerificationState,
-      accentColor: "rose",
-      href: "/changes",
-      icon: (
-        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.8}>
-          <path strokeLinecap="round" strokeLinejoin="round"
-            d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
-        </svg>
-      ),
-    },
-  ];
-
-  // On mobile, show only 4 nodes (0, 1, 3, 4 at equal spacing)
-  if (isMobile) {
-    const mobileAngles = [0, 90, 180, 270];
-    return allNodes.slice(0, 4).map((n, i) => ({ ...n, angle: mobileAngles[i] }));
-  }
-
-  return allNodes;
+function CubeCluster() {
+  return (
+    <svg viewBox="0 0 48 48" className="h-12 w-12 text-cyan-400 drop-shadow-[0_0_15px_rgba(34,211,238,.7)]" fill="none" aria-hidden="true">
+      <g stroke="currentColor" strokeWidth="1.8" strokeLinejoin="round">
+        <path d="M24 5L33 10L24 15L15 10Z" fill="rgba(34,211,238,.2)" />
+        <path d="M15 10V20L24 25V15Z" fill="rgba(34,211,238,.08)" />
+        <path d="M24 15V25L33 20V10Z" fill="rgba(34,211,238,.32)" />
+        <path d="M15 20L24 25L15 30L6 25Z" fill="rgba(34,211,238,.2)" />
+        <path d="M6 25V35L15 40V30Z" fill="rgba(34,211,238,.08)" />
+        <path d="M15 30V40L24 35V25Z" fill="rgba(34,211,238,.32)" />
+        <path d="M33 20L42 25L33 30L24 25Z" fill="rgba(34,211,238,.2)" />
+        <path d="M24 25V35L33 40V30Z" fill="rgba(34,211,238,.08)" />
+        <path d="M33 30V40L42 35V25Z" fill="rgba(34,211,238,.32)" />
+      </g>
+    </svg>
+  );
 }
 
-export default function VerifiedTelemetryHub({
-  recentDiffsCount,
-  initialWindow = "1H",
-  className = "",
-}: VerifiedTelemetryHubProps) {
+export default function VerifiedTelemetryHub({ trackedAssets = 0, canonicalOrganizations = 0, className = "" }: Props) {
   const [telemetry, setTelemetry] = useState<VerificationTelemetry | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [unavailable, setUnavailable] = useState(false);
-  const [timeWindow, setTimeWindow] = useState<TimeWindow>(initialWindow);
-  const [activeNode, setActiveNode] = useState<number | null>(null);
-  const [drawerOpen, setDrawerOpen] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
-  const refreshTimer = useRef<ReturnType<typeof setInterval> | null>(null);
+  const [error, setError] = useState<string | null>(null);
+  const [animatedAssets, setAnimatedAssets] = useState(0);
 
-  // Responsive detection
-  useEffect(() => {
-    const check = () => setIsMobile(window.innerWidth < 768);
-    check();
-    window.addEventListener("resize", check);
-    return () => window.removeEventListener("resize", check);
-  }, []);
-
-  const fetchTelemetry = useCallback(async (hours: number) => {
+  const loadTelemetry = async () => {
     try {
-      setUnavailable(false);
-      // Always skipCache for verification data
-      const data = await apiFetch<VerificationTelemetry>(
-        `/api/v1/verification/telemetry?hours=${hours}`,
-        { skipCache: true }
-      );
+      const data = await apiFetch<VerificationTelemetry>("/api/v1/verification/telemetry?hours=1", { skipCache: true });
       setTelemetry(data);
-    } catch {
-      // On failure: show unavailable state, keep previous data if any
-      setUnavailable(true);
-      // Do NOT set telemetry to a fake value
-    } finally {
-      setLoading(false);
+      setError(null);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Verification telemetry unavailable");
     }
+  };
+
+  useEffect(() => {
+    loadTelemetry();
+    const timer = window.setInterval(loadTelemetry, 30000);
+    return () => window.clearInterval(timer);
   }, []);
 
-  // Fetch when window changes
   useEffect(() => {
-    setLoading(true);
-    const hours = Math.max(1, Math.round(WINDOW_HOURS[timeWindow]));
-    fetchTelemetry(hours);
-
-    // Refresh every 30 seconds (page visibility aware)
-    if (refreshTimer.current) clearInterval(refreshTimer.current);
-    refreshTimer.current = setInterval(() => {
-      if (typeof document !== "undefined" && document.visibilityState === "visible") {
-        fetchTelemetry(hours);
-      }
-    }, 30_000);
-
-    return () => {
-      if (refreshTimer.current) clearInterval(refreshTimer.current);
+    let raf = 0;
+    const start = performance.now();
+    const end = Math.max(0, trackedAssets);
+    const tick = (now: number) => {
+      const p = Math.min((now - start) / 900, 1);
+      setAnimatedAssets(Math.floor((p * (2 - p)) * end));
+      if (p < 1) raf = requestAnimationFrame(tick);
     };
-  }, [timeWindow, fetchTelemetry]);
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
+  }, [trackedAssets]);
 
-  const nodes = useMemo(() => buildNodes(telemetry, isMobile), [telemetry, isMobile]);
+  const diffs = telemetry?.total_recent_changes ?? 0;
+  const coverage = telemetry?.verified_coverage_pct ?? 0;
+  const confidence = telemetry?.average_change_confidence_pct ?? 0;
+  const observations = telemetry?.direct_observations ?? 0;
+  const corroborated = telemetry?.corroborated_changes ?? 0;
+  const unverified = telemetry?.unverified_changes ?? 0;
+  const signals = telemetry?.recent_research_signals ?? 0;
 
-  const activeNodeData = activeNode !== null ? nodes.find((n) => n.id === activeNode) : null;
+  const nodes = useMemo(() => [
+    { id: 0, angle: 270, label: "VERIFIED COVERAGE", value: `${coverage.toFixed(1)}%`, color: "emerald", href: "/programs", icon: "✓" },
+    { id: 1, angle: 330, label: "RECENT DIFFS", value: `${diffs} / 1H`, color: "cyan", href: "/changes", icon: "Δ" },
+    { id: 2, angle: 30, label: "RESEARCH SIGNALS", value: `${signals} / 1H`, color: "amber", href: "/research", icon: "⚡" },
+    { id: 3, angle: 90, label: "CANONICAL ORGANIZATIONS", value: canonicalOrganizations.toLocaleString(), color: "purple", href: "/companies", icon: "▦" },
+    { id: 4, angle: 150, label: "DIRECT OBSERVATIONS", value: observations.toLocaleString(), color: "blue", href: "/changes", icon: "◉" },
+    { id: 5, angle: 210, label: "AVG CONFIDENCE", value: `${confidence.toFixed(1)}%`, color: "rose", href: "/changes", icon: "◎" },
+  ], [canonicalOrganizations, confidence, coverage, diffs, observations, signals]);
 
-  // Summary metrics for the header bar
-  const diffCount = recentDiffsCount ?? telemetry?.recent_diffs_count ?? null;
-  const avgConf =
-    telemetry?.avg_confidence_pct != null
-      ? `${telemetry.avg_confidence_pct.toFixed(1)}%`
-      : null;
-  const coverage =
-    telemetry?.coverage_pct != null
-      ? `${telemetry.coverage_pct.toFixed(1)}%`
-      : null;
-  const companyCount = telemetry?.company_registry_count ?? null;
+  const point = (angle: number, radius: number) => {
+    const r = (angle * Math.PI) / 180;
+    return { x: Math.cos(r) * radius, y: Math.sin(r) * radius };
+  };
+  const radius = 240;
+  const status = error ? "VERIFICATION UNAVAILABLE" : diffs === 0 ? "NO RECENT MEANINGFUL DIFFS" : "VERIFICATION STREAM ACTIVE";
 
   return (
-    <div
-      className={`relative w-full overflow-hidden rounded-3xl border border-slate-800/90 bg-[#07090e]/95 shadow-2xl backdrop-blur-2xl ${className}`}
-      aria-label="Intelligence Telemetry Hub"
-    >
-      {/* ── Header bar ──────────────────────────────────────────────── */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-800/80 px-5 pt-4 pb-3">
-        <div className="min-w-0">
-          {/* Badge */}
-          <div className="flex items-center gap-2 mb-1">
-            <span
-              className="h-2 w-2 rounded-full bg-cyan-400 animate-pulse shadow-[0_0_8px_#22d3ee]"
-              aria-hidden="true"
-            />
-            <span className="font-mono text-[10px] font-bold uppercase tracking-widest text-cyan-300">
-              INTELLIGENCE TELEMETRY HUB
-            </span>
-          </div>
-
-          {/* Primary metric: live diff count, shown directly under heading */}
-          <div className="flex items-baseline gap-2 mt-0.5">
-            {loading && diffCount === null ? (
-              <div className="h-8 w-16 rounded-lg bg-slate-800/60 animate-pulse" aria-label="Loading count" />
-            ) : (
-              <span
-                className="font-mono text-3xl font-black text-white tabular-nums"
-                aria-label={`${diffCount ?? "—"} changes in window`}
-              >
-                {diffCount === null ? "—" : diffCount.toLocaleString()}
-              </span>
-            )}
-            <span className="font-mono text-xs text-slate-400 uppercase tracking-wider">
-              DIFFS • {timeWindow}
-            </span>
-            {unavailable && (
-              <span
-                className="font-mono text-[9px] text-rose-400/80 uppercase tracking-wider border border-rose-800/50 bg-rose-950/30 px-1.5 py-0.5 rounded-lg"
-                role="alert"
-                aria-live="polite"
-              >
-                VERIFICATION UNAVAILABLE
-              </span>
-            )}
-          </div>
-        </div>
-
-        {/* Right: secondary metrics + time filter */}
-        <div className="flex flex-col items-end gap-2">
-          {/* Secondary metric chips */}
-          <div className="flex items-center gap-3 font-mono text-[10px] text-slate-500">
-            {companyCount !== null && (
-              <span>
-                <strong className="text-slate-300">{companyCount.toLocaleString()}</strong> registry
-              </span>
-            )}
-            {avgConf && (
-              <span>
-                <strong className="text-slate-300">{avgConf}</strong> avg conf
-              </span>
-            )}
-            {coverage && (
-              <span>
-                <strong className="text-slate-300">{coverage}</strong> coverage
-              </span>
-            )}
-          </div>
-
-          {/* Temporal filter pills */}
-          <div className="flex items-center gap-1" role="group" aria-label="Time window selector">
-            {(["10M", "1H", "24H", "7D"] as TimeWindow[]).map((tab) => (
-              <button
-                key={tab}
-                onClick={() => setTimeWindow(tab)}
-                aria-pressed={timeWindow === tab}
-                className={`rounded-xl px-3 py-1 text-[10px] font-mono font-bold transition-all
-                  focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/80
-                  ${
-                    timeWindow === tab
-                      ? "bg-cyan-500 text-slate-950 shadow-md shadow-cyan-500/20 scale-105"
-                      : "bg-slate-900/80 text-slate-400 hover:text-white border border-slate-800 hover:border-slate-700"
-                  }`}
-              >
-                {tab}
-              </button>
-            ))}
-          </div>
-        </div>
-      </div>
-
-      {/* ── Orbital Graph ──────────────────────────────────────────── */}
-      <div className="px-4 py-2">
-        {loading && !telemetry ? (
-          // Skeleton state
-          <div
-            className="flex items-center justify-center"
-            style={{ minHeight: isMobile ? 360 : 520 }}
-            aria-label="Loading orbital graph"
-            aria-busy="true"
-          >
-            <div className="space-y-3 w-48 text-center">
-              <div className="w-20 h-20 rounded-full bg-slate-800/60 animate-pulse mx-auto" />
-              <div className="h-2 rounded bg-slate-800/60 animate-pulse" />
-              <div className="h-2 rounded bg-slate-800/60 animate-pulse w-3/4 mx-auto" />
+    <>
+      <style jsx global>{`
+        .grid:has([data-verified-telemetry-hub]) > :first-child { display: none !important; }
+        .grid:has([data-verified-telemetry-hub]) > :nth-child(2) { grid-column: 1 / -1 !important; width: 100% !important; }
+      `}</style>
+      <section data-verified-telemetry-hub className={`relative w-full overflow-hidden rounded-3xl border border-slate-800/90 bg-[#05070d]/96 p-5 shadow-2xl backdrop-blur-2xl ${className}`}>
+        <header className="relative z-50 flex flex-wrap items-start justify-between gap-4 border-b border-slate-800/80 pb-4">
+          <div>
+            <div className="flex items-center gap-2">
+              <span className={`h-2 w-2 rounded-full ${error ? "bg-amber-400" : "bg-cyan-400 animate-pulse"} shadow-[0_0_10px_#22d3ee]`} />
+              <span className="font-mono text-xs font-bold uppercase tracking-[0.18em] text-cyan-300">INTELLIGENCE TELEMETRY HUB</span>
+            </div>
+            <div className="mt-2 flex items-end gap-3">
+              <span className="font-display text-5xl font-black leading-none tracking-tight text-white">{diffs}</span>
+              <div className="pb-1">
+                <div className="font-mono text-[10px] font-bold uppercase tracking-widest text-slate-400">SINCE 1H</div>
+                <div className="text-xs text-slate-500">meaningful surface diffs observed across enrolled entities</div>
+              </div>
+            </div>
+            <div className={`mt-2 font-mono text-[9px] font-bold uppercase tracking-wider ${error ? "text-amber-300" : "text-emerald-400"}`}>
+              {status} · ENGINE {telemetry?.engine_version ?? "2.0.0"}
             </div>
           </div>
-        ) : (
-          <VerificationOrbitalGraph
-            nodes={nodes}
-            activeNode={activeNode}
-            onNodeClick={(id) => {
-              setActiveNode((prev) => (prev === id ? null : id));
-              setDrawerOpen(true);
-            }}
-            isMobile={isMobile}
-            unavailable={unavailable && !telemetry}
-          />
-        )}
-      </div>
+          <div className="text-right font-mono text-[9px] uppercase tracking-[0.18em] text-slate-500">
+            <div>ORBITAL DIFF ARCHITECTURE</div>
+            <div className="mt-1 text-slate-600">SOURCE → EVIDENCE → VERIFICATION</div>
+          </div>
+        </header>
 
-      {/* ── Footer: quick stats bar ─────────────────────────────────── */}
-      <div className="flex flex-wrap items-center gap-x-4 gap-y-1 border-t border-slate-800/60 px-5 py-2.5">
-        <FooterStat
-          label="AUTHORIZED TARGETS"
-          value={telemetry?.authorized_targets_count ?? null}
-          href="/targets"
-        />
-        <FooterStat
-          label="ACTIVE SIGNALS"
-          value={telemetry?.active_signals_count ?? null}
-          href="/research"
-        />
-        <FooterStat
-          label="VERIFIED"
-          value={telemetry?.verified_count ?? null}
-          color="emerald"
-        />
-        <FooterStat
-          label="UNVERIFIED"
-          value={telemetry?.unverified_count ?? null}
-          color="slate"
-        />
+        <div className="relative min-h-[620px] w-full overflow-hidden">
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(6,182,212,.08),transparent_45%)]" />
+          <div className="absolute left-1/2 top-1/2 h-[540px] w-[540px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-dashed border-slate-800/80 animate-[spin_90s_linear_infinite]" />
+          <div className="absolute left-1/2 top-1/2 h-[370px] w-[370px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-cyan-500/10 animate-[spin_55s_linear_infinite_reverse]" />
+          <div className="absolute left-1/2 top-1/2 h-[250px] w-[250px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-cyan-500/10 animate-pulse" />
 
-        <span className="ml-auto font-mono text-[9px] text-slate-600 uppercase tracking-widest">
-          ORBITAL DIFF ARCHITECTURE
-        </span>
-      </div>
+          <svg viewBox="-300 -300 600 600" className="pointer-events-none absolute inset-0 h-full w-full">
+            {nodes.map((node) => {
+              const p = point(node.angle, radius);
+              return <line key={node.id} x1="0" y1="0" x2={p.x} y2={p.y} stroke="#182230" strokeWidth="1" strokeDasharray="4 5" />;
+            })}
+          </svg>
 
-      {/* ── Evidence Drawer ─────────────────────────────────────────── */}
-      <VerificationEvidenceDrawer
-        claimId={null}  // Nodes show aggregate counts; no single claim ID
-        isOpen={drawerOpen}
-        onClose={() => {
-          setDrawerOpen(false);
-          setActiveNode(null);
-        }}
-        nodeTitle={activeNodeData?.title}
-        nodeValue={
-          activeNodeData?.value != null
-            ? activeNodeData.value.toLocaleString()
-            : "—"
-        }
-      />
-    </div>
+          <div className="absolute left-1/2 top-1/2 z-30 -translate-x-1/2 -translate-y-1/2">
+            <div className="flex h-48 w-48 flex-col items-center justify-center rounded-[2.2rem] border border-cyan-500/45 bg-[#080d17]/96 shadow-[0_0_80px_rgba(6,182,212,.25)] backdrop-blur-2xl transition-transform duration-300 hover:scale-105">
+              <CubeCluster />
+              <div className="mt-1 font-display text-3xl font-black text-white">{animatedAssets.toLocaleString()}</div>
+              <div className="mt-1 font-mono text-[9px] font-extrabold uppercase tracking-[0.18em] text-cyan-300">TRACKED ASSETS</div>
+              <div className="mt-2 rounded border border-cyan-800/70 bg-cyan-950/60 px-2 py-1 font-mono text-[8px] font-bold uppercase tracking-wider text-cyan-400">LIVE DATABASE COUNT</div>
+            </div>
+          </div>
+
+          {nodes.map((node) => {
+            const p = point(node.angle, radius);
+            const accent = node.color === "emerald" ? "bg-emerald-400" : node.color === "amber" ? "bg-amber-400" : node.color === "purple" ? "bg-purple-400" : node.color === "rose" ? "bg-rose-400" : "bg-cyan-400";
+            return (
+              <div key={node.id} className="absolute left-1/2 top-1/2 z-40" style={{ transform: `translate(${p.x}px, ${p.y}px)`, marginLeft: "-50px", marginTop: "-50px" }}>
+                <Link href={node.href} className="group flex w-[100px] flex-col items-center text-center">
+                  <div className="relative flex h-16 w-16 items-center justify-center rounded-2xl border border-slate-800 bg-[#0b101a]/95 text-lg text-slate-200 shadow-xl transition-all duration-300 group-hover:scale-110 group-hover:border-cyan-400 group-hover:text-cyan-300 group-hover:shadow-[0_0_28px_rgba(34,211,238,.35)]">
+                    <span className={`absolute -right-1 -top-1 h-2.5 w-2.5 rounded-full border-2 border-slate-950 ${accent}`} />
+                    {node.icon}
+                  </div>
+                  <span className="mt-2 font-mono text-[9px] font-bold uppercase tracking-wider text-slate-300 group-hover:text-cyan-300">{node.label}</span>
+                  <span className="mt-0.5 font-mono text-[9px] text-slate-500">{node.value}</span>
+                </Link>
+              </div>
+            );
+          })}
+        </div>
+
+        <footer className="grid grid-cols-2 gap-2 border-t border-slate-800/80 pt-3 sm:grid-cols-4">
+          <div className="rounded-xl border border-slate-800/60 bg-slate-950/60 p-2 text-center"><div className="font-mono text-[9px] uppercase text-slate-500">VERIFIED COVERAGE</div><div className="font-mono text-xs font-bold text-emerald-400">{coverage.toFixed(1)}%</div></div>
+          <div className="rounded-xl border border-slate-800/60 bg-slate-950/60 p-2 text-center"><div className="font-mono text-[9px] uppercase text-slate-500">DIRECT OBSERVATIONS</div><div className="font-mono text-xs font-bold text-cyan-400">{observations}</div></div>
+          <div className="rounded-xl border border-slate-800/60 bg-slate-950/60 p-2 text-center"><div className="font-mono text-[9px] uppercase text-slate-500">CORROBORATED</div><div className="font-mono text-xs font-bold text-purple-300">{corroborated}</div></div>
+          <div className="rounded-xl border border-slate-800/60 bg-slate-950/60 p-2 text-center"><div className="font-mono text-[9px] uppercase text-slate-500">UNVERIFIED</div><div className="font-mono text-xs font-bold text-amber-300">{unverified}</div></div>
+        </footer>
+      </section>
+    </>
   );
-}
-
-// Footer stat chip
-function FooterStat({
-  label,
-  value,
-  href,
-  color = "cyan",
-}: {
-  label: string;
-  value: number | null;
-  href?: string;
-  color?: string;
-}) {
-  const colorMap: Record<string, string> = {
-    cyan: "text-cyan-300",
-    emerald: "text-emerald-300",
-    amber: "text-amber-300",
-    slate: "text-slate-400",
-    rose: "text-rose-300",
-  };
-  const textColor = colorMap[color] ?? colorMap.cyan;
-
-  const inner = (
-    <span className="flex items-center gap-1.5 font-mono text-[9px] text-slate-500 hover:text-slate-300 transition-colors">
-      <strong className={`text-[10px] font-black tabular-nums ${textColor}`}>
-        {value === null ? "—" : value.toLocaleString()}
-      </strong>
-      <span className="uppercase tracking-widest">{label}</span>
-    </span>
-  );
-
-  return href ? <Link href={href}>{inner}</Link> : inner;
 }

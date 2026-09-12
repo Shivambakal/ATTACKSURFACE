@@ -50,7 +50,6 @@ async def lifespan(app: FastAPI):
 
 
 
-
 def create_app() -> FastAPI:
     """Application factory."""
     application = FastAPI(
@@ -111,6 +110,7 @@ def create_app() -> FastAPI:
         from .routers.admin_router import router as admin_router
         from .routers.trial import router as trial_router
         from .routers.live_intelligence import router as live_intelligence_router
+        from .routers.verification import router as verification_router
 
         from .routers.exports import router as exports_router
         from .routers.billing import router as billing_router
@@ -125,6 +125,7 @@ def create_app() -> FastAPI:
         application.include_router(billing_router)
         application.include_router(trial_router)
         application.include_router(live_intelligence_router)
+        application.include_router(verification_router)
         application.include_router(scheduler_router)
         application.include_router(sources_router)
         application.include_router(corporate_intelligence_router)
