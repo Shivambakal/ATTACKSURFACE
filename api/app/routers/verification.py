@@ -1,7 +1,8 @@
 """Verification telemetry API.
 
-Exposes computed verification coverage for the researcher UI. Counts are derived
-from persisted evidence/changes/signals; there are no display-only constants.
+Counts are derived from persisted evidence and the deterministic verification
+engine. A second before/after record from the same source is not treated as
+independent corroboration.
 """
 from __future__ import annotations
 
@@ -25,6 +26,53 @@ def _recent_cutoff(hours: int) -> datetime:
     return datetime.now(timezone.utc) - timedelta(hours=hours)
 
 
+def _payload_source(payload: dict[str, Any]) -> str:
+    return str(payload.get("source_url") or payload.get("source") or payload.get("provider") or "").strip()
+
+
+def _distinct_sources(payloads: list[dict[str, Any]]) -> set[str]:
+    return {value for value in (_payload_source(p) for p in payloads) if value}
+
+
+def _parse_dt(value: Any) -> datetime | None:
+    if not value:
+        return None
+    try:
+        dt = datetime.fromisoformat(str(value).replace("Z", "+00:00"))
+        return dt if dt.tzinfo else dt.replace(tzinfo=timezone.utc)
+    except Exception:
+        return None
+
+
+def _evaluate_change(change: Change, evidences: list[ChangeEvidence]) -> dict[str, Any]:
+    payloads = [e.payload or {} for e in evidences]
+    sources = _distinct_sources(payloads)
+    direct = any(str(p.get("evidence_strength", "")).upper() == "DIRECT_PRODUCTION_OBSERVATION" for p in payloads)
+    entity_verified = any(bool(p.get("entity_relationship_verified")) for p in payloads)
+    first_payload = payloads[0] if payloads else {}
+
+    result = engine.evaluate(
+        title=change.summary,
+        summary=change.researcher_note or change.summary,
+        item_url=change.source_url,
+        source_url=change.source_url,
+        source_type=str(first_payload.get("source_type") or first_payload.get("authority_level") or "").upper(),
+        authority_level=str(first_payload.get("authority_level") or "").upper(),
+        source_content_hash=str(first_payload.get("content_hash") or ""),
+        published_at=_parse_dt(first_payload.get("published_at")),
+        updated_at=_parse_dt(first_payload.get("updated_at")),
+        ai_generated=bool(first_payload.get("ai_generated")),
+        direct_production_observed=direct,
+        corroborating_source_count=len(sources),
+        entity_relationship_verified=entity_verified,
+    )
+    return result.to_dict() | {
+        "evidence_count": len(evidences),
+        "distinct_source_count": len(sources),
+        "distinct_sources": sorted(sources),
+    }
+
+
 @router.get("/telemetry")
 def verification_telemetry(
     hours: int = Query(default=1, ge=1, le=168),
@@ -36,40 +84,36 @@ def verification_telemetry(
     changes = db.query(Change).filter(Change.detected_at >= cutoff).all()
 
     total = len(changes)
-    with_evidence = 0
-    corroborated = 0
+    verified = 0
     observed = 0
+    corroborated = 0
     documented = 0
     unverified = 0
     rejected_or_weak = 0
-    avg_conf = 0.0
+    confidence_sum = 0.0
 
     for change in changes:
         evidences = db.query(ChangeEvidence).filter(ChangeEvidence.change_id == change.id).all()
-        if evidences:
-            with_evidence += 1
-        states = {str(e.state).upper() for e in evidences}
-        payloads = [e.payload or {} for e in evidences]
-        has_direct = any(str(p.get("evidence_strength", "")).upper() == "DIRECT_PRODUCTION_OBSERVATION" for p in payloads)
-        has_corroboration = len(evidences) >= 2 or any(str(p.get("observation_state", "")).upper() == "CONFIRMED" for p in payloads)
-        has_documented = any(s in states for s in {"DOCUMENTED", "DOCUMENTED_NOT_OBSERVED"})
-        if has_direct:
+        evaluation = _evaluate_change(change, evidences)
+        state = evaluation["state"]
+        if state == "CONFIRMED":
+            verified += 1
             observed += 1
-        if has_corroboration:
+        elif state == "CORROBORATED":
+            verified += 1
             corroborated += 1
-        if has_documented:
+        elif state == "OBSERVED":
+            observed += 1
+        elif state == "DOCUMENTED":
             documented += 1
-        if not evidences:
+        else:
             unverified += 1
-        if any(str(p.get("verification_state", "")).upper() in {"UNVERIFIED", "REJECTED"} for p in payloads):
+        if evaluation["blockers"]:
             rejected_or_weak += 1
-        avg_conf += float(change.confidence or 0.0)
+        confidence_sum += float(evaluation["score"] or 0.0)
 
-    avg_conf = round((avg_conf / total) * 100, 1) if total else 0.0
-    verified = observed + max(0, corroborated - observed)
-    verified = min(verified, total)
     coverage = round((verified / total) * 100, 1) if total else 0.0
-
+    avg_conf = round((confidence_sum / total) * 100, 1) if total else 0.0
     signal_count = db.query(func.count(ResearchSignal.id)).filter(ResearchSignal.created_at >= cutoff).scalar() or 0
     active_targets = db.query(func.count(Target.id)).filter(Target.monitoring_status == "active").scalar() or 0
 
@@ -99,39 +143,25 @@ def verify_change(
     current_user=Depends(get_current_user),
     db: Session = Depends(get_db),
 ) -> dict[str, Any]:
-    """Return the evidence chain and conservative verification state for one change."""
+    """Return the deterministic verification result and complete evidence chain."""
     change = db.get(Change, change_id)
     if not change:
         return {"error": "Change not found"}
 
     evidences = db.query(ChangeEvidence).filter(ChangeEvidence.change_id == change.id).all()
-    payloads = [e.payload or {} for e in evidences]
-    source_count = len({str(p.get("source_url") or p.get("source") or "").strip() for p in payloads if (p.get("source_url") or p.get("source"))})
-    direct = any(str(p.get("evidence_strength", "")).upper() == "DIRECT_PRODUCTION_OBSERVATION" for p in payloads)
-    state = "UNVERIFIED"
-    if direct:
-        state = "CONFIRMED" if source_count >= 2 or len(evidences) >= 2 else "OBSERVED"
-    elif len(evidences) >= 2:
-        state = "CORROBORATED"
-    elif any(str(e.state).upper() in {"DOCUMENTED", "DOCUMENTED_NOT_OBSERVED"} for e in evidences):
-        state = "DOCUMENTED"
+    evaluation = _evaluate_change(change, evidences)
 
     return {
         "id": change.id,
-        "state": state,
+        "state": evaluation["state"],
+        "verification": evaluation,
         "confidence_pct": round(float(change.confidence or 0.0) * 100, 1),
         "security_relevance": change.security_relevance,
         "priority": change.priority,
         "source_url": change.source_url,
         "detected_at": change.detected_at.isoformat() if change.detected_at else None,
-        "evidence_count": len(evidences),
-        "source_count": source_count,
         "evidence": [
-            {
-                "id": e.id,
-                "state": e.state,
-                "payload": e.payload,
-            }
+            {"id": e.id, "state": e.state, "payload": e.payload}
             for e in evidences
         ],
     }
