@@ -7,7 +7,6 @@ import { useAuth } from "@/lib/auth";
 import PublicNav from "@/components/PublicNav";
 import PublicFooter from "@/components/PublicFooter";
 import WhiteAesthetic3DBackground from "@/components/WhiteAesthetic3DBackground";
-import TrackedAssetsOrbitalHub from "@/components/TrackedAssetsOrbitalHub";
 
 export default function LandingPage() {
   const router = useRouter();
@@ -61,19 +60,57 @@ export default function LandingPage() {
         </div>
         </div>
 
-        {/* Orbital Telemetry Hub Hero (matching media_1789123121664.png) */}
+        {/* Orbital visualization — public preview (decorative, not live data) */}
         <div className="relative hidden w-full lg:block">
-          <TrackedAssetsOrbitalHub
-            trackedAssets={324}
-            verifiedScope="VERIFIED SCOPE"
-            activeSignals={0}
-            actionableLeads="ACTIONABLE LEADS"
-            companiesWatched={1436}
-            canonicalOrgs="CANONICAL ORGANIZATIONS"
-            avgConfidence="99.4%"
-            consensusStatus="CONSENSUS"
-            className="w-full"
-          />
+          <div className="relative w-full overflow-hidden rounded-3xl border border-slate-800/70 bg-[#07090e]/90 p-6 shadow-2xl backdrop-blur-2xl">
+            <div className="flex items-center gap-2 border-b border-slate-800/60 pb-3 mb-4">
+              <span className="h-2 w-2 rounded-full bg-cyan-400 animate-pulse shadow-[0_0_8px_#22d3ee]" />
+              <span className="font-mono text-[10px] font-bold uppercase tracking-widest text-cyan-300">
+                INTELLIGENCE TELEMETRY HUB
+              </span>
+            </div>
+            {/* Static decorative rings — no fabricated numbers */}
+            <div className="relative flex items-center justify-center" style={{ minHeight: 300 }}>
+              <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                <div className="w-48 h-48 rounded-full border border-cyan-400/10 border-dashed animate-spin" style={{ animationDuration: "18s" }} />
+                <div className="absolute w-32 h-32 rounded-full border border-cyan-400/15" />
+              </div>
+              <div className="relative z-10 w-16 h-16 rounded-full bg-gradient-to-br from-slate-900 to-[#030608] border border-cyan-500/30 shadow-[0_0_24px_rgba(34,211,238,0.18)] flex items-center justify-center">
+                <svg viewBox="0 0 48 48" fill="none" className="w-8 h-8">
+                  <path d="M24 8L30 11.5L24 15L18 11.5Z" fill="rgba(6,182,212,0.18)" stroke="#22d3ee" strokeWidth="1.5" />
+                  <path d="M18 11.5V18.5L24 22V15Z" fill="rgba(6,182,212,0.08)" stroke="#22d3ee" strokeWidth="1.5" />
+                  <path d="M24 15V22L30 18.5V11.5Z" fill="rgba(6,182,212,0.30)" stroke="#22d3ee" strokeWidth="1.5" />
+                </svg>
+              </div>
+              {/* Decorative node labels — no fabricated DB numbers */}
+              {[
+                { label: "VERIFIED", angle: -90, color: "emerald" },
+                { label: "OBSERVED", angle: -30, color: "cyan" },
+                { label: "CORROBORATED", angle: 30, color: "amber" },
+                { label: "DOCUMENTED", angle: 90, color: "blue" },
+              ].map((n) => {
+                const rad = (n.angle * Math.PI) / 180;
+                const r = 110;
+                const x = Math.cos(rad) * r;
+                const y = Math.sin(rad) * r;
+                return (
+                  <div
+                    key={n.label}
+                    className="absolute w-14 h-14 rounded-2xl border border-slate-700/50 bg-slate-900/60 flex items-center justify-center"
+                    style={{ left: `calc(50% + ${x}px - 28px)`, top: `calc(50% + ${y}px - 28px)` }}
+                    aria-hidden="true"
+                  >
+                    <span className={`font-mono text-[8px] font-bold text-${n.color}-400 text-center leading-tight uppercase`}>
+                      {n.label}
+                    </span>
+                  </div>
+                );
+              })}
+            </div>
+            <div className="mt-3 text-center font-mono text-[9px] text-slate-600 uppercase tracking-widest">
+              Sign in to see live verified telemetry
+            </div>
+          </div>
         </div>
         </div>
 

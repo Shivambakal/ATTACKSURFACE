@@ -175,20 +175,13 @@ export default function CompanyDetailPage({ params }: PageProps) {
   const loadCompanyData = async () => {
     setLoading(true);
     try {
-      const [
-        compRes,
-        sigsRes,
-        covRes,
-        telemRes,
-        bugsRes,
-        historyRes,
-        assetsRes,
-        scopeRes,
-        prodsRes,
-        apisRes,
-        featsRes,
-      ] = await Promise.all([
-        apiFetch<Company>(`/api/v1/companies/${companyId}`),
+      // 1. Fetch core company entity first so header & layout render immediately
+      const compRes = await apiFetch<Company>(`/api/v1/companies/${companyId}`);
+      setCompany(compRes);
+      setLoading(false);
+
+      // 2. Fetch ancillary intelligence in parallel without blocking main UI
+      Promise.all([
         apiFetch<ResearchSignal[]>(`/api/v1/companies/${companyId}/signals`).catch(() => []),
         apiFetch<CompanyCoverage>(`/api/v1/companies/${companyId}/coverage`).catch(() => null),
         apiFetch<ServerTelemetry>(`/api/v1/companies/${companyId}/server-telemetry`).catch(() => null),
@@ -199,22 +192,33 @@ export default function CompanyDetailPage({ params }: PageProps) {
         apiFetch<Product[]>(`/api/v1/companies/${companyId}/products`).catch(() => []),
         apiFetch<CompanyApi[]>(`/api/v1/companies/${companyId}/apis`).catch(() => []),
         apiFetch<CompanyFeature[]>(`/api/v1/companies/${companyId}/features`).catch(() => []),
-      ]);
-
-      setCompany(compRes);
-      setSignals(sigsRes || []);
-      setCoverage(covRes);
-      setTelemetry(telemRes);
-      setBugsData(bugsRes);
-      setTimelineEvents(historyRes?.timeline_events || []);
-      setAssets(assetsRes || []);
-      setSecurityPrograms(scopeRes || []);
-      setProducts(prodsRes || []);
-      setApis(apisRes || []);
-      setFeatures(featsRes || []);
+      ]).then(
+        ([
+          sigsRes,
+          covRes,
+          telemRes,
+          bugsRes,
+          historyRes,
+          assetsRes,
+          scopeRes,
+          prodsRes,
+          apisRes,
+          featsRes,
+        ]) => {
+          setSignals(sigsRes || []);
+          setCoverage(covRes);
+          setTelemetry(telemRes);
+          setBugsData(bugsRes);
+          setTimelineEvents(historyRes?.timeline_events || []);
+          setAssets(assetsRes || []);
+          setSecurityPrograms(scopeRes || []);
+          setProducts(prodsRes || []);
+          setApis(apisRes || []);
+          setFeatures(featsRes || []);
+        }
+      );
     } catch (err) {
       console.error("Failed to load company detail:", err);
-    } finally {
       setLoading(false);
     }
   };

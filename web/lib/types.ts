@@ -727,3 +727,87 @@ export interface PaymentTransactionItem {
   completed_at?: string | null;
 }
 
+// ── Phase 8: Verification Engine Types ──────────────────────────────────────
+
+/**
+ * Canonical 11-state verification taxonomy.
+ * Strength order (highest → lowest):
+ * VERIFIED > OBSERVED > CORROBORATED > DOCUMENTED > DOCUMENTED_NOT_OBSERVED
+ * > HISTORICAL > DEVELOPMENT_EVIDENCE > CANDIDATE > UNVERIFIED > CONFLICTING > REJECTED
+ */
+export type VerificationState =
+  | "VERIFIED"
+  | "OBSERVED"
+  | "CORROBORATED"
+  | "DOCUMENTED"
+  | "DOCUMENTED_NOT_OBSERVED"
+  | "HISTORICAL"
+  | "DEVELOPMENT_EVIDENCE"
+  | "CANDIDATE"
+  | "UNVERIFIED"
+  | "CONFLICTING"
+  | "REJECTED";
+
+/**
+ * Live verification telemetry returned by GET /api/v1/verification/telemetry
+ *
+ * All numeric fields are direct SQL aggregates — never fabricated defaults.
+ * null means the database returned no rows for that metric in the window.
+ * source is always "database" to distinguish from any mock/cached data.
+ */
+export interface VerificationTelemetry {
+  /** Sources with SUCCESS_CHANGED in window */
+  verified_count: number;
+  /** Sources with SUCCESS_UNCHANGED in window */
+  observed_count: number;
+  /** Companies with ≥2 independent successful source types in window */
+  corroborated_count: number;
+  /** Sources with FAILED status in window */
+  unverified_count: number;
+  /** Sources with RATE_LIMITED in window */
+  conflicting_count: number;
+  /** Change records detected_at within window */
+  recent_diffs_count: number;
+  /** RawSourceSnapshot records retrieved within window */
+  direct_observations_count: number;
+  /** Total authorized targets (all time) */
+  authorized_targets_count: number;
+  /** Total companies in registry (all time) */
+  company_registry_count: number;
+  /** ResearchSignal records in active status */
+  active_signals_count: number;
+  /** Average confidence from changes in window; null if no changes */
+  avg_confidence_pct: number | null;
+  /** Percentage of enabled sources checked in window; null if no enabled sources */
+  coverage_pct: number | null;
+  /** The requested lookback window in hours */
+  window_hours: number;
+  /** ISO 8601 UTC timestamp of when this was computed */
+  computed_at: string;
+  /** Always "database" — never "mock", "cache", or "fallback" */
+  source: "database";
+}
+
+export interface VerificationClaimDetail {
+  claim_id: number;
+  claim_type: "signal" | "change";
+  title?: string;
+  summary?: string;
+  state: VerificationState;
+  confidence: number;
+  evidence_chain?: Array<{ step: string; value: string }>;
+  evidence_records?: Array<{ state: string; payload: Record<string, unknown> }>;
+  score_factors: Record<string, unknown>;
+  ai_influenced: boolean;
+  computed_at: string;
+}
+
+export interface VerificationHealth {
+  last_successful_run_at: string | null;
+  last_successful_run_id: number | null;
+  last_failed_run_at: string | null;
+  runs_last_24h: number;
+  enabled_sources: number;
+  checked_at: string;
+  source: "database";
+}

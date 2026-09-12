@@ -21,7 +21,7 @@ import {
 import CompanyPriorityBoard from "@/components/CompanyPriorityBoard";
 import LiveTelemetryBar from "@/components/LiveTelemetryBar";
 import ModernFilterDropdown, { FilterOption } from "@/components/ModernFilterDropdown";
-import TrackedAssetsOrbitalHub from "@/components/TrackedAssetsOrbitalHub";
+import VerifiedTelemetryHub from "@/components/VerifiedTelemetryHub";
 
 interface TrendingAdvisory {
   id: number;
@@ -291,57 +291,19 @@ export default function DashboardPage() {
         </div>
       </div>
 
-      {/* ── HERO SECTION: SINCE 1H + 2x2 STATS (matching media_1788891721052.jpg) ─ */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-4">
-        {/* Left Hero Card: "SINCE 1H" */}
-        <div className="lg:col-span-5 rounded-3xl border border-white/[0.08] bg-[#070b14]/75 p-6 flex flex-col justify-between shadow-2xl backdrop-blur-2xl card-25d">
-          <div>
-            <div className="text-[10px] font-mono font-bold uppercase tracking-widest text-slate-400 flex items-center justify-between">
-              <span>SINCE {timeFilter}</span>
-              <span className="h-1.5 w-1.5 rounded-full bg-cyan-400 shadow-[0_0_8px_#00f0ff] animate-pulse" />
-            </div>
-            <div className="mt-2 text-6xl font-black text-white font-display tracking-tight">
-              <AnimatedNumber value={countDisplay} />
-            </div>
-            <p className="mt-2 text-xs text-slate-400 leading-relaxed max-w-sm">
-              meaningful surface diffs observed across enrolled entities
-            </p>
-          </div>
-
-          {/* Temporal Filter Pills */}
-          <div className="mt-6 flex items-center gap-1.5 pt-2 border-t border-slate-900">
-            {(["10M", "1H", "24H", "7D"] as const).map((tab) => (
-              <button
-                key={tab}
-                onClick={() => setTimeFilter(tab)}
-                className={`rounded-xl px-3.5 py-1 text-xs font-mono font-bold transition-all ${
-                  timeFilter === tab
-                    ? "bg-cyan-500 text-slate-950 shadow-md shadow-cyan-500/20 scale-105"
-                    : "bg-slate-900/80 text-slate-400 hover:text-white border border-slate-800 hover:border-slate-700"
-                }`}
-              >
-                {tab}
-              </button>
-            ))}
-          </div>
-        </div>
-
-        {/* Right Orbital Telemetry Hub (matching media_1789123121664.png) */}
-        <div className="lg:col-span-7 flex">
-          <TrackedAssetsOrbitalHub
-            trackedAssets={companyStats?.observed_assets ?? 324}
-            verifiedScope="VERIFIED SCOPE"
-            activeSignals={companyStats?.research_signals ?? highValueSignals.length}
-            actionableLeads="ACTIONABLE LEADS"
-            companiesWatched={companyStats?.canonical_companies ?? 1436}
-            canonicalOrgs="CANONICAL ORGANIZATIONS"
-            avgConfidence="99.4%"
-            consensusStatus="CONSENSUS"
-            className="w-full"
-          />
-        </div>
-      </div>
-
+      {/* ── HERO SECTION: Verified Telemetry Hub (full-width, Phase 8) ──────── */}
+      {/*
+        VerifiedTelemetryHub replaces:
+        - The left "SINCE 1H" card (the diff count now appears under the hub heading)
+        - The right TrackedAssetsOrbitalHub (which had hardcoded 324, 1436, 99.4%)
+        All metrics are fetched live from /api/v1/verification/telemetry with skipCache=true.
+        If API returns 0, hub shows 0. If unavailable, hub shows "—" and VERIFICATION UNAVAILABLE.
+      */}
+      <VerifiedTelemetryHub
+        recentDiffsCount={countDisplay > 0 ? countDisplay : (recentChanges.length > 0 ? recentChanges.length : null)}
+        initialWindow={timeFilter}
+        className="w-full"
+      />
 
       {/* ── LIVE FORENSIC DIFF FEED TABLE (matching media_1788891721052.jpg) ──── */}
       <div className="rounded-3xl border border-white/[0.08] bg-[#070b14]/75 p-6 shadow-2xl backdrop-blur-2xl space-y-4">
