@@ -5,6 +5,7 @@ import Link from "next/link";
 import { apiFetch } from "@/lib/api";
 import { SecurityIntelligenceEvent, SecurityIntelligenceStats } from "@/lib/types";
 import ModernFilterDropdown from "@/components/ModernFilterDropdown";
+import { AnimatedNumber } from "@/components/ui/InteractionPrimitives";
 
 const createFallbackEvent = (
   data: Partial<SecurityIntelligenceEvent> & { id: number; title: string; summary: string }
@@ -265,35 +266,43 @@ export default function SecurityIntelligencePage() {
 
       {/* Stats Ribbon */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-        <div className="bg-slate-900/80 border border-slate-800 rounded-xl p-4 shadow-sm">
-          <div className="text-xs uppercase font-medium tracking-wider text-slate-400">Total Intel Events</div>
-          <div className="text-2xl font-bold text-slate-100 mt-1">{stats ? stats.total_events : "—"}</div>
+        <div className="rounded-2xl border border-white/[0.08] bg-[#070b14]/75 p-4 shadow-xl backdrop-blur-xl card-25d">
+          <div className="text-xs uppercase font-medium tracking-wider text-slate-400 font-mono">Total Intel Events</div>
+          <div className="text-2xl font-bold text-slate-100 mt-1 font-display">
+            {stats ? <AnimatedNumber value={stats.total_events} /> : "—"}
+          </div>
           <div className="text-xs text-slate-500 mt-1">Grounding verified entries</div>
         </div>
 
-        <div className="bg-slate-900/80 border border-red-900/30 rounded-xl p-4 shadow-sm">
-          <div className="text-xs uppercase font-medium tracking-wider text-red-400">Actively Exploited (In-The-Wild)</div>
-          <div className="text-2xl font-bold text-red-400 mt-1">{stats ? stats.actively_exploited_count : "—"}</div>
-          <div className="text-xs text-red-400/70 mt-1">Confirmed exploitation evidence</div>
+        <div className="rounded-2xl border border-rose-900/40 bg-rose-950/20 p-4 shadow-xl backdrop-blur-xl card-25d">
+          <div className="text-xs uppercase font-medium tracking-wider text-rose-400 font-mono">Actively Exploited (In-The-Wild)</div>
+          <div className="text-2xl font-bold text-rose-400 mt-1 font-display">
+            {stats ? <AnimatedNumber value={stats.actively_exploited_count} /> : "—"}
+          </div>
+          <div className="text-xs text-rose-400/70 mt-1">Confirmed exploitation evidence</div>
         </div>
 
-        <div className="bg-slate-900/80 border border-amber-900/30 rounded-xl p-4 shadow-sm">
-          <div className="text-xs uppercase font-medium tracking-wider text-amber-400">Critical / High Severity</div>
-          <div className="text-2xl font-bold text-amber-300 mt-1">
-            {stats ? (stats.by_severity["CRITICAL"] || 0) + (stats.by_severity["HIGH"] || 0) : "—"}
+        <div className="rounded-2xl border border-amber-900/40 bg-amber-950/20 p-4 shadow-xl backdrop-blur-xl card-25d">
+          <div className="text-xs uppercase font-medium tracking-wider text-amber-400 font-mono">Critical / High Severity</div>
+          <div className="text-2xl font-bold text-amber-300 mt-1 font-display">
+            {stats ? (
+              <AnimatedNumber value={(stats.by_severity["CRITICAL"] || 0) + (stats.by_severity["HIGH"] || 0)} />
+            ) : (
+              "—"
+            )}
           </div>
           <div className="text-xs text-amber-400/70 mt-1">Priority researcher focus</div>
         </div>
 
-        <div className="bg-slate-900/80 border border-cyan-900/30 rounded-xl p-4 shadow-sm">
-          <div className="text-xs uppercase font-medium tracking-wider text-cyan-400">Cadence & Engine</div>
-          <div className="text-2xl font-bold text-cyan-300 mt-1">10 Min</div>
+        <div className="rounded-2xl border border-cyan-900/40 bg-cyan-950/20 p-4 shadow-xl backdrop-blur-xl card-25d">
+          <div className="text-xs uppercase font-medium tracking-wider text-cyan-400 font-mono">Cadence & Engine</div>
+          <div className="text-2xl font-bold text-cyan-300 mt-1 font-display">10 Min</div>
           <div className="text-xs text-cyan-400/70 mt-1">Automated continuous polling</div>
         </div>
       </div>
 
       {/* Filter and Search Bar */}
-      <div className="bg-slate-900/80 border border-slate-800 rounded-xl p-4 space-y-3">
+      <div className="rounded-2xl border border-white/[0.08] bg-[#070b14]/75 p-4 space-y-3 shadow-xl backdrop-blur-xl">
         <div className="flex flex-col md:flex-row gap-3 items-center justify-between">
           <div className="relative flex-1 w-full">
             <svg className="w-4 h-4 absolute left-3.5 top-3 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">

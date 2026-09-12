@@ -47,3 +47,5 @@ data/exports/
 *.dump
 merge_*.py
 safe_merge_check.py
+*.log
+api/data/exports/

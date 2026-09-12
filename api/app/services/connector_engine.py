@@ -226,7 +226,7 @@ class GenericFeedConnector(BaseConnector):
                     items = self._parse_html_advisories(body_text, source, target_url)
 
             return FetchResult(
-                status="SUCCESS_CHANGED",
+                status="SUCCESS_CHANGED" if items else "SUCCESS_UNCHANGED",
                 http_status=resp.status_code,
                 etag=resp.headers.get("etag"),
                 last_modified=resp.headers.get("last-modified"),
@@ -602,7 +602,7 @@ class JsonApiConnector(BaseConnector):
                 )
 
             return FetchResult(
-                status="SUCCESS_CHANGED",
+                status="SUCCESS_CHANGED" if items else "SUCCESS_UNCHANGED",
                 http_status=200,
                 etag=resp.headers.get("etag"),
                 last_modified=resp.headers.get("last-modified"),
@@ -678,7 +678,7 @@ class ConnectorEngine:
             health.last_checked_at = now
             health.latency_ms = result.duration_ms
 
-            if result.status == "SUCCESS_UNCHANGED":
+            if result.status == "SUCCESS_UNCHANGED" or (result.status == "SUCCESS_CHANGED" and len(result.items) == 0):
                 source.status = SourceStatus.SUCCESS_UNCHANGED.value
                 source.consecutive_failures = 0
                 source.last_http_status = result.http_status
@@ -839,8 +839,16 @@ class ConnectorEngine:
         except Exception as exc:
             db.rollback()
             logger.exception("Unexpected error executing source %s", source_id)
-            source.status = SourceStatus.FAILED.value
-            source.last_error = str(exc)
+            source = db.get(CompanySource, source_id)
+            if source:
+                source.status = SourceStatus.FAILED.value
+                source.consecutive_failures = (source.consecutive_failures or 0) + 1
+                source.last_error = str(exc)
+                health = db.scalar(select(SourceHealth).where(SourceHealth.source_id == source.id))
+                if health:
+                    health.consecutive_failures = (health.consecutive_failures or 0) + 1
+                    health.health_state = SourceHealthState.FAILED.value if health.consecutive_failures >= 3 else SourceHealthState.DEGRADED.value
+                    health.last_checked_at = datetime.now(timezone.utc)
             db.commit()
             return FetchResult(status="FAILED", error_message=str(exc))
         finally:

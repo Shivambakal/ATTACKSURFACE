@@ -64,11 +64,11 @@ export default function LandingPage() {
         {/* Orbital Telemetry Hub Hero (matching media_1789123121664.png) */}
         <div className="relative hidden w-full lg:block">
           <TrackedAssetsOrbitalHub
-            trackedAssets={14740}
+            trackedAssets={324}
             verifiedScope="VERIFIED SCOPE"
             activeSignals={0}
             actionableLeads="ACTIONABLE LEADS"
-            companiesWatched={2010}
+            companiesWatched={1436}
             canonicalOrgs="CANONICAL ORGANIZATIONS"
             avgConfidence="99.4%"
             consensusStatus="CONSENSUS"

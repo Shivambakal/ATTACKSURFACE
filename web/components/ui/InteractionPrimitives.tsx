@@ -9,7 +9,7 @@ import { useReducedMotion } from "@/lib/useReducedMotion";
 export function CardTilt3D({
   children,
   className = "",
-  maxTilt = 6,
+  maxTilt = 3,
   onClick,
 }: {
   children: React.ReactNode;
@@ -329,3 +329,164 @@ export function SeverityBadge({
     </span>
   );
 }
+
+/**
+ * 9. GlassCard: Standard frosted glass container with 1px micro-border & hover elevation
+ */
+export function GlassCard({
+  children,
+  className = "",
+  hoverLift = true,
+  onClick,
+}: {
+  children: React.ReactNode;
+  className?: string;
+  hoverLift?: boolean;
+  onClick?: () => void;
+}) {
+  return (
+    <div
+      onClick={onClick}
+      className={`rounded-2xl border border-white/[0.08] bg-[#070b14]/75 backdrop-blur-xl shadow-xl transition-all duration-200 ${
+        hoverLift ? "hover:-translate-y-1 hover:border-cyan-500/30 hover:shadow-[0_16px_36px_-10px_rgba(0,0,0,0.7),0_0_20px_-4px_rgba(0,240,255,0.12)]" : ""
+      } ${onClick ? "cursor-pointer" : ""} ${className}`}
+    >
+      {children}
+    </div>
+  );
+}
+
+/**
+ * 10. ExpandableCard: Smooth micro-accordion for inspecting technical details
+ */
+export function ExpandableCard({
+  title,
+  subtitle,
+  badge,
+  badgeTone = "cyan",
+  children,
+  defaultExpanded = false,
+  className = "",
+}: {
+  title: React.ReactNode;
+  subtitle?: React.ReactNode;
+  badge?: React.ReactNode;
+  badgeTone?: "cyan" | "rose" | "amber" | "emerald" | "purple";
+  children: React.ReactNode;
+  defaultExpanded?: boolean;
+  className?: string;
+}) {
+  const [expanded, setExpanded] = useState(defaultExpanded);
+
+  const badgeStyles = {
+    cyan: "bg-cyan-500/15 text-cyan-300 border-cyan-500/30",
+    rose: "bg-rose-500/15 text-rose-300 border-rose-500/30",
+    amber: "bg-amber-500/15 text-amber-300 border-amber-500/30",
+    emerald: "bg-emerald-500/15 text-emerald-300 border-emerald-500/30",
+    purple: "bg-purple-500/15 text-purple-300 border-purple-500/30",
+  };
+
+  return (
+    <div className={`rounded-2xl border border-white/[0.08] bg-[#070b14]/80 backdrop-blur-xl overflow-hidden transition-all duration-200 ${expanded ? "border-cyan-500/30 shadow-[0_12px_30px_-8px_rgba(0,0,0,0.8)]" : "hover:border-white/[0.14]"} ${className}`}>
+      <button
+        type="button"
+        onClick={() => setExpanded(!expanded)}
+        className="w-full p-4 flex items-center justify-between gap-4 text-left transition-colors hover:bg-white/[0.02]"
+      >
+        <div className="flex-1 min-w-0">
+          <div className="flex items-center gap-2.5">
+            <span className="font-semibold text-sm text-white truncate font-sans">{title}</span>
+            {badge && (
+              <span className={`px-2 py-0.5 rounded text-[10px] font-mono font-bold border ${badgeStyles[badgeTone]}`}>
+                {badge}
+              </span>
+            )}
+          </div>
+          {subtitle && (
+            <p className="text-xs text-slate-400 mt-0.5 truncate font-sans">{subtitle}</p>
+          )}
+        </div>
+        <svg
+          className={`w-4 h-4 text-slate-400 transition-transform duration-200 shrink-0 ${expanded ? "rotate-180 text-cyan-400" : "rotate-0"}`}
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+        </svg>
+      </button>
+      {expanded && (
+        <div className="border-t border-white/[0.06] p-4 bg-black/20 animate-surface-in">
+          {children}
+        </div>
+      )}
+    </div>
+  );
+}
+
+/**
+ * 11. EmptyState: Elegant zero-result placeholder
+ */
+export function EmptyState({
+  icon,
+  title,
+  description,
+  action,
+}: {
+  icon?: React.ReactNode;
+  title: string;
+  description: string;
+  action?: React.ReactNode;
+}) {
+  return (
+    <div className="flex flex-col items-center justify-center p-12 text-center rounded-2xl border border-white/[0.06] bg-[#070b14]/50 backdrop-blur-xl">
+      <div className="h-12 w-12 rounded-2xl bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center text-cyan-400 mb-4 shadow-[0_0_20px_rgba(0,240,255,0.15)]">
+        {icon || (
+          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+          </svg>
+        )}
+      </div>
+      <h3 className="text-sm font-bold text-white font-sans">{title}</h3>
+      <p className="text-xs text-slate-400 mt-1 max-w-sm font-sans leading-relaxed">{description}</p>
+      {action && <div className="mt-4">{action}</div>}
+    </div>
+  );
+}
+
+/**
+ * 12. ErrorState: Elegant error container with retry action
+ */
+export function ErrorState({
+  title = "Telemetry Error",
+  message = "Unable to retrieve telemetry feed. Please verify connectivity.",
+  onRetry,
+}: {
+  title?: string;
+  message?: string;
+  onRetry?: () => void;
+}) {
+  return (
+    <div className="p-6 rounded-2xl border border-rose-500/30 bg-rose-950/20 backdrop-blur-xl text-rose-200">
+      <div className="flex items-start gap-3">
+        <svg className="w-5 h-5 text-rose-400 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+        </svg>
+        <div className="flex-1 min-w-0">
+          <h4 className="text-xs font-bold font-mono uppercase tracking-wider text-rose-300">{title}</h4>
+          <p className="text-xs text-rose-200/80 mt-1 font-sans">{message}</p>
+          {onRetry && (
+            <button
+              onClick={onRetry}
+              className="mt-3 px-3 py-1.5 rounded-lg bg-rose-500/20 hover:bg-rose-500/30 border border-rose-500/40 text-xs font-mono font-semibold transition-colors"
+            >
+              Retry Connection &rarr;
+            </button>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export const CardTilt25D = CardTilt3D;

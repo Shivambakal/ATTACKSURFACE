@@ -507,9 +507,13 @@ export interface CompanySource {
   priority: string;
   enabled: boolean;
   status: string;
-  health_state: "HEALTHY" | "DEGRADED" | "FAILED" | "DISABLED" | string;
+  health_state: "HEALTHY" | "DEGRADED" | "FAILED" | "DISABLED" | "NOT_CONFIGURED" | "NEVER_CHECKED" | string;
   last_checked_at?: string | null;
   last_changed_at?: string | null;
+  last_success_at?: string | null;
+  next_check_at?: string | null;
+  last_http_status?: number | null;
+  last_error?: string | null;
   consecutive_failures: number;
   parser_version: string;
   notes?: string | null;

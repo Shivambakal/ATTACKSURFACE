@@ -54,9 +54,12 @@ export default function WhiteAesthetic3DBackground() {
     };
 
     const handlePointerMove = (e: MouseEvent) => {
+      if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        return;
+      }
       const { innerWidth, innerHeight } = window;
-      targetX = (e.clientX / innerWidth - 0.5) * 35;
-      targetY = (e.clientY / innerHeight - 0.5) * 25;
+      targetX = (e.clientX / innerWidth - 0.5) * 25;
+      targetY = (e.clientY / innerHeight - 0.5) * 18;
 
       if (!isRunning) {
         isRunning = true;
@@ -94,39 +97,39 @@ export default function WhiteAesthetic3DBackground() {
         }`}
       >
         <div
-          className="absolute -top-32 -left-32 w-[600px] h-[600px] rounded-full blur-[120px] pointer-events-none will-change-transform"
+          className="absolute -top-32 -left-32 w-[600px] h-[600px] rounded-full blur-[140px] pointer-events-none will-change-transform"
           style={{
             background: isWhiteAesthetic
-              ? "radial-gradient(circle, rgba(6, 182, 212, 0.12) 0%, transparent 70%)"
-              : "radial-gradient(circle, rgba(6, 182, 212, 0.18) 0%, transparent 70%)",
-            transform: "translate3d(calc(var(--mx) * 1.2), calc(var(--my) * 1.2), 0)",
+              ? "radial-gradient(circle, rgba(6, 182, 212, 0.10) 0%, transparent 70%)"
+              : "radial-gradient(circle, rgba(6, 182, 212, 0.14) 0%, transparent 70%)",
+            transform: "translate3d(calc(var(--mx) * 1.1), calc(var(--my) * 1.1), 0)",
           }}
         />
         <div
-          className="absolute top-1/3 -right-32 w-[700px] h-[700px] rounded-full blur-[130px] pointer-events-none will-change-transform"
+          className="absolute top-1/3 -right-32 w-[700px] h-[700px] rounded-full blur-[140px] pointer-events-none will-change-transform"
           style={{
             background: isWhiteAesthetic
-              ? "radial-gradient(circle, rgba(59, 130, 246, 0.10) 0%, transparent 70%)"
-              : "radial-gradient(circle, rgba(139, 92, 246, 0.16) 0%, transparent 70%)",
-            transform: "translate3d(calc(var(--mx) * -0.8), calc(var(--my) * -0.8), 0)",
+              ? "radial-gradient(circle, rgba(59, 130, 246, 0.08) 0%, transparent 70%)"
+              : "radial-gradient(circle, rgba(139, 92, 246, 0.12) 0%, transparent 70%)",
+            transform: "translate3d(calc(var(--mx) * -0.7), calc(var(--my) * -0.7), 0)",
           }}
         />
         <div
-          className="absolute -bottom-40 left-1/3 w-[800px] h-[600px] rounded-full blur-[140px] pointer-events-none will-change-transform"
+          className="absolute -bottom-40 left-1/3 w-[800px] h-[600px] rounded-full blur-[150px] pointer-events-none will-change-transform"
           style={{
             background: isWhiteAesthetic
-              ? "radial-gradient(circle, rgba(99, 102, 241, 0.06) 0%, transparent 70%)"
-              : "radial-gradient(circle, rgba(6, 182, 212, 0.12) 0%, transparent 70%)",
+              ? "radial-gradient(circle, rgba(99, 102, 241, 0.05) 0%, transparent 70%)"
+              : "radial-gradient(circle, rgba(16, 185, 129, 0.08) 0%, transparent 70%)",
           }}
         />
       </div>
 
       <div
         className={`absolute inset-0 pointer-events-none transition-opacity duration-500 will-change-transform ${
-          isWhiteAesthetic ? "opacity-20" : "opacity-55"
+          isWhiteAesthetic ? "opacity-15" : "opacity-30"
         }`}
         style={{
-          transform: "rotateX(55deg) translate3d(calc(var(--mx) * 0.4), calc(var(--my) * 0.4 + 100px), -100px)",
+          transform: "rotateX(55deg) translate3d(calc(var(--mx) * 0.3), calc(var(--my) * 0.3 + 80px), -80px)",
           transformOrigin: "bottom center",
           backgroundImage: isWhiteAesthetic
             ? `linear-gradient(to right, rgba(148, 163, 184, 0.10) 1px, transparent 1px),

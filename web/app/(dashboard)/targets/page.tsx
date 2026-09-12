@@ -193,14 +193,14 @@ export default function TargetsPage() {
       )}
 
       {/* Filter and Search Bar */}
-      <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between rounded-xl border border-slate-800 bg-slate-900/60 p-3">
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between rounded-2xl border border-white/[0.08] bg-[#070b14]/75 p-3.5 shadow-xl backdrop-blur-xl">
         <div className="relative flex-1 max-w-md">
           <input
             type="text"
             placeholder="Filter by domain name (e.g. app.corp.com)..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full rounded-lg border border-slate-700 bg-slate-800/80 px-3 py-2 font-mono text-xs text-slate-100 placeholder-slate-500 outline-none focus:border-cyan-500"
+            className="w-full rounded-xl border border-white/[0.08] bg-black/40 px-3.5 py-2 font-mono text-xs text-slate-100 placeholder-slate-500 outline-none focus:border-cyan-500/60"
           />
           {searchTerm && (
             <button
@@ -214,7 +214,7 @@ export default function TargetsPage() {
 
         <div className="flex items-center gap-3">
           {/* View Mode Switcher */}
-          <div className="flex items-center gap-1 rounded-xl border border-slate-800 bg-slate-950 p-1">
+          <div className="flex items-center gap-1 rounded-xl border border-white/[0.08] bg-black/40 p-1">
             <button
               type="button"
               onClick={() => setViewMode("stream")}
@@ -223,12 +223,12 @@ export default function TargetsPage() {
                   ? "bg-cyan-500 text-slate-950 font-bold shadow-sm"
                   : "text-slate-400 hover:text-white"
               }`}
-              title="Animated Stream List"
+              title="Stream View"
             >
               <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
               </svg>
-              Stream List
+              Stream
             </button>
             <button
               type="button"
@@ -255,8 +255,8 @@ export default function TargetsPage() {
                 onClick={() => setStatusFilter(status)}
                 className={`rounded px-2.5 py-1 font-mono text-[10px] font-semibold transition ${
                   statusFilter === status
-                    ? "bg-cyan-500 text-slate-950"
-                    : "bg-slate-800 text-slate-400 hover:text-slate-200"
+                    ? "bg-cyan-500 text-slate-950 font-bold shadow-sm"
+                    : "bg-white/[0.04] text-slate-400 hover:text-slate-200 border border-white/[0.06]"
                 }`}
               >
                 {status}
@@ -268,20 +268,20 @@ export default function TargetsPage() {
 
       {/* Target Registry View */}
       {loading ? (
-        <div className="py-16 text-center font-mono text-xs text-slate-400 rounded-xl border border-slate-800 bg-slate-900/40">
+        <div className="py-16 text-center font-mono text-xs text-slate-400 rounded-2xl border border-white/[0.08] bg-[#070b14]/75 shadow-xl backdrop-blur-xl">
           <div className="inline-block h-6 w-6 animate-spin rounded-full border-2 border-cyan-500 border-t-transparent mb-2" />
           <div>RETRIEVING TARGET REGISTRY...</div>
         </div>
       ) : filteredTargets.length === 0 ? (
-        <div className="py-16 text-center rounded-xl border border-slate-800 bg-slate-900/40">
+        <div className="py-16 text-center rounded-2xl border border-white/[0.08] bg-[#070b14]/75 shadow-xl backdrop-blur-xl">
           <p className="text-sm text-slate-400">No targets found matching criteria.</p>
           <p className="mt-1 text-xs text-slate-500">
             {searchTerm ? "Try adjusting your search filter." : "Click Add Target to register your first domain."}
           </p>
         </div>
       ) : viewMode === "stream" ? (
-        <div className="rounded-2xl border border-slate-800/80 bg-slate-900/30 p-2 sm:p-3 backdrop-blur-md">
-          <div className="flex items-center justify-between px-3 py-2 text-xs font-mono text-slate-400 border-b border-slate-800/60 mb-2">
+        <div className="rounded-3xl border border-white/[0.08] bg-[#070b14]/75 p-3 sm:p-4 shadow-2xl backdrop-blur-2xl">
+          <div className="flex items-center justify-between px-3 py-2 text-xs font-mono text-slate-400 border-b border-white/[0.06] mb-2">
             <div className="flex items-center gap-2">
               <span className="h-2 w-2 rounded-full bg-cyan-400 animate-pulse" />
               <span className="font-bold text-slate-200">INTERACTIVE TARGET STREAM</span>
@@ -301,7 +301,7 @@ export default function TargetsPage() {
                 className={`p-4 sm:p-5 rounded-2xl border transition-all duration-200 backdrop-blur-md flex flex-col md:flex-row md:items-center md:justify-between gap-4 ${
                   isSelected
                     ? "bg-cyan-950/40 border-cyan-500/70 shadow-lg shadow-cyan-500/15 ring-1 ring-cyan-500/50"
-                    : "bg-slate-900/80 border-slate-800/80 hover:border-cyan-500/40 hover:bg-slate-900"
+                    : "bg-[#0a0f1d]/75 border-white/[0.06] hover:border-cyan-500/40 hover:bg-[#0e1628]/90 hover:shadow-[0_8px_25px_-5px_rgba(0,0,0,0.6)]"
                 }`}
               >
                 {/* Domain Info */}

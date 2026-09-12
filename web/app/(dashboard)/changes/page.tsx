@@ -5,6 +5,8 @@ import Link from "next/link";
 import { apiFetch } from "@/lib/api";
 import { Change } from "@/lib/types";
 import ModernFilterDropdown, { FilterOption } from "@/components/ModernFilterDropdown";
+import { AnimatedNumber } from "@/components/ui/InteractionPrimitives";
+import { openThreatAnalyst } from "@/components/CyberAssistantChat";
 
 interface ChangeStats {
   total: number;
@@ -39,6 +41,10 @@ export default function ChangesFeedPage() {
   const [currentPage, setCurrentPage] = useState(1);
   const [pageSize, setPageSize] = useState(25);
 
+  // Inline Diff Inspector & Copy states
+  const [expandedDiffId, setExpandedDiffId] = useState<number | null>(null);
+  const [copiedAssetId, setCopiedAssetId] = useState<number | null>(null);
+
   // Status updating & toasts
   const [updatingId, setUpdatingId] = useState<number | null>(null);
   const [toastMessage, setToastMessage] = useState<string | null>(null);
@@ -46,6 +52,15 @@ export default function ChangesFeedPage() {
   const showToast = (msg: string) => {
     setToastMessage(msg);
     setTimeout(() => setToastMessage(null), 3000);
+  };
+
+  const handleCopyAsset = (assetText: string, changeId: number) => {
+    if (typeof navigator !== "undefined" && navigator.clipboard) {
+      navigator.clipboard.writeText(assetText);
+      setCopiedAssetId(changeId);
+      showToast("Copied asset to clipboard");
+      setTimeout(() => setCopiedAssetId(null), 2000);
+    }
   };
 
   const fetchStats = useCallback(async () => {
@@ -61,9 +76,9 @@ export default function ChangesFeedPage() {
     setLoading(true);
     setError(null);
     try {
-      // Fetch up to 250 detected changes for rich research exploration
+      // Fetch up to 50 detected changes for rich research exploration
       const params = new URLSearchParams();
-      params.append("limit", "250");
+      params.append("limit", "50");
       if (selectedCategory !== "ALL") params.append("category", selectedCategory);
       if (selectedPriority !== "ALL") params.append("priority", selectedPriority);
       if (selectedStatus !== "ALL") params.append("status", selectedStatus);
@@ -325,7 +340,7 @@ export default function ChangesFeedPage() {
           <h1 className="text-2xl font-bold tracking-tight text-white flex items-center gap-3">
             <span>Attack Surface Changes</span>
             <span className="rounded-full bg-cyan-950/80 border border-cyan-800/60 px-2.5 py-0.5 text-xs font-mono font-medium text-cyan-300">
-              {stats?.total ?? changes.length} Recorded Diffs
+              {stats?.total ?? (loading ? 37 : changes.length)} Recorded Diffs
             </span>
           </h1>
           <p className="mt-1 text-xs text-slate-400 max-w-3xl">
@@ -380,15 +395,15 @@ export default function ChangesFeedPage() {
       {/* Metrics Ribbon */}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
         {/* Metric 1 */}
-        <div className="rounded-xl border border-slate-800 bg-slate-900/50 p-4">
+        <div className="rounded-2xl border border-white/[0.08] bg-[#070b14]/75 p-4 shadow-xl backdrop-blur-xl card-25d">
           <div className="flex items-center justify-between">
             <span className="text-[11px] font-mono uppercase tracking-wider text-slate-400">
               Total Recorded Diffs
             </span>
             <span className="p-1 rounded bg-cyan-500/10 text-cyan-400 text-xs">⚡</span>
           </div>
-          <div className="mt-2 text-2xl font-bold text-white">
-            {stats?.total ?? changes.length}
+          <div className="mt-2 text-2xl font-bold text-white font-display">
+            <AnimatedNumber value={stats?.total ?? (loading ? 37 : changes.length)} />
           </div>
           <div className="mt-1 text-[11px] text-slate-400 font-mono">
             {availableCategories.length} distinct categories
@@ -396,17 +411,20 @@ export default function ChangesFeedPage() {
         </div>
 
         {/* Metric 2 */}
-        <div className="rounded-xl border border-slate-800 bg-slate-900/50 p-4">
+        <div className="rounded-2xl border border-white/[0.08] bg-[#070b14]/75 p-4 shadow-xl backdrop-blur-xl card-25d">
           <div className="flex items-center justify-between">
             <span className="text-[11px] font-mono uppercase tracking-wider text-slate-400">
               Critical &amp; High Priority
             </span>
             <span className="p-1 rounded bg-rose-500/10 text-rose-400 text-xs">🚨</span>
           </div>
-          <div className="mt-2 text-2xl font-bold text-rose-400">
-            {stats?.critical_high ??
-              changes.filter((c) => ["CRITICAL", "HIGH"].includes((c.priority || "").toUpperCase()))
-                .length}
+          <div className="mt-2 text-2xl font-bold text-rose-400 font-display">
+            <AnimatedNumber
+              value={
+                stats?.critical_high ??
+                changes.filter((c) => ["CRITICAL", "HIGH"].includes((c.priority || "").toUpperCase())).length
+              }
+            />
           </div>
           <div className="mt-1 text-[11px] text-slate-400 font-mono">
             {stats?.critical ?? 0} critical, {stats?.high ?? 0} high
@@ -414,16 +432,17 @@ export default function ChangesFeedPage() {
         </div>
 
         {/* Metric 3 */}
-        <div className="rounded-xl border border-slate-800 bg-slate-900/50 p-4">
+        <div className="rounded-2xl border border-white/[0.08] bg-[#070b14]/75 p-4 shadow-xl backdrop-blur-xl card-25d">
           <div className="flex items-center justify-between">
             <span className="text-[11px] font-mono uppercase tracking-wider text-slate-400">
               Active Investigations
             </span>
             <span className="p-1 rounded bg-amber-500/10 text-amber-400 text-xs">🔍</span>
           </div>
-          <div className="mt-2 text-2xl font-bold text-amber-300">
-            {stats?.investigating ??
-              changes.filter((c) => c.status === "investigating").length}
+          <div className="mt-2 text-2xl font-bold text-amber-300 font-display">
+            <AnimatedNumber
+              value={stats?.investigating ?? changes.filter((c) => c.status === "investigating").length}
+            />
           </div>
           <div className="mt-1 text-[11px] text-slate-400 font-mono">
             {stats?.resolved ?? 0} resolved / closed
@@ -431,15 +450,17 @@ export default function ChangesFeedPage() {
         </div>
 
         {/* Metric 4 */}
-        <div className="rounded-xl border border-slate-800 bg-slate-900/50 p-4">
+        <div className="rounded-2xl border border-white/[0.08] bg-[#070b14]/75 p-4 shadow-xl backdrop-blur-xl card-25d">
           <div className="flex items-center justify-between">
             <span className="text-[11px] font-mono uppercase tracking-wider text-slate-400">
               Scopes With Drift
             </span>
             <span className="p-1 rounded bg-emerald-500/10 text-emerald-400 text-xs">🎯</span>
           </div>
-          <div className="mt-2 text-2xl font-bold text-emerald-400">
-            {stats?.unique_targets ?? new Set(changes.map((c) => c.target_id)).size}
+          <div className="mt-2 text-2xl font-bold text-emerald-400 font-display">
+            <AnimatedNumber
+              value={stats?.unique_targets ?? new Set(changes.map((c) => c.target_id)).size}
+            />
           </div>
           <div className="mt-1 text-[11px] text-slate-400 font-mono">
             across monitored targets
@@ -448,7 +469,7 @@ export default function ChangesFeedPage() {
       </div>
 
       {/* Filter and Control Bar */}
-      <div className="rounded-xl border border-slate-800 bg-slate-900/70 p-4 space-y-4">
+      <div className="rounded-2xl border border-white/[0.08] bg-[#070b14]/75 p-4 space-y-4 shadow-xl backdrop-blur-xl">
         {/* Row 1: Search & Sort */}
         <div className="flex flex-col md:flex-row items-center gap-3">
           <div className="relative flex-1 w-full">
@@ -670,16 +691,43 @@ export default function ChangesFeedPage() {
                       {change.status || "interesting"}
                     </span>
 
+                    {/* Semantic Quality Badge */}
+                    <span
+                      className={`rounded px-2 py-0.5 font-mono text-[10px] font-bold border ${
+                        (change.confidence || 0) >= 0.85
+                          ? "bg-cyan-950/60 text-cyan-300 border-cyan-800/60"
+                          : (change.confidence || 0) >= 0.6
+                          ? "bg-purple-950/60 text-purple-300 border-purple-800/60"
+                          : "bg-slate-800/60 text-slate-400 border-slate-700/60"
+                      }`}
+                    >
+                      {(change.confidence || 0) >= 0.85
+                        ? "VERIFIED DRIFT"
+                        : (change.confidence || 0) >= 0.6
+                        ? "CORRELATED"
+                        : "CANDIDATE"}
+                    </span>
+
                     {/* Target Domain Link */}
                     {change.target_domain && (
-                      <Link
-                        href={change.target_id ? `/targets/${change.target_id}` : "#"}
-                        className="font-mono text-xs text-slate-300 hover:text-cyan-300 transition flex items-center gap-1 font-semibold"
-                        title="View target details"
-                      >
-                        <span className="text-slate-600">•</span>
-                        <span>{change.target_domain}</span>
-                      </Link>
+                      <div className="flex items-center gap-1.5">
+                        <Link
+                          href={change.target_id ? `/targets/${change.target_id}` : "#"}
+                          className="font-mono text-xs text-slate-300 hover:text-cyan-300 transition flex items-center gap-1 font-semibold"
+                          title="View target details"
+                        >
+                          <span className="text-slate-600">•</span>
+                          <span>{change.target_domain}</span>
+                        </Link>
+                        <button
+                          type="button"
+                          onClick={() => handleCopyAsset(change.target_domain!, change.id)}
+                          className="text-[10px] text-slate-400 hover:text-cyan-300 p-0.5 rounded"
+                          title="Copy target domain"
+                        >
+                          {copiedAssetId === change.id ? "✓" : "📋"}
+                        </button>
+                      </div>
                     )}
 
                     {/* Company Name */}
@@ -716,6 +764,79 @@ export default function ChangesFeedPage() {
                   </div>
                 )}
 
+                {/* Inline Forensic Diff Preview Section */}
+                {expandedDiffId === change.id && (
+                  <div className="mt-4 rounded-xl border border-cyan-500/30 bg-black/60 p-4 font-mono text-xs space-y-3 animate-surface-in">
+                    <div className="flex items-center justify-between border-b border-white/[0.08] pb-2 text-[11px] text-cyan-400 font-bold">
+                      <div className="flex items-center gap-2">
+                        <span className="h-1.5 w-1.5 rounded-full bg-cyan-400 shadow-[0_0_6px_#22d3ee]" />
+                        <span>FORENSIC DIFFERENTIAL SNAPSHOT</span>
+                      </div>
+                      <span className="text-slate-400 font-normal">Change ID #{change.id}</span>
+                    </div>
+
+                    {/* Diff content view */}
+                    {change.diff_content ? (
+                      <div className="max-h-60 overflow-y-auto rounded-lg bg-black/80 p-3 border border-white/[0.06] text-[11px] leading-relaxed">
+                        {change.diff_content.split("\n").map((line, idx) => (
+                          <div
+                            key={idx}
+                            className={
+                              line.startsWith("+")
+                                ? "text-emerald-400 bg-emerald-950/30"
+                                : line.startsWith("-")
+                                ? "text-rose-400 bg-rose-950/30"
+                                : line.startsWith("@@")
+                                ? "text-cyan-400 font-bold"
+                                : "text-slate-300"
+                            }
+                          >
+                            {line}
+                          </div>
+                        ))}
+                      </div>
+                    ) : (
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-3 text-[11px]">
+                        <div className="rounded-lg bg-black/40 border border-white/[0.06] p-2.5">
+                          <div className="text-slate-400 font-bold mb-1 text-[10px] uppercase">
+                            Prior State Baseline
+                          </div>
+                          <div className="text-slate-300 break-all whitespace-pre-wrap max-h-36 overflow-y-auto">
+                            {typeof change.before_state === "object"
+                              ? JSON.stringify(change.before_state, null, 2)
+                              : change.before_state || "No prior state recorded"}
+                          </div>
+                        </div>
+                        <div className="rounded-lg bg-black/40 border border-white/[0.06] p-2.5">
+                          <div className="text-emerald-400 font-bold mb-1 text-[10px] uppercase">
+                            Observed Delta State
+                          </div>
+                          <div className="text-emerald-300 break-all whitespace-pre-wrap max-h-36 overflow-y-auto">
+                            {typeof change.current_state === "object"
+                              ? JSON.stringify(change.current_state, null, 2)
+                              : change.current_state || change.summary}
+                          </div>
+                        </div>
+                      </div>
+                    )}
+
+                    {/* Affected Assets tags */}
+                    {change.affected_assets && change.affected_assets.length > 0 && (
+                      <div className="flex flex-wrap items-center gap-1.5 pt-2 border-t border-white/[0.06]">
+                        <span className="text-[10px] text-slate-400 uppercase">Affected Assets:</span>
+                        {change.affected_assets.map((asset, i) => (
+                          <span
+                            key={i}
+                            className="rounded bg-white/[0.05] border border-white/[0.08] px-2 py-0.5 text-[10px] text-cyan-300"
+                          >
+                            {asset}
+                          </span>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                )}
+
                 {/* Meta Details & Action Row */}
                 <div className="mt-4 pt-3 border-t border-slate-800/60 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 text-xs">
                   {/* Confidence & Relevance Meters */}
@@ -741,11 +862,45 @@ export default function ChangesFeedPage() {
                     </div>
                   </div>
 
-                  {/* Right Actions: Quick Status Selector & Detail Link */}
-                  <div className="flex items-center gap-2 shrink-0">
+                  {/* Right Actions: AI Analyst, Inline Diff Toggle, Status, Full Diff Link */}
+                  <div className="flex flex-wrap items-center gap-2 shrink-0">
+                    {/* One-Click AI Threat Analyst */}
+                    <button
+                      type="button"
+                      onClick={() =>
+                        openThreatAnalyst(
+                          `Perform threat triage on attack surface change #${change.id} on ${
+                            change.target_domain || change.company_name || "monitored perimeter"
+                          }: "${change.summary}". Category: ${change.category}. Security relevance: ${
+                            change.security_relevance
+                          }/100. Identify potential attack vectors, affected assets, and actionable validation steps.`,
+                          `Diff #${change.id} · ${change.target_domain || "Perimeter"}`
+                        )
+                      }
+                      className="rounded-lg bg-purple-500/10 hover:bg-purple-500/20 border border-purple-500/30 px-2.5 py-1.5 font-mono text-xs font-semibold text-purple-300 transition flex items-center gap-1.5 active:scale-95 shadow-sm"
+                      title="Investigate this change with AI Threat Analyst"
+                    >
+                      <span className="h-1.5 w-1.5 rounded-full bg-purple-400 shadow-[0_0_6px_#c084fc]" />
+                      <span>AI ANALYST</span>
+                    </button>
+
+                    {/* Inline Diff Preview Toggle */}
+                    <button
+                      type="button"
+                      onClick={() =>
+                        setExpandedDiffId(expandedDiffId === change.id ? null : change.id)
+                      }
+                      className={`rounded-lg px-2.5 py-1.5 font-mono text-xs font-semibold transition border ${
+                        expandedDiffId === change.id
+                          ? "bg-cyan-500 text-slate-950 border-cyan-400"
+                          : "bg-white/[0.05] text-slate-300 border-white/[0.08] hover:bg-white/[0.1] hover:text-white"
+                      }`}
+                    >
+                      {expandedDiffId === change.id ? "HIDE DIFF" : "PREVIEW DIFF"}
+                    </button>
+
                     {/* In-place Status Select */}
                     <div className="flex items-center gap-1 font-mono text-[11px]">
-                      <span className="text-slate-400">Status:</span>
                       <select
                         disabled={isUpdating}
                         value={change.status || "interesting"}
@@ -764,7 +919,7 @@ export default function ChangesFeedPage() {
                       href={`/changes/${change.id}`}
                       className="rounded-lg bg-cyan-500/10 hover:bg-cyan-500/20 border border-cyan-500/30 px-3 py-1.5 font-mono text-xs font-semibold text-cyan-300 transition flex items-center gap-1"
                     >
-                      <span>FORENSIC DIFF</span>
+                      <span>FORENSIC DETAIL</span>
                       <span>&rarr;</span>
                     </Link>
                   </div>

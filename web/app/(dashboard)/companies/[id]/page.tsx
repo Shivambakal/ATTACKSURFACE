@@ -17,6 +17,7 @@ import {
 import ResearchSignalCard from "@/components/ResearchSignalCard";
 import ThreeDTimeline from "@/components/ThreeDTimeline";
 import CompanyIntelligenceEnvironment from "@/components/CompanyIntelligenceEnvironment";
+import { openThreatAnalyst } from "@/components/CyberAssistantChat";
 
 interface ServerTelemetry {
   domain: string;
@@ -333,6 +334,21 @@ export default function CompanyDetailPage({ params }: PageProps) {
               </svg>
               ATTACK GRAPH
             </Link>
+
+            <button
+              type="button"
+              onClick={() =>
+                openThreatAnalyst(
+                  `Generate a full cyber threat intelligence briefing for ${company?.name} (${company?.canonical_domain}). Detail their historical perimeter evolution, high-severity CVE vulnerability exposures, public bounty scope, and current attack surface risks.`,
+                  `Company: ${company?.name || "Target"}`
+                )
+              }
+              className="flex items-center gap-2 rounded-xl border border-purple-500/40 bg-purple-950/50 px-4 py-2.5 font-display text-xs font-bold text-purple-300 shadow-lg shadow-purple-500/20 hover:bg-purple-900/60 active:scale-95 transition"
+              title="Ask AI Threat Analyst for a full briefing on this company"
+            >
+              <span className="h-2 w-2 rounded-full bg-purple-400 shadow-[0_0_8px_#c084fc] animate-pulse" />
+              <span>ASK THREAT AI</span>
+            </button>
 
             <button
               onClick={handleEnrich}

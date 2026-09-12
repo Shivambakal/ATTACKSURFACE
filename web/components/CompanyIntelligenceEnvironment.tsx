@@ -14,6 +14,7 @@ import {
 } from "@/lib/types";
 import TemporalTimeMachine from "@/components/TemporalTimeMachine";
 import { CardTilt3D, SeverityBadge } from "@/components/ui/InteractionPrimitives";
+import { openThreatAnalyst } from "@/components/CyberAssistantChat";
 
 interface CompanyIntelligenceEnvironmentProps {
   company: Company;
@@ -179,6 +180,76 @@ export default function CompanyIntelligenceEnvironment({
                 )
               )}
             </div>
+          </div>
+        </div>
+
+        {/* ── Focal Target Interactive Inspector Panel ── */}
+        <div className="rounded-xl border border-white/[0.08] bg-black/50 p-3.5 backdrop-blur-xl flex flex-col md:flex-row md:items-center justify-between gap-3 font-mono text-xs card-25d">
+          <div className="flex flex-wrap items-center gap-2.5">
+            <span className="rounded bg-cyan-500/15 border border-cyan-500/40 text-cyan-300 px-2.5 py-0.5 font-bold uppercase text-[10px]">
+              FOCAL TARGET: {focalTarget.type}
+            </span>
+            <span className="text-white font-bold tracking-tight text-sm font-sans">
+              {focalTarget.name}
+            </span>
+            {focalTarget.meta?.scope_status && (
+              <span
+                className={`px-2 py-0.5 rounded text-[10px] font-bold border ${
+                  focalTarget.meta.scope_status === "IN_SCOPE"
+                    ? "bg-emerald-950/60 text-emerald-300 border-emerald-800/60"
+                    : "bg-slate-800 text-slate-300 border-slate-700"
+                }`}
+              >
+                {focalTarget.meta.scope_status}
+              </span>
+            )}
+            {focalTarget.meta?.verification_status && (
+              <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-cyan-950/60 text-cyan-300 border border-cyan-800/60">
+                {focalTarget.meta.verification_status}
+              </span>
+            )}
+            {focalTarget.type === "COMPANY" && (
+              <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-950/60 text-emerald-300 border border-emerald-800/60">
+                CANONICAL REGISTRY
+              </span>
+            )}
+          </div>
+
+          <div className="flex flex-wrap items-center gap-2">
+            {/* Ask Threat AI */}
+            <button
+              type="button"
+              onClick={() =>
+                openThreatAnalyst(
+                  `Analyze security posture, known vulnerabilities, and potential attack vectors for ${focalTarget.type.toLowerCase()} "${focalTarget.name}" belonging to ${company.name} (${company.canonical_domain}).`,
+                  `${focalTarget.type}: ${focalTarget.name}`
+                )
+              }
+              className="rounded-lg bg-purple-500/15 hover:bg-purple-500/25 border border-purple-500/30 px-3 py-1.5 font-mono text-xs font-semibold text-purple-300 transition flex items-center gap-1.5 active:scale-95 shadow-sm"
+              title="Ask AI Threat Analyst about this node"
+            >
+              <span className="h-1.5 w-1.5 rounded-full bg-purple-400 shadow-[0_0_6px_#c084fc]" />
+              <span>ASK THREAT AI</span>
+            </button>
+
+            {/* Surface Diffs */}
+            <Link
+              href={`/changes?search=${encodeURIComponent(
+                focalTarget.type === "COMPANY" ? company.name : focalTarget.name
+              )}`}
+              className="rounded-lg bg-cyan-500/10 hover:bg-cyan-500/20 border border-cyan-500/30 px-3 py-1.5 font-mono text-xs font-semibold text-cyan-300 transition flex items-center gap-1"
+            >
+              <span>SURFACE DIFFS</span>
+              <span>&rarr;</span>
+            </Link>
+
+            {/* Evidence verification */}
+            <Link
+              href="/evidence"
+              className="rounded-lg bg-white/[0.05] hover:bg-white/[0.1] border border-white/[0.08] px-3 py-1.5 font-mono text-xs text-slate-300 transition"
+            >
+              <span>EVIDENCE</span>
+            </Link>
           </div>
         </div>
 

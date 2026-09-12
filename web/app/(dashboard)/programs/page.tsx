@@ -5,6 +5,7 @@ import Link from "next/link";
 import { apiFetch } from "@/lib/api";
 import { SecurityProgram } from "@/lib/types";
 import AnimatedList, { AnimatedItem } from "@/components/AnimatedList";
+import { AnimatedNumber } from "@/components/ui/InteractionPrimitives";
 
 interface ProgramStats {
   total_programs: number;
@@ -170,65 +171,65 @@ export default function ProgramsPage() {
 
       {/* Stats Ribbon */}
       <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-5 gap-3 font-sans">
-        <div className="rounded-2xl border border-slate-800 bg-slate-900/80 p-4 backdrop-blur-md">
+        <div className="rounded-2xl border border-white/[0.08] bg-[#070b14]/75 p-4 shadow-xl backdrop-blur-xl card-25d">
           <div className="text-[11px] font-bold uppercase tracking-wider text-slate-400 font-display">
             Total Programs
           </div>
           <div className="mt-1 flex items-baseline gap-1.5">
             <span className="text-2xl font-black text-white font-display">
-              {stats ? stats.total_programs.toLocaleString() : totalCount.toLocaleString()}
+              <AnimatedNumber value={stats ? stats.total_programs : totalCount} />
             </span>
             <span className="text-[10px] text-emerald-400 font-mono">Public</span>
           </div>
           <p className="mt-1 text-[11px] text-slate-500">Live verified registries</p>
         </div>
 
-        <div className="rounded-2xl border border-emerald-800/40 bg-emerald-950/20 p-4 backdrop-blur-md">
+        <div className="rounded-2xl border border-emerald-800/40 bg-emerald-950/25 p-4 shadow-xl backdrop-blur-xl card-25d">
           <div className="text-[11px] font-bold uppercase tracking-wider text-emerald-300 font-display">
             Bounty Programs
           </div>
           <div className="mt-1 flex items-baseline gap-1.5">
             <span className="text-2xl font-black text-emerald-400 font-display">
-              {stats ? stats.bounty_programs.toLocaleString() : "..."}
+              <AnimatedNumber value={stats ? stats.bounty_programs : 0} />
             </span>
             <span className="text-[10px] text-emerald-300 font-mono">Rewarded</span>
           </div>
           <p className="mt-1 text-[11px] text-emerald-300/70">Offers cash rewards</p>
         </div>
 
-        <div className="rounded-2xl border border-slate-800 bg-slate-900/80 p-4 backdrop-blur-md">
+        <div className="rounded-2xl border border-white/[0.08] bg-[#070b14]/75 p-4 shadow-xl backdrop-blur-xl card-25d">
           <div className="text-[11px] font-bold uppercase tracking-wider text-slate-400 font-display">
             VDP / Disclosure
           </div>
           <div className="mt-1 flex items-baseline gap-1.5">
             <span className="text-2xl font-black text-cyan-400 font-display">
-              {stats ? stats.vdp_programs.toLocaleString() : "..."}
+              <AnimatedNumber value={stats ? stats.vdp_programs : 0} />
             </span>
             <span className="text-[10px] text-slate-400 font-mono">Safe Harbor</span>
           </div>
           <p className="mt-1 text-[11px] text-slate-500">Responsible disclosure</p>
         </div>
 
-        <div className="rounded-2xl border border-slate-800 bg-slate-900/80 p-4 backdrop-blur-md">
+        <div className="rounded-2xl border border-white/[0.08] bg-[#070b14]/75 p-4 shadow-xl backdrop-blur-xl card-25d">
           <div className="text-[11px] font-bold uppercase tracking-wider text-slate-400 font-display">
             Scope Rules Ingested
           </div>
           <div className="mt-1 flex items-baseline gap-1.5">
             <span className="text-2xl font-black text-white font-display">
-              {stats ? stats.total_scope_rules.toLocaleString() : "..."}
+              <AnimatedNumber value={stats ? stats.total_scope_rules : 0} />
             </span>
             <span className="text-[10px] text-cyan-400 font-mono">Rules</span>
           </div>
           <p className="mt-1 text-[11px] text-slate-500">Verified target boundaries</p>
         </div>
 
-        <div className="rounded-2xl border border-slate-800 bg-slate-900/80 p-4 backdrop-blur-md col-span-2 sm:col-span-1">
+        <div className="rounded-2xl border border-white/[0.08] bg-[#070b14]/75 p-4 shadow-xl backdrop-blur-xl card-25d col-span-2 sm:col-span-1">
           <div className="text-[11px] font-bold uppercase tracking-wider text-amber-400 font-display">
             Canonical Organizations
           </div>
           <div className="mt-1 flex items-baseline gap-1.5">
             <span className="text-2xl font-black text-amber-300 font-display">
-              {stats ? stats.canonical_companies_with_programs.toLocaleString() : "..."}
+              <AnimatedNumber value={stats ? stats.canonical_companies_with_programs : 0} />
             </span>
             <span className="text-[10px] text-amber-400 font-mono">Orgs</span>
           </div>
@@ -237,7 +238,7 @@ export default function ProgramsPage() {
       </div>
 
       {/* Filter and Search Bar */}
-      <div className="flex flex-col gap-3 rounded-2xl border border-slate-800 bg-slate-900/60 p-4 font-sans">
+      <div className="flex flex-col gap-3 rounded-2xl border border-white/[0.08] bg-[#070b14]/75 p-4 font-sans shadow-xl backdrop-blur-xl">
         <div className="flex flex-col md:flex-row gap-3 items-stretch md:items-center">
           <div className="relative flex-1">
             <svg className="absolute left-3.5 top-3 h-4 w-4 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">

@@ -95,7 +95,15 @@ def list_sources(
 
     items = []
     for s in sources:
-        h_state = s.health.health_state if s.health else "HEALTHY"
+        if s.status == SourceStatus.NEVER_CHECKED.value:
+            h_state = "NOT_CONFIGURED" if not (s.feed_url or s.source_url) else "NEVER_CHECKED"
+        elif s.status == SourceStatus.FAILED.value:
+            h_state = s.health.health_state if (s.health and s.health.health_state != "HEALTHY") else "FAILED"
+        elif s.health:
+            h_state = s.health.health_state
+        else:
+            h_state = "UNKNOWN"
+
         if isinstance(health, str) and health != "ALL" and h_state.upper() != health.upper():
             continue
         items.append({
@@ -119,6 +127,10 @@ def list_sources(
             "health_state": h_state,
             "last_checked_at": s.last_checked_at,
             "last_changed_at": s.last_changed_at,
+            "last_success_at": s.last_success_at,
+            "next_check_at": s.next_check_at,
+            "last_http_status": s.last_http_status,
+            "last_error": s.last_error,
             "consecutive_failures": s.consecutive_failures,
             "parser_version": s.parser_version,
             "notes": s.notes,
@@ -201,14 +213,23 @@ def get_source_detail(
         "enabled": s.enabled,
         "status": s.status,
         "health": {
-            "state": s.health.health_state if s.health else "HEALTHY",
+            "state": (
+                "NOT_CONFIGURED" if s.status == SourceStatus.NEVER_CHECKED.value and not (s.feed_url or s.source_url)
+                else ("NEVER_CHECKED" if s.status == SourceStatus.NEVER_CHECKED.value
+                else (s.health.health_state if (s.health and (s.status != SourceStatus.FAILED.value or s.health.health_state != "HEALTHY"))
+                else ("FAILED" if s.status == SourceStatus.FAILED.value else "UNKNOWN")))
+            ),
             "latency_ms": s.health.latency_ms if s.health else 0,
-            "consecutive_failures": s.health.consecutive_failures if s.health else 0,
-            "last_checked_at": s.health.last_checked_at if s.health else None,
-            "last_success_at": s.health.last_success_at if s.health else None,
+            "consecutive_failures": s.health.consecutive_failures if s.health else (s.consecutive_failures or 0),
+            "last_checked_at": s.health.last_checked_at if s.health else s.last_checked_at,
+            "last_success_at": s.health.last_success_at if s.health else s.last_success_at,
         },
         "last_checked_at": s.last_checked_at,
         "last_changed_at": s.last_changed_at,
+        "last_success_at": s.last_success_at,
+        "next_check_at": s.next_check_at,
+        "last_http_status": s.last_http_status,
+        "last_error": s.last_error,
         "etag": s.etag,
         "last_modified": s.last_modified,
         "content_hash": s.content_hash,

@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
+import { openThreatAnalyst } from "@/components/CyberAssistantChat";
 
 interface EvidenceBundle {
   claimId: string;
@@ -157,7 +158,7 @@ export default function EvidencePage() {
           </div>
         </div>
 
-        <div className="rounded-3xl border border-white/[0.1] bg-slate-950/90 p-6 sm:p-8 backdrop-blur-xl shadow-2xl space-y-6">
+        <div className="rounded-3xl border border-white/[0.08] bg-[#070b14]/80 p-6 sm:p-8 backdrop-blur-2xl shadow-2xl card-25d space-y-6">
           <div className="flex flex-wrap items-center justify-between gap-4 border-b border-white/[0.08] pb-4">
             <div>
               <div className="flex items-center gap-2">
@@ -174,7 +175,7 @@ export default function EvidencePage() {
             </div>
 
             <div className="text-right font-mono text-xs">
-              <span className="text-slate-300 block text-[10px]">OBSERVATION TIMESTAMP</span>
+              <span className="text-slate-400 block text-[10px]">OBSERVATION TIMESTAMP</span>
               <span className="text-slate-200 block mt-0.5">{selectedBundle.observedAt}</span>
             </div>
           </div>
@@ -183,17 +184,17 @@ export default function EvidencePage() {
           <div>
             <div className="flex items-center justify-between font-mono text-xs text-slate-300 mb-2">
               <span>RAW SOCKET / DNS TELEMETRY CAPTURE</span>
-              <span>SOURCE: {selectedBundle.upstreamSource}</span>
+              <span className="text-slate-400">SOURCE: {selectedBundle.upstreamSource}</span>
             </div>
-            <pre className="rounded-2xl border border-white/[0.08] bg-[#02050b] p-5 font-mono text-xs text-slate-300 overflow-x-auto leading-relaxed whitespace-pre-wrap">
+            <pre className="rounded-2xl border border-white/[0.08] bg-black/80 p-5 font-mono text-xs text-slate-300 overflow-x-auto leading-relaxed whitespace-pre-wrap">
               {selectedBundle.rawPayload}
             </pre>
           </div>
 
           {/* Checksum Bar */}
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-3 rounded-xl border border-white/[0.08] bg-white/[0.02] p-4 font-mono text-xs">
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-3 rounded-xl border border-white/[0.08] bg-black/40 p-4 font-mono text-xs">
             <div className="truncate w-full sm:w-auto">
-              <span className="text-slate-300 uppercase block text-[10px]">Cryptographic Checksum (SHA-256)</span>
+              <span className="text-slate-400 uppercase block text-[10px]">Cryptographic Checksum (SHA-256)</span>
               <span className="text-cyan-400 truncate block mt-0.5">{selectedBundle.sha256}</span>
             </div>
 
@@ -205,12 +206,39 @@ export default function EvidencePage() {
             </button>
           </div>
 
-          <div className="pt-2 text-right">
+          <div className="pt-2 flex flex-wrap items-center justify-between gap-3 border-t border-white/[0.08]">
+            <div className="flex flex-wrap items-center gap-2">
+              {/* Ask Threat AI */}
+              <button
+                type="button"
+                onClick={() =>
+                  openThreatAnalyst(
+                    `Validate and correlate cryptographic evidence bundle ${selectedBundle.claimId} on ${selectedBundle.entity}: "${selectedBundle.claim}". Captured via ${selectedBundle.method}. Evaluate bug bounty exploitability, CVSS vector, and remediation validation steps.`,
+                    `Evidence ${selectedBundle.claimId}`
+                  )
+                }
+                className="rounded-xl bg-purple-500/15 hover:bg-purple-500/25 border border-purple-500/30 px-4 py-2.5 font-mono text-xs font-semibold text-purple-300 transition flex items-center gap-2 active:scale-95 shadow-sm"
+                title="Investigate this evidence with AI Threat Analyst"
+              >
+                <span className="h-1.5 w-1.5 rounded-full bg-purple-400 shadow-[0_0_6px_#c084fc]" />
+                <span>CORRELATE WITH AI</span>
+              </button>
+
+              {/* View Surface Changes */}
+              <Link
+                href={`/changes?search=${encodeURIComponent(selectedBundle.entity)}`}
+                className="rounded-xl bg-cyan-500/10 hover:bg-cyan-500/20 border border-cyan-500/30 px-4 py-2.5 font-mono text-xs font-semibold text-cyan-300 transition flex items-center gap-1.5"
+              >
+                <span>SURFACE DIFFS</span>
+                <span>&rarr;</span>
+              </Link>
+            </div>
+
             <Link
               href="/signup"
-              className="inline-flex items-center gap-2 rounded-xl bg-cyan-500 px-5 py-2.5 font-mono text-xs font-bold text-slate-950 hover:bg-cyan-400 transition"
+              className="inline-flex items-center gap-2 rounded-xl bg-cyan-500 px-5 py-2.5 font-mono text-xs font-bold text-slate-950 hover:bg-cyan-400 hover:shadow-[0_0_20px_rgba(6,182,212,0.35)] transition active:scale-95"
             >
-              <span>Export Evidence for Reports</span>
+              <span>Export Evidence Bundle</span>
               <span>&rarr;</span>
             </Link>
           </div>

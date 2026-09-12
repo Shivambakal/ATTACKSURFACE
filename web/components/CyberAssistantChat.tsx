@@ -31,6 +31,19 @@ const QUICK_PROMPTS = [
 ];
 
 /**
+ * Global helper to trigger the AI Cyber Threat Analyst from anywhere in the workstation.
+ */
+export function openThreatAnalyst(query?: string, label?: string) {
+  if (typeof window !== "undefined") {
+    window.dispatchEvent(
+      new CustomEvent("attacksurface:open-analyst", {
+        detail: { query, label, context: label },
+      })
+    );
+  }
+}
+
+/**
  * Animated Cyber Threat Agent Avatar with pulsing visor, radar scan, and high-tech aesthetics.
  */
 export function CyberAgentAvatar({ className = "w-7 h-7" }: { className?: string }) {
@@ -95,6 +108,7 @@ export default function CyberAssistantChat() {
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
   const [showFindingsPopup, setShowFindingsPopup] = useState(false);
+  const [activeContext, setActiveContext] = useState<{ label: string; query?: string } | null>(null);
   const [messages, setMessages] = useState<ChatMessage[]>([
     {
       id: "welcome",
@@ -128,6 +142,28 @@ export default function CyberAssistantChat() {
     }
   }, []);
 
+  // Global Context Bus: Listen for "attacksurface:open-analyst" from any card/surface
+  useEffect(() => {
+    const handleGlobalAnalystOpen = (e: Event) => {
+      const customEvent = e as CustomEvent<{ query?: string; context?: string; label?: string }>;
+      setIsOpen(true);
+      if (customEvent.detail?.context || customEvent.detail?.label) {
+        setActiveContext({
+          label: customEvent.detail.label || customEvent.detail.context || "Active Entity",
+          query: customEvent.detail.query,
+        });
+      }
+      if (customEvent.detail?.query) {
+        handleSend(customEvent.detail.query);
+      }
+    };
+
+    window.addEventListener("attacksurface:open-analyst", handleGlobalAnalystOpen);
+    return () => {
+      window.removeEventListener("attacksurface:open-analyst", handleGlobalAnalystOpen);
+    };
+  }, []);
+
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   };
@@ -137,6 +173,17 @@ export default function CyberAssistantChat() {
       scrollToBottom();
     }
   }, [messages, isOpen]);
+
+  // Keyboard accessibility: Close drawer on Escape
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape" && isOpen) {
+        setIsOpen(false);
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [isOpen]);
 
   const handleDismissPopup = () => {
     try {
@@ -294,29 +341,37 @@ export default function CyberAssistantChat() {
             setIsOpen((prev) => !prev);
             if (showFindingsPopup) handleDismissPopup();
           }}
-          className="relative flex h-14 w-14 items-center justify-center rounded-full bg-slate-950/95 border border-cyan-500/50 hover:border-cyan-300 text-white shadow-[0_0_20px_rgba(6,182,212,0.35)] hover:shadow-[0_0_30px_rgba(6,182,212,0.6)] backdrop-blur-xl transition-all duration-300 hover:scale-105 active:scale-95 cursor-pointer"
+          className="group relative flex h-14 w-14 items-center justify-center rounded-full bg-[#050914]/90 border border-cyan-500/40 hover:border-cyan-400 text-white shadow-[0_0_25px_rgba(0,240,255,0.25)] hover:shadow-[0_0_35px_rgba(0,240,255,0.45)] backdrop-blur-2xl transition-all duration-300 hover:scale-105 active:scale-95 cursor-pointer"
           title="Open AI Threat Analyst"
           aria-label="Toggle AI Cyber Threat Analyst"
         >
-          {/* Animated radar ripple effect around circle */}
-          <span className="absolute inset-0 rounded-full border border-cyan-400/40 animate-ping opacity-60 pointer-events-none" />
+          {/* Subtle multi-layer animated orbital ring */}
+          <span className="absolute -inset-1 rounded-full border border-cyan-500/20 group-hover:border-cyan-400/40 animate-[spin_10s_linear_infinite] pointer-events-none" />
+          <span className="absolute -inset-2.5 rounded-full border border-dashed border-cyan-500/10 pointer-events-none" />
 
           {/* Active status indicator dot */}
-          <span className="absolute top-0.5 right-0.5 flex h-3.5 w-3.5">
+          <span className="absolute top-0 right-0 flex h-3.5 w-3.5 z-10">
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
-            <span className="relative inline-flex rounded-full h-3.5 w-3.5 bg-emerald-500 border-2 border-slate-950 shadow-[0_0_8px_#10b981]" />
+            <span className="relative inline-flex rounded-full h-3.5 w-3.5 bg-emerald-500 border-2 border-black shadow-[0_0_8px_#10b981]" />
           </span>
 
           {/* Animated Cyber Agent Avatar */}
-          <CyberAgentAvatar className="w-8 h-8 group-hover:scale-110 transition-transform" />
+          <CyberAgentAvatar className="w-8 h-8 group-hover:scale-110 transition-transform duration-200" />
         </button>
       </div>
 
       {/* ── Slide-Over Chat Modal ── */}
       {isOpen && (
-        <div className="fixed inset-y-0 right-0 z-50 w-full max-w-lg bg-slate-950 border-l border-slate-800/90 shadow-2xl flex flex-col backdrop-blur-xl animate-in slide-in-from-right duration-300">
+        <>
+          {/* Backdrop overlay */}
+          <div
+            className="fixed inset-0 z-40 bg-black/60 backdrop-blur-sm transition-opacity"
+            onClick={() => setIsOpen(false)}
+            aria-hidden="true"
+          />
+          <div className="fixed inset-y-0 right-0 z-50 w-full max-w-full sm:max-w-lg bg-[#060a14]/95 border-l border-white/[0.08] shadow-[0_0_60px_rgba(0,0,0,0.8)] flex flex-col backdrop-blur-2xl animate-in slide-in-from-right duration-300">
           {/* Header */}
-          <div className="px-5 py-4 border-b border-slate-800 flex items-center justify-between bg-slate-900/60">
+          <div className="px-5 py-4 border-b border-white/[0.08] flex items-center justify-between bg-white/[0.02]">
             <div className="flex items-center gap-3">
               <CyberAgentAvatar className="w-8 h-8" />
               <div>
@@ -350,6 +405,24 @@ export default function CyberAssistantChat() {
               </button>
             </div>
           </div>
+
+          {/* Active Context Banner */}
+          {activeContext && (
+            <div className="flex items-center justify-between bg-cyan-950/40 border-b border-cyan-500/20 px-4 py-2 text-[11px] font-mono text-cyan-300">
+              <div className="flex items-center gap-2 truncate">
+                <span className="h-1.5 w-1.5 rounded-full bg-cyan-400 animate-pulse shrink-0" />
+                <span className="text-slate-400">ACTIVE WORKSPACE CONTEXT:</span>
+                <span className="font-bold text-white truncate">{activeContext.label}</span>
+              </div>
+              <button
+                onClick={() => setActiveContext(null)}
+                className="text-slate-400 hover:text-white shrink-0 ml-2 text-xs"
+                title="Clear active context"
+              >
+                ✕
+              </button>
+            </div>
+          )}
 
           {/* Quick Prompt Pills */}
           <div className="px-4 py-2 border-b border-slate-800/80 bg-slate-900/30 overflow-x-auto flex gap-2 shrink-0 scrollbar-none">
@@ -447,6 +520,7 @@ export default function CyberAssistantChat() {
             </form>
           </div>
         </div>
+        </>
       )}
     </>
   );

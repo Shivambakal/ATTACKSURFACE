@@ -76,6 +76,18 @@ function formatRelativeTime(dateStr?: string | null): string {
   }
 }
 
+function cleanSummaryText(text?: string | null): string {
+  if (!text) return "";
+  return text
+    .replace(/<[^>]*>/g, "")
+    .replace(/style="[^"]*"/g, "")
+    .replace(/[a-zA-Z0-9_-]+="[^"]*"/g, "")
+    .replace(/&nbsp;/g, " ")
+    .replace(/&amp;/g, "&")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
 export default function DashboardPage() {
   const router = useRouter();
   // Core Data States
@@ -93,34 +105,11 @@ export default function DashboardPage() {
   const [timeFilter, setTimeFilter] = useState<"10M" | "1H" | "24H" | "7D">("1H");
   const [eventFilter, setEventFilter] = useState<"ALL" | "CRITICAL" | "HIGH" | "WATCH" | "CONTEXT" | "AI">("ALL");
   const [loading, setLoading] = useState(true);
-  const [utcTime, setUtcTime] = useState<{ time: string; date: string }>({
-    time: "00:00:00",
-    date: "08 SEPT 2026",
-  });
 
   // Modal / Detail Drill-downs
   const [selectedSignal, setSelectedSignal] = useState<ResearchSignal | null>(null);
   const [selectedEvent, setSelectedEvent] = useState<LiveIntelligenceEvent | null>(null);
 
-  // Live UTC Clock for Operating Room
-  useEffect(() => {
-    const updateUtc = () => {
-      const now = new Date();
-      const h = String(now.getUTCHours()).padStart(2, "0");
-      const m = String(now.getUTCMinutes()).padStart(2, "0");
-      const s = String(now.getUTCSeconds()).padStart(2, "0");
-      const day = String(now.getUTCDate()).padStart(2, "0");
-      const month = now.toLocaleString("en-US", { month: "short", timeZone: "UTC" }).toUpperCase();
-      const year = now.getUTCFullYear();
-      setUtcTime({
-        time: `${h}:${m}:${s}`,
-        date: `${day} ${month} ${year}`,
-      });
-    };
-    updateUtc();
-    const interval = setInterval(updateUtc, 1000);
-    return () => clearInterval(interval);
-  }, []);
 
   // Add Target Modal
   const [showAddModal, setShowAddModal] = useState(false);
@@ -132,6 +121,17 @@ export default function DashboardPage() {
   const [authConfirmed, setAuthConfirmed] = useState(false);
   const [addBusy, setAddBusy] = useState(false);
   const [addError, setAddError] = useState<string | null>(null);
+
+  // Escape key listener for modal dismissal
+  useEffect(() => {
+    const handleEsc = (e: KeyboardEvent) => {
+      if (e.key === "Escape" && showAddModal) {
+        setShowAddModal(false);
+      }
+    };
+    window.addEventListener("keydown", handleEsc);
+    return () => window.removeEventListener("keydown", handleEsc);
+  }, [showAddModal]);
 
   const fetchDashboardData = useCallback(async (isInitial = false) => {
     if (isInitial) setLoading(true);
@@ -289,32 +289,19 @@ export default function DashboardPage() {
             Continuous differential diffing across your attack surface. Real-time telemetry.
           </p>
         </div>
-
-        {/* Large Digital Clock Widget */}
-        <div className="flex flex-col items-start md:items-end justify-center rounded-2xl border border-slate-800/80 bg-slate-950/70 px-5 py-3 shadow-inner backdrop-blur-xl">
-          <div className="font-mono text-2xl font-bold tracking-widest text-white">
-            {utcTime.time}
-          </div>
-          <div className="flex items-center gap-2.5 font-mono text-[11px] text-slate-400 mt-0.5">
-            <span>{utcTime.date} · UTC</span>
-            <span className="flex items-center gap-1 text-[10px] font-bold text-emerald-400">
-              <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse shadow-[0_0_6px_#34d399]" />
-              ((•)) STREAM
-            </span>
-          </div>
-        </div>
       </div>
 
       {/* ── HERO SECTION: SINCE 1H + 2x2 STATS (matching media_1788891721052.jpg) ─ */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-4">
         {/* Left Hero Card: "SINCE 1H" */}
-        <div className="lg:col-span-5 rounded-3xl border border-slate-800/90 bg-slate-950/80 p-6 flex flex-col justify-between shadow-xl backdrop-blur-xl">
+        <div className="lg:col-span-5 rounded-3xl border border-white/[0.08] bg-[#070b14]/75 p-6 flex flex-col justify-between shadow-2xl backdrop-blur-2xl card-25d">
           <div>
-            <div className="text-[10px] font-mono font-bold uppercase tracking-widest text-slate-400">
-              SINCE {timeFilter}
+            <div className="text-[10px] font-mono font-bold uppercase tracking-widest text-slate-400 flex items-center justify-between">
+              <span>SINCE {timeFilter}</span>
+              <span className="h-1.5 w-1.5 rounded-full bg-cyan-400 shadow-[0_0_8px_#00f0ff] animate-pulse" />
             </div>
             <div className="mt-2 text-6xl font-black text-white font-display tracking-tight">
-              {countDisplay}
+              <AnimatedNumber value={countDisplay} />
             </div>
             <p className="mt-2 text-xs text-slate-400 leading-relaxed max-w-sm">
               meaningful surface diffs observed across enrolled entities
@@ -342,11 +329,11 @@ export default function DashboardPage() {
         {/* Right Orbital Telemetry Hub (matching media_1789123121664.png) */}
         <div className="lg:col-span-7 flex">
           <TrackedAssetsOrbitalHub
-            trackedAssets={14740}
+            trackedAssets={companyStats?.observed_assets ?? 324}
             verifiedScope="VERIFIED SCOPE"
-            activeSignals={highValueSignals.length}
+            activeSignals={companyStats?.research_signals ?? highValueSignals.length}
             actionableLeads="ACTIONABLE LEADS"
-            companiesWatched={companies.length || 2010}
+            companiesWatched={companyStats?.canonical_companies ?? 1436}
             canonicalOrgs="CANONICAL ORGANIZATIONS"
             avgConfidence="99.4%"
             consensusStatus="CONSENSUS"
@@ -357,7 +344,7 @@ export default function DashboardPage() {
 
 
       {/* ── LIVE FORENSIC DIFF FEED TABLE (matching media_1788891721052.jpg) ──── */}
-      <div className="rounded-3xl border border-slate-800/90 bg-slate-950/80 p-6 shadow-xl backdrop-blur-xl space-y-4">
+      <div className="rounded-3xl border border-white/[0.08] bg-[#070b14]/75 p-6 shadow-2xl backdrop-blur-2xl space-y-4">
         {/* Feed Header & Filters (Dribbble Modern Filter UI) */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-800/80 pb-3.5">
           <div className="flex flex-wrap items-center gap-2.5">
@@ -556,7 +543,7 @@ export default function DashboardPage() {
                   </div>
 
                   <p className="mt-2 text-xs text-slate-400 line-clamp-3 leading-relaxed">
-                    {sig.summary}
+                    {cleanSummaryText(sig.summary)}
                   </p>
                 </div>
 

@@ -48,11 +48,11 @@ function IsometricThreeCubes({ className = "w-8 h-8" }: { className?: string }) 
 }
 
 export default function TrackedAssetsOrbitalHub({
-  trackedAssets = 14740,
+  trackedAssets = 324,
   verifiedScope = "VERIFIED SCOPE",
   activeSignals = 0,
   actionableLeads = "ACTIONABLE LEADS",
-  companiesWatched = 2010,
+  companiesWatched = 1436,
   canonicalOrgs = "CANONICAL ORGANIZATIONS",
   avgConfidence = "99.4%",
   consensusStatus = "CONSENSUS",
@@ -87,7 +87,7 @@ export default function TrackedAssetsOrbitalHub({
       angle: 270, // Top (12 o'clock)
       title: "VERIFIED SCOPE",
       subtitle: "100% Policy Match",
-      value: "14,740",
+      value: (trackedAssets ?? 324).toLocaleString(),
       accent: "emerald",
       icon: (
         <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.8}>
@@ -144,7 +144,7 @@ export default function TrackedAssetsOrbitalHub({
       angle: 150, // Bottom-Left (8 o'clock)
       title: "CANONICAL ORGANIZATIONS",
       subtitle: "Verified Enrolled",
-      value: "1,432 ENTITIES",
+      value: `${companiesWatched.toLocaleString()} ENTITIES`,
       accent: "blue",
       icon: (
         <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.8}>

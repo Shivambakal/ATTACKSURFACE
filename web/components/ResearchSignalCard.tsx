@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { ResearchSignal } from "@/lib/types";
 import { apiFetch } from "@/lib/api";
+import { openThreatAnalyst } from "@/components/CyberAssistantChat";
 
 interface ResearchSignalCardProps {
   signal: ResearchSignal;
@@ -60,15 +61,18 @@ export default function ResearchSignalCard({ signal, onStatusChange }: ResearchS
       : "text-cyan-400 bg-cyan-950/40 border-cyan-800/60";
 
   return (
-    <div className="rounded-xl border border-slate-800 bg-slate-900/70 p-5 shadow-lg backdrop-blur-sm transition hover:border-slate-700">
+    <div className="rounded-2xl border border-white/[0.08] bg-[#070b14]/75 p-5 shadow-xl backdrop-blur-xl transition hover:border-white/[0.15] card-25d">
       {/* Header bar: Type, Priority, Confidence & Context Scores */}
-      <div className="flex flex-wrap items-center justify-between gap-2 border-b border-slate-800/80 pb-3">
+      <div className="flex flex-wrap items-center justify-between gap-2 border-b border-white/[0.08] pb-3">
         <div className="flex items-center gap-2">
           <span className={`rounded-md border px-2 py-0.5 font-mono text-[10px] font-semibold uppercase tracking-wider ${priorityColor}`}>
             {signal.priority}
           </span>
           <span className="rounded-md border border-cyan-900/60 bg-cyan-950/30 px-2 py-0.5 font-mono text-[10px] text-cyan-300">
             {signal.signal_type.replace(/_/g, " ")}
+          </span>
+          <span className="rounded-md border border-white/[0.08] bg-white/[0.04] px-2 py-0.5 font-mono text-[10px] text-slate-300 font-semibold">
+            {signal.confidence_score >= 85 ? "VERIFIED QUALIFIED" : signal.confidence_score >= 60 ? "CORRELATED" : "CANDIDATE"}
           </span>
           {signal.source_count > 1 && (
             <span className="rounded-md border border-slate-800 bg-slate-800/60 px-2 py-0.5 font-mono text-[10px] text-slate-300">
@@ -155,12 +159,28 @@ export default function ResearchSignalCard({ signal, onStatusChange }: ResearchS
         </div>
 
         {/* Action & Feedback Buttons */}
-        <div className="flex items-center gap-1.5">
+        <div className="flex flex-wrap items-center gap-2">
           {feedbackSuccess && (
             <span className="text-[10px] text-emerald-400 font-semibold mr-1">
               Feedback saved!
             </span>
           )}
+
+          {/* Ask Threat AI */}
+          <button
+            type="button"
+            onClick={() =>
+              openThreatAnalyst(
+                `Perform in-depth hypothesis testing on prioritized research signal #${signal.id}: "${signal.title}". Relevance: ${signal.relevance_score}/100, Confidence: ${signal.confidence_score}%. Summary: ${signal.summary}. Recommended research: ${signal.recommended_research_area || "General reconnaissance"}. Outline step-by-step verification methods and safe proof-of-concept guidelines.`,
+                `Signal #${signal.id}`
+              )
+            }
+            className="rounded-lg bg-purple-500/15 hover:bg-purple-500/25 border border-purple-500/30 px-2.5 py-1 text-[11px] font-mono font-semibold text-purple-300 transition flex items-center gap-1 active:scale-95 shadow-sm"
+            title="Ask AI Threat Analyst to evaluate this signal"
+          >
+            <span className="h-1.5 w-1.5 rounded-full bg-purple-400 shadow-[0_0_6px_#c084fc]" />
+            <span>ASK THREAT AI</span>
+          </button>
 
           <button
             onClick={() => handleStatus("investigating")}

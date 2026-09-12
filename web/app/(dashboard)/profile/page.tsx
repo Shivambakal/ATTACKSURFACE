@@ -232,8 +232,8 @@ export default function ProfilePage() {
 
       {/* ── SECTION 2: RESEARCHER PROFILE & IDENTITY ─────────── */}
       <form onSubmit={handleSave} className="space-y-6">
-        <div className="rounded-3xl border border-slate-800 bg-slate-950/80 p-6 sm:p-8 shadow-xl backdrop-blur-xl space-y-6">
-          <div className="border-b border-slate-800 pb-3 flex items-center justify-between">
+        <div className="rounded-3xl border border-white/[0.08] bg-[#070b14]/75 p-6 sm:p-8 shadow-2xl backdrop-blur-2xl card-25d space-y-6">
+          <div className="border-b border-white/[0.08] pb-3 flex items-center justify-between">
             <div className="flex items-center gap-2.5">
               <span className="h-2.5 w-2.5 rounded-full bg-emerald-400 shadow-[0_0_8px_#10b981]" />
               <h2 className="text-base font-bold text-white font-display tracking-tight">
@@ -250,7 +250,7 @@ export default function ProfilePage() {
                 value={displayName}
                 onChange={(e) => setDisplayName(e.target.value)}
                 placeholder="e.g. Shiva"
-                className="w-full rounded-xl bg-slate-900 border border-slate-800 px-3.5 py-2.5 text-white focus:border-cyan-500 outline-none"
+                className="w-full rounded-xl bg-black/40 border border-white/[0.08] px-3.5 py-2.5 text-white focus:border-cyan-500/60 focus:ring-1 focus:ring-cyan-500/30 outline-none transition"
               />
             </div>
 
@@ -261,7 +261,7 @@ export default function ProfilePage() {
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
                 placeholder="e.g. operator_01"
-                className="w-full rounded-xl bg-slate-900 border border-slate-800 px-3.5 py-2.5 text-white font-mono focus:border-cyan-500 outline-none"
+                className="w-full rounded-xl bg-black/40 border border-white/[0.08] px-3.5 py-2.5 text-white font-mono focus:border-cyan-500/60 focus:ring-1 focus:ring-cyan-500/30 outline-none transition"
               />
             </div>
 
@@ -272,7 +272,7 @@ export default function ProfilePage() {
                 value={bio}
                 onChange={(e) => setBio(e.target.value)}
                 placeholder="Differential attack surface analysis, authentication logic flaws..."
-                className="w-full rounded-xl bg-slate-900 border border-slate-800 px-3.5 py-2.5 text-white focus:border-cyan-500 outline-none"
+                className="w-full rounded-xl bg-black/40 border border-white/[0.08] px-3.5 py-2.5 text-white focus:border-cyan-500/60 focus:ring-1 focus:ring-cyan-500/30 outline-none transition"
               />
             </div>
 
@@ -283,7 +283,7 @@ export default function ProfilePage() {
                 value={country}
                 onChange={(e) => setCountry(e.target.value)}
                 placeholder="e.g. United States"
-                className="w-full rounded-xl bg-slate-900 border border-slate-800 px-3.5 py-2.5 text-white focus:border-cyan-500 outline-none"
+                className="w-full rounded-xl bg-black/40 border border-white/[0.08] px-3.5 py-2.5 text-white focus:border-cyan-500/60 focus:ring-1 focus:ring-cyan-500/30 outline-none transition"
               />
             </div>
 
@@ -294,13 +294,13 @@ export default function ProfilePage() {
                 value={timezone}
                 onChange={(e) => setTimezone(e.target.value)}
                 placeholder="e.g. UTC"
-                className="w-full rounded-xl bg-slate-900 border border-slate-800 px-3.5 py-2.5 text-white font-mono focus:border-cyan-500 outline-none"
+                className="w-full rounded-xl bg-black/40 border border-white/[0.08] px-3.5 py-2.5 text-white font-mono focus:border-cyan-500/60 focus:ring-1 focus:ring-cyan-500/30 outline-none transition"
               />
             </div>
           </div>
 
           {/* Research Handles & Verification */}
-          <div className="border-t border-slate-800 pt-5 space-y-4">
+          <div className="border-t border-white/[0.08] pt-5 space-y-4">
             <div>
               <h3 className="font-mono text-xs uppercase text-slate-300 font-bold">
                 Platform Handles &amp; Identity Verification
@@ -320,13 +320,13 @@ export default function ProfilePage() {
                     value={github}
                     onChange={(e) => setGithub(e.target.value)}
                     placeholder="github_username"
-                    className="flex-1 rounded-xl bg-slate-900 border border-slate-800 px-3 py-2 text-white font-mono focus:border-cyan-500 outline-none text-xs"
+                    className="flex-1 rounded-xl bg-black/40 border border-white/[0.08] px-3 py-2 text-white font-mono focus:border-cyan-500/60 focus:ring-1 focus:ring-cyan-500/30 outline-none text-xs transition"
                   />
                   <button
                     type="button"
                     onClick={() => handleVerify("github", github)}
                     disabled={!github.trim() || verifyingPlatform === "github"}
-                    className="px-3 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 font-mono text-xs font-semibold disabled:opacity-40 transition"
+                    className="px-3 py-2 rounded-xl bg-white/[0.05] hover:bg-white/[0.1] border border-white/[0.08] text-slate-200 font-mono text-xs font-semibold disabled:opacity-40 transition"
                   >
                     {verifyingPlatform === "github" ? "Checking..." : "Verify"}
                   </button>
@@ -354,13 +354,13 @@ export default function ProfilePage() {
                     value={website}
                     onChange={(e) => setWebsite(e.target.value)}
                     placeholder="example.com or https://..."
-                    className="flex-1 rounded-xl bg-slate-900 border border-slate-800 px-3 py-2 text-white font-mono focus:border-cyan-500 outline-none text-xs"
+                    className="flex-1 rounded-xl bg-black/40 border border-white/[0.08] px-3 py-2 text-white font-mono focus:border-cyan-500/60 focus:ring-1 focus:ring-cyan-500/30 outline-none text-xs transition"
                   />
                   <button
                     type="button"
                     onClick={() => handleVerify("website", website)}
                     disabled={!website.trim() || verifyingPlatform === "website"}
-                    className="px-3 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 font-mono text-xs font-semibold disabled:opacity-40 transition"
+                    className="px-3 py-2 rounded-xl bg-white/[0.05] hover:bg-white/[0.1] border border-white/[0.08] text-slate-200 font-mono text-xs font-semibold disabled:opacity-40 transition"
                   >
                     {verifyingPlatform === "website" ? "Checking..." : "Verify"}
                   </button>
@@ -387,13 +387,13 @@ export default function ProfilePage() {
                     value={hackerone}
                     onChange={(e) => setHackerone(e.target.value)}
                     placeholder="hackerone_handle"
-                    className="flex-1 rounded-xl bg-slate-900 border border-slate-800 px-3 py-2 text-white font-mono focus:border-cyan-500 outline-none text-xs"
+                    className="flex-1 rounded-xl bg-black/40 border border-white/[0.08] px-3 py-2 text-white font-mono focus:border-cyan-500/60 focus:ring-1 focus:ring-cyan-500/30 outline-none text-xs transition"
                   />
                   <button
                     type="button"
                     onClick={() => handleVerify("hackerone", hackerone)}
                     disabled={!hackerone.trim() || verifyingPlatform === "hackerone"}
-                    className="px-3 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 font-mono text-xs font-semibold disabled:opacity-40 transition"
+                    className="px-3 py-2 rounded-xl bg-white/[0.05] hover:bg-white/[0.1] border border-white/[0.08] text-slate-200 font-mono text-xs font-semibold disabled:opacity-40 transition"
                   >
                     {verifyingPlatform === "hackerone" ? "Checking..." : "Verify"}
                   </button>
@@ -418,13 +418,13 @@ export default function ProfilePage() {
                     value={bugcrowd}
                     onChange={(e) => setBugcrowd(e.target.value)}
                     placeholder="bugcrowd_handle"
-                    className="flex-1 rounded-xl bg-slate-900 border border-slate-800 px-3 py-2 text-white font-mono focus:border-cyan-500 outline-none text-xs"
+                    className="flex-1 rounded-xl bg-black/40 border border-white/[0.08] px-3 py-2 text-white font-mono focus:border-cyan-500/60 focus:ring-1 focus:ring-cyan-500/30 outline-none text-xs transition"
                   />
                   <button
                     type="button"
                     onClick={() => handleVerify("bugcrowd", bugcrowd)}
                     disabled={!bugcrowd.trim() || verifyingPlatform === "bugcrowd"}
-                    className="px-3 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 font-mono text-xs font-semibold disabled:opacity-40 transition"
+                    className="px-3 py-2 rounded-xl bg-white/[0.05] hover:bg-white/[0.1] border border-white/[0.08] text-slate-200 font-mono text-xs font-semibold disabled:opacity-40 transition"
                   >
                     {verifyingPlatform === "bugcrowd" ? "Checking..." : "Verify"}
                   </button>
@@ -448,17 +448,17 @@ export default function ProfilePage() {
                   value={twitter}
                   onChange={(e) => setTwitter(e.target.value)}
                   placeholder="@handle"
-                  className="w-full sm:w-1/2 rounded-xl bg-slate-900 border border-slate-800 px-3 py-2 text-white font-mono focus:border-cyan-500 outline-none text-xs"
+                  className="w-full sm:w-1/2 rounded-xl bg-black/40 border border-white/[0.08] px-3 py-2 text-white font-mono focus:border-cyan-500/60 focus:ring-1 focus:ring-cyan-500/30 outline-none text-xs transition"
                 />
               </div>
             </div>
           </div>
 
-          <div className="flex justify-end pt-4 border-t border-slate-800">
+          <div className="flex justify-end pt-4 border-t border-white/[0.08]">
             <button
               type="submit"
               disabled={saving}
-              className="rounded-xl bg-cyan-500 px-6 py-2.5 font-mono text-xs font-bold text-slate-950 hover:bg-cyan-400 transition disabled:opacity-50 active:scale-95"
+              className="rounded-xl bg-cyan-500 px-6 py-2.5 font-mono text-xs font-bold text-slate-950 hover:bg-cyan-400 hover:shadow-[0_0_20px_rgba(6,182,212,0.35)] transition active:scale-95 disabled:opacity-50"
             >
               {saving ? "SAVING..." : "SAVE PROFILE"}
             </button>

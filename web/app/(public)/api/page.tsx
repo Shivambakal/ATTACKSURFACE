@@ -69,11 +69,11 @@ print(f"Total programs: {stats['total_programs']}, Scope rules: {stats['total_sc
     nodeExample: `const res = await fetch("https://api.attacksurface.online/api/v1/programs/stats");
 const stats = await res.json();`,
     responseSample: `{
-  "total_programs": 2010,
-  "bounty_programs": 1079,
-  "vdp_programs": 931,
-  "total_scope_rules": 14740,
-  "canonical_companies_with_programs": 1432
+  "total_programs": 4249,
+  "bounty_programs": 2318,
+  "vdp_programs": 1931,
+  "total_scope_rules": 39046,
+  "canonical_companies_with_programs": 1436
 }`,
   },
   {

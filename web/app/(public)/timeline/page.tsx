@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
+import { openThreatAnalyst } from "@/components/CyberAssistantChat";
 
 interface TimelineMilestone {
   date: string;
@@ -94,8 +95,8 @@ export default function TimelinePage() {
                   onClick={() => setSelectedMilestone(m)}
                   className={`cursor-pointer rounded-2xl p-4 border transition-all relative ${
                     isSelected
-                      ? "bg-cyan-500/15 border-cyan-500/40 text-white shadow-lg shadow-cyan-500/10"
-                      : "bg-white/[0.02] border-white/[0.06] text-slate-300 hover:border-white/[0.2] hover:text-white"
+                      ? "bg-cyan-500/15 border-cyan-500/40 text-white shadow-xl shadow-cyan-500/15 ring-1 ring-cyan-500/30"
+                      : "bg-[#070b14]/75 border-white/[0.08] text-slate-300 hover:border-white/[0.2] hover:text-white card-25d"
                   }`}
                 >
                   <div
@@ -125,19 +126,19 @@ export default function TimelinePage() {
         </div>
 
         {/* Right Detail Pane (Span 7) */}
-        <div className="lg:col-span-7 rounded-3xl border border-white/[0.08] bg-slate-950/80 p-6 sm:p-8 backdrop-blur-xl shadow-2xl space-y-6">
+        <div className="lg:col-span-7 rounded-3xl border border-white/[0.08] bg-[#070b14]/85 p-6 sm:p-8 backdrop-blur-2xl shadow-2xl space-y-6 card-25d">
           <div className="border-b border-white/[0.08] pb-4">
             <div className="flex items-center gap-2">
               <span className="font-mono text-xs text-cyan-400">{selectedMilestone.date}</span>
               <span className="text-slate-600">·</span>
               <span className="font-mono text-xs text-slate-300">{selectedMilestone.deltaType}</span>
             </div>
-            <h2 className="mt-2 text-2xl font-bold text-white">{selectedMilestone.title}</h2>
+            <h2 className="mt-2 text-2xl font-bold text-white font-display">{selectedMilestone.title}</h2>
           </div>
 
           <div className="space-y-4">
             <div>
-              <span className="font-mono text-[11px] uppercase tracking-wider text-slate-300 block">
+              <span className="font-mono text-[11px] uppercase tracking-wider text-slate-400 block">
                 Perimeter Delta Analysis
               </span>
               <p className="mt-2 text-sm leading-relaxed text-slate-300">
@@ -145,7 +146,7 @@ export default function TimelinePage() {
               </p>
             </div>
 
-            <div className="grid grid-cols-2 gap-4 rounded-2xl border border-white/[0.08] bg-white/[0.02] p-4 font-mono text-xs">
+            <div className="grid grid-cols-2 gap-4 rounded-2xl border border-white/[0.08] bg-black/40 p-4 font-mono text-xs">
               <div>
                 <span className="text-slate-300 block text-[10px]">Tracked Assets at Timestamp</span>
                 <span className="text-xl font-bold text-cyan-400 mt-1 block">
@@ -161,15 +162,36 @@ export default function TimelinePage() {
             </div>
           </div>
 
-          <div className="pt-4 border-t border-white/[0.08] flex items-center justify-between">
-            <span className="text-xs text-slate-300 font-mono">
-              Temporal diffing verified with cryptographic immutability.
-            </span>
+          <div className="pt-4 border-t border-white/[0.08] flex flex-wrap items-center justify-between gap-3">
+            <div className="flex flex-wrap items-center gap-2">
+              <button
+                type="button"
+                onClick={() =>
+                  openThreatAnalyst(
+                    `Analyze historical infrastructure shift for the period: ${selectedMilestone.date} ("${selectedMilestone.title}"). Shift type: ${selectedMilestone.deltaType}. Summary: ${selectedMilestone.summary}. What common historical security oversights or lingering misconfigurations should a security researcher probe for?`,
+                    `Timeline: ${selectedMilestone.date}`
+                  )
+                }
+                className="rounded-xl bg-purple-500/15 hover:bg-purple-500/25 border border-purple-500/30 px-3.5 py-2 font-mono text-xs font-semibold text-purple-300 transition flex items-center gap-2 active:scale-95 shadow-sm"
+                title="Ask AI Threat Analyst to analyze this era"
+              >
+                <span className="h-1.5 w-1.5 rounded-full bg-purple-400 shadow-[0_0_6px_#c084fc]" />
+                <span>ANALYZE ERA WITH AI</span>
+              </button>
+
+              <Link
+                href="/changes"
+                className="rounded-xl bg-cyan-500/10 hover:bg-cyan-500/20 border border-cyan-500/30 px-3.5 py-2 font-mono text-xs font-semibold text-cyan-300 transition"
+              >
+                VIEW SURFACE DIFFS &rarr;
+              </Link>
+            </div>
+
             <Link
-              href="/signup"
-              className="rounded-xl bg-cyan-500 px-4 py-2 font-mono text-xs font-bold text-slate-950 hover:bg-cyan-400 transition"
+              href="/targets"
+              className="rounded-xl bg-cyan-500 px-4 py-2 font-mono text-xs font-bold text-slate-950 hover:bg-cyan-400 hover:shadow-[0_0_20px_rgba(6,182,212,0.35)] transition active:scale-95"
             >
-              Scrub Target Timelines &rarr;
+              Scrub Monitored Targets &rarr;
             </Link>
           </div>
         </div>

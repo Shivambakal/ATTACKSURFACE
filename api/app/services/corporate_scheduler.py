@@ -121,8 +121,14 @@ class CorporateScheduler:
                 buckets["p2_standard"].append(s)
         return buckets
 
-    async def run_due_sources(self, db: Session, max_sources: int = 50, force: bool = False) -> dict[str, Any]:
-        """Runs an execution cycle for all due sources, respecting locks and intervals."""
+    async def run_due_sources(
+        self, db: Session, max_sources: int = 50, force: bool = False, enqueue_to_rq: bool = False
+    ) -> dict[str, Any]:
+        """Runs an execution cycle for all due sources, respecting locks and intervals.
+
+        When enqueue_to_rq=True and Redis is available, dispatches each source to its
+        designated RQ priority queue (p0_critical, p1_official, p2_standard, etc.) for worker execution.
+        """
         due = self.get_due_sources(db, limit=max_sources, force=force)
         stats: dict[str, Any] = {
             "due_count": len(due),
@@ -135,6 +141,7 @@ class CorporateScheduler:
         }
 
         now = datetime.now(timezone.utc)
+        r = self.redis
 
         for source in due:
             if not self.acquire_source_lock(source.id):
@@ -147,19 +154,39 @@ class CorporateScheduler:
                 source.next_check_at = now + timedelta(seconds=interval)
                 db.commit()
 
-                # Execute collection
-                result = await self.engine.execute_source(source.id, db)
-                stats["dispatched"] += 1
-                stats["items_found"] += len(result.items)
-                stats["items_changed"] += len(result.items) if result.status == "SUCCESS_CHANGED" else 0
-                stats["runs"].append({
-                    "source_id": source.id,
-                    "source_name": source.name,
-                    "status": result.status,
-                    "http_status": result.http_status,
-                    "items_found": len(result.items),
-                    "duration_ms": result.duration_ms,
-                })
+                if enqueue_to_rq and r is not None:
+                    from rq import Queue
+                    pri = (source.priority or "P2").upper()
+                    queue_name = {
+                        "P0": "p0_critical",
+                        "P1": "p1_official",
+                        "P3": "p3_replay",
+                        "P4": "p4_community",
+                    }.get(pri, "p2_standard")
+                    q = Queue(queue_name, connection=r)
+                    job = q.enqueue("app.jobs.corporate_source_job.run_corporate_source_collection", source.id)
+                    stats["dispatched"] += 1
+                    stats["runs"].append({
+                        "source_id": source.id,
+                        "source_name": source.name,
+                        "status": "ENQUEUED",
+                        "queue": queue_name,
+                        "job_id": job.id,
+                    })
+                else:
+                    # Execute collection directly
+                    result = await self.engine.execute_source(source.id, db)
+                    stats["dispatched"] += 1
+                    stats["items_found"] += len(result.items)
+                    stats["items_changed"] += len(result.items) if result.status == "SUCCESS_CHANGED" else 0
+                    stats["runs"].append({
+                        "source_id": source.id,
+                        "source_name": source.name,
+                        "status": result.status,
+                        "http_status": result.http_status,
+                        "items_found": len(result.items),
+                        "duration_ms": result.duration_ms,
+                    })
             except Exception as exc:
                 logger.error("Error executing source %s: %s", source.id, exc)
                 stats["errors"] += 1

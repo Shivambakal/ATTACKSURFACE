@@ -104,7 +104,7 @@ export default function NormalSidebar({ collapsed, onToggleCollapse, onOpenComma
       ],
     },
     {
-      title: "INTELLIGENCE",
+      title: "TARGET INTELLIGENCE",
       items: [
         {
           name: "Companies",
@@ -126,7 +126,16 @@ export default function NormalSidebar({ collapsed, onToggleCollapse, onOpenComma
           ),
         },
         {
-          name: "Security Intel",
+          name: "Changes",
+          href: "/changes",
+          icon: (
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+            </svg>
+          ),
+        },
+        {
+          name: "Security Intelligence",
           href: "/security-intelligence",
           icon: (
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -154,26 +163,18 @@ export default function NormalSidebar({ collapsed, onToggleCollapse, onOpenComma
         },
         {
           name: "Timeline",
-          href: "/changes",
+          href: "/timeline",
           icon: (
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
-            </svg>
-          ),
-        },
-        {
-          name: "Evidence",
-          href: "/sources",
-          icon: (
-            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+              <circle cx="12" cy="12" r="9" strokeWidth={1.8} />
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M12 7v5l3 3" />
             </svg>
           ),
         },
       ],
     },
     {
-      title: "WORKSPACE",
+      title: "RESEARCH",
       items: [
         {
           name: "My Priorities",
@@ -194,20 +195,11 @@ export default function NormalSidebar({ collapsed, onToggleCollapse, onOpenComma
           ),
         },
         {
-          name: "Compare",
-          href: "/research",
+          name: "Evidence",
+          href: "/evidence",
           icon: (
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
-            </svg>
-          ),
-        },
-        {
-          name: "Notes",
-          href: "/research/notes",
-          icon: (
-            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
             </svg>
           ),
         },
@@ -243,6 +235,9 @@ export default function NormalSidebar({ collapsed, onToggleCollapse, onOpenComma
   const hoverTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   const handleMouseEnter = () => {
+    if (typeof window !== "undefined" && window.matchMedia("(hover: none)").matches) {
+      return;
+    }
     if (hoverTimeoutRef.current) {
       clearTimeout(hoverTimeoutRef.current);
       hoverTimeoutRef.current = null;
@@ -259,20 +254,31 @@ export default function NormalSidebar({ collapsed, onToggleCollapse, onOpenComma
   const isExpanded = !collapsed || isHovered;
 
   const isActive = (href: string) => {
-    if (href === "/dashboard") return pathname === "/dashboard";
-    return pathname.startsWith(href);
+    if (pathname === href) return true;
+    if (href !== "/" && pathname.startsWith(href + "/")) return true;
+    return false;
   };
 
   return (
-    <aside
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
-      className={`fixed top-0 bottom-0 left-0 z-40 flex flex-col rounded-r-3xl overflow-hidden border-r transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] ${
-        isExpanded ? "w-64 shadow-[14px_0_45px_rgba(0,0,0,0.5)]" : "w-16 shadow-[6px_0_20px_rgba(0,0,0,0.3)]"
-      } backdrop-blur-2xl bg-[#0c0e18]/85 border-white/10 dark:bg-[#0c0e18]/85 dark:border-white/10 [data-theme=white-aesthetic]:bg-white/90 [data-theme=white-aesthetic]:border-slate-200/90 [data-theme=white-aesthetic]:shadow-[10px_0_35px_rgba(15,23,42,0.06)]`}
-    >
-      {/* Brand Header */}
-      <div className="flex h-16 items-center justify-between border-b border-white/[0.08] dark:border-white/[0.08] [data-theme=white-aesthetic]:border-slate-200/80 px-3.5 shrink-0">
+    <>
+      {/* Mobile Drawer Backdrop when open on small screens */}
+      {isExpanded && (
+        <div
+          className="fixed inset-0 z-30 bg-black/60 backdrop-blur-xs md:hidden animate-fade-in"
+          onClick={onToggleCollapse}
+          aria-hidden="true"
+        />
+      )}
+
+      <aside
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
+        className={`fixed top-0 bottom-0 left-0 z-40 flex flex-col rounded-r-3xl overflow-hidden border-r transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+          isExpanded ? "w-64 shadow-[14px_0_45px_rgba(0,0,0,0.5)]" : "w-14 sm:w-16 shadow-[6px_0_20px_rgba(0,0,0,0.3)]"
+        } backdrop-blur-2xl bg-[#0c0e18]/85 border-white/10 dark:bg-[#0c0e18]/85 dark:border-white/10 [data-theme=white-aesthetic]:bg-white/90 [data-theme=white-aesthetic]:border-slate-200/90 [data-theme=white-aesthetic]:shadow-[10px_0_35px_rgba(15,23,42,0.06)]`}
+      >
+        {/* Brand Header */}
+        <div className="flex h-16 items-center justify-between border-b border-white/[0.08] dark:border-white/[0.08] [data-theme=white-aesthetic]:border-slate-200/80 px-3 sm:px-3.5 shrink-0">
         <AttackSurfaceLogo
           size={isExpanded ? "md" : "sm"}
           showText={isExpanded}
@@ -313,6 +319,11 @@ export default function NormalSidebar({ collapsed, onToggleCollapse, onOpenComma
                   <Link
                     key={item.name}
                     href={item.href}
+                    onClick={() => {
+                      if (typeof window !== "undefined" && window.innerWidth < 768 && isExpanded) {
+                        onToggleCollapse();
+                      }
+                    }}
                     title={!isExpanded ? item.name : undefined}
                     className={`group relative flex items-center gap-3 rounded-xl px-2.5 py-2 text-xs font-medium transition-all duration-150 ${
                       active
@@ -372,5 +383,6 @@ export default function NormalSidebar({ collapsed, onToggleCollapse, onOpenComma
         </div>
       </div>
     </aside>
+    </>
   );
 }

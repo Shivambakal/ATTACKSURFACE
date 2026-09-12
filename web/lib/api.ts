@@ -51,13 +51,17 @@ export async function apiFetch<T>(path: string, options?: ApiFetchOptions): Prom
     }
   }
 
-  // Helper for localStorage cached fallback
+  // Helper for localStorage cached fallback (maximum 60-second TTL to prevent stale overwrite)
   const getPersistedCache = (): T | null => {
     if (typeof window === "undefined") return null;
     try {
       const raw = window.localStorage.getItem(`ast_cache:${path}`);
       if (!raw) return null;
       const parsed = JSON.parse(raw);
+      if (!parsed || !parsed.ts || Date.now() - parsed.ts > 60_000) {
+        window.localStorage.removeItem(`ast_cache:${path}`);
+        return null;
+      }
       return parsed.data as T;
     } catch {
       return null;

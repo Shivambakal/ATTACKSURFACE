@@ -354,10 +354,11 @@ def list_sync_runs(
     db: Session = Depends(get_db),
 ) -> list[dict[str, Any]]:
     """Return the most recent knowledge ingestion sync runs."""
+    limit_val = limit if isinstance(limit, int) else 20
     runs = (
         db.query(KnowledgeSyncRun)
         .order_by(KnowledgeSyncRun.started_at.desc())
-        .limit(limit)
+        .limit(limit_val)
         .all()
     )
     return [_sync_run_to_dict(r) for r in runs]

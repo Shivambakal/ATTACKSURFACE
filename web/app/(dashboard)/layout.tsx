@@ -50,10 +50,21 @@ function DashboardShell({ children }: { children: React.ReactNode }) {
     return () => clearInterval(interval);
   }, [user]);
 
-  // Global Keyboard shortcuts: Ctrl+K / Cmd+K for Command Palette, [ for Sidebar collapse
+  // Auto-collapse sidebar on mobile screens
+  useEffect(() => {
+    if (typeof window !== "undefined" && window.innerWidth < 768) {
+      setSidebarCollapsed(true);
+    }
+  }, [pathname]);
+
+  // Global Keyboard shortcuts: Ctrl+K / Cmd+K for Command Palette, [ for Sidebar collapse, Escape for modals
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "k") {
+      if (e.key === "Escape") {
+        setCommandPaletteOpen(false);
+        setNotificationCenterOpen(false);
+        setUserMenuOpen(false);
+      } else if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "k") {
         e.preventDefault();
         setCommandPaletteOpen((prev) => !prev);
       } else if (e.key === "[" && !["INPUT", "TEXTAREA"].includes((e.target as HTMLElement)?.tagName)) {
@@ -142,6 +153,8 @@ function DashboardShell({ children }: { children: React.ReactNode }) {
     if (pathname === "/watchlist") return "Entity Watchlist";
     if (pathname === "/alerts") return "Security Alerts";
     if (pathname === "/search") return "Global Intelligence Search";
+    if (pathname === "/timeline") return "Security Timeline";
+    if (pathname === "/evidence") return "Cryptographic Evidence Verification";
     if (pathname === "/profile") return "Researcher Profile";
     if (pathname === "/settings") return "Platform Settings";
     return "AttackSurface Timeline";
@@ -204,22 +217,22 @@ function DashboardShell({ children }: { children: React.ReactNode }) {
         />
       )}
 
-      {/* ── MAIN CONTAINER WITH DYNAMIC PADDING ─────────────────── */}
+      {/* ── MAIN CONTAINER WITH DYNAMIC RESPONSIVE PADDING ─────── */}
       <div
         className={`relative z-10 flex min-h-screen flex-col transition-all duration-300 ease-[cubic-bezier(0.2,0.9,0.3,1)] ${
           sidebarCollapsed
-            ? "pl-16"
+            ? "pl-14 sm:pl-16"
             : showAdminSidebar
-            ? "pl-64"
-            : "pl-60"
+            ? "pl-14 sm:pl-16 md:pl-64"
+            : "pl-14 sm:pl-16 md:pl-60"
         }`}
       >
         {/* Top Header Bar (Timeline OS HUD) */}
         <header
-          className={`sticky top-0 z-30 flex h-16 items-center justify-between border-b px-4 sm:px-6 backdrop-blur-xl transition-colors ${
+          className={`sticky top-0 z-30 flex h-16 items-center justify-between border-b px-3 sm:px-6 backdrop-blur-2xl transition-colors ${
             showAdminSidebar
-              ? "border-amber-500/20 bg-slate-950/75"
-              : "border-slate-800/80 bg-slate-950/80"
+              ? "border-amber-500/20 bg-black/80"
+              : "border-white/[0.08] bg-black/70"
           }`}
         >
           {/* Left: Functional Sidebar Toggle Controller + Page Title */}
@@ -265,14 +278,14 @@ function DashboardShell({ children }: { children: React.ReactNode }) {
           {/* Center: Search or command... [⌘K] */}
           <button
             onClick={() => setCommandPaletteOpen(true)}
-            className="hidden sm:flex items-center gap-3 rounded-full border border-slate-800 bg-slate-900/60 px-5 py-1.5 text-xs text-slate-400 hover:border-cyan-500/40 hover:text-white transition shadow-sm"
+            className="hidden sm:flex items-center gap-3 rounded-full border border-white/[0.08] bg-black/40 px-5 py-1.5 text-xs text-slate-400 hover:border-cyan-500/40 hover:text-white transition shadow-sm"
             title="Global Command Center (⌘K)"
           >
             <svg className="h-3.5 w-3.5 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
             </svg>
             <span>Search or command...</span>
-            <kbd className="rounded bg-slate-800 px-1.5 py-0.5 font-mono text-[10px] text-cyan-400 border border-slate-700">
+            <kbd className="rounded bg-white/[0.06] px-1.5 py-0.5 font-mono text-[10px] text-cyan-400 border border-white/[0.08]">
               ⌘K
             </kbd>
           </button>
@@ -381,7 +394,7 @@ function DashboardShell({ children }: { children: React.ReactNode }) {
         </header>
 
         {/* Main Content Area */}
-        <main className="animate-surface-in flex-1 p-4 sm:p-6">
+        <main className="animate-surface-in flex-1 p-3 sm:p-6 w-full max-w-full overflow-x-hidden">
           {/* Route Protection Guard */}
           {!isAdmin && isDirectAdminRoute ? (
             <div className="max-w-2xl mx-auto py-16 text-center space-y-4">

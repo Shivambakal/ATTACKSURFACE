@@ -7,17 +7,17 @@
   --font-sans: 'Plus Jakarta Sans', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   --font-display: 'Plus Jakarta Sans', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   --font-mono: 'JetBrains Mono', 'Fira Code', 'Roboto Mono', 'SFMono-Regular', Menlo, Monaco, Consolas, monospace;
-  --canvas: #04090e;
-  --canvas-deep: #010306;
-  --canvas-surface: #070d14;
-  --canvas-card: rgba(10, 16, 28, 0.65);
-  --glass: rgba(10, 18, 30, 0.68);
-  --glass-strong: rgba(14, 24, 40, 0.82);
-  --glass-soft: rgba(255, 255, 255, 0.06);
-  --line: rgba(148, 163, 184, 0.16);
+  --canvas: #000000;
+  --canvas-deep: #000000;
+  --canvas-surface: #040812;
+  --canvas-card: rgba(8, 13, 23, 0.72);
+  --glass: rgba(8, 13, 23, 0.75);
+  --glass-strong: rgba(12, 18, 30, 0.88);
+  --glass-soft: rgba(255, 255, 255, 0.04);
+  --line: rgba(255, 255, 255, 0.08);
   --line-strong: rgba(0, 240, 255, 0.35);
   --ink: #ffffff;
-  --muted: #cbd5e1;
+  --muted: #94a3b8;
   --accent: #00f0ff;
   --accent-strong: #a5f3fc;
   --accent-wash: rgba(0, 240, 255, 0.14);
@@ -885,21 +885,40 @@ tbody tr:hover { background: rgba(255, 255, 255, 0.045); }
   background-size: 100% 4px;
 }
 
-/* Card 3D Lift & Specular Highlight */
-.card-3d-interactive {
-  transition: transform 0.25s cubic-bezier(0.2, 0.9, 0.3, 1), box-shadow 0.25s ease, border-color 0.25s ease;
-  transform: translateZ(0);
+/* Restrained 2.5D Micro-Elevation & Specular Surface */
+.card-3d-interactive,
+.card-25d {
+  transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.22s ease, border-color 0.22s ease;
+  transform: translateY(0);
 }
-.card-3d-interactive:hover {
-  transform: translateY(-4px) rotateX(2deg) translateZ(8px);
-  box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.8), 0 0 25px -4px var(--accent-wash);
-  border-color: rgba(0, 240, 255, 0.4) !important;
+.card-3d-interactive:hover,
+.card-25d:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 16px 36px -10px rgba(0, 0, 0, 0.75), 0 0 20px -4px var(--accent-wash);
+  border-color: rgba(0, 240, 255, 0.35) !important;
 }
 
-/* Glow Badges */
+/* Unified Glass Surface Tokens */
+.glass-panel {
+  background: rgba(8, 13, 23, 0.72);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(20px) saturate(140%);
+  -webkit-backdrop-filter: blur(20px) saturate(140%);
+  box-shadow: 0 16px 40px -10px rgba(0, 0, 0, 0.65), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+.glass-panel-elevated {
+  background: rgba(12, 18, 32, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(24px) saturate(150%);
+  -webkit-backdrop-filter: blur(24px) saturate(150%);
+  box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.85), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+/* Glow Halos */
 .badge-glow-red { box-shadow: 0 0 16px -2px rgba(244, 63, 94, 0.45); }
 .badge-glow-cyan { box-shadow: 0 0 16px -2px rgba(0, 240, 255, 0.45); }
 .badge-glow-amber { box-shadow: 0 0 16px -2px rgba(245, 158, 11, 0.45); }
+.badge-glow-emerald { box-shadow: 0 0 16px -2px rgba(16, 185, 129, 0.45); }
 .badge-glow-violet { box-shadow: 0 0 16px -2px rgba(139, 92, 246, 0.45); }
 
 /* Reduced motion handling */

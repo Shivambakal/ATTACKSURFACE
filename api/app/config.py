@@ -11,11 +11,14 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
 class Settings(BaseSettings):
-    model_config = SettingsConfigDict(env_file=".env", extra="ignore")
+    model_config = SettingsConfigDict(
+        env_file=(".env", "../.env"),
+        extra="ignore",
+    )
 
     # ── Infrastructure ──────────────────────────────────────────────
-    database_url: str = "postgresql+psycopg://attack:attack@localhost:5432/attacksurface"
-    redis_url: str = "redis://localhost:6379/0"
+    database_url: str = "postgresql+psycopg://postgres.lejxvdccfyecbtesmuzw:T1jK36MrZ8ofIeML@aws-0-ap-northeast-1.pooler.supabase.com:6543/postgres?sslmode=require"
+    redis_url: str = "rediss://default:gQAAAAAAAomjAAIgcDE2NmVjYzc4YjNiZDA0NWJhYjdkYTYzY2M2YTNjNDQ4NA@renewing-impala-166307.upstash.io:6379"
     secret_key: str = secrets.token_urlsafe(64)
 
     # ── API behavior ────────────────────────────────────────────────

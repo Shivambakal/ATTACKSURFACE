@@ -174,6 +174,9 @@ export default function AdminSidebar({ collapsed, onToggleCollapse }: AdminSideb
   const hoverTimeoutRef = React.useRef<NodeJS.Timeout | null>(null);
 
   const handleMouseEnter = () => {
+    if (typeof window !== "undefined" && window.matchMedia("(hover: none)").matches) {
+      return;
+    }
     if (hoverTimeoutRef.current) {
       clearTimeout(hoverTimeoutRef.current);
       hoverTimeoutRef.current = null;
@@ -195,15 +198,25 @@ export default function AdminSidebar({ collapsed, onToggleCollapse }: AdminSideb
   };
 
   return (
-    <aside
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
-      className={`fixed top-0 bottom-0 left-0 z-40 flex flex-col rounded-r-3xl overflow-hidden border-r border-amber-500/25 backdrop-blur-2xl bg-[#0c0e18]/85 [data-theme=white-aesthetic]:bg-white/90 [data-theme=white-aesthetic]:border-amber-400/40 shadow-[14px_0_45px_rgba(0,0,0,0.4)] transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] ${
-        isExpanded ? "w-64" : "w-16"
-      }`}
-    >
-      {/* Brand Header */}
-      <div className="flex h-16 items-center justify-between border-b border-amber-500/20 px-3.5 bg-amber-500/[0.03]">
+    <>
+      {/* Mobile Drawer Backdrop when open on small screens */}
+      {isExpanded && (
+        <div
+          className="fixed inset-0 z-30 bg-black/60 backdrop-blur-xs md:hidden animate-fade-in"
+          onClick={onToggleCollapse}
+          aria-hidden="true"
+        />
+      )}
+
+      <aside
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
+        className={`fixed top-0 bottom-0 left-0 z-40 flex flex-col rounded-r-3xl overflow-hidden border-r border-amber-500/25 backdrop-blur-2xl bg-[#0c0e18]/85 [data-theme=white-aesthetic]:bg-white/90 [data-theme=white-aesthetic]:border-amber-400/40 shadow-[14px_0_45px_rgba(0,0,0,0.4)] transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+          isExpanded ? "w-64" : "w-14 sm:w-16"
+        }`}
+      >
+        {/* Brand Header */}
+        <div className="flex h-16 items-center justify-between border-b border-amber-500/20 px-3 sm:px-3.5 bg-amber-500/[0.03]">
         <AttackSurfaceLogo
           size={isExpanded ? "md" : "sm"}
           showText={isExpanded}
@@ -272,6 +285,11 @@ export default function AdminSidebar({ collapsed, onToggleCollapse }: AdminSideb
                 <Link
                   key={item.name}
                   href={item.href}
+                  onClick={() => {
+                    if (typeof window !== "undefined" && window.innerWidth < 768 && isExpanded) {
+                      onToggleCollapse();
+                    }
+                  }}
                   title={collapsed ? item.name : undefined}
                   className={`group flex items-center gap-3 rounded-lg px-3 py-1.5 text-xs font-medium transition-colors ${
                     active
@@ -308,6 +326,11 @@ export default function AdminSidebar({ collapsed, onToggleCollapse }: AdminSideb
               <Link
                 key={item.name}
                 href={item.href}
+                onClick={() => {
+                  if (typeof window !== "undefined" && window.innerWidth < 768 && isExpanded) {
+                    onToggleCollapse();
+                  }
+                }}
                 title={collapsed ? item.name : undefined}
                 className={`group flex items-center gap-3 rounded-lg px-3 py-1.5 text-xs font-medium transition-colors ${
                   active
@@ -346,5 +369,6 @@ export default function AdminSidebar({ collapsed, onToggleCollapse }: AdminSideb
         </div>
       )}
     </aside>
+    </>
   );
 }
