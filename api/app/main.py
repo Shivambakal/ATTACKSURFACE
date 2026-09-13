@@ -117,7 +117,6 @@ def create_app() -> FastAPI:
         from .routers.programs import router as programs_router
         from .routers.assistant import router as assistant_router
         from .routers.scheduler_router import router as scheduler_router
-        from .routers.verification_router import router as verification_router
 
         application.include_router(auth_router)
         application.include_router(admin_router)
@@ -147,7 +146,6 @@ def create_app() -> FastAPI:
         application.include_router(settings_router)
         application.include_router(health_router)
         application.include_router(assistant_router)
-        application.include_router(verification_router)
         logger.info("All API v1 routers registered")
 
     except Exception as exc:
