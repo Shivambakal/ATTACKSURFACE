@@ -1,0 +1,31 @@
+﻿import sys
+sys.path.insert(0,'.')
+from dotenv import load_dotenv
+load_dotenv('.env')
+from app.db import SessionLocal
+from sqlalchemy import text
+db = SessionLocal()
+cols = db.execute(text("SELECT column_name FROM information_schema.columns WHERE table_name='security_intelligence_events' ORDER BY ordinal_position")).fetchall()
+print('SI columns:', [c[0] for c in cols])
+r = db.execute(text('SELECT count(*) FROM security_intelligence_events')).scalar()
+print('SI total:', r)
+comp = db.execute(text('SELECT count(*) FROM companies')).scalar()
+tgts_all = db.execute(text('SELECT count(*) FROM targets')).scalar()
+assets = db.execute(text('SELECT count(*) FROM assets')).scalar()
+sigs = db.execute(text('SELECT count(*) FROM research_signals')).scalar()
+chgs = db.execute(text('SELECT count(*) FROM changes')).scalar()
+progs = db.execute(text('SELECT count(*) FROM security_programs')).scalar()
+tl = db.execute(text('SELECT count(*) FROM timeline_events')).scalar()
+snaps = db.execute(text('SELECT count(*) FROM raw_source_snapshots')).scalar()
+print('Companies:', comp)
+print('Targets (all):', tgts_all)
+print('Assets:', assets)
+print('Signals:', sigs)
+print('Changes:', chgs)
+print('Programs:', progs)
+print('Timeline Events:', tl)
+print('Raw Snapshots:', snaps)
+ms = db.execute(text('SELECT monitoring_status, count(*) FROM targets GROUP BY monitoring_status')).fetchall()
+for row in ms:
+    print('Target monitoring_status='+str(row[0])+': '+str(row[1]))
+db.close()

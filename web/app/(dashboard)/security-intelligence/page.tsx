@@ -7,121 +7,12 @@ import { SecurityIntelligenceEvent, SecurityIntelligenceStats } from "@/lib/type
 import ModernFilterDropdown from "@/components/ModernFilterDropdown";
 import { AnimatedNumber } from "@/components/ui/InteractionPrimitives";
 
-const createFallbackEvent = (
-  data: Partial<SecurityIntelligenceEvent> & { id: number; title: string; summary: string }
-): SecurityIntelligenceEvent => ({
-  additional_sources: [],
-  cve_ids: [],
-  cwe_ids: [],
-  affected_products: [],
-  affected_companies: [],
-  severity: "CRITICAL",
-  actively_exploited: true,
-  event_type: "CVE",
-  confidence: 95,
-  fingerprint: `fp-${data.id}`,
-  severity_score: 9.8,
-  freshness_score: 9.5,
-  exploitation_score: 9.9,
-  relevance_score: 9.6,
-  priority_score: 9.7,
-  priority: "CRITICAL",
-  correlated_company_ids: [],
-  correlated_product_ids: [],
-  correlated_technology_ids: [],
-  correlated_advisory_ids: [],
-  published_at: new Date().toISOString(),
-  created_at: new Date().toISOString(),
-  source_name: "CISA KEV",
-  source_url: "https://www.cisa.gov/known-exploited-vulnerabilities-catalog",
-  ...data,
-});
-
-const VERIFIED_FALLBACK_EVENTS: SecurityIntelligenceEvent[] = [
-  createFallbackEvent({
-    id: 101,
-    title: "CVE-2024-6387 (regreSSHion): Signal Handler Race Condition in OpenSSH Server",
-    summary: "A signal handler race condition vulnerability in OpenSSH's server (sshd) allows unauthenticated remote code execution with root privileges on glibc-based Linux systems.",
-    event_type: "CVE",
-    severity: "CRITICAL",
-    actively_exploited: true,
-    cve_ids: ["CVE-2024-6387"],
-    affected_products: ["OpenSSH", "sshd 8.5p1 - 9.7p1"],
-    affected_companies: ["Linux Foundation", "OpenBSD"],
-    published_at: new Date(Date.now() - 3600000 * 4).toISOString(),
-    source_name: "CISA KEV / Qualys ThreatLabz",
-    source_url: "https://www.cisa.gov/known-exploited-vulnerabilities-catalog",
-  }),
-  createFallbackEvent({
-    id: 102,
-    title: "CVE-2024-38077: Windows Remote Desktop Licensing Service RCE (MadLicense)",
-    summary: "Remote code execution vulnerability in Windows Remote Desktop Licensing Service allowing unauthenticated network attackers to execute arbitrary code with SYSTEM privileges.",
-    event_type: "CVE",
-    severity: "CRITICAL",
-    actively_exploited: true,
-    cve_ids: ["CVE-2024-38077"],
-    affected_products: ["Windows Server 2022", "Windows Server 2019", "Windows Server 2016"],
-    affected_companies: ["Microsoft"],
-    published_at: new Date(Date.now() - 3600000 * 12).toISOString(),
-    source_name: "Microsoft MSRC",
-    source_url: "https://msrc.microsoft.com/update-guide/vulnerability/CVE-2024-38077",
-  }),
-  createFallbackEvent({
-    id: 103,
-    title: "CVE-2024-21887 / CVE-2023-46805: Ivanti Connect Secure Authentication Bypass & Command Injection",
-    summary: "A command injection vulnerability in web components of Ivanti Connect Secure allows an authenticated administrator to send specially crafted requests and execute arbitrary commands.",
-    event_type: "EXPLOIT",
-    severity: "CRITICAL",
-    actively_exploited: true,
-    cve_ids: ["CVE-2024-21887", "CVE-2023-46805"],
-    affected_products: ["Connect Secure", "Policy Secure Gateway"],
-    affected_companies: ["Ivanti"],
-    published_at: new Date(Date.now() - 3600000 * 24).toISOString(),
-    source_name: "CISA KEV",
-    source_url: "https://www.cisa.gov/known-exploited-vulnerabilities-catalog",
-  }),
-  createFallbackEvent({
-    id: 104,
-    title: "CVE-2024-3400: Palo Alto Networks PAN-OS GlobalProtect Command Injection",
-    summary: "A command injection vulnerability in GlobalProtect feature of Palo Alto Networks PAN-OS software allows an unauthenticated attacker to execute arbitrary code with root privileges.",
-    event_type: "CVE",
-    severity: "CRITICAL",
-    actively_exploited: true,
-    cve_ids: ["CVE-2024-3400"],
-    affected_products: ["PAN-OS 10.2", "PAN-OS 11.0", "PAN-OS 11.1"],
-    affected_companies: ["Palo Alto Networks"],
-    published_at: new Date(Date.now() - 3600000 * 48).toISOString(),
-    source_name: "Volexity / CISA",
-    source_url: "https://security.paloaltonetworks.com/CVE-2024-3400",
-  }),
-  createFallbackEvent({
-    id: 105,
-    title: "CVE-2024-4577: PHP CGI Argument Injection Remote Code Execution",
-    summary: "Best-fit character encoding conversion in Windows allows bypass of CVE-2012-1823, enabling arbitrary command execution on PHP installed in CGI mode or XAMPP on Windows.",
-    event_type: "CVE",
-    severity: "HIGH",
-    actively_exploited: true,
-    cve_ids: ["CVE-2024-4577"],
-    affected_products: ["PHP 8.1", "PHP 8.2", "PHP 8.3"],
-    affected_companies: ["PHP Group"],
-    published_at: new Date(Date.now() - 3600000 * 72).toISOString(),
-    source_name: "DEVCORE",
-    source_url: "https://devco.re/blog/2024/06/06/security-alert-cve-2024-4577-php-cgi-argument-injection/",
-  }),
-];
-
-const VERIFIED_FALLBACK_STATS: SecurityIntelligenceStats = {
-  total_events: 184,
-  actively_exploited_count: 32,
-  by_severity: { CRITICAL: 48, HIGH: 86, MEDIUM: 42, LOW: 8 },
-  by_priority: { CRITICAL: 48, HIGH: 86, MEDIUM: 42, LOW: 8 },
-  by_event_type: { CVE: 120, ADVISORY: 40, EXPLOIT: 24 },
-};
+// No hardcoded fallback data — all values come from real DB via /api/v1/security-intelligence
 
 export default function SecurityIntelligencePage() {
-  const [events, setEvents] = useState<SecurityIntelligenceEvent[]>(VERIFIED_FALLBACK_EVENTS);
-  const [stats, setStats] = useState<SecurityIntelligenceStats | null>(VERIFIED_FALLBACK_STATS);
-  const [loading, setLoading] = useState<boolean>(false);
+  const [events, setEvents] = useState<SecurityIntelligenceEvent[]>([]);
+  const [stats, setStats] = useState<SecurityIntelligenceStats | null>(null);
+  const [loading, setLoading] = useState<boolean>(true);
   const [collecting, setCollecting] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
   const [actionSuccess, setActionSuccess] = useState<string | null>(null);
@@ -133,20 +24,23 @@ export default function SecurityIntelligencePage() {
   const [onlyExploited, setOnlyExploited] = useState<boolean>(false);
 
   const fetchIntelligenceData = async () => {
+    setLoading(true);
     try {
       const [eventsSettled, statsSettled] = await Promise.allSettled([
         apiFetch<{ items: SecurityIntelligenceEvent[]; total: number }>("/api/v1/security-intelligence/?limit=50"),
         apiFetch<SecurityIntelligenceStats>("/api/v1/security-intelligence/stats"),
       ]);
 
-      if (eventsSettled.status === "fulfilled" && eventsSettled.value?.items?.length) {
+      if (eventsSettled.status === "fulfilled" && eventsSettled.value?.items !== undefined) {
         setEvents(eventsSettled.value.items);
+      } else if (eventsSettled.status === "rejected") {
+        setError("Failed to load intelligence events from database.");
       }
       if (statsSettled.status === "fulfilled" && statsSettled.value) {
         setStats(statsSettled.value);
       }
     } catch {
-      // Retain fallback data smoothly
+      setError("Failed to reach intelligence API.");
     } finally {
       setLoading(false);
     }
@@ -208,6 +102,22 @@ export default function SecurityIntelligencePage() {
 
   return (
     <div className="space-y-6 pb-12">
+      {/* Loading skeleton */}
+      {loading && (
+        <div className="space-y-4 animate-pulse">
+          <div className="h-8 w-72 bg-slate-800 rounded-lg" />
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            {[1,2,3,4].map(i => (
+              <div key={i} className="h-20 bg-slate-800/60 rounded-2xl" />
+            ))}
+          </div>
+          <div className="space-y-3">
+            {[1,2,3].map(i => <div key={i} className="h-24 bg-slate-800/40 rounded-xl" />)}
+          </div>
+        </div>
+      )}
+      {loading ? null : (
+      <div className="space-y-6 pb-12">
       {/* Header */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-800 pb-5">
         <div>
@@ -523,6 +433,8 @@ export default function SecurityIntelligencePage() {
             );
           })}
         </div>
+      )}
+      </div>
       )}
     </div>
   );

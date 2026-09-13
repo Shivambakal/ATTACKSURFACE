@@ -58,7 +58,7 @@ export default function CompaniesPage() {
       }
       const compData = await apiFetch<{ total: number; items: Company[] }>(url);
       setCompanies(compData.items || []);
-      setTotalCount(compData.total || 1436);
+      setTotalCount(compData.total ?? 0);
       setCurrentPage(1);
     } catch (err) {
       console.error("Failed to load companies:", err);
@@ -157,7 +157,7 @@ export default function CompaniesPage() {
             href="/programs"
             className="flex items-center gap-2 rounded-xl border border-cyan-700/60 bg-cyan-950/40 px-3.5 py-2.5 text-xs font-bold text-cyan-300 shadow-sm hover:bg-cyan-900/60 transition-colors font-display"
           >
-            VIEW PROGRAMS DIRECTORY ({stats ? stats.public_programs.toLocaleString() : "4,249"}) &rarr;
+            VIEW PROGRAMS DIRECTORY ({stats ? stats.public_programs.toLocaleString() : "…"}) &rarr;
           </Link>
           <button
             onClick={() => setShowAddModal(true)}
@@ -179,7 +179,7 @@ export default function CompaniesPage() {
           </div>
           <div className="mt-1 flex items-baseline gap-1.5">
             <span className="text-2xl font-black text-white font-display">
-              <AnimatedNumber value={stats ? stats.canonical_companies : (totalCount || 1436)} />
+              <AnimatedNumber value={stats ? stats.canonical_companies : totalCount} />
             </span>
             <span className="text-[10px] text-cyan-400 font-mono">Registry</span>
           </div>
@@ -192,7 +192,7 @@ export default function CompaniesPage() {
           </div>
           <div className="mt-1 flex items-baseline gap-1.5">
             <span className="text-2xl font-black text-cyan-400 font-display">
-              <AnimatedNumber value={stats ? stats.authorized_targets : 50} />
+              <AnimatedNumber value={stats ? stats.authorized_targets : 0} />
             </span>
             <span className="text-[10px] text-cyan-300 font-mono">Active Scope</span>
           </div>
@@ -218,7 +218,7 @@ export default function CompaniesPage() {
           </div>
           <div className="mt-1 flex items-baseline gap-1.5">
             <span className="text-2xl font-black text-white font-display">
-              <AnimatedNumber value={stats ? stats.observed_assets : totalAssets} />
+              <AnimatedNumber value={stats ? stats.observed_assets : 0} />
             </span>
             <span className="text-[10px] text-cyan-400 font-mono">Discovered</span>
           </div>
@@ -231,7 +231,7 @@ export default function CompaniesPage() {
           </div>
           <div className="mt-1 flex items-baseline gap-1.5">
             <span className="text-2xl font-black text-amber-300 font-display">
-              <AnimatedNumber value={stats ? stats.research_signals : totalSignals} />
+              <AnimatedNumber value={stats ? stats.research_signals : 0} />
             </span>
             <span className="text-[10px] text-amber-400 font-mono">Synthesized</span>
           </div>

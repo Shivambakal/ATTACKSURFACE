@@ -73,9 +73,17 @@ function CubeCluster() {
   );
 }
 
+/** Format a nullable number — shows "—" when data hasn't loaded yet instead of a fake default */
+const fmt = (v: number | null | undefined, suffix = ""): string =>
+  v === null || v === undefined ? "—" : `${v.toLocaleString()}${suffix}`;
+
+/** Format a nullable percentage */
+const fmtPct = (v: number | null | undefined): string =>
+  v === null || v === undefined ? "—" : `${v.toFixed(1)}%`;
+
 export default function VerifiedTelemetryHub({
-  trackedAssets = 325,
-  canonicalOrganizations = 1436,
+  trackedAssets = undefined,
+  canonicalOrganizations = undefined,
   recentDiffsCount = null,
   initialWindow = "1H",
   className = "",
@@ -86,7 +94,7 @@ export default function VerifiedTelemetryHub({
   const [timeWindow, setTimeWindow] = useState<TimeWindow>(initialWindow);
   const [animatedAssets, setAnimatedAssets] = useState<number>(0);
 
-  const targetAssetCount = telemetry?.tracked_assets ?? telemetry?.observed_assets ?? trackedAssets ?? 325;
+  const targetAssetCount = telemetry?.tracked_assets ?? telemetry?.observed_assets ?? trackedAssets ?? 0;
 
   const loadTelemetry = useCallback(async (win: TimeWindow) => {
     try {
@@ -129,19 +137,19 @@ export default function VerifiedTelemetryHub({
     return () => cancelAnimationFrame(raf);
   }, [targetAssetCount]);
 
-  // Derive metrics with dual-schema key fallback and props fallback
+  // Derive metrics — NO hardcoded fallback numbers. Show real values from API or "—" while loading.
   const rawRecentDiffs = telemetry?.total_recent_changes ?? 0;
   const diffs = rawRecentDiffs > 0
     ? rawRecentDiffs
-    : (recentDiffsCount ?? telemetry?.recent_diffs_count ?? telemetry?.total_changes ?? 37);
+    : (recentDiffsCount ?? telemetry?.recent_diffs_count ?? telemetry?.total_changes ?? null);
 
-  const coverage = telemetry?.verified_coverage_pct ?? telemetry?.coverage_pct ?? 100.0;
-  const confidence = telemetry?.average_change_confidence_pct ?? telemetry?.avg_confidence_pct ?? 100.0;
-  const observations = telemetry?.direct_observations ?? telemetry?.direct_observations_count ?? telemetry?.lifetime_observations ?? 239;
+  const coverage = telemetry?.verified_coverage_pct ?? telemetry?.coverage_pct ?? null;
+  const confidence = telemetry?.average_change_confidence_pct ?? telemetry?.avg_confidence_pct ?? null;
+  const observations = telemetry?.direct_observations ?? telemetry?.direct_observations_count ?? telemetry?.lifetime_observations ?? null;
   const corroborated = telemetry?.corroborated_changes ?? telemetry?.corroborated_count ?? 0;
   const unverified = telemetry?.unverified_changes ?? telemetry?.unverified_count ?? 0;
-  const signals = telemetry?.recent_research_signals ?? telemetry?.active_signals_count ?? 573;
-  const orgCount = telemetry?.canonical_organizations ?? telemetry?.company_registry_count ?? canonicalOrganizations ?? 1436;
+  const signals = telemetry?.recent_research_signals ?? telemetry?.active_signals_count ?? null;
+  const orgCount = telemetry?.canonical_organizations ?? telemetry?.company_registry_count ?? canonicalOrganizations ?? null;
 
   // Optimized orbit radius (195px) to prevent bottom node clipping
   const radius = 195;
@@ -159,13 +167,14 @@ export default function VerifiedTelemetryHub({
   const isHealthy = !error || Boolean(telemetry);
 
   const nodes = useMemo(() => [
-    { id: 0, angle: 270, label: "VERIFIED COVERAGE", value: `${coverage.toFixed(1)}%`, color: "emerald", href: "/programs", icon: "✓" },
-    { id: 1, angle: 330, label: "RECENT DIFFS", value: `${diffs} / ${timeWindow}`, color: "cyan", href: "/changes", icon: "Δ" },
-    { id: 2, angle: 30, label: "RESEARCH SIGNALS", value: `${signals} / ${timeWindow}`, color: "amber", href: "/research", icon: "⚡" },
-    { id: 3, angle: 90, label: "CANONICAL ORGANIZATIONS", value: orgCount.toLocaleString(), color: "purple", href: "/companies", icon: "▦" },
-    { id: 4, angle: 150, label: "DIRECT OBSERVATIONS", value: observations.toLocaleString(), color: "blue", href: "/changes", icon: "◉" },
-    { id: 5, angle: 210, label: "AVG CONFIDENCE", value: `${confidence.toFixed(1)}%`, color: "rose", href: "/changes", icon: "◎" },
+    { id: 0, angle: 270, label: "VERIFIED COVERAGE", value: fmtPct(coverage), color: "emerald", href: "/programs", icon: "✓" },
+    { id: 1, angle: 330, label: "RECENT DIFFS", value: `${fmt(diffs)} / ${timeWindow}`, color: "cyan", href: "/changes", icon: "Δ" },
+    { id: 2, angle: 30, label: "RESEARCH SIGNALS", value: `${fmt(signals)} / ${timeWindow}`, color: "amber", href: "/research", icon: "⚡" },
+    { id: 3, angle: 90, label: "CANONICAL ORGANIZATIONS", value: fmt(orgCount), color: "purple", href: "/companies", icon: "▦" },
+    { id: 4, angle: 150, label: "DIRECT OBSERVATIONS", value: fmt(observations), color: "blue", href: "/changes", icon: "◉" },
+    { id: 5, angle: 210, label: "AVG CONFIDENCE", value: fmtPct(confidence), color: "rose", href: "/changes", icon: "◎" },
   ], [coverage, diffs, timeWindow, signals, orgCount, observations, confidence]);
+
 
   return (
     <>
@@ -191,7 +200,7 @@ export default function VerifiedTelemetryHub({
 
             <div className="mt-2 flex items-end gap-3">
               <span className="font-display text-5xl font-black leading-none tracking-tight text-white tabular-nums">
-                {diffs.toLocaleString()}
+                {loading ? <span className="inline-block h-12 w-16 animate-pulse bg-slate-700 rounded-lg align-middle" /> : fmt(diffs)}
               </span>
               <div className="pb-1">
                 <div className="font-mono text-[10px] font-bold uppercase tracking-widest text-slate-400">
@@ -315,11 +324,11 @@ export default function VerifiedTelemetryHub({
         <footer className="grid grid-cols-2 gap-2.5 border-t border-slate-800/80 pt-3 sm:grid-cols-4">
           <div className="rounded-xl border border-slate-800/60 bg-slate-950/60 p-2.5 text-center">
             <div className="font-mono text-[9px] uppercase tracking-wider text-slate-500">VERIFIED COVERAGE</div>
-            <div className="font-mono text-sm font-bold text-emerald-400 mt-0.5 tabular-nums">{coverage.toFixed(1)}%</div>
+            <div className="font-mono text-sm font-bold text-emerald-400 mt-0.5 tabular-nums">{fmtPct(coverage)}</div>
           </div>
           <div className="rounded-xl border border-slate-800/60 bg-slate-950/60 p-2.5 text-center">
             <div className="font-mono text-[9px] uppercase tracking-wider text-slate-500">DIRECT OBSERVATIONS</div>
-            <div className="font-mono text-sm font-bold text-cyan-400 mt-0.5 tabular-nums">{observations.toLocaleString()}</div>
+            <div className="font-mono text-sm font-bold text-cyan-400 mt-0.5 tabular-nums">{fmt(observations)}</div>
           </div>
           <div className="rounded-xl border border-slate-800/60 bg-slate-950/60 p-2.5 text-center">
             <div className="font-mono text-[9px] uppercase tracking-wider text-slate-500">CORROBORATED</div>
@@ -327,7 +336,7 @@ export default function VerifiedTelemetryHub({
           </div>
           <div className="rounded-xl border border-slate-800/60 bg-slate-950/60 p-2.5 text-center">
             <div className="font-mono text-[9px] uppercase tracking-wider text-slate-500">MONITORED TARGETS</div>
-            <div className="font-mono text-sm font-bold text-amber-300 mt-0.5 tabular-nums">50</div>
+            <div className="font-mono text-sm font-bold text-amber-300 mt-0.5 tabular-nums">{fmt(telemetry?.active_targets ?? telemetry?.authorized_targets_count ?? null)}</div>
           </div>
         </footer>
       </section>

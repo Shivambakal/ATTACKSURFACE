@@ -300,9 +300,9 @@ export default function DashboardPage() {
         If API returns 0, hub shows 0. If unavailable, hub shows "—" and VERIFICATION UNAVAILABLE.
       */}
       <VerifiedTelemetryHub
-        trackedAssets={companyStats?.observed_assets ?? 325}
-        canonicalOrganizations={companyStats?.canonical_companies ?? 1436}
-        recentDiffsCount={countDisplay > 0 ? countDisplay : (recentChanges.length > 0 ? recentChanges.length : 37)}
+        trackedAssets={companyStats?.observed_assets}
+        canonicalOrganizations={companyStats?.canonical_companies}
+        recentDiffsCount={recentChanges.length > 0 ? recentChanges.length : null}
         initialWindow={timeFilter}
         className="w-full"
       />
